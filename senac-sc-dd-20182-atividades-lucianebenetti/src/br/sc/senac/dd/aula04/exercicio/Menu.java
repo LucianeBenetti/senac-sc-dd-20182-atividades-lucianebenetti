@@ -144,7 +144,7 @@ public class Menu {
 		
 		carros.toString();
 		caminhoes.toString();
-		JOptionPane.showMessageDialog(null, "Lista dos carros e caminhões cadastrados");
+		JOptionPane.showMessageDialog(null, "Lista os carros e caminhões cadastrados");
 		JOptionPane.showMessageDialog(null, carros);
 		JOptionPane.showMessageDialog(null,caminhoes);
 			
@@ -153,7 +153,7 @@ public class Menu {
 	}
 	private void exibirMoto() {
 		motos.toString();
-		JOptionPane.showMessageDialog(null, "Lista das motos cadastradas");
+		JOptionPane.showMessageDialog(null, "Lista as motos cadastradas");
 		JOptionPane.showMessageDialog(null, motos);
 		
 		this.apresentarMenu();
