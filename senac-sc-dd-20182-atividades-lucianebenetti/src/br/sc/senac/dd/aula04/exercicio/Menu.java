@@ -60,7 +60,6 @@ public class Menu {
 			}
 			default: {
 				JOptionPane.showMessageDialog(null, "Opção Inválida");
-				break;
 				}
 			}
 			

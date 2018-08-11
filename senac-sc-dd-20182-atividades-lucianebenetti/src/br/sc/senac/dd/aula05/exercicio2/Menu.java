@@ -15,7 +15,7 @@ public class Menu {
 			try {
 				opcao = Integer.parseInt(JOptionPane.showInputDialog(criarOpcaoMenu()));
 			}catch(NumberFormatException ex){
-				JOptionPane.showInputDialog(null, "O número informado deve ser um número inteiro entre 1 e 3.");
+				JOptionPane.showMessageDialog(null, "O número informado deve ser um número inteiro entre 1 e 3.");
 			}
 			
 			switch(opcao) {
@@ -39,17 +39,15 @@ public class Menu {
 			}
 			default: {
 				JOptionPane.showMessageDialog(null, "Opção Inválida");
-				break;
 				}
 			}
 		}
-		
 	}
 
 	public String criarOpcaoMenu() {
-		String mensagem = "Sistema de Controle de Supermercado";
+		String mensagem = "Sistema Gerenciador de Supermercado";
 		mensagem += "\n Opções:";
-		mensagem += "\n 1 - Menu Funcinário.";
+		mensagem += "\n 1 - Menu Funcionário.";
 		mensagem += "\n 2 - Menu Produto.";
 		mensagem += "\n 3 - Sair";
 		mensagem +="\n Digite a Opção: ";

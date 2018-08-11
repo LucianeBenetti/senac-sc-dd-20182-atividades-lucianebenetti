@@ -39,7 +39,6 @@ public class MenuProduto {
 			}
 			default: {
 				JOptionPane.showMessageDialog(null, "Opção Inválida");
-				break;
 				}
 			}
 		}
@@ -47,21 +46,36 @@ public class MenuProduto {
 	
 	private void consultarProduto() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	private void atualizarProduto() {
-		// TODO Auto-generated method stub
-		
+		ProdutoVO produtoVO = new ProdutoVO();
+		produtoVO.setIdProduto(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do funcionário para atualizar")));
+		produtoVO.setNome(JOptionPane.showInputDialog(null, "Digite o nome do funcionário:"));
+		produtoVO.setSecao(JOptionPane.showInputDialog(null,"Digite a seção:"));
+		produtoVO.setValor(Double.parseDouble(JOptionPane.showInputDialog(null,"Digite o valor do produto:")));
+ 
+		ProdutoDAO atualizarProduto = new ProdutoDAO();
+		atualizarProduto.atualizar();
 	}
 
 	private void excluirProduto() {
-		// TODO Auto-generated method stub
+		ProdutoVO produtoVO = new ProdutoVO();
+		produtoVO.setIdProduto(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do funcionário para atualizar")));
+		
+		ProdutoDAO excluirProduto = new ProdutoDAO();
+		excluirProduto.deletar();
 		
 	}
 
 	private void cadastrarProduto() {
-		// TODO Auto-generated method stub
+		ProdutoVO produtoVO = new ProdutoVO();
+		produtoVO.setNome(JOptionPane.showInputDialog(null, "Digite o nome do funcionário:"));
+		produtoVO.setSecao(JOptionPane.showInputDialog(null,"Digite o CPF:"));
+		produtoVO.setValor(Double.parseDouble(JOptionPane.showInputDialog(null,"Digite o telefone:")));
+		
+		ProdutoDAO inserirProduto = new ProdutoDAO();
+		inserirProduto.inserir();
 		
 	}
 

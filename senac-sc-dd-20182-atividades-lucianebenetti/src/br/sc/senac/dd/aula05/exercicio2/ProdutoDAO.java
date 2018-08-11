@@ -5,10 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class ProdutoDAO implements InterfaceDAO {
+import javax.swing.JOptionPane;
 
-	@Override
-	public void inserir () {
+public class ProdutoDAO {
+
+	public int inserir () {
 		ProdutoVO produtoVO = new ProdutoVO();
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
@@ -17,17 +18,17 @@ public class ProdutoDAO implements InterfaceDAO {
 				+"','" + produtoVO.getValor() +"')";
 		try {
 			resultado = stmt.executeUpdate(query);
+			JOptionPane.showMessageDialog(null,"Produto cadastrado com sucesso!");
 		}catch (SQLException e) {
 			System.out.println("Erro ao executar Query de Cadastro de Produto!");
 		}finally {
 			Banco.closeStatement(stmt);
 			Banco.closeConnection(conn);
 		}
-		////return resultado;
+		return resultado;
 	}
 
-	@Override
-	public void deletar() {
+	public int deletar() {
 		ProdutoVO produtoVO = new ProdutoVO();
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
@@ -35,17 +36,17 @@ public class ProdutoDAO implements InterfaceDAO {
 		String query = "DELETE FROM produto WHERE idProduto = " + produtoVO.getIdProduto();
 		try {
 			resultado = stmt.executeUpdate(query);
+			JOptionPane.showMessageDialog(null,"Produto deleteado com sucesso!");
 		}catch (SQLException e) {
 			System.out.println("Erro ao executar Query de Exclusão do Produto!");
 		}finally {
 			Banco.closeStatement(stmt);
 			Banco.closeConnection(conn);
 		}
-		//return resultado;
+		return resultado;
 	}
 
-	@Override
-	public void atualizar() {
+	public int atualizar() {
 		ProdutoVO produtoVO = new ProdutoVO();
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
@@ -57,13 +58,14 @@ public class ProdutoDAO implements InterfaceDAO {
 		+ "' WHERE idproduto = " + produtoVO.getIdProduto();
 		try {
 			resultado = stmt.executeUpdate(query);
+			JOptionPane.showMessageDialog(null,"Produto atualizado com sucesso!");
 		}catch (SQLException e) {
 			System.out.println("Erro ao executar Query de Atualização do Produto!");
 		}finally {
 			Banco.closeStatement(stmt);
 			Banco.closeConnection(conn);
 		}
-		//return resultado;
+		return resultado;
 		
 	}
 

@@ -1,7 +1,6 @@
 package br.sc.senac.dd.aula05.exercicio2;
 
 import java.util.Scanner;
-
 import javax.swing.JOptionPane;
 
 public class MenuFuncionario{
@@ -44,7 +43,6 @@ public class MenuFuncionario{
 			}
 			default: {
 				JOptionPane.showMessageDialog(null, "Opção Inválida");
-				break;
 				}
 			}
 		}
@@ -70,18 +68,34 @@ public class MenuFuncionario{
 	}
 
 	private void atualizarFuncionario() {
-		// TODO Auto-generated method stub
-		
+		FuncionarioVO funcionarioVO = new FuncionarioVO();
+		funcionarioVO.setIdFuncionario(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do funcionário para atualizar")));
+		funcionarioVO.setNome(JOptionPane.showInputDialog(null, "Digite o nome do funcionário:"));
+		funcionarioVO.setCpf(JOptionPane.showInputDialog(null,"Digite o CPF:"));
+		funcionarioVO.setTelefone(JOptionPane.showInputDialog(null,"Digite o telefone:"));
+		funcionarioVO.setEmail(JOptionPane.showInputDialog(null,"Digite o e-mail:"));
+	 
+		FuncionarioDAO atualizarFuncionario = new FuncionarioDAO();
+		atualizarFuncionario.atualizar();
 	}
 
 	private void excluirFuncionario() {
-		// TODO Auto-generated method stub
+		FuncionarioVO funcionarioVO = new FuncionarioVO();
+		funcionarioVO.setIdFuncionario(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do funcionário para atualizar")));
 		
+		FuncionarioDAO excluirFuncionario = new FuncionarioDAO();
+		excluirFuncionario.deletar();
 	}
 
 	private void cadastrarFuncionario() {
-		// TODO Auto-generated method stub
+		FuncionarioVO funcionarioVO = new FuncionarioVO();
+		funcionarioVO.setNome(JOptionPane.showInputDialog(null, "Digite o nome do funcionário:"));
+		funcionarioVO.setCpf(JOptionPane.showInputDialog(null,"Digite o CPF:"));
+		funcionarioVO.setTelefone(JOptionPane.showInputDialog(null,"Digite o telefone:"));
+		funcionarioVO.setEmail(JOptionPane.showInputDialog(null,"Digite o e-mail:"));
 		
+		FuncionarioDAO inserirFuncionario = new FuncionarioDAO();
+		inserirFuncionario.inserir();
 	}
 
 

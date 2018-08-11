@@ -5,10 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class FuncionarioDAO implements InterfaceDAO{
+import javax.swing.JOptionPane;
 
-	@Override
-	public void inserir () {
+public class FuncionarioDAO {
+
+	public int inserir () {
 		FuncionarioVO funcionarioVO = new FuncionarioVO();
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
@@ -17,17 +18,17 @@ public class FuncionarioDAO implements InterfaceDAO{
 		+ "', '" + funcionarioVO.getTelefone()+"','" + funcionarioVO.getEmail() +"')";
 		try {
 			resultado = stmt.executeUpdate(query);
+			JOptionPane.showMessageDialog(null,"Funcionário cadastrado com sucesso!");
 		}catch (SQLException e) {
 			System.out.println("Erro ao executar Query de Cadastro de Funcionário!");
 		}finally {
 			Banco.closeStatement(stmt);
 			Banco.closeConnection(conn);
 		}
-		//return resultado;
+		return resultado;
 	}
 
-	@Override
-	public void deletar() {
+	public int deletar() {
 		FuncionarioVO funcionarioVO = new FuncionarioVO();
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
@@ -35,17 +36,17 @@ public class FuncionarioDAO implements InterfaceDAO{
 		String query = "DELETE FROM funcionario WHERE idFuncionario = " + funcionarioVO.getIdFuncionario();
 		try {
 			resultado = stmt.executeUpdate(query);
+			JOptionPane.showMessageDialog(null,"Funcionário excluído com sucesso!");
 		}catch (SQLException e) {
 			System.out.println("Erro ao executar Query de Exclusão do Funcionario!");
 		}finally {
 			Banco.closeStatement(stmt);
 			Banco.closeConnection(conn);
 		}
-		//return resultado;
+		return resultado;
 	}
 
-	@Override
-	public void atualizar() {
+	public int atualizar() {
 		FuncionarioVO funcionarioVO = new FuncionarioVO();
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
@@ -58,13 +59,14 @@ public class FuncionarioDAO implements InterfaceDAO{
 		+ "' WHERE idfuncionario = " + funcionarioVO.getIdFuncionario();
 		try {
 			resultado = stmt.executeUpdate(query);
+			JOptionPane.showMessageDialog(null,"Funcionário atualizado com sucesso!");
 		}catch (SQLException e) {
 			System.out.println("Erro ao executar Query de Atualização do Funcionário!");
 		}finally {
 			Banco.closeStatement(stmt);
 			Banco.closeConnection(conn);
 		}
-		//return resultado;
+		return resultado;
 		
 	}
 
