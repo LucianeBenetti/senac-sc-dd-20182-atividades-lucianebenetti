@@ -12,13 +12,12 @@ public class MenuFuncionario{
 	
 		int opcao = -1;
 		
-		try {
-			opcao = Integer.parseInt(JOptionPane.showInputDialog(criarMenuFuncionario()));
-		}catch(NumberFormatException ex){
-			JOptionPane.showMessageDialog(null, "O número digitado deve ser um inteiro entre 1 e 5;");
-		}
-		
 		while (opcao !=5) {
+			try {
+				opcao = Integer.parseInt(JOptionPane.showInputDialog(criarMenuFuncionario()));
+			}catch(NumberFormatException ex){
+				JOptionPane.showMessageDialog(null, "O número digitado deve ser um inteiro entre 1 e 5;");
+			}
 			switch(opcao) {
 			case 1:{
 				this.cadastrarFuncionario();
@@ -36,20 +35,22 @@ public class MenuFuncionario{
 				this.consultarFuncionario();
 				break;
 			}
-			default:{
-				JOptionPane.showMessageDialog(null, "Opção Inválida!");
+			case 5: {
+				int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza?");
+				if(resposta == 0) {
+					JOptionPane.showMessageDialog(null, "Você foi desconectado do sistema!");
+				}
+				break;
 			}
+			default: {
+				JOptionPane.showMessageDialog(null, "Opção Inválida");
+				break;
+				}
 			}
 		}
-		int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair do sistema?");
-			if (resposta == 0) {
-				JOptionPane.showMessageDialog(null, "Você foi desconectado do sistema.");
-			}else if (resposta == 1) {
-				JOptionPane.showInputDialog(criarMenuFuncionario());
-			}
 	}
 	
-		private Object criarMenuFuncionario() {
+		private String criarMenuFuncionario() {
 			String mensagem = "Menu Funcionário";
 			mensagem += "\n Opções:";
 			mensagem += "\n 1 - Cadastrar Funcionário.";

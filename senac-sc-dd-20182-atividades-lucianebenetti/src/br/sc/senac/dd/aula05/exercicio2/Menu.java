@@ -9,12 +9,14 @@ public class Menu {
 	
 	public void apresentaMenu() {
 		int opcao = -1;
-		try {
-			opcao = Integer.parseInt(JOptionPane.showInputDialog(criarOpcaoMenu()));
-		}catch(NumberFormatException ex){
-			JOptionPane.showInputDialog(null, "O número informado deve ser um número inteiro entre 1 e 3.");
-		}
+		
 		while (opcao!=3) {
+		 	
+			try {
+				opcao = Integer.parseInt(JOptionPane.showInputDialog(criarOpcaoMenu()));
+			}catch(NumberFormatException ex){
+				JOptionPane.showInputDialog(null, "O número informado deve ser um número inteiro entre 1 e 3.");
+			}
 			
 			switch(opcao) {
 			
@@ -28,18 +30,20 @@ public class Menu {
 				menuProduto.apresentaMenuProduto();
 				break;
 			}
-			default:{
-				JOptionPane.showMessageDialog(null,"Opção inválida.");
+			case 3:{
+				int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza?");
+				if(resposta == 0) {
+					JOptionPane.showMessageDialog(null, "Você foi desconectado do sistema!");
+				}
+				break;
 			}
+			default: {
+				JOptionPane.showMessageDialog(null, "Opção Inválida");
+				break;
+				}
 			}
 		}
-		int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?");
 		
-		if (resposta == 0) {
-			JOptionPane.showMessageDialog(null,"Você foi desconectado do sistema.");
-		}else if (resposta == 1){
-			JOptionPane.showInputDialog(null, criarOpcaoMenu());
-		}
 	}
 
 	public String criarOpcaoMenu() {

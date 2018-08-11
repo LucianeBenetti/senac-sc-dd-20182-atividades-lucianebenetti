@@ -4,9 +4,9 @@ public class ProdutoVO {
 	int idProduto;
 	String nome;
 	String secao;
-	float valor;
+	double valor;
 	
-	public ProdutoVO(int idProduto, String nome, String secao, float valor) {
+	public ProdutoVO(int idProduto, String nome, String secao, double valor) {
 		super();
 		this.idProduto = idProduto;
 		this.nome = nome;
@@ -42,11 +42,11 @@ public class ProdutoVO {
 		this.secao = secao;
 	}
 
-	public float getValor() {
+	public double getValor() {
 		return valor;
 	}
 
-	public void setValor(float valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 

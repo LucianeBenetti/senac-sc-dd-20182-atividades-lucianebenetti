@@ -23,7 +23,7 @@ public class Menu {
 		
 		int opcao = -1;
 		
-		while (opcao != 6){
+		while (opcao != SAIR){
 			try {
 				opcao = Integer.parseInt(JOptionPane.showInputDialog(criarOpcoesMenu()));
 			}catch(NumberFormatException ex) {
