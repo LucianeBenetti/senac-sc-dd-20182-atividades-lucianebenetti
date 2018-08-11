@@ -12,58 +12,58 @@ public class Menu {
 	public List<Moto>motos = new ArrayList<Moto>();
 
  Scanner teclado = new Scanner(System.in);
+    private static final int CADASTRAR_MOTO = 1;
+	private static final int CADASTRAR_CAMINHAO = 2;
+	private static final int CADASTRAR_CARRO = 3;
+	private static final int EXIBIR_CAMINHAO_CARRO = 4;
+	private static final int EXIBIR_MOTO = 5;
+	private static final int SAIR = 6;
 	
 	public void apresentarMenu() {
 		
 		int opcao = -1;
 		
-		try {
-			opcao = Integer.parseInt(JOptionPane.showInputDialog(criarOpcoesMenu()));
-		}catch(NumberFormatException ex) {
-			JOptionPane.showMessageDialog(null, "Valor informado deve ser um número inteiro entre 1 e 6");
-		} 
-				
 		while (opcao != 6){
+			try {
+				opcao = Integer.parseInt(JOptionPane.showInputDialog(criarOpcoesMenu()));
+			}catch(NumberFormatException ex) {
+				JOptionPane.showMessageDialog(null, "Valor informado deve ser um número inteiro entre 1 e 6");
+			} 
 				
 			switch(opcao){
-				case 1: {
-					Menu cadastrarMoto = new Menu();
-					cadastrarMoto.cadastrarMoto();
-					break;
+			case CADASTRAR_MOTO: {
+				this.cadastrarMoto();
+				break;
+			}
+			case CADASTRAR_CAMINHAO: {
+				this.cadastrarCaminhao();
+				break;
+			}
+			case CADASTRAR_CARRO: {
+				this.cadastrarCarro();
+				break;
+			}
+			case EXIBIR_CAMINHAO_CARRO: {
+				this.exibirCaminhaoCarro();
+				break; 
+			}
+			case EXIBIR_MOTO: {
+				this.exibirMoto();
+				break;
+			}
+			case SAIR: {
+				int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza?");
+				if(resposta == 0) {
+					JOptionPane.showMessageDialog(null, "Você foi desconectado do sistema!");
 				}
-				case 2: {
-					Menu cadastrarCaminhao = new Menu();
-					cadastrarCaminhao.cadastrarCaminhao();
-					break;
-				}
-				case 3: {
-					Menu cadastrarCarro = new Menu();
-					cadastrarCarro.cadastrarCarro();
-					break;
-				}
-				case 4: {
-					Menu exibirCaminhaoCarro = new Menu();
-					exibirCaminhaoCarro.exibirCaminhaoCarro();
-					break;
-				}
-				case 5: {
-					Menu exibirMoto = new Menu();
-					exibirMoto.exibirMoto();
-					break;
-				}
-				default: {
-					JOptionPane.showMessageDialog(null, "Opção Inválida");
+				break;
+			}
+			default: {
+				JOptionPane.showMessageDialog(null, "Opção Inválida");
+				break;
 				}
 			}
 			
-		}
-		//Opção 6 - Sair
-		int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza?");
-		
-		if(resposta == 0) {
-			JOptionPane.showMessageDialog(null, "Você foi desconectado do sistema!");
-		}else if(resposta == 1) {
-			JOptionPane.showInputDialog(criarOpcoesMenu());
 		}
 	}
 
