@@ -50,10 +50,10 @@ public class MenuProduto {
 
 	private void atualizarProduto() {
 		ProdutoVO produtoVO = new ProdutoVO();
-		produtoVO.setIdProduto(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do funcionário para atualizar")));
-		produtoVO.setNome(JOptionPane.showInputDialog(null, "Digite o nome do funcionário:"));
-		produtoVO.setSecao(JOptionPane.showInputDialog(null,"Digite a seção:"));
-		produtoVO.setValor(Double.parseDouble(JOptionPane.showInputDialog(null,"Digite o valor do produto:")));
+		produtoVO.setIdProduto(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do funcionário para atualizar.")));
+		produtoVO.setNome(JOptionPane.showInputDialog(null, "Digite o nome do funcionário."));
+		produtoVO.setSecao(JOptionPane.showInputDialog(null,"Digite a seção."));
+		produtoVO.setValor(Double.parseDouble(JOptionPane.showInputDialog(null,"Digite o valor do produto.")));
  
 		ProdutoDAO atualizarProduto = new ProdutoDAO();
 		atualizarProduto.atualizar();
@@ -61,7 +61,7 @@ public class MenuProduto {
 
 	private void excluirProduto() {
 		ProdutoVO produtoVO = new ProdutoVO();
-		produtoVO.setIdProduto(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do funcionário para atualizar")));
+		produtoVO.setIdProduto(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do funcionário para excluir.")));
 		
 		ProdutoDAO excluirProduto = new ProdutoDAO();
 		excluirProduto.deletar();
@@ -70,9 +70,9 @@ public class MenuProduto {
 
 	private void cadastrarProduto() {
 		ProdutoVO produtoVO = new ProdutoVO();
-		produtoVO.setNome(JOptionPane.showInputDialog(null, "Digite o nome do funcionário:"));
-		produtoVO.setSecao(JOptionPane.showInputDialog(null,"Digite o CPF:"));
-		produtoVO.setValor(Double.parseDouble(JOptionPane.showInputDialog(null,"Digite o telefone:")));
+		produtoVO.setNome(JOptionPane.showInputDialog(null, "Digite o nome do funcionário."));
+		produtoVO.setSecao(JOptionPane.showInputDialog(null,"Digite o CPF."));
+		produtoVO.setValor(Double.parseDouble(JOptionPane.showInputDialog(null,"Digite o telefone.")));
 		
 		ProdutoDAO inserirProduto = new ProdutoDAO();
 		inserirProduto.inserir();

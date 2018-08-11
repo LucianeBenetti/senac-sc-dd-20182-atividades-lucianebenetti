@@ -45,7 +45,7 @@ public class Menu {
 	}
 
 	public String criarOpcaoMenu() {
-		String mensagem = "Sistema Gerenciador de Supermercado";
+		String mensagem = "Sistema de Gestão de Supermercado";
 		mensagem += "\n Opções:";
 		mensagem += "\n 1 - Menu Funcionário.";
 		mensagem += "\n 2 - Menu Produto.";
