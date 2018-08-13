@@ -7,10 +7,13 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
-public class ProdutoDAO {
+public class ProdutoDAO implements InterfaceDAO {
 
-	public int inserir () {
-		ProdutoVO produtoVO = new ProdutoVO();
+	ProdutoVO produtoVO = new ProdutoVO();
+	
+	@Override
+	public int insert(Object objeto) {
+		
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		int resultado = 0;
@@ -28,8 +31,9 @@ public class ProdutoDAO {
 		return resultado;
 	}
 
-	public int deletar() {
-		ProdutoVO produtoVO = new ProdutoVO();
+	@Override
+	public int delete() {
+		
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		int resultado = 0;
@@ -46,16 +50,14 @@ public class ProdutoDAO {
 		return resultado;
 	}
 
-	public int atualizar() {
-		ProdutoVO produtoVO = new ProdutoVO();
+	@Override
+	public int atualizar(Object objeto) {
+		
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		int resultado = 0;
-		String query = "UPDATE produto SET nome = '" 
-		+ produtoVO.getNome() 
-		+ "', secao = '"+ produtoVO.getSecao() 
-		+ "', valor = '" + produtoVO.getValor()
-		+ "' WHERE idproduto = " + produtoVO.getIdProduto();
+		String query = "UPDATE produto SET nome = '" + produtoVO.getNome() + "', secao = '"+ produtoVO.getSecao() 
+		+ "', valor = '" + produtoVO.getValor() + "' WHERE idproduto = " + produtoVO.getIdProduto();
 		try {
 			resultado = stmt.executeUpdate(query);
 			JOptionPane.showMessageDialog(null,"Produto atualizado com sucesso!");
@@ -69,19 +71,20 @@ public class ProdutoDAO {
 		
 	}
 
-	public ProdutoVO cosultarprodutoDAO(ProdutoVO produtoVO) {
+	@Override
+	public void consultar() {
+		
 			Connection conn = Banco.getConnection();
 			Statement stmt = Banco.getStatement(conn);
 			ResultSet resultado = null;
-			ProdutoVO produto = new ProdutoVO();
 			String query = "SELECT *FROM produto WHERE idproduto = " + produtoVO.getIdProduto();
 			try {
 				resultado = stmt.executeQuery(query);
 				while (resultado.next()){
-					produto.setIdProduto(Integer.parseInt(resultado.getString(1)));
-					produto.setNome(resultado.getString(2));
-					produto.setSecao(resultado.getString(3));
-					produto.setValor(Double.parseDouble(resultado.getString(4)));
+					produtoVO.setIdProduto(Integer.parseInt(resultado.getString(1)));
+					produtoVO.setNome(resultado.getString(2));
+					produtoVO.setSecao(resultado.getString(3));
+					produtoVO.setValor(Double.parseDouble(resultado.getString(4)));
 				}
 			} catch(SQLException e) {
 				System.out.println("Erro ao executar a Query de Consulta de produtos!");
@@ -90,7 +93,6 @@ public class ProdutoDAO {
 				Banco.closeStatement(stmt);
 				Banco.closeConnection(conn);
 			}
-			return produto;
-	}
+		}
 
 }

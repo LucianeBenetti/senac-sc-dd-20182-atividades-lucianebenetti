@@ -7,10 +7,13 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
-public class FuncionarioDAO {
-
-	public int inserir () {
-		FuncionarioVO funcionarioVO = new FuncionarioVO();
+public class FuncionarioDAO implements InterfaceDAO {
+	
+	FuncionarioVO funcionarioVO = new FuncionarioVO();
+	
+	@Override
+	public int insert(Object objeto) {
+				
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		int resultado = 0;
@@ -28,8 +31,9 @@ public class FuncionarioDAO {
 		return resultado;
 	}
 
-	public int deletar() {
-		FuncionarioVO funcionarioVO = new FuncionarioVO();
+	@Override
+	public int delete() {
+		
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		int resultado = 0;
@@ -46,8 +50,9 @@ public class FuncionarioDAO {
 		return resultado;
 	}
 
-	public int atualizar() {
-		FuncionarioVO funcionarioVO = new FuncionarioVO();
+	@Override
+	public int atualizar(Object objeto) {
+				
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		int resultado = 0;
@@ -69,21 +74,21 @@ public class FuncionarioDAO {
 		return resultado;
 		
 	}
+	@Override
+	public void consultar() {
 
-	public FuncionarioVO cosultarfuncionarioDAO(FuncionarioVO funcionarioVO) {
 			Connection conn = Banco.getConnection();
 			Statement stmt = Banco.getStatement(conn);
 			ResultSet resultado = null;
-			FuncionarioVO funcionario = new FuncionarioVO();
 			String query = "SELECT *FROM funcionario WHERE idfuncionario = " + funcionarioVO.getIdFuncionario();
 			try {
 				resultado = stmt.executeQuery(query);
 				while (resultado.next()){
-					funcionario.setIdFuncionario(Integer.parseInt(resultado.getString(1)));
-					funcionario.setNome(resultado.getString(2));
-					funcionario.setCpf(resultado.getString(3));
-					funcionario.setTelefone(resultado.getString(4));
-					funcionario.setEmail(resultado.getString(5));
+					funcionarioVO.setIdFuncionario(Integer.parseInt(resultado.getString(1)));
+					funcionarioVO.setNome(resultado.getString(2));
+					funcionarioVO.setCpf(resultado.getString(3));
+					funcionarioVO.setTelefone(resultado.getString(4));
+					funcionarioVO.setEmail(resultado.getString(5));
 				}
 			} catch(SQLException e) {
 				System.out.println("Erro ao executar a Query de Consulta de Funcionários!");
@@ -92,8 +97,7 @@ public class FuncionarioDAO {
 				Banco.closeStatement(stmt);
 				Banco.closeConnection(conn);
 			}
-			return funcionario;
+			
 	}
 
-	
 }

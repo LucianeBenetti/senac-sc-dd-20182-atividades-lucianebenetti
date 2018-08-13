@@ -1,11 +1,10 @@
 package br.sc.senac.dd.aula05.exercicio2;
 
-import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 public class MenuFuncionario{
 	
-	Scanner teclado = new Scanner(System.in);
+	FuncionarioVO funcionarioVO = new FuncionarioVO();
 
 	public void apresentaMenuFuncionario() {
 	
@@ -63,12 +62,15 @@ public class MenuFuncionario{
 	
 
 	private void consultarFuncionario() {
-		// TODO Auto-generated method stub
+       
+		funcionarioVO.setIdFuncionario(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do funcionário para consultar.")));
 		
+		FuncionarioDAO consultarFuncionario = new FuncionarioDAO();
+		consultarFuncionario.consultar();
 	}
 
 	private void atualizarFuncionario() {
-		FuncionarioVO funcionarioVO = new FuncionarioVO();
+		
 		funcionarioVO.setIdFuncionario(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do funcionário para atualizar.")));
 		funcionarioVO.setNome(JOptionPane.showInputDialog(null, "Digite o nome do funcionário."));
 		funcionarioVO.setCpf(JOptionPane.showInputDialog(null,"Digite o CPF do funcionário."));
@@ -76,26 +78,26 @@ public class MenuFuncionario{
 		funcionarioVO.setEmail(JOptionPane.showInputDialog(null,"Digite o e-mail."));
 	 
 		FuncionarioDAO atualizarFuncionario = new FuncionarioDAO();
-		atualizarFuncionario.atualizar();
+		atualizarFuncionario.atualizar(funcionarioVO);
 	}
 
 	private void excluirFuncionario() {
-		FuncionarioVO funcionarioVO = new FuncionarioVO();
+	
 		funcionarioVO.setIdFuncionario(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do funcionário para excluir.")));
 		
 		FuncionarioDAO excluirFuncionario = new FuncionarioDAO();
-		excluirFuncionario.deletar();
+		excluirFuncionario.delete();
 	}
 
 	private void cadastrarFuncionario() {
-		FuncionarioVO funcionarioVO = new FuncionarioVO();
+		
 		funcionarioVO.setNome(JOptionPane.showInputDialog(null, "Digite o nome do funcionário."));
 		funcionarioVO.setCpf(JOptionPane.showInputDialog(null,"Digite o CPF."));
 		funcionarioVO.setTelefone(JOptionPane.showInputDialog(null,"Digite o telefone."));
 		funcionarioVO.setEmail(JOptionPane.showInputDialog(null,"Digite o e-mail."));
 		
 		FuncionarioDAO inserirFuncionario = new FuncionarioDAO();
-		inserirFuncionario.inserir();
+		inserirFuncionario.insert(funcionarioVO);
 	}
 
 

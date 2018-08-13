@@ -3,6 +3,7 @@ package br.sc.senac.dd.aula05.exercicio2;
 import javax.swing.JOptionPane;
 
 public class MenuProduto {
+	ProdutoVO produtoVO = new ProdutoVO();
 
 	public void apresentaMenuProduto() {
 		int opcao = -1;
@@ -45,26 +46,30 @@ public class MenuProduto {
 	}
 	
 	private void consultarProduto() {
-		// TODO Auto-generated method stub
+		
+		produtoVO.setIdProduto(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do funcionário para consultado.")));
+		
+		ProdutoDAO consultarProduto = new ProdutoDAO();
+		consultarProduto.consultar();
 	}
 
 	private void atualizarProduto() {
-		ProdutoVO produtoVO = new ProdutoVO();
+
 		produtoVO.setIdProduto(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do funcionário para atualizar.")));
 		produtoVO.setNome(JOptionPane.showInputDialog(null, "Digite o nome do funcionário."));
 		produtoVO.setSecao(JOptionPane.showInputDialog(null,"Digite a seção."));
 		produtoVO.setValor(Double.parseDouble(JOptionPane.showInputDialog(null,"Digite o valor do produto.")));
  
 		ProdutoDAO atualizarProduto = new ProdutoDAO();
-		atualizarProduto.atualizar();
+		atualizarProduto.atualizar(produtoVO);
 	}
 
 	private void excluirProduto() {
-		ProdutoVO produtoVO = new ProdutoVO();
+		
 		produtoVO.setIdProduto(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do funcionário para excluir.")));
 		
 		ProdutoDAO excluirProduto = new ProdutoDAO();
-		excluirProduto.deletar();
+		excluirProduto.delete();
 		
 	}
 
@@ -75,7 +80,7 @@ public class MenuProduto {
 		produtoVO.setValor(Double.parseDouble(JOptionPane.showInputDialog(null,"Digite o telefone.")));
 		
 		ProdutoDAO inserirProduto = new ProdutoDAO();
-		inserirProduto.inserir();
+		inserirProduto.insert(produtoVO);
 		
 	}
 

@@ -2,8 +2,6 @@ package br.sc.senac.dd.aula04.exercicio;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
 import javax.swing.JOptionPane;
 
 public class Menu {
@@ -11,7 +9,6 @@ public class Menu {
 	public List<Carro>carros = new ArrayList<Carro>();
 	public List<Moto>motos = new ArrayList<Moto>();
 
- Scanner teclado = new Scanner(System.in);
     private static final int CADASTRAR_MOTO = 1;
 	private static final int CADASTRAR_CAMINHAO = 2;
 	private static final int CADASTRAR_CARRO = 3;
@@ -144,7 +141,6 @@ public class Menu {
 		
 		carros.toString();
 		caminhoes.toString();
-		JOptionPane.showMessageDialog(null, "Lista os carros e caminhões cadastrados");
 		JOptionPane.showMessageDialog(null, carros);
 		JOptionPane.showMessageDialog(null,caminhoes);
 			
@@ -153,7 +149,6 @@ public class Menu {
 	}
 	private void exibirMoto() {
 		motos.toString();
-		JOptionPane.showMessageDialog(null, "Lista as motos cadastradas");
 		JOptionPane.showMessageDialog(null, motos);
 		
 		this.apresentarMenu();
