@@ -1,11 +1,8 @@
-package br.sc.senac.dd.aula05.exercicio2;
-
-import java.util.Scanner;
+package br.sc.senac.dd.aula05.exercicio2.View;
 
 import javax.swing.JOptionPane;
 
 public class Menu {
-	Scanner teclado = new Scanner (System.in);
 	
 	public void apresentaMenu() {
 		int opcao = -1;
@@ -13,7 +10,12 @@ public class Menu {
 		while (opcao!=3) {
 		 	
 			try {
-				opcao = Integer.parseInt(JOptionPane.showInputDialog(criarOpcaoMenu()));
+				String valorDigitado = JOptionPane.showInputDialog(criarOpcaoMenu());
+				if(valorDigitado !=null) {
+					opcao = Integer.parseInt(valorDigitado);
+				}else {
+					break;
+				}
 			}catch(NumberFormatException ex){
 				JOptionPane.showMessageDialog(null, "O número informado deve ser um número inteiro entre 1 e 3.");
 			}

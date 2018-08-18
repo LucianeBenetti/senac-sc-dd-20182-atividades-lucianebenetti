@@ -1,14 +1,13 @@
-package br.sc.senac.dd.aula05.exercicio2;
+package br.sc.senac.dd.aula05.exercicio2.ModelVO;
 
 public class ProdutoVO {
-	int idProduto;
-	String nome;
-	String secao;
-	double valor;
+	private int idProduto;
+	private String nome;
+	private String secao;
+	private double valor;
 	
-	public ProdutoVO(int idProduto, String nome, String secao, double valor) {
+	public ProdutoVO(String nome, String secao, double valor) {
 		super();
-		this.idProduto = idProduto;
 		this.nome = nome;
 		this.secao = secao;
 		this.valor = valor;
@@ -50,4 +49,10 @@ public class ProdutoVO {
 		this.valor = valor;
 	}
 
+	@Override
+	public String toString() {
+		return "Produto\n IdProduto: " + idProduto + ",\n Nome: " + nome + ",\n Secao: " + secao + ",\n Valor: " + valor;
+	}
+
+	
 }

@@ -1,12 +1,12 @@
-package br.sc.senac.dd.aula05.exercicio2;
+package br.sc.senac.dd.aula05.exercicio2.ModelVO;
 
 public class FuncionarioVO {
 
-	int idFuncionario;
-	String nome;
-	String cpf;
-	String telefone;
-	String email;
+	private int idFuncionario;
+	private String nome;
+	private String cpf;
+	private String telefone;
+	private String email;
 	
 	public FuncionarioVO(int idFuncionario, String nome, String cpf, String telefone, String email) {
 		super();
@@ -16,10 +16,10 @@ public class FuncionarioVO {
 		this.telefone = telefone;
 		this.email = email;
 	}
-
+		
 	public FuncionarioVO() {
-		super();
-	}
+			super();
+		}
 
 	public int getIdFuncionario() {
 		return idFuncionario;
@@ -59,6 +59,12 @@ public class FuncionarioVO {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "FuncionarioVO \nIdFuncionario: " + idFuncionario + ",\n Nome: " + nome + ",\n CPF: " + cpf + ",\n Telefone: "
+				+ telefone + ",\n e-mail: " + email;
 	}
 	
 }
