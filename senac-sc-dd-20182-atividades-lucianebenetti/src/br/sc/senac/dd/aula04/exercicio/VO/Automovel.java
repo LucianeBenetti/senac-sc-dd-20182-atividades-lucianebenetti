@@ -1,8 +1,17 @@
-package br.sc.senac.dd.aula04.exercicio;
+package br.sc.senac.dd.aula04.exercicio.VO;
 
 import java.util.ArrayList;
 
-public class Automovel {
+public abstract class Automovel {
+	
+	//Constantes para instanciar nas classes.
+	public static final int NUMERO_RODAS_MOTO_PADRAO = 2;
+	public static final int NUMERO_RODAS_MOTO_TRICICLO = 3;
+	public static final int NUMERO_RODAS_CARRO = 4;
+	public static final int NUMERO_RODAS_CAMINHAO_PEQUENO = 6;
+	public static final int NUMERO_RODAS_CAMINHAO_MEDIO = 12;
+	public static final int NUMERO_RODAS_CAMINHAO_GRANDE = 18;
+	
 	
 	private String fabricante;
 	private String modelo;
@@ -18,11 +27,19 @@ public class Automovel {
 		this.chassi = chassi;
 		this.numRodas = numRodas;
 	}
+	
+	public Automovel(String fabricante, String modelo, int ano, String chassi) {
+		super();
+		this.fabricante = fabricante;
+		this.modelo = modelo;
+		this.ano = ano;
+		this.chassi = chassi;
+	
+	}
 
 	public Automovel() {
 		super();
 	}
-
 
 	public String getFabricante() {
 		return fabricante;
@@ -78,8 +95,7 @@ public class Automovel {
 
 	@Override
 	public String toString() {
-		return "Fabricante= " + fabricante + "\nModelo=" + modelo + "\nAno=" + ano + "\nChassi=" + chassi
-				+ "\nNumRodas=" + numRodas + "]";
+		return "Fabricante= " + fabricante + "\nModelo=" + modelo + "\nAno=" + ano + "\nChassi=" + chassi;
 	}
 	
 

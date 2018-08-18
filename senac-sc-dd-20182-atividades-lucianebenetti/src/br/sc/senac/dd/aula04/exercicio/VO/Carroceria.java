@@ -1,4 +1,4 @@
-package br.sc.senac.dd.aula04.exercicio;
+package br.sc.senac.dd.aula04.exercicio.VO;
 
 public class Carroceria {
 	

@@ -1,15 +1,23 @@
-package br.sc.senac.dd.aula04.exercicio;
+package br.sc.senac.dd.aula04.exercicio.VO;
 
 public class Caminhao extends Automovel{
 	
+	private static final double CAPACIDADE_DEZ_TONELADAS = 0;
 	private int eixos;
 	private Carroceria carroceria;
 	
-	public Caminhao(String fabricante, String modelo, int ano, String chassi, int numRodas, int eixos,
+	public Caminhao(String fabricante, String modelo, int ano, String chassi, int eixos,
 			Carroceria carroceria) {
-		super(fabricante, modelo, ano, chassi, numRodas);
+		super(fabricante, modelo, ano, chassi);
 		this.eixos = eixos;
 		this.carroceria = carroceria;
+		
+		if(this.getCarroceria().getCapacidade() > CAPACIDADE_DEZ_TONELADAS) {
+			this.eixos = 4;
+			
+		}else {
+			this.eixos = 3;
+		}
 	}
 
 	public Caminhao() {

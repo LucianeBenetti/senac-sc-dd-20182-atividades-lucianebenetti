@@ -1,13 +1,11 @@
-package br.sc.senac.dd.aula04.exercicio;
-
-import java.util.Scanner;
+package br.sc.senac.dd.aula04.exercicio.VO;
 
 public class Moto extends Automovel{
 	
 	private int cilindradas;
 
 	public Moto(String fabricante, String modelo, int ano, String chassi, int numRodas, int cilindradas) {
-		super(fabricante, modelo, ano, chassi, numRodas);
+		super(fabricante, modelo, ano, chassi, Automovel.NUMERO_RODAS_MOTO_PADRAO);
 		this.cilindradas = cilindradas;
 	}
 

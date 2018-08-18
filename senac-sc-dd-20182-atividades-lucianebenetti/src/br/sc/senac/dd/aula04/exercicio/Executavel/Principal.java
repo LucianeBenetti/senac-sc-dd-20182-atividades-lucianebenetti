@@ -1,4 +1,6 @@
-package br.sc.senac.dd.aula04.exercicio;
+package br.sc.senac.dd.aula04.exercicio.Executavel;
+
+import br.sc.senac.dd.aula04.exercicio.VIEW.Menu;
 
 public class Principal {
 

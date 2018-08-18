@@ -1,4 +1,4 @@
-package br.sc.senac.dd.aula04.exercicio;
+package br.sc.senac.dd.aula04.exercicio.VO;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -10,7 +10,7 @@ public class Carro extends Automovel{
 	private String categoria; //passeio, SUV, transporte.
 
 	public Carro(String fabricante, String modelo, int ano, String chassi, int numRodas, String categoria) {
-		super(fabricante, modelo, ano, chassi, numRodas);
+		super(fabricante, modelo, ano, chassi, Automovel.NUMERO_RODAS_CARRO);
 		this.categoria = categoria;
 	}
 	

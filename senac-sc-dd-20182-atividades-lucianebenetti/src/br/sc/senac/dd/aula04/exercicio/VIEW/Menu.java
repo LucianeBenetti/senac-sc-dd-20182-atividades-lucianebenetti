@@ -1,8 +1,12 @@
-package br.sc.senac.dd.aula04.exercicio;
+package br.sc.senac.dd.aula04.exercicio.VIEW;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+
+import br.sc.senac.dd.aula04.exercicio.VO.Caminhao;
+import br.sc.senac.dd.aula04.exercicio.VO.Carro;
+import br.sc.senac.dd.aula04.exercicio.VO.Moto;
 
 public class Menu {
 	public List<Caminhao>caminhoes = new ArrayList<Caminhao>();
@@ -18,52 +22,55 @@ public class Menu {
 	
 	public void apresentarMenu() {
 		
-		int opcao = -1;
-		
-		while (opcao != SAIR){
-			try {
-				opcao = Integer.parseInt(JOptionPane.showInputDialog(criarOpcoesMenu()));
-			}catch(NumberFormatException ex) {
-				JOptionPane.showMessageDialog(null, "Valor informado deve ser um número inteiro entre 1 e 6");
-			} 
+			int opcao = -1;
+			
+			while (opcao != SAIR) {
 				
-			switch(opcao){
-			case CADASTRAR_MOTO: {
-				this.cadastrarMoto();
-				break;
-			}
-			case CADASTRAR_CAMINHAO: {
-				this.cadastrarCaminhao();
-				break;
-			}
-			case CADASTRAR_CARRO: {
-				this.cadastrarCarro();
-				break;
-			}
-			case EXIBIR_CAMINHAO_CARRO: {
-				this.exibirCaminhaoCarro();
-				break; 
-			}
-			case EXIBIR_MOTO: {
-				this.exibirMoto();
-				break;
-			}
-			case SAIR: {
-				int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza?");
-				if(resposta == 0) {
-					JOptionPane.showMessageDialog(null, "Você foi desconectado do sistema!");
-				}
-				break;
-			}
-			default: {
-				JOptionPane.showMessageDialog(null, "Opção Inválida");
-				}
+			try {
+				opcao = Integer.parseInt(JOptionPane.showInputDialog(criarOpcaoMenu()));
+			}catch(NumberFormatException ex){
+				JOptionPane.showMessageDialog(null, "O número informado deve ser um número inteiro entre 1 e 3.");
 			}
 			
-		}
+			  //if(opcao != null) {
+				switch(opcao){
+				case CADASTRAR_MOTO: 
+					this.cadastrarMoto();
+					break;
+				
+				case CADASTRAR_CAMINHAO: 
+					this.cadastrarCaminhao();
+					break;
+				
+				case CADASTRAR_CARRO: 
+					this.cadastrarCarro();
+					break;
+				
+				case EXIBIR_CAMINHAO_CARRO: 
+					this.exibirCaminhaoCarro();
+					break; 
+				
+				case EXIBIR_MOTO: 
+					this.exibirMoto();
+					break;
+				
+				case SAIR: 
+					int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza?");
+					if(resposta == 0) {
+						JOptionPane.showMessageDialog(null, "Você foi desconectado do sistema!");
+					}
+					break;
+				
+				default: 
+					JOptionPane.showMessageDialog(null, "Opção Inválida");
+					
+				}
+			}
 	}
-
-	public String criarOpcoesMenu() {
+			
+	
+	
+	public String criarOpcaoMenu() {
 		String mensagem = "Sistema Gerenciador de Automóveis";
 		mensagem += "\n Opções:";
 		mensagem += "\n 1 - Cadastrar Moto.";
@@ -139,17 +146,45 @@ public class Menu {
 	
 	private void exibirCaminhaoCarro() {
 		
-		carros.toString();
-		caminhoes.toString();
+		JOptionPane.showMessageDialog(null, caminhoes);
 		JOptionPane.showMessageDialog(null, carros);
-		JOptionPane.showMessageDialog(null,caminhoes);
-			
+		
+		//String chassiInformado = JOptionPane.showInputDialog("Informe o chassi");
+		
+		//Carro carro = obterCarroPorChassi (chassiInformado);
+		//Caminhao caminhao = obterCaminhaoPorChassi (chassiInformado);
+		
+		//String mensagem = "";
+		
+		//if(carro != null) {
+			//mensagem = carro.toString();
+		//}else if(caminhao != null) {
+			//mensagem = caminhao.toString();
+		//}else {
+			//mensagem = "Veículo não encontrado";
+		//}
+		
+		//JOptionPane.showMessageDialog(null, mensagem);
+				
 		this.apresentarMenu();
 		
 	}
+	private Caminhao obterCaminhaoPorChassi(String chassiInformado) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private Carro obterCarroPorChassi(String chassiInformado) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	private void exibirMoto() {
-		motos.toString();
-		JOptionPane.showMessageDialog(null, motos);
+		String mensagem = "Motos cadastradas!!\n";
+		mensagem += "Motos: " + motos.size() + "\n";
+		mensagem += motos.toString() + "\n";
+		
+		JOptionPane.showMessageDialog(null, mensagem);
 		
 		this.apresentarMenu();
 		
