@@ -107,9 +107,6 @@ public class FuncionarioDAO extends BaseDAO<FuncionarioVO> {
 				
 				funcionarios.add(funcionario);
 			}
-
-			JOptionPane.showMessageDialog(null, funcionarios.toString());
-
 		} catch(SQLException e) {
 			System.out.println("Erro ao executar a Query de Consulta de produtos!Causa: \n: " + e.getMessage());
 		} finally {

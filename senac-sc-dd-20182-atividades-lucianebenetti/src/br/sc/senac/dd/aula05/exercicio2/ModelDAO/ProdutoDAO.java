@@ -6,10 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 import br.sc.senac.dd.aula05.dao.Banco;
-import br.sc.senac.dd.aula05.exercicio2.ModelVO.FuncionarioVO;
 import br.sc.senac.dd.aula05.exercicio2.ModelVO.ProdutoVO;
 
 public class ProdutoDAO {
@@ -33,8 +31,6 @@ public class ProdutoDAO {
 			if (generatedKeys.next()) {
 				novoId = generatedKeys.getInt(1);
 			}
-			JOptionPane.showMessageDialog(null,"Produto cadastrado com sucesso!");
-
 		}catch (SQLException e) {
 			System.out.println("Erro ao executar Query de Cadastro de Produto! Causa: \n: " + e.getMessage());
 
@@ -58,7 +54,6 @@ public class ProdutoDAO {
 			int codigoRetorno = prepStmt.executeUpdate();
 			if(codigoRetorno == 1){
 				sucesso = true;
-				JOptionPane.showMessageDialog(null,"Produto deleteado com sucesso!");
 			}
 		}catch (SQLException e) {
 			System.out.println("Erro ao executar Query de Exclusão do Produto! Causa: \n: " + e.getMessage());
@@ -89,8 +84,6 @@ public class ProdutoDAO {
 			if(codigoRetorno == 1){
 				sucesso = true;
 			}
-			JOptionPane.showMessageDialog(null,"Produto atualizado com sucesso!");
-
 		}catch (SQLException e) {
 			System.out.println("Erro ao executar Query de Atualização do Produto!Causa: \n: " + e.getMessage());
 		}finally {
@@ -120,7 +113,7 @@ public class ProdutoDAO {
 
 				produtos.add(produto);
 			}	
-			JOptionPane.showMessageDialog(null, produtos.toString());
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -150,9 +143,6 @@ public class ProdutoDAO {
 
 			produtos.add(produto);
 			}
-
-			JOptionPane.showMessageDialog(null, produtos.toString());
-
 		} catch(SQLException e) {
 			System.out.println("Erro ao executar a Query de Consulta de produtos!Causa: \n: " + e.getMessage());
 		} finally {

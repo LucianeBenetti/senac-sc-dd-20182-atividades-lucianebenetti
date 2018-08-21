@@ -1,10 +1,7 @@
 package br.sc.senac.dd.aula05.exercicio2.View;
 
-import java.sql.SQLException;
-
+import java.util.List;
 import javax.swing.JOptionPane;
-
-import br.sc.senac.dd.aula05.exercicio2.ModelDAO.FuncionarioDAO;
 import br.sc.senac.dd.aula05.exercicio2.ModelDAO.ProdutoDAO;
 import br.sc.senac.dd.aula05.exercicio2.ModelVO.ProdutoVO;
 
@@ -62,17 +59,22 @@ public class MenuProduto {
 		ProdutoVO produtoVO = new ProdutoVO();
 		ProdutoDAO produtoDAO = new ProdutoDAO();
 		
-		produtoVO.setIdProduto(Integer.parseInt((JOptionPane.showInputDialog(null,"Digite o ID do Produto."))));
-		if (produtoDAO.existeRegistroPorIdProduto(produtoVO.getIdProduto())){
-			JOptionPane.showMessageDialog(null, "Produto já cadastrado! Tente novamente.");
-		}else{
+		//Código de validação opcional, não exigido no exercício. Fiz somente para treinar.
+		//produtoVO.setIdProduto(Integer.parseInt((JOptionPane.showInputDialog(null,"Digite o ID do Produto."))));
+		//if (produtoDAO.existeRegistroPorIdProduto(produtoVO.getIdProduto())){
+		//	JOptionPane.showMessageDialog(null, "Produto já cadastrado! Tente novamente.");
+		//}else{
 		
 		produtoVO.setNome(JOptionPane.showInputDialog(null, "Digite o nome do produto."));
 		produtoVO.setSecao(JOptionPane.showInputDialog(null,"Digite a seção do produto."));
 		produtoVO.setValor(Double.parseDouble(JOptionPane.showInputDialog(null,"Digite o valor do produto.")));
 		
-		ProdutoDAO inserirProduto = new ProdutoDAO();
-		inserirProduto.insert(produtoVO);
+		int idGerado = produtoDAO.insert(produtoVO);
+		
+		if(idGerado > 0) {
+			JOptionPane.showMessageDialog(null,"Produto cadastrado com sucesso!");
+		}else {
+			JOptionPane.showMessageDialog(null,"Tente novamente!");
 		}
 	}
 	
@@ -83,6 +85,7 @@ public class MenuProduto {
 		produtoVO.setIdProduto(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do Produto para excluir.")));
 		if(produtoDAO.existeRegistroPorIdProduto(produtoVO.getIdProduto())) {
 			produtoDAO.delete(produtoVO.getIdProduto());
+			JOptionPane.showMessageDialog(null,"Produto deleteado com sucesso!");
 		}else {
 			JOptionPane.showMessageDialog(null, "ID não existe. Não foi possível excluir o Produto.");
 		}
@@ -100,23 +103,33 @@ public class MenuProduto {
 		produtoVO.setSecao(JOptionPane.showInputDialog(null,"Digite a seção."));
 		produtoVO.setValor(Double.parseDouble(JOptionPane.showInputDialog(null,"Digite o valor do produto.")));
  
-		produtoDAO.atualizar(produtoVO);
-		JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso!");	
+		if(produtoDAO.atualizar(produtoVO)) {
+			JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso!");	
+		}else {
+			JOptionPane.showMessageDialog(null, "Pdoduto não exite. Tente novamente!");	
+		}
 		}
 	}
 	
 	private void consultarTodosProduto() {
 		ProdutoDAO consultarProduto = new ProdutoDAO();
-		consultarProduto.listarTodos();
 		
+		List<ProdutoVO> produtos = consultarProduto.listarTodos();
+		JOptionPane.showMessageDialog(null, produtos);
 	}
 
 	private void consultarProduto() {
-		ProdutoVO produtoVO = new ProdutoVO();
-		produtoVO.setIdProduto(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do produto para consultado.")));
-		
 		ProdutoDAO consultarProduto = new ProdutoDAO();
-		consultarProduto.consultarPorId(produtoVO.getIdProduto());
+		
+		int idProduto = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do produto para consultado."));
+		ProdutoVO produtoConsultado = consultarProduto.consultarPorId(idProduto);
+		
+		if(produtoConsultado != null) {
+			JOptionPane.showMessageDialog(null, produtoConsultado);
+		}else {
+			JOptionPane.showMessageDialog(null,"Tente novamente!");
+			
+		}
 	}
 
 	private String criarMenuProduto() {

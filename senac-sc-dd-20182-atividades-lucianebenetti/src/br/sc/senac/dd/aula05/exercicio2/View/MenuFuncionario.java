@@ -94,11 +94,16 @@ public class MenuFuncionario{
 		funcionarioVO.setCpf(JOptionPane.showInputDialog(null,"Digite o CPF."));
 		funcionarioVO.setTelefone(JOptionPane.showInputDialog(null,"Digite o telefone."));
 		funcionarioVO.setEmail(JOptionPane.showInputDialog(null,"Digite o e-mail."));
-
-		funcionarioDAO.inserir(funcionarioVO);
-		JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
+		
+		int idGerado = funcionarioDAO.inserir(funcionarioVO);
+			if(idGerado > 0) {
+				JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
+			}else {
+				JOptionPane.showMessageDialog(null,"Tente novamente!");
+			}
 		}
 	}
+		
 
 	private void excluirFuncionario() throws SQLException {
 		FuncionarioVO funcionarioVO = new FuncionarioVO();
@@ -126,15 +131,14 @@ public class MenuFuncionario{
 				funcionarioVO.setTelefone(JOptionPane.showInputDialog(null,"Digite o telefone."));
 				funcionarioVO.setEmail(JOptionPane.showInputDialog(null,"Digite o e-mail."));
 
-					try {
-						funcionarioDAO.atualizar(funcionarioVO, funcionarioVO.getIdFuncionario());
-					JOptionPane.showMessageDialog(null, "Funcionário atualizado com sucesso!");	
-					} catch (SQLException e) {
-					
-						e.printStackTrace();
-					}
-			}else {
-				JOptionPane.showMessageDialog(null, "Funcionário não existe para ser atualizado!");	
+				try {
+					if(funcionarioDAO.atualizar(funcionarioVO, funcionarioVO.getIdFuncionario()));
+						JOptionPane.showMessageDialog(null, "Funcionário atualizado com sucesso!");
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}							
+					}else {
+						JOptionPane.showMessageDialog(null, "Funcionário não existe para ser atualizado!");	
 			}
 	}
 				
@@ -143,23 +147,23 @@ public class MenuFuncionario{
 		FuncionarioDAO consultarProduto = new FuncionarioDAO();
 		try {
 			List<FuncionarioVO> funcionarios = consultarProduto.listarTodos();
-
 			JOptionPane.showMessageDialog(null, funcionarios.toString());
 		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	private void consultarFuncionarioPorCPF() throws SQLException {
-		FuncionarioVO funcionarioVO = new FuncionarioVO();
-		funcionarioVO.setCpf(JOptionPane.showInputDialog(null, "Digite o CPF do funcionário para consultar."));
-
 		FuncionarioDAO consultarFuncionario = new FuncionarioDAO();
-		consultarFuncionario.consultarPorCpf(funcionarioVO.getCpf());
+		
+		String cpf = (JOptionPane.showInputDialog(null, "Digite o CPF do funcionário para consultar."));
+		FuncionarioVO funcionarioConsultado = consultarFuncionario.consultarPorCpf(cpf);
+		
+			if(funcionarioConsultado != null) {
+				JOptionPane.showMessageDialog(null, funcionarioConsultado);
+			}else {
+				JOptionPane.showMessageDialog(null,"Tente novamente!");
+			}
 	}
-
-
-
 }
