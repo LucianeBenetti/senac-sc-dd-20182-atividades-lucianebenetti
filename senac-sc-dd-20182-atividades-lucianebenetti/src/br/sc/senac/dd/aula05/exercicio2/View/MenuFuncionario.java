@@ -1,8 +1,11 @@
-package br.sc.senac.dd.aula05.exercicio2;
+package br.sc.senac.dd.aula05.exercicio2.View;
 
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
+
+import br.sc.senac.dd.aula05.exercicio2.ModelDAO.FuncionarioDAO;
+import br.sc.senac.dd.aula05.exercicio2.ModelVO.FuncionarioVO;
 
 public class MenuFuncionario{
 

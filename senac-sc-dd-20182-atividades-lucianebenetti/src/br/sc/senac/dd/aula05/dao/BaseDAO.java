@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.sc.senac.dd.aula05;
+package br.sc.senac.dd.aula05.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

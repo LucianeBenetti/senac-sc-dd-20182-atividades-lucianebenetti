@@ -1,4 +1,6 @@
-package br.sc.senac.dd.aula04.exercicio;
+package br.sc.senac.dd.aula04.exercicio.VIEW;
+
+import br.sc.senac.dd.aula04.exercicio.VO.Automovel;
 
 public class Moto extends Automovel{
 	

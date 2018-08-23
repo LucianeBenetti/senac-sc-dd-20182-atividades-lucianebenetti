@@ -1,8 +1,11 @@
-package br.sc.senac.dd.aula04.exercicio;
+package br.sc.senac.dd.aula04.exercicio.VIEW;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+
+import br.sc.senac.dd.aula04.exercicio.VO.Caminhao;
+import br.sc.senac.dd.aula04.exercicio.VO.Carro;
 
 public class Menu {
 	public List<Caminhao>caminhoes = new ArrayList<Caminhao>();

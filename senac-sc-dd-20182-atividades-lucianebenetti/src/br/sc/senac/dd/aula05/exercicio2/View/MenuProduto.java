@@ -1,8 +1,11 @@
 
-package br.sc.senac.dd.aula05.exercicio2;
+package br.sc.senac.dd.aula05.exercicio2.View;
 
 import java.util.List;
 import javax.swing.JOptionPane;
+
+import br.sc.senac.dd.aula05.exercicio2.ModelDAO.ProdutoDAO;
+import br.sc.senac.dd.aula05.exercicio2.ModelVO.ProdutoVO;
 
 public class MenuProduto {
 	

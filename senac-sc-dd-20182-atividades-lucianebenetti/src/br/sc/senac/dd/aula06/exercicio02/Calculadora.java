@@ -1,4 +1,4 @@
-package br.sc.senac.dd.aula06;
+package br.sc.senac.dd.aula06.exercicio02;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;

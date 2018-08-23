@@ -1,4 +1,4 @@
-package br.sc.senac.dd.aula05.exercicio2;
+package br.sc.senac.dd.aula05.exercicio2.ModelDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,8 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-import br.sc.senac.dd.aula05.Banco;
-import br.sc.senac.dd.aula05.BaseDAO;
+import br.sc.senac.dd.aula05.dao.Banco;
+import br.sc.senac.dd.aula05.dao.BaseDAO;
+import br.sc.senac.dd.aula05.exercicio2.ModelVO.FuncionarioVO;
 
 public class FuncionarioDAO extends BaseDAO<FuncionarioVO> {
 

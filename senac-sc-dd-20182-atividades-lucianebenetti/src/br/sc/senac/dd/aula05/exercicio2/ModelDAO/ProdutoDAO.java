@@ -1,4 +1,4 @@
-package br.sc.senac.dd.aula05.exercicio2;
+package br.sc.senac.dd.aula05.exercicio2.ModelDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import br.sc.senac.dd.aula05.Banco;
+import br.sc.senac.dd.aula05.dao.Banco;
+import br.sc.senac.dd.aula05.exercicio2.ModelVO.ProdutoVO;
 
 public class ProdutoDAO {
 

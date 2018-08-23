@@ -1,4 +1,4 @@
-package br.sc.senac.dd.aula05.exercicio2;
+package br.sc.senac.dd.aula05.exercicio2.ModelVO;
 
 public class FuncionarioVO {
 
