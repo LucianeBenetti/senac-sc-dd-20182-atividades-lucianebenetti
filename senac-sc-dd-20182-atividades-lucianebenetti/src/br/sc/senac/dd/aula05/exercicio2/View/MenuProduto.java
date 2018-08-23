@@ -1,3 +1,4 @@
+
 package br.sc.senac.dd.aula05.exercicio2.View;
 
 import java.util.List;
@@ -65,10 +66,27 @@ public class MenuProduto {
 		//	JOptionPane.showMessageDialog(null, "Produto já cadastrado! Tente novamente.");
 		//}else{
 		
-		produtoVO.setNome(JOptionPane.showInputDialog(null, "Digite o nome do produto."));
-		produtoVO.setSecao(JOptionPane.showInputDialog(null,"Digite a seção do produto."));
-		produtoVO.setValor(Double.parseDouble(JOptionPane.showInputDialog(null,"Digite o valor do produto.")));
+		String nomeDigitado =JOptionPane.showInputDialog(null, "Digite o nome do produto.");
+			if(nomeDigitado != null) {
+				produtoVO.setNome(nomeDigitado);
+			}else {
+				this.apresentaMenuProduto();
+			}
+					
+		String secaoDigitada = (JOptionPane.showInputDialog(null,"Digite a seção do produto."));
+			if(secaoDigitada != null) {
+				produtoVO.setSecao(secaoDigitada);
+			}else {
+				this.apresentaMenuProduto();
+			}
 		
+		String valorDigitado = JOptionPane.showInputDialog(null,"Digite o valor do produto.");
+			if(valorDigitado != null) {
+				produtoVO.setValor(Double.parseDouble(valorDigitado));
+			}else {
+				this.apresentaMenuProduto();
+			}	
+						 
 		int idGerado = produtoDAO.insert(produtoVO);
 		
 		if(idGerado > 0) {
@@ -106,7 +124,7 @@ public class MenuProduto {
 		if(produtoDAO.atualizar(produtoVO)) {
 			JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso!");	
 		}else {
-			JOptionPane.showMessageDialog(null, "Pdoduto não exite. Tente novamente!");	
+			JOptionPane.showMessageDialog(null, "Tente novamente!");	
 		}
 		}
 	}
@@ -127,7 +145,7 @@ public class MenuProduto {
 		if(produtoConsultado != null) {
 			JOptionPane.showMessageDialog(null, produtoConsultado);
 		}else {
-			JOptionPane.showMessageDialog(null,"Tente novamente!");
+			JOptionPane.showMessageDialog(null,"Produto não encontrado. Tente novamente!");
 			
 		}
 	}
