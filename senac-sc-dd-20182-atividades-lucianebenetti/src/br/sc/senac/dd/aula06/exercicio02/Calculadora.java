@@ -73,7 +73,7 @@ public class Calculadora extends JFrame implements ActionListener {
 		contentPane.setLayout(null);
 		
 		panel = new JPanel();
-		panel.setBounds(48, 35, 258, 39);
+		panel.setBounds(48, 35, 258, 40);
 		contentPane.add(panel);
 		
 		btnCE = new JButton("CE");

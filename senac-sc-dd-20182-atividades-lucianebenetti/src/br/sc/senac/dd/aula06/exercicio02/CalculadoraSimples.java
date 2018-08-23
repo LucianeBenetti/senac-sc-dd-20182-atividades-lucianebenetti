@@ -133,7 +133,7 @@ public class CalculadoraSimples extends JFrame implements ActionListener {
 			
 		btnSubtacao.setBackground(new Color(238, 232, 170));
 		btnSubtacao.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnSubtacao.setBounds(195, 149, 80, 55);
+		btnSubtacao.setBounds(195, 149, 80, 60);
 		contentPane.add(btnSubtacao);
 		
 		btnMultiplicacao = new JButton("*");
