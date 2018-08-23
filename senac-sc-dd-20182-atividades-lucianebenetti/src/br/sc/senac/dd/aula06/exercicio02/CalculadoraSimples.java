@@ -1,6 +1,5 @@
 package br.sc.senac.dd.aula06.exercicio02;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
