@@ -63,7 +63,7 @@ public class FuncionarioVO {
 
 	@Override
 	public String toString() {
-		return "FuncionarioVO \nIdFuncionario: " + idFuncionario + ",\n Nome: " + nome + ",\n CPF: " + cpf + ",\n Telefone: "
+		return "\n\nIdFuncionario: " + idFuncionario + ",\n Nome: " + nome + ",\n CPF: " + cpf + ",\n Telefone: "
 				+ telefone + ",\n e-mail: " + email;
 	}
 	

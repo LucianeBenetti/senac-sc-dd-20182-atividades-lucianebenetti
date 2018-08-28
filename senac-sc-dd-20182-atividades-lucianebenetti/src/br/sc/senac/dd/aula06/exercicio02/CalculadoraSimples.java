@@ -68,6 +68,7 @@ public class CalculadoraSimples extends JFrame implements ActionListener {
 		contentPane.add(lblN2);
 		
 		txtResultado = new JTextField();
+		txtResultado.setEditable(false);
 		txtResultado.setHorizontalAlignment(SwingConstants.CENTER);
 		txtResultado.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		txtResultado.setBounds(15, 16, 337, 44);

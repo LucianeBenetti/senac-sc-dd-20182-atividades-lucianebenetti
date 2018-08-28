@@ -57,44 +57,30 @@ public class MenuProduto {
 		}
 	}
 	
-	private void cadastrarProduto() {
+	private boolean cadastrarProduto() {
+		
+		boolean sucessoCadastro;
 		ProdutoVO produtoVO = new ProdutoVO();
 		ProdutoDAO produtoDAO = new ProdutoDAO();
 		
-		//Código de validação opcional, não exigido no exercício. Fiz somente para treinar.
-		//produtoVO.setIdProduto(Integer.parseInt((JOptionPane.showInputDialog(null,"Digite o ID do Produto."))));
-		//if (produtoDAO.existeRegistroPorIdProduto(produtoVO.getIdProduto())){
-		//	JOptionPane.showMessageDialog(null, "Produto já cadastrado! Tente novamente.");
-		//}else{
-		
 		String nomeDigitado =JOptionPane.showInputDialog(null, "Digite o nome do produto.");
-			if(nomeDigitado != null) {
-				produtoVO.setNome(nomeDigitado);
-			}else {
-				this.apresentaMenuProduto();
-			}
-					
+			produtoVO.setNome(nomeDigitado);
+		
 		String secaoDigitada = (JOptionPane.showInputDialog(null,"Digite a seção do produto."));
-			if(secaoDigitada != null) {
-				produtoVO.setSecao(secaoDigitada);
-			}else {
-				this.apresentaMenuProduto();
-			}
-		
+			produtoVO.setSecao(secaoDigitada);
+				
 		String valorDigitado = JOptionPane.showInputDialog(null,"Digite o valor do produto.");
-			if(valorDigitado != null) {
-				produtoVO.setValor(Double.parseDouble(valorDigitado));
-			}else {
-				this.apresentaMenuProduto();
-			}	
-						 
-		int idGerado = produtoDAO.insert(produtoVO);
+			produtoVO.setValor(Double.parseDouble(valorDigitado));
 		
-		if(idGerado > 0) {
-			JOptionPane.showMessageDialog(null,"Produto cadastrado com sucesso!");
-		}else {
-			JOptionPane.showMessageDialog(null,"Tente novamente!");
-		}
+		if(nomeDigitado != null && secaoDigitada != null && valorDigitado != null) {
+				produtoDAO.insert(produtoVO);
+				JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+				sucessoCadastro = true;
+			}else {
+				sucessoCadastro = false;
+			}
+			
+			return sucessoCadastro;
 	}
 	
 	private void excluirProduto() {
@@ -111,23 +97,34 @@ public class MenuProduto {
 				
 	}
 	
-	private void atualizarProduto() {
+	private boolean atualizarProduto() {
+		boolean sucessoAtualizar = false;
 		ProdutoVO produtoVO = new ProdutoVO();
 		ProdutoDAO produtoDAO = new ProdutoDAO();
 
 		produtoVO.setIdProduto(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do Produto para atualizar.")));
 		if(produtoDAO.existeRegistroPorIdProduto(produtoVO.getIdProduto())) {
 		
-		produtoVO.setNome(JOptionPane.showInputDialog(null, "Digite o nome do produto."));
-		produtoVO.setSecao(JOptionPane.showInputDialog(null,"Digite a seção."));
-		produtoVO.setValor(Double.parseDouble(JOptionPane.showInputDialog(null,"Digite o valor do produto.")));
- 
-		if(produtoDAO.atualizar(produtoVO)) {
-			JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso!");	
+		String nomeDigitado =JOptionPane.showInputDialog(null, "Digite o nome do produto.");
+			produtoVO.setNome(nomeDigitado);
+		
+		String secaoDigitada = (JOptionPane.showInputDialog(null,"Digite a seção do produto."));
+			produtoVO.setSecao(secaoDigitada);
+				
+		String valorDigitado = JOptionPane.showInputDialog(null,"Digite o valor do produto.");
+			produtoVO.setValor(Double.parseDouble(valorDigitado));
+			
+		if(nomeDigitado != null && secaoDigitada != null && valorDigitado != null) {
+			produtoDAO.atualizar(produtoVO);
+			JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso!");
+			sucessoAtualizar = true;
+			}
 		}else {
-			JOptionPane.showMessageDialog(null, "Tente novamente!");	
-		}
-		}
+			JOptionPane.showMessageDialog(null, "Não foi possível atualizar!");	
+			sucessoAtualizar = false;
+				
+		}		
+		return sucessoAtualizar;
 	}
 	
 	private void consultarTodosProduto() {

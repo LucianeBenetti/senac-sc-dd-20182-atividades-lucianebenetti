@@ -40,7 +40,12 @@ public class MenuFuncionario{
 				break;
 
 			case 3:
-				this.atualizarFuncionario();
+				try {
+					this.atualizarFuncionario();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				break;
 
 			case 4:
@@ -82,27 +87,38 @@ public class MenuFuncionario{
 		return mensagem;
 	}	
 
-	private void cadastrarFuncionario() {
+	private boolean cadastrarFuncionario() {
 		
+		boolean sucessoCadastro;
 		FuncionarioVO funcionarioVO = new FuncionarioVO();
 		FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 		
 		funcionarioVO.setCpf(JOptionPane.showInputDialog(null,"Digite o CPF."));
 		if (funcionarioDAO.existeRegistroPorCpf(funcionarioVO.getCpf())){
 			JOptionPane.showMessageDialog(null, "Funcionario já cadastrado! Tente novamente.");
-		}else{
-		funcionarioVO.setNome(JOptionPane.showInputDialog(null, "Digite o nome do funcionário."));
-		funcionarioVO.setCpf(JOptionPane.showInputDialog(null,"Digite o CPF."));
-		funcionarioVO.setTelefone(JOptionPane.showInputDialog(null,"Digite o telefone."));
-		funcionarioVO.setEmail(JOptionPane.showInputDialog(null,"Digite o e-mail."));
-		
-		int idGerado = funcionarioDAO.inserir(funcionarioVO);
-			if(idGerado > 0) {
-				JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
-			}else {
-				JOptionPane.showMessageDialog(null,"Tente novamente!");
-			}
 		}
+		
+		String nome = JOptionPane.showInputDialog(null, "Digite o nome do funcionário.");
+		funcionarioVO.setNome(nome);
+		
+		String cpf = JOptionPane.showInputDialog(null,"Digite o CPF.");
+		funcionarioVO.setCpf(cpf);
+		
+		String telefone = JOptionPane.showInputDialog(null,"Digite o telefone.");
+		funcionarioVO.setTelefone(telefone);
+		
+		String email = JOptionPane.showInputDialog(null,"Digite o e-mail.");
+		funcionarioVO.setEmail(email);
+		
+		if(nome != null && cpf != null && telefone != null && email != null) {
+			funcionarioDAO.inserir(funcionarioVO);
+			JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
+			sucessoCadastro = true;
+		}else {
+			sucessoCadastro = false;
+		}
+		
+		return sucessoCadastro;
 	}
 		
 
@@ -120,27 +136,37 @@ public class MenuFuncionario{
 		}
 	}
 	
-	private void atualizarFuncionario() {
+	private boolean atualizarFuncionario() throws SQLException {
+		boolean sucessoAtualizar = false;
 		FuncionarioVO funcionarioVO = new FuncionarioVO();
 		FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 		
 		funcionarioVO.setIdFuncionario(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do funcionário para atualizar.")));
 		if(funcionarioDAO.existeRegistroPorIdFuncionario(funcionarioVO.getIdFuncionario())) {
 			
-				funcionarioVO.setNome(JOptionPane.showInputDialog(null, "Digite o nome do funcionário."));
-				funcionarioVO.setCpf(JOptionPane.showInputDialog(null,"Digite o CPF do funcionário."));
-				funcionarioVO.setTelefone(JOptionPane.showInputDialog(null,"Digite o telefone."));
-				funcionarioVO.setEmail(JOptionPane.showInputDialog(null,"Digite o e-mail."));
-
-				try {
-					if(funcionarioDAO.atualizar(funcionarioVO, funcionarioVO.getIdFuncionario()));
-						JOptionPane.showMessageDialog(null, "Funcionário atualizado com sucesso!");
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}							
-					}else {
-						JOptionPane.showMessageDialog(null, "Funcionário não existe para ser atualizado!");	
-			}
+			String nome = JOptionPane.showInputDialog(null, "Digite o nome do funcionário.");
+			funcionarioVO.setNome(nome);
+			
+			String cpf = JOptionPane.showInputDialog(null,"Digite o CPF.");
+			funcionarioVO.setCpf(cpf);
+			
+			String telefone = JOptionPane.showInputDialog(null,"Digite o telefone.");
+			funcionarioVO.setTelefone(telefone);
+			
+			String email = JOptionPane.showInputDialog(null,"Digite o e-mail.");
+			funcionarioVO.setEmail(email);
+		
+			if(nome != null && cpf != null && telefone != null && email != null) {
+				funcionarioDAO.atualizar(funcionarioVO, funcionarioVO.getIdFuncionario());
+				JOptionPane.showMessageDialog(null, "Funcionário atualizado com sucesso!");
+				sucessoAtualizar = true;
+				}
+		}else {
+			JOptionPane.showMessageDialog(null, "Não foi possível atualizar!");	
+			sucessoAtualizar = false;
+				
+		}		
+		return sucessoAtualizar;
 	}
 				
 

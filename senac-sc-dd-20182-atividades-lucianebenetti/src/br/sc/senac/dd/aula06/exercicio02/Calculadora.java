@@ -37,6 +37,7 @@ public class Calculadora extends JFrame implements ActionListener {
 	private double memoria;
 	private char operacao;
 	private JButton btnC;
+	private JButton btnPonto;
 
 	/**
 	 * Launch the application.
@@ -143,7 +144,7 @@ public class Calculadora extends JFrame implements ActionListener {
 		btnNum0 = new JButton("0");
 		btnNum0.addActionListener(this);
 		btnNum0.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNum0.setBounds(48, 304, 191, 37);
+		btnNum0.setBounds(48, 304, 124, 37);
 		contentPane.add(btnNum0);
 		
 		btnNum2 = new JButton("2");
@@ -177,11 +178,22 @@ public class Calculadora extends JFrame implements ActionListener {
 		contentPane.add(btnC);
 		
 		txtVisor = new JTextField();
+		txtVisor.setEditable(false);
 		txtVisor.setHorizontalAlignment(SwingConstants.CENTER);
 		txtVisor.setBounds(48, 35, 258, 43);
 		contentPane.add(txtVisor);
 		txtVisor.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtVisor.setColumns(10);
+		
+		btnPonto = new JButton(".");
+		btnPonto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btnPonto.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnPonto.setBounds(182, 304, 57, 40);
+		contentPane.add(btnPonto);
 	}
 	
 	public void actionPerformed(ActionEvent e) {

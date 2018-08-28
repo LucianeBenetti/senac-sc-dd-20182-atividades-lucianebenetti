@@ -51,7 +51,7 @@ public class ProdutoVO {
 
 	@Override
 	public String toString() {
-		return "Produto\n IdProduto: " + idProduto + ",\n Nome: " + nome + ",\n Secao: " + secao + ",\n Valor: " + valor;
+		return "\n\n IdProduto: " + idProduto + ",\n Nome: " + nome + ",\n Secao: " + secao + ",\n Valor: " + valor;
 	}
 
 	
