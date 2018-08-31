@@ -1,7 +1,4 @@
-package br.sc.senac.dd.aula06.exercicio04.Controller;
-
-import br.sc.senac.dd.aula06.exercicio04.Model.ProdutoBO;
-import br.sc.senac.dd.aula06.exercicio04.Model.ProdutoVO;
+package br.sc.senac.dd.aula06.Produto;
 
 public class ProdutoController {
 	

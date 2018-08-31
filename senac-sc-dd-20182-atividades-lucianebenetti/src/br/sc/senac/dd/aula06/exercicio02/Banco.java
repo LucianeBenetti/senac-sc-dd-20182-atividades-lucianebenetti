@@ -1,4 +1,4 @@
-package br.sc.senac.dd.aula05.dao;
+package br.sc.senac.dd.aula06.exercicio02;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,35 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * Classe criada na disciplina de POO (2018/1). Representa um banco de dados que se conecta à aplicação 
- * Encapsula métodos da API JDBC, com a definição, criação e fechamento de conexões à bancos de dados relacionais
- * @author Adriano de Melo Vilmar César Pereira Júnior (continuação em Desenvolvimento Desktop 2018/2)
- * Diferenças entre Statement e PreparedStatement:
- * A maioria dos bancos de dados relacionais lida com uma consulta (query) JDBC / SQL em quatro passos:
- *
- * 1- Interpretar (parse) a consulta SQL;
- * 2- Compilar a consulta SQL;
- * 3- Planejar e otimizar o caminho de busca dos dados;
- * 4- Executar a consulta otimizada, buscando e retornando os dados.
- * 
- * Um Statement irá sempre passar pelos quatro passos acima para cada consulta SQL enviada para o banco. Já um Prepared Statement 
- * pré-executa os passos (1) a (3).
- * Então, ao criar um Prepared Statement alguma pré-otimização é feita de imediato. O efeito disso é que, se você pretende executar 
- * a mesma consulta repetidas vezes mudando apenas os parâmetros de cada uma, a execução usando Prepared Statements será mais rápida 
- * e com menos carga sobre o banco.
- * 
- * Outra vantagem dos Prepared Statements é que, se utilizados corretamente, ajudam a evitar <b>ataques de Injeção de SQL</b>.
- * Note que para isso é preciso que os parâmetros da consulta sejam atribuídos através dos métodos setInt(), setString(), etc. 
- * presentes na interface PreparedStatement e não por concatenação de strings.
- * 
- * Para uma consulta que vai ser executada poucas vezes e não requer nenhum parâmetro, Statement basta. Para os demais casos, 
- * prefira PreparedStatement.
- * FONTE: {@link https://pt.stackoverflow.com/questions/99620/qual-a-diferen%C3%A7a-entre-o-statement-e-o-preparedstatement}
- */
-
 public class Banco {
-
 	private static final String DRIVER_MYSQL = "com.mysql.jdbc.Driver";
 	private static final String NOME_ESQUEMA = "dbsupermercado";
 	private static final String URL_CONEXAO = "jdbc:mysql://localhost:3306/" + NOME_ESQUEMA;

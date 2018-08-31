@@ -1,4 +1,4 @@
-package br.sc.senac.dd.aula05.exercicio2.ModelVO;
+package br.sc.senac.dd.aula06.Produto;
 
 public class ProdutoVO {
 	private int idProduto;
@@ -56,3 +56,4 @@ public class ProdutoVO {
 
 	
 }
+

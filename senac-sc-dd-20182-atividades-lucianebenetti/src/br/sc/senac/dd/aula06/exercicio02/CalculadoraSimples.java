@@ -1,5 +1,6 @@
 package br.sc.senac.dd.aula06.exercicio02;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -47,7 +48,6 @@ public class CalculadoraSimples extends JFrame implements ActionListener {
 	private JButton btnDivisao;
 	private JButton btnMultiplicacao;
 	public CalculadoraSimples() {
-		setTitle("Calculadora");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 395, 368);
@@ -68,7 +68,6 @@ public class CalculadoraSimples extends JFrame implements ActionListener {
 		contentPane.add(lblN2);
 		
 		txtResultado = new JTextField();
-		txtResultado.setEditable(false);
 		txtResultado.setHorizontalAlignment(SwingConstants.CENTER);
 		txtResultado.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		txtResultado.setBounds(15, 16, 337, 44);
@@ -133,7 +132,7 @@ public class CalculadoraSimples extends JFrame implements ActionListener {
 			
 		btnSubtacao.setBackground(new Color(238, 232, 170));
 		btnSubtacao.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnSubtacao.setBounds(195, 149, 80, 60);
+		btnSubtacao.setBounds(195, 149, 80, 55);
 		contentPane.add(btnSubtacao);
 		
 		btnMultiplicacao = new JButton("*");

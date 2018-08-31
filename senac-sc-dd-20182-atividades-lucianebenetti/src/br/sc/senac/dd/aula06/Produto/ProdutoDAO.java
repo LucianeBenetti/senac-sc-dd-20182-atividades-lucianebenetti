@@ -1,4 +1,4 @@
-package br.sc.senac.dd.aula05.exercicio2.ModelDAO;
+package br.sc.senac.dd.aula06.Produto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,12 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import br.sc.senac.dd.aula05.dao.Banco;
-import br.sc.senac.dd.aula05.exercicio2.ModelVO.ProdutoVO;
+import br.sc.senac.dd.aula06.exercicio04.Model.Banco;
 
 public class ProdutoDAO {
-
-	public int insert(ProdutoVO produtoVO) {
+	public int inserirProduto(ProdutoVO produtoVO) {
 		int novoId = -1;
 
 		String query = "INSERT INTO produto (nome, secao, valor)" + " VALUES (?,?,?)";
@@ -173,6 +171,5 @@ public class ProdutoDAO {
 			return false;
 		}
 
+	}
 
-
-}
