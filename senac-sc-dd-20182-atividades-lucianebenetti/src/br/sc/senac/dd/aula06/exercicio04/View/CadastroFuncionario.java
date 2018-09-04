@@ -28,6 +28,7 @@ public class CadastroFuncionario extends JFrame {
 
 	private static final String MASCARA_TELEFONE_FIXO = "(##) ####-####";
 	private static final String MASCARA_TELEFONE_CELULAR ="(##) #####-####";
+	private static final String MASCARA_CPF = "###.###.###-##";
 	private JPanel contentPane;
 	private JLabel lblNome;
 	private JLabel lblCpf;
@@ -131,7 +132,7 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.add(textNome);
 		textNome.setColumns(10);
 		
-		textCpf = new JFormattedTextField(new MaskFormatter ("###.###.###-##"));
+		textCpf = new JFormattedTextField(new MaskFormatter (MASCARA_CPF));
 		textCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textCpf.setBounds(187, 73, 321, 35);
 		contentPane.add(textCpf);

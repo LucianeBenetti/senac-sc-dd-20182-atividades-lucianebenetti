@@ -30,6 +30,7 @@ public class AlterarFuncionario extends JFrame {
 
 	private static final String MASCARA_TELEFONE_FIXO = "(##) ####-####";
 	private static final String MASCARA_TELEFONE_CELULAR ="(##) #####-####";
+	private static final String MASCARA_CPF = "###.###.###-##";
 	private JPanel contentPane;
 	private JLabel lblNome;
 	private JTextField textNome;
@@ -95,7 +96,7 @@ public class AlterarFuncionario extends JFrame {
 		lblCpf.setBounds(10, 117, 76, 38);
 		contentPane.add(lblCpf);
 		
-		textCpf = new JFormattedTextField(new MaskFormatter ("###.###.###-##"));
+		textCpf = new JFormattedTextField(new MaskFormatter (MASCARA_CPF));
 		textCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textCpf.setColumns(10);
 		textCpf.setBounds(130, 122, 363, 29);
@@ -140,7 +141,7 @@ public class AlterarFuncionario extends JFrame {
 		lblBuscaCpf.setBounds(10, 11, 76, 38);
 		contentPane.add(lblBuscaCpf);
 		
-		textBuscaCpf = new JFormattedTextField(new MaskFormatter ("###.###.###-##"));
+		textBuscaCpf = new JFormattedTextField(new MaskFormatter (MASCARA_CPF));
 		textBuscaCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textBuscaCpf.setColumns(10);
 		textBuscaCpf.setBounds(130, 20, 228, 29);
@@ -195,16 +196,11 @@ public class AlterarFuncionario extends JFrame {
 		}
 
 		});
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnCancelar.setBounds(341, 341, 152, 38);
 		contentPane.add(btnCancelar);
 	}
-	
-			
 	
 
 	protected void limparTela() {

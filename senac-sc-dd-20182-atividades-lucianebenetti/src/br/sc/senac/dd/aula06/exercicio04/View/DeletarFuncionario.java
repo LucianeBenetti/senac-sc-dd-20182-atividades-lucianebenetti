@@ -27,6 +27,7 @@ import java.awt.event.MouseEvent;
 
 public class DeletarFuncionario extends JFrame {
 
+	private static final String MASCARA_CPF = "###.###.###-##";
 	private JPanel contentPane;
 	private JLabel lblBuscaCpf;
 	private JLabel lblCpf_1;
@@ -144,7 +145,7 @@ public class DeletarFuncionario extends JFrame {
 		btnBuscar.setBounds(439, 13, 99, 45);
 		contentPane.add(btnBuscar);
 		
-		textBuscaCpf = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
+		textBuscaCpf = new JFormattedTextField(new MaskFormatter(MASCARA_CPF));
 		textBuscaCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textBuscaCpf.setBounds(148, 17, 281, 37);
 		contentPane.add(textBuscaCpf);
@@ -156,7 +157,7 @@ public class DeletarFuncionario extends JFrame {
 		contentPane.add(textNome);
 		textNome.setColumns(10);
 		
-		textCpf = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
+		textCpf = new JFormattedTextField(new MaskFormatter(MASCARA_CPF));
 		textCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textCpf.setBounds(148, 142, 281, 34);
 		contentPane.add(textCpf);
