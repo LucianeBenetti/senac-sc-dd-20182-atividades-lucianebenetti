@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import br.sc.senac.dd.aula06.exercicio02.Banco;
 
 public class FuncionarioDAO {
+	
+	
 	public int inserirFuncionario(FuncionarioVO funcionarioVO) {
 		int novoId = -1;
 
@@ -64,7 +66,7 @@ public class FuncionarioDAO {
 		return sucesso;
 	}
 
-	public boolean atualizar(FuncionarioVO funcionarioVO) {
+	public boolean atualizar(FuncionarioVO funcionarioAlterado, String cpfAnterior) {
 
 		boolean sucesso = false;
 
@@ -74,12 +76,12 @@ public class FuncionarioDAO {
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
 
 		try {
-			prepStmt.setString(1,  funcionarioVO.getNome());
-			prepStmt.setString(2,  funcionarioVO.getCpf());
-			prepStmt.setString(3,  funcionarioVO.getTelefone());
-			prepStmt.setString(4,  funcionarioVO.getCelular());
-			prepStmt.setString(5,  funcionarioVO.getEmail());
-			prepStmt.setString(6,  funcionarioVO.getCpf());
+			prepStmt.setString(1,  funcionarioAlterado.getNome());
+			prepStmt.setString(2,  funcionarioAlterado.getCpf());
+			prepStmt.setString(3,  funcionarioAlterado.getTelefone());
+			prepStmt.setString(4,  funcionarioAlterado.getCelular());
+			prepStmt.setString(5,  funcionarioAlterado.getEmail());
+			prepStmt.setString(6,  cpfAnterior);
 
 			int codigoRetorno = prepStmt.executeUpdate();
 

@@ -20,9 +20,12 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.text.ParseException;
 import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class DeletarFuncionario extends JFrame implements MouseListener {
+public class DeletarFuncionario extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel lblBuscaCpf;
@@ -82,19 +85,61 @@ public class DeletarFuncionario extends JFrame implements MouseListener {
 		contentPane.add(lblNome);
 		
 		btnExcluir = new JButton("Excluir");
-		btnExcluir.addMouseListener(this);
+		btnExcluir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				FuncionarioController controlador = new FuncionarioController();
+				controlador.deletar(funcionarioVO);
+				limparTela();
+			}
+
+		});
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+				
 		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnExcluir.setBounds(82, 217, 108, 45);
 		contentPane.add(btnExcluir);
 		
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.addMouseListener(this);
+		btnCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				 System.exit(0);
+		}
+
+		});
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnCancelar.setBounds(338, 217, 131, 45);
 		contentPane.add(btnCancelar);
 		
 		btnBuscar = new JButton("Buscar");
-		btnBuscar.addMouseListener(this);
+		btnBuscar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				funcionarioVO = bo.buscarFuncionarioPorCPF(textBuscaCpf.getText());
+				
+				if(funcionarioVO != null) {
+						textNome.setText(funcionarioVO.getNome());
+						textCpf.setText(funcionarioVO.getCpf());
+								
+					}else {
+						JOptionPane.showMessageDialog(null, "Funcionário não encontrado.");
+					}
+				}
+		});
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+			
+		
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnBuscar.setBounds(439, 13, 99, 45);
 		contentPane.add(btnBuscar);
@@ -117,35 +162,7 @@ public class DeletarFuncionario extends JFrame implements MouseListener {
 		contentPane.add(textCpf);
 		textCpf.setColumns(10);
 	}
-	public void mouseClicked(MouseEvent arg0) {
 		
-		if (arg0.getSource() == btnCancelar) {
-			do_btnCancelar_mouseClicked(arg0);
-			System.exit(0);
-		}
-		if (arg0.getSource() == btnBuscar) {
-			do_btnBuscar_mouseClicked(arg0);
-			
-			funcionarioVO = bo.buscarFuncionarioPorCPF(textBuscaCpf.getText());
-			
-			if(funcionarioVO != null) {
-					textNome.setText(funcionarioVO.getNome());
-					textCpf.setText(funcionarioVO.getCpf());
-							
-				}else {
-					JOptionPane.showMessageDialog(null, "Funcionário não encontrado.");
-				}
-			}
-		
-			if (arg0.getSource() == btnExcluir) {
-				do_btnExcluir_mouseClicked(arg0);
-
-				FuncionarioController controlador = new FuncionarioController();
-				controlador.deletar(funcionarioVO);
-				limparTela();
-				}
-			}
-	
 		private void limparTela() {
 			funcionarioVO = new FuncionarioVO();
 			textBuscaCpf.setText("");
@@ -153,19 +170,4 @@ public class DeletarFuncionario extends JFrame implements MouseListener {
 			textCpf.setText("");
 		}
 
-	
-	public void mouseEntered(MouseEvent arg0) {
-	}
-	public void mouseExited(MouseEvent arg0) {
-	}
-	public void mousePressed(MouseEvent arg0) {
-	}
-	public void mouseReleased(MouseEvent arg0) {
-	}
-	protected void do_btnBuscar_mouseClicked(MouseEvent arg0) {
-	}
-	protected void do_btnCancelar_mouseClicked(MouseEvent arg0) {
-	}
-	protected void do_btnExcluir_mouseClicked(MouseEvent arg0) {
-	}
 }

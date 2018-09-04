@@ -2,16 +2,13 @@ package br.sc.senac.dd.aula06.exercicio04.View;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
-
 import br.sc.senac.dd.aula06.exercicio04.Controller.FuncionarioController;
 import br.sc.senac.dd.aula06.exercicio04.Model.FuncionarioBO;
 import br.sc.senac.dd.aula06.exercicio04.Model.FuncionarioVO;
-
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,11 +18,16 @@ import javax.swing.JFormattedTextField;
 import java.awt.Font;
 import java.awt.event.MouseListener;
 import java.text.ParseException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class CadastroFuncionario extends JFrame implements MouseListener {
+public class CadastroFuncionario extends JFrame {
 
+	private static final String MASCARA_TELEFONE_FIXO = "(##) ####-####";
+	private static final String MASCARA_TELEFONE_CELULAR ="(##) #####-####";
 	private JPanel contentPane;
 	private JLabel lblNome;
 	private JLabel lblCpf;
@@ -87,13 +89,38 @@ public class CadastroFuncionario extends JFrame implements MouseListener {
 		contentPane.add(lblTelefone);
 		
 		btnSalvar = new JButton("Salvar");
-		btnSalvar.addMouseListener(this);
+		btnSalvar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				FuncionarioController controlador = new FuncionarioController();
+				FuncionarioVO funcionario = contruirFuncionario();
+				
+				String mensagem = controlador.salvar(funcionario);
+				JOptionPane.showMessageDialog(null,  mensagem);
+				limparTela();
+			}
+
+		});
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnSalvar.setBounds(40, 386, 148, 41);
 		contentPane.add(btnSalvar);
 		
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.addMouseListener(this);
+		btnCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				 System.exit(0);
+		}
+
+		});
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnCancelar.setBounds(324, 386, 130, 41);
 		contentPane.add(btnCancelar);
@@ -114,7 +141,7 @@ public class CadastroFuncionario extends JFrame implements MouseListener {
 		lblEmail.setBounds(15, 293, 159, 35);
 		contentPane.add(lblEmail);
 		
-		textTelefone = new JFormattedTextField(new MaskFormatter ("(##) ####-####"));
+		textTelefone = new JFormattedTextField(new MaskFormatter (MASCARA_TELEFONE_FIXO));
 		textTelefone.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textTelefone.setBounds(187, 132, 321, 35);
 		contentPane.add(textTelefone);
@@ -130,27 +157,12 @@ public class CadastroFuncionario extends JFrame implements MouseListener {
 		lblCelular.setBounds(15, 207, 159, 35);
 		contentPane.add(lblCelular);
 		
-		textCelular = new JFormattedTextField(new MaskFormatter ("(##) #####-####"));
+		textCelular = new JFormattedTextField(new MaskFormatter (MASCARA_TELEFONE_CELULAR));
 		textCelular.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textCelular.setBounds(187, 207, 321, 35);
 		contentPane.add(textCelular);
 	}
-	public void mouseClicked(MouseEvent arg0) {
-		if (arg0.getSource() == btnCancelar) {
-			do_btnCancelar_mouseClicked(arg0);
-			System.exit(0);
-		}
-		if (arg0.getSource() == btnSalvar) {
-			do_btnSalvar_mouseClicked(arg0);
-			FuncionarioController controlador = new FuncionarioController();
-			FuncionarioVO funcionario = contruirFuncionario();
-			
-			String mensagem = controlador.salvar(funcionario);
-			JOptionPane.showMessageDialog(null,  mensagem);
-			limparTela();
-			}
-		}
-			
+				
 	protected void limparTela() {
 		funcionario = new FuncionarioVO();
 		textNome.setText("");
@@ -169,17 +181,6 @@ public class CadastroFuncionario extends JFrame implements MouseListener {
 			
 		return funcionario;
 	}
+
 	
-	public void mouseEntered(MouseEvent arg0) {
-	}
-	public void mouseExited(MouseEvent arg0) {
-	}
-	public void mousePressed(MouseEvent arg0) {
-	}
-	public void mouseReleased(MouseEvent arg0) {
-	}
-	protected void do_btnSalvar_mouseClicked(MouseEvent arg0) {
-	}
-	protected void do_btnCancelar_mouseClicked(MouseEvent arg0) {
-	}
 }

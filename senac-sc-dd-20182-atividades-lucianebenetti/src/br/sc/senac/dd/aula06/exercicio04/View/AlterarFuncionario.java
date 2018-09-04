@@ -21,10 +21,15 @@ import javax.swing.JFormattedTextField;
 import java.awt.Font;
 import java.text.ParseException;
 import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class AlterarFuncionario extends JFrame implements MouseListener {
+public class AlterarFuncionario extends JFrame {
 
+	private static final String MASCARA_TELEFONE_FIXO = "(##) ####-####";
+	private static final String MASCARA_TELEFONE_CELULAR ="(##) #####-####";
 	private JPanel contentPane;
 	private JLabel lblNome;
 	private JTextField textNome;
@@ -41,7 +46,8 @@ public class AlterarFuncionario extends JFrame implements MouseListener {
 	private JButton btnBuscar;
 	private JButton btnAtualizar;
 	private JButton btnCancelar;
-	private FuncionarioVO funcionarioVO = new FuncionarioVO();
+	private FuncionarioVO funcionarioDaTela = new FuncionarioVO();
+	private FuncionarioVO funcionarioConsultado = new FuncionarioVO();
 	private FuncionarioBO bo = new FuncionarioBO();
 
 	/**
@@ -100,7 +106,7 @@ public class AlterarFuncionario extends JFrame implements MouseListener {
 		lblTelefone.setBounds(10, 169, 95, 38);
 		contentPane.add(lblTelefone);
 		
-		textTelefone = new JFormattedTextField(new MaskFormatter ("(##) #####-####"));
+		textTelefone = new JFormattedTextField(new MaskFormatter (MASCARA_TELEFONE_FIXO));
 		textTelefone.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textTelefone.setColumns(10);
 		textTelefone.setBounds(130, 174, 363, 29);
@@ -111,7 +117,8 @@ public class AlterarFuncionario extends JFrame implements MouseListener {
 		lblCelular.setBounds(10, 229, 76, 38);
 		contentPane.add(lblCelular);
 		
-		textCelular = new JFormattedTextField(new MaskFormatter ("(##) #####-####"));
+		
+		textCelular = new JFormattedTextField(new MaskFormatter (MASCARA_TELEFONE_CELULAR));
 		textCelular.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textCelular.setColumns(10);
 		textCelular.setBounds(130, 234, 363, 29);
@@ -140,61 +147,70 @@ public class AlterarFuncionario extends JFrame implements MouseListener {
 		contentPane.add(textBuscaCpf);
 		
 		btnBuscar = new JButton("Buscar");
-		btnBuscar.addMouseListener(this);
+		btnBuscar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				funcionarioConsultado = bo.buscarFuncionarioPorCPF(textBuscaCpf.getText());
+				
+				if(funcionarioConsultado != null) {
+					textNome.setText(funcionarioConsultado.getNome());
+					textCpf.setText(funcionarioConsultado.getCpf());
+					textTelefone.setText(funcionarioConsultado.getTelefone());
+					textCelular.setText(funcionarioConsultado.getCelular());
+					textEmail.setText(funcionarioConsultado.getEmail());
+								
+					}else {
+						JOptionPane.showMessageDialog(null, "Funcionário não encontrado.");
+					}
+				}
+		});
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnBuscar.setBounds(381, 11, 112, 38);
 		contentPane.add(btnBuscar);
 		
 		btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.addMouseListener(this);
+		btnAtualizar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				FuncionarioController controlador = new FuncionarioController();
+				construirFuncionario();
+				controlador.atualizar(funcionarioDaTela, funcionarioConsultado.getCpf());
+		}
+
+		});
+		
 		btnAtualizar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnAtualizar.setBounds(63, 341, 138, 38);
 		contentPane.add(btnAtualizar);
 		
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.addMouseListener(this);
+		btnCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				 System.exit(0);
+		}
+
+		});
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnCancelar.setBounds(341, 341, 152, 38);
 		contentPane.add(btnCancelar);
 	}
 	
-	public void mouseClicked(MouseEvent arg0) {
-			if (arg0.getSource() == btnCancelar) {
-				do_btnCancelar_mouseClicked(arg0);
-				System.exit(0);
-			}
 			
-			if (arg0.getSource() == btnBuscar) {
-				do_btnBuscar_mouseClicked(arg0);
-			
-			funcionarioVO = bo.buscarFuncionarioPorCPF(textBuscaCpf.getText());
-			
-			if(funcionarioVO != null) {
-					textNome.setText(funcionarioVO.getNome());
-					textCpf.setText(funcionarioVO.getCpf());
-					textTelefone.setText(funcionarioVO.getTelefone());
-					textCelular.setText(funcionarioVO.getCelular());
-					textEmail.setText(funcionarioVO.getEmail());
-					
-				}else {
-					JOptionPane.showMessageDialog(null, "Funcionário não encontrado.");
-				}
-			}
-			
-			if (arg0.getSource() == btnAtualizar) {
-				do_btnAtualizar_mouseClicked(arg0);
-				
-				FuncionarioController controlador = new FuncionarioController();
-				FuncionarioVO funcionarioVO = constriurFuncionario();
-				controlador.atualizar(funcionarioVO);
-				
-				limparTela();			
-				
-			}
-		}
+	
 
 	protected void limparTela() {
-		funcionarioVO = new FuncionarioVO();
+		funcionarioDaTela = new FuncionarioVO();
+		funcionarioConsultado = new FuncionarioVO();
+
 		textBuscaCpf.setText("");
 		textNome.setText("");
 		textCpf.setText("");
@@ -204,28 +220,13 @@ public class AlterarFuncionario extends JFrame implements MouseListener {
 		
 	}
 
-	public FuncionarioVO constriurFuncionario() {
-		funcionarioVO.setNome(textNome.getText());
-		funcionarioVO.setCpf(textCpf.getText());
-		funcionarioVO.setTelefone(textTelefone.getText());
-		funcionarioVO.setCelular(textCelular.getText());
-		funcionarioVO.setEmail(textEmail.getText());
-		
-		return funcionarioVO;
+	public void construirFuncionario() {
+		funcionarioDaTela.setNome(textNome.getText());
+		funcionarioDaTela.setCpf(textCpf.getText());
+		funcionarioDaTela.setTelefone(textTelefone.getText());
+		funcionarioDaTela.setCelular(textCelular.getText());
+		funcionarioDaTela.setEmail(textEmail.getText());
 	}
 
-	public void mouseEntered(MouseEvent arg0) {
-	}
-	public void mouseExited(MouseEvent arg0) {
-	}
-	public void mousePressed(MouseEvent arg0) {
-	}
-	public void mouseReleased(MouseEvent arg0) {
-	}
-	protected void do_btnBuscar_mouseClicked(MouseEvent arg0) {
-	}
-	protected void do_btnAtualizar_mouseClicked(MouseEvent arg0) {
-	}
-	protected void do_btnCancelar_mouseClicked(MouseEvent arg0) {
-	}
+	
 }

@@ -14,7 +14,6 @@ public class FuncionarioController {
 		
 		if(validacao == "") {
 				
-			//inserir
 			if(bo.inserir(funcionario)) {
 				validacao ="Funcionario salvo com sucesso!";
 			}else {
@@ -38,12 +37,16 @@ public class FuncionarioController {
 		return validacao;
 	}
 	
-	public String atualizar(FuncionarioVO funcionario) {
+	public void atualizar(FuncionarioVO funcionario, String cpfOriginal) {
 					
-			bo.atualizar(funcionario);
+		boolean resultado = bo.atualizar(funcionario, cpfOriginal);
+		
+		if(resultado) {
 			JOptionPane.showMessageDialog(null,"Funcionario atualizado com sucesso!");
+		}else {
+			JOptionPane.showMessageDialog(null,"Funcionário não foi atualizado!");
+		}
 			
-		return null;
 	}
 
 	public String deletar(FuncionarioVO funcionarioVO) {
