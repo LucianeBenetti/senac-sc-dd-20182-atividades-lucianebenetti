@@ -118,10 +118,6 @@ public class CadastroFuncionario extends JFrame {
 		}
 
 		});
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnCancelar.setBounds(324, 386, 130, 41);
 		contentPane.add(btnCancelar);

@@ -5,11 +5,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.BorderLayout;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
+
 import javax.swing.JButton;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -22,17 +22,16 @@ import javax.swing.JFormattedTextField;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
-public class CadastroProduto implements KeyListener, MouseListener, ActionListener {
+public class CadastroProduto {
 
-	private JFrame frmCadastroProdutoNovo;
-	private JTextField textNome;
 	private ProdutoBO bo = new ProdutoBO();
-	private ProdutoVO produtoVO = new ProdutoVO();
-	private JButton btnCancelar;
-	private JButton btnSalvar;
+	private ProdutoVO produto = new ProdutoVO();
+	private JFrame frmNovoProduto;
+	private JTextField txtNome;
+	private JTextField txtValor;
 	private JComboBox cbSecao;
-	private JFormattedTextField textValor;
-	
+	private JTextField txtId;
+	private JTextField textValor;
 
 	/**
 	 * Launch the application.
@@ -42,7 +41,7 @@ public class CadastroProduto implements KeyListener, MouseListener, ActionListen
 			public void run() {
 				try {
 					CadastroProduto window = new CadastroProduto();
-					window.frmCadastroProdutoNovo.setVisible(true);
+					window.frmNovoProduto.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -61,150 +60,134 @@ public class CadastroProduto implements KeyListener, MouseListener, ActionListen
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmCadastroProdutoNovo = new JFrame();
-		frmCadastroProdutoNovo.setTitle("Novo Produto");
-		frmCadastroProdutoNovo.setBounds(100, 100, 724, 491);
-		frmCadastroProdutoNovo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmCadastroProdutoNovo.getContentPane().setLayout(null);
-		
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(this);
-		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnCancelar.setBounds(358, 336, 309, 59);
-		frmCadastroProdutoNovo.getContentPane().add(btnCancelar);
-		
-		JLabel lblNome = new JLabel("Nome");
+		frmNovoProduto = new JFrame();
+		frmNovoProduto.setTitle("Novo produto");
+		frmNovoProduto.setBounds(100, 100, 547, 429);
+		frmNovoProduto.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmNovoProduto.getContentPane().setLayout(null);
+
+		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNome.setBounds(41, 31, 87, 40);
-		frmCadastroProdutoNovo.getContentPane().add(lblNome);
-		
-		JLabel lblSecao = new JLabel("Se\u00E7\u00E3o");
+		lblNome.setBounds(10, 117, 81, 34);
+		frmNovoProduto.getContentPane().add(lblNome);
+
+		JLabel lblSecao = new JLabel("Secao:");
 		lblSecao.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblSecao.setBounds(41, 124, 112, 40);
-		frmCadastroProdutoNovo.getContentPane().add(lblSecao);
-		
-		String [] secoes = {"------Selecione------", "Açougue", "Bebidas", "Higiene", "Hortifruti", "Alimentos", "Produtos de Limpeza"};
-		cbSecao = new JComboBox(secoes);
-		cbSecao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cbSecao.setBounds(173, 126, 446, 40);
-		frmCadastroProdutoNovo.getContentPane().add(cbSecao);
-		
-		textNome = new JTextField();
-		textNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textNome.setBounds(173, 31, 446, 40);
-		frmCadastroProdutoNovo.getContentPane().add(textNome);
-		textNome.setColumns(10);
-		
-		JLabel lblValor = new JLabel("Valor");
+		lblSecao.setBounds(10, 167, 81, 28);
+		frmNovoProduto.getContentPane().add(lblSecao);
+
+		JLabel lblValor = new JLabel("Valor:");
 		lblValor.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblValor.setBounds(41, 221, 112, 41);
-		frmCadastroProdutoNovo.getContentPane().add(lblValor);
-		
-		btnSalvar = new JButton("Salvar");
+		lblValor.setBounds(10, 211, 81, 34);
+		frmNovoProduto.getContentPane().add(lblValor);
+
+		txtNome = new JTextField();
+		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		txtNome.setBounds(174, 117, 316, 31);
+		frmNovoProduto.getContentPane().add(txtNome);
+		txtNome.setColumns(10);
+
+		String[] secoes = {"---Selecione---", "Açougue", "Bebidas", "Higiene", "Hortifruti", "Alimentos", "Produtos de Limpeza"};
+		cbSecao = new JComboBox(secoes);
+		cbSecao.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		cbSecao.setBounds(174, 164, 316, 31);
+		frmNovoProduto.getContentPane().add(cbSecao);
+
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnSalvar.addMouseListener(new MouseAdapter() {
-		public void mouseClicked(MouseEvent e) {
-			if (e.getSource() == btnSalvar) {
-				do_btnSalvar_mouseClicked(e);
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
 				ProdutoController controlador = new ProdutoController();
-				ProdutoVO produtoVO = contruirProduto();
-				
-				String mensagem = controlador.salvar(produtoVO);
-				JOptionPane.showMessageDialog(null,  mensagem);
+				ProdutoVO produto = construirProduto();
+
+				String mensagem = controlador.salvar(produto);
+				JOptionPane.showMessageDialog(null, mensagem);
 				limparTela();
+			}
+
+		});
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnSalvar.setBounds(53, 292, 115, 51);
+		frmNovoProduto.getContentPane().add(btnSalvar);
+		
+		JLabel lblId = new JLabel("Digite o ID para Buscar");
+		lblId.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblId.setBounds(10, 11, 188, 45);
+		frmNovoProduto.getContentPane().add(lblId);
+		
+		txtId = new JTextField();
+		txtId.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		txtId.setBounds(250, 13, 120, 43);
+		frmNovoProduto.getContentPane().add(txtId);
+		txtId.setColumns(10);
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				produto = bo.buscarProdutoPorId(txtId.getText());
+				
+				if(produto != null) {
+					//Preencher os campos da tela
+					txtNome.setText(produto.getNome());
+					cbSecao.setSelectedItem(produto.getSecao());
+					txtValor.setText(produto.getValor()+"");
+					
+				}else {
+					JOptionPane.showMessageDialog(null, "Produto não encontrado");
 				}
 			}
 		});
-		btnSalvar.addMouseListener(this);
-		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnSalvar.setBounds(41, 336, 271, 59);
-		frmCadastroProdutoNovo.getContentPane().add(btnSalvar);
+		btnBuscar.setBounds(385, 16, 105, 45);
+		frmNovoProduto.getContentPane().add(btnBuscar);
 		
-		//textValor = new JFormattedTextField();
-		textValor.addKeyListener(this);
-		//textValor = new JFormattedTextField(new MaskFormatter("(#####,##"));
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.exit(0);
+			}
+		});
+		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnCancelar.setBounds(330, 292, 115, 51);
+		frmNovoProduto.getContentPane().add(btnCancelar);
+		
+		textValor = new JTextField();
+		textValor.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				double num1 = e.getKeyCode();
+			}
+		});
 		textValor.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textValor.setBounds(173, 221, 446, 34);
-		frmCadastroProdutoNovo.getContentPane().add(textValor);
-	}
-		
-		
-	public MaskFormatter Mascara(String Mascara){
-        MaskFormatter F_Mascara = new MaskFormatter();
-        try{
-            F_Mascara.setMask(Mascara); //Atribui a mascara
-            F_Mascara.setPlaceholderCharacter(' '); //Caracter para preencimento 
-        }
-        catch (Exception excecao) {
-        excecao.printStackTrace();
-        } 
-        return F_Mascara;
- }
-	
-	
-	protected void limparTela() {
-		produtoVO = new ProdutoVO();
-		textNome.setText(" ");
-		cbSecao.setSelectedIndex(0);
-		textValor.setText(" ");
+		textValor.setColumns(10);
+		textValor.setBounds(174, 213, 316, 31);
+		frmNovoProduto.getContentPane().add(textValor);
 	}
 
-	public ProdutoVO contruirProduto() {
-		produtoVO.setNome(textNome.getText());
+	protected void limparTela() {
+		produto = new ProdutoVO();
+		txtNome.setText("");
+		cbSecao.setSelectedIndex(0);
+		textValor.setText("");
+		
+		
+	}
+
+	public ProdutoVO construirProduto() {
+		produto.setNome(txtNome.getText());
 		
 		String valor = textValor.getText();
 		
 		if(valor.trim() !="") {
-		produtoVO.setValor(Double.parseDouble(valor));
+		produto.setValor(Double.parseDouble(valor));
 		}
-		return produtoVO;
-	}
-
-	public void mouseEntered(MouseEvent e) {
-	}
-	public void mouseExited(MouseEvent e) {
-	}
-	public void mousePressed(MouseEvent e) {
-	}
-	public void mouseReleased(MouseEvent e) {
-	}
-	protected static void do_btnSalvar_mouseClicked(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		if (e.getSource() == textValor) {
-			do_textValor_keyTyped(e);
-			e.getKeyCode();
-		}
-		// TODO Auto-generated method stub
-		
-	}
-	protected static void do_textValor_keyTyped(KeyEvent arg0) {
-	}
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnCancelar) {
-			do_btnCancelar_actionPerformed(e);
-			System.exit(0);
-		}
-	}
-	protected static void do_btnCancelar_actionPerformed(ActionEvent arg0) {
+		return produto;
+	
 	}
 }
