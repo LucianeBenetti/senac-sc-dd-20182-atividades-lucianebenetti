@@ -1,4 +1,4 @@
-package br.sc.senac.dd.aula06.exercicio04.Model;
+package br.sc.senac.dd.aula06.exercicio04.funcionario.model;
 
 import java.util.ArrayList;
 import java.util.List;

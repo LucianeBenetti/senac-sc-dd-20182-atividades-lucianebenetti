@@ -1,4 +1,4 @@
-package br.sc.senac.dd.aula06.Produto;
+package br.sc.senac.dd.aula06.Produto.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +27,16 @@ import java.util.List;
 		
 		public List<ProdutoVO> listarProdutosPorNome(String nome) {
 			ArrayList<ProdutoVO> produtos = dao.listarPorNome(nome);
+			return produtos;
+		}
+		
+		public List<ProdutoVO> listarProdutosPorValor(String valor) {
+			ArrayList<ProdutoVO> produtos = dao.listarPorValor(valor);
+			return produtos;
+		}
+		public List<ProdutoVO> listarProdutosPorSecao(String secao) {
+			ArrayList<ProdutoVO> produtos = dao.listarPorSecao(secao);
+			
 			return produtos;
 		}
 		

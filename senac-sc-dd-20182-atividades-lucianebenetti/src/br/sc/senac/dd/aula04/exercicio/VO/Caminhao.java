@@ -2,7 +2,7 @@ package br.sc.senac.dd.aula04.exercicio.VO;
 
 public class Caminhao extends Automovel{
 	
-	private static final double CAPACIDADE_DEZ_TONELADAS = 0;
+	private static final double CAPACIDADE_DEZ_TONELADAS = 10000;
 	private int eixos;
 	private Carroceria carroceria;
 	

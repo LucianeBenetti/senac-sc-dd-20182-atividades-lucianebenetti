@@ -1,6 +1,9 @@
-package br.sc.senac.dd.aula06.Produto;
+package br.sc.senac.dd.aula06.Produto.Controller;
 
 import java.util.List;
+
+import br.sc.senac.dd.aula06.Produto.Model.ProdutoBO;
+import br.sc.senac.dd.aula06.Produto.Model.ProdutoVO;
 
 
 public class ProdutoController {
@@ -14,7 +17,15 @@ public class ProdutoController {
 	public List<ProdutoVO> listarProdutosPorNome(String nome){
 		return bo.listarProdutosPorNome(nome);
 	}
+	
+	public List<ProdutoVO> listarProdutosPorValor(String valor) {
+		return bo.listarProdutosPorValor(valor);
+	}
 	 
+	public List<ProdutoVO> listarProdutosPorSecao(String secao) {
+		
+		return bo.listarProdutosPorSecao(secao);
+	}
 	public String salvar(ProdutoVO produto) {
 		String validacao = validarProduto(produto);
 
@@ -53,4 +64,8 @@ public class ProdutoController {
 		}
 		return validacao;
 	}
+
+	
+
+	
 }

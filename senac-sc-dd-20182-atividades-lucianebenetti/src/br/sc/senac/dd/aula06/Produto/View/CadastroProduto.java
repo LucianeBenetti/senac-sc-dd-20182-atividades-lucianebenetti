@@ -1,4 +1,4 @@
-package br.sc.senac.dd.aula06.Produto;
+package br.sc.senac.dd.aula06.Produto.View;
 
 import java.awt.EventQueue;
 
@@ -9,6 +9,10 @@ import java.awt.BorderLayout;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
+
+import br.sc.senac.dd.aula06.Produto.Controller.ProdutoController;
+import br.sc.senac.dd.aula06.Produto.Model.ProdutoBO;
+import br.sc.senac.dd.aula06.Produto.Model.ProdutoVO;
 
 import javax.swing.JButton;
 import java.awt.event.KeyAdapter;
@@ -28,10 +32,9 @@ public class CadastroProduto {
 	private ProdutoVO produto = new ProdutoVO();
 	private JFrame frmNovoProduto;
 	private JTextField txtNome;
-	private JTextField txtValor;
 	private JComboBox cbSecao;
 	private JTextField txtId;
-	private JTextField textValor;
+	private JTextField txtValor;
 
 	/**
 	 * Launch the application.
@@ -136,7 +139,9 @@ public class CadastroProduto {
 					//Preencher os campos da tela
 					txtNome.setText(produto.getNome());
 					cbSecao.setSelectedItem(produto.getSecao());
-					txtValor.setText(produto.getValor()+"");
+					
+					String valorFormatado = produto.getValor() + ""; 
+					txtValor.setText(valorFormatado);
 					
 				}else {
 					JOptionPane.showMessageDialog(null, "Produto não encontrado");
@@ -157,32 +162,32 @@ public class CadastroProduto {
 		btnCancelar.setBounds(330, 292, 115, 51);
 		frmNovoProduto.getContentPane().add(btnCancelar);
 		
-		textValor = new JTextField();
-		textValor.addKeyListener(new KeyAdapter() {
+		txtValor = new JTextField();
+		txtValor.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				double num1 = e.getKeyCode();
 			}
 		});
-		textValor.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textValor.setColumns(10);
-		textValor.setBounds(174, 213, 316, 31);
-		frmNovoProduto.getContentPane().add(textValor);
+		txtValor.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		txtValor.setColumns(10);
+		txtValor.setBounds(174, 213, 316, 31);
+		frmNovoProduto.getContentPane().add(txtValor);
 	}
 
 	protected void limparTela() {
 		produto = new ProdutoVO();
 		txtNome.setText("");
 		cbSecao.setSelectedIndex(0);
-		textValor.setText("");
-		
+		txtValor.setText("");
 		
 	}
 
 	public ProdutoVO construirProduto() {
 		produto.setNome(txtNome.getText());
+		produto.setSecao((String) cbSecao.getSelectedItem());
 		
-		String valor = textValor.getText();
+		String valor = txtValor.getText();
 		
 		if(valor.trim() !="") {
 		produto.setValor(Double.parseDouble(valor));

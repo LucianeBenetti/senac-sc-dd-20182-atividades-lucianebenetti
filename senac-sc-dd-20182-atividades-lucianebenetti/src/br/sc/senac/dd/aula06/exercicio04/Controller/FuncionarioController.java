@@ -1,5 +1,8 @@
 package br.sc.senac.dd.aula06.exercicio04.Controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import br.sc.senac.dd.aula06.exercicio04.Model.FuncionarioBO;
@@ -55,6 +58,16 @@ public class FuncionarioController {
 		JOptionPane.showMessageDialog(null,  "Funcionario excluido com sucesso!");
 		
 		return null;
+	}
+
+	public List<FuncionarioVO> listarTodosFuncionarios() {
+		
+		return bo.listarFuncionarios();
+	}
+
+	public List<FuncionarioVO> exibirFuncionarioPorCPF(String cpf) {
+		// TODO Auto-generated method stub
+		return  bo.exibirFuncionarioPorCPF(cpf);
 	}
 	
 

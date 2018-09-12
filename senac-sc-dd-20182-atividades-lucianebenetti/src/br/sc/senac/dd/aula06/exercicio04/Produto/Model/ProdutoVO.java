@@ -1,4 +1,4 @@
-package br.sc.senac.dd.aula06.Produto;
+package br.sc.senac.dd.aula06.exercicio04.Produto.Model;
 
 public class ProdutoVO {
 	private int idProduto;

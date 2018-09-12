@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 
 import br.sc.senac.dd.aula04.exercicio.VO.Caminhao;
 import br.sc.senac.dd.aula04.exercicio.VO.Carro;
+import br.sc.senac.dd.aula04.exercicio.VO.Moto;
 
 public class Menu {
 	public List<Caminhao>caminhoes = new ArrayList<Caminhao>();

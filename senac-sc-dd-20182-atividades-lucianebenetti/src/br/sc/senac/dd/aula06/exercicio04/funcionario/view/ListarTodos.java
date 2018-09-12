@@ -1,4 +1,4 @@
-package br.sc.senac.dd.aula06.exercicio04.View;
+package br.sc.senac.dd.aula06.exercicio04.funcionario.view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -9,9 +9,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
-import br.sc.senac.dd.aula06.Produto.Model.ProdutoVO;
-import br.sc.senac.dd.aula06.exercicio04.Controller.FuncionarioController;
-import br.sc.senac.dd.aula06.exercicio04.Model.FuncionarioVO;
+import br.sc.senac.dd.aula06.exercicio04.Produto.Model.ProdutoVO;
+import br.sc.senac.dd.aula06.exercicio04.funcionario.controller.FuncionarioController;
+import br.sc.senac.dd.aula06.exercicio04.funcionario.model.FuncionarioVO;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;

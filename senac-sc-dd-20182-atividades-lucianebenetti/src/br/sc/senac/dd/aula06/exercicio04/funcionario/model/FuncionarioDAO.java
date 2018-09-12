@@ -1,4 +1,4 @@
-package br.sc.senac.dd.aula06.exercicio04.Model;
+package br.sc.senac.dd.aula06.exercicio04.funcionario.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

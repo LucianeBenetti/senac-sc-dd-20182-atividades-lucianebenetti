@@ -1,4 +1,4 @@
-package br.sc.senac.dd.aula06.Produto;
+package br.sc.senac.dd.aula06.exercicio04.Produto.Model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -100,14 +100,14 @@ public class ProdutoDAO {
 		}
 		
 		public ArrayList<ProdutoVO> listarPorNome(String nome){
-			String sql = " SELECT * FROM PRODUTO WHERE NOME = ? ";
+			String sql = " SELECT * FROM PRODUTO WHERE NOME like ?";
 			
 			Connection conexao = Banco.getConnection();
 			PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
 			ArrayList<ProdutoVO> produtos = new ArrayList<ProdutoVO>();
 			
 			try {
-				prepStmt.setString(1, nome);
+				prepStmt.setString(1, '%'+ nome+'%');
 				ResultSet result = prepStmt.executeQuery();
 				
 				while(result.next()){
@@ -177,6 +177,63 @@ public class ProdutoDAO {
 				e.printStackTrace();
 			}
 			return p;
+		}
+
+		public ArrayList<ProdutoVO> listarPorValor(String valor) {
+			
+			String sql = " SELECT * FROM PRODUTO WHERE valor = ?";
+			
+			Connection conexao = Banco.getConnection();
+			PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
+			ArrayList<ProdutoVO> produtos = new ArrayList<ProdutoVO>();
+			
+			try {
+				prepStmt.setString(1, valor);
+				ResultSet result = prepStmt.executeQuery();
+				
+				while(result.next()){
+					ProdutoVO p = new ProdutoVO();
+					
+					p.setIdProduto(result.getInt(1));
+					p.setNome(result.getString(2));
+					p.setSecao(result.getString(3));
+					p.setValor(result.getDouble(4));
+					
+					produtos.add(p);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return produtos;
+			
+		}
+
+		public ArrayList<ProdutoVO> listarPorSecao(String secao) {
+			String sql = " SELECT * FROM PRODUTO WHERE secao = ?";
+			
+			Connection conexao = Banco.getConnection();
+			PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
+			ArrayList<ProdutoVO> produtos = new ArrayList<ProdutoVO>();
+			
+			try {
+				prepStmt.setString(1, secao);
+				ResultSet result = prepStmt.executeQuery();
+				
+				while(result.next()){
+					ProdutoVO p = new ProdutoVO();
+					
+					p.setIdProduto(result.getInt(1));
+					p.setNome(result.getString(2));
+					p.setSecao(result.getString(3));
+					p.setValor(result.getDouble(4));
+					
+					produtos.add(p);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return produtos;
+			
 		}
 	}
 
