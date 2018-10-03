@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -28,7 +29,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.event.MouseListener;
 
-public class ListarTodos extends JFrame {
+public class ListarTodos extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTable tbFuncionario;
@@ -58,7 +59,8 @@ public class ListarTodos extends JFrame {
 	 * Create the frame.
 	 * @throws ParseException 
 	 */
-	public ListarTodos() throws ParseException {
+	public ListarTodos(){
+		setClosable(true);
 		setTitle("Listar Todos Funcion\u00E1rios");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 602);
@@ -72,11 +74,15 @@ public class ListarTodos extends JFrame {
 		lblFuncionario.setBounds(59, 252, 156, 49);
 		contentPane.add(lblFuncionario);
 		
+		try {
 		textCPF = new JFormattedTextField(new MaskFormatter (MASCARA_CPF));
 		textCPF.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textCPF.setBounds(125, 138, 306, 46);
 		contentPane.add(textCPF);
 		textCPF.setColumns(10);
+		}catch(ParseException pEx) {
+			//TODO tratar			
+		}
 		
 		tbFuncionario = new JTable();
 		tbFuncionario.setFont(new Font("Tahoma", Font.PLAIN, 16));

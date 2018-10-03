@@ -14,7 +14,7 @@ FuncionarioDAO dao = new FuncionarioDAO();
 		
 		FuncionarioDAO dao = new FuncionarioDAO();
 		if (dao.consultarPorCpf(funcionario.getCpf()) != null){
-			JOptionPane.showMessageDialog(null, "Funcionario já cadastrado! Tente novamente.");
+			//JOptionPane.showMessageDialog(null, "Funcionario já cadastrado! Tente novamente.");
 		}else {
 		
 		int idGerado = dao.inserirFuncionario(funcionario);

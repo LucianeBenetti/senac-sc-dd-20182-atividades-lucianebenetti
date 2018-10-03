@@ -3,6 +3,7 @@ package br.sc.senac.dd.aula06.exercicio04.View;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
@@ -26,7 +27,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class CadastroFuncionario extends JFrame {
+public class CadastroFuncionario extends JInternalFrame  {
 
 	private static final String MASCARA_TELEFONE_FIXO = "(##) ####-####";
 	private static final String MASCARA_TELEFONE_CELULAR ="(##) #####-####";
@@ -63,11 +64,8 @@ public class CadastroFuncionario extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 * @throws ParseException 
-	 */
-	public CadastroFuncionario() throws ParseException {
+	public CadastroFuncionario() {
+		setClosable(true);
 		setTitle("Cadastrar Funcion\u00E1rio");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 569, 501);
@@ -75,29 +73,29 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNome.setBounds(15, 18, 85, 35);
 		contentPane.add(lblNome);
-		
+
 		lblCpf = new JLabel("CPF");
 		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblCpf.setBounds(15, 73, 85, 35);
 		contentPane.add(lblCpf);
-		
+
 		lblTelefone = new JLabel("Telefone");
 		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblTelefone.setBounds(15, 132, 159, 35);
 		contentPane.add(lblTelefone);
-		
+
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				FuncionarioController controlador = new FuncionarioController();
 				FuncionarioVO funcionario = contruirFuncionario();
-				
+
 				String mensagem = controlador.salvar(funcionario);
 				JOptionPane.showMessageDialog(null,  mensagem);
 				limparTela();
@@ -111,57 +109,69 @@ public class CadastroFuncionario extends JFrame {
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnSalvar.setBounds(40, 386, 148, 41);
 		contentPane.add(btnSalvar);
-		
+
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				 System.exit(0);
-		}
+				System.exit(0);
+			}
 
 		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnCancelar.setBounds(324, 386, 130, 41);
 		contentPane.add(btnCancelar);
-		
+
 		textNome = new JTextField();
 		textNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textNome.setBounds(187, 18, 321, 35);
 		contentPane.add(textNome);
 		textNome.setColumns(10);
-		
-		textCpf = new JFormattedTextField(new MaskFormatter (MASCARA_CPF));
-		textCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textCpf.setBounds(187, 73, 321, 35);
-		contentPane.add(textCpf);
-		
+
+		try {
+			textCpf = new JFormattedTextField(new MaskFormatter (MASCARA_CPF));
+			textCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			textCpf.setBounds(187, 73, 321, 35);
+			contentPane.add(textCpf);
+		}catch(ParseException pEx) {
+			//TODO tratar			
+		}
+
 		lblEmail = new JLabel("E-mail");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblEmail.setBounds(15, 293, 159, 35);
 		contentPane.add(lblEmail);
-		
-		textTelefone = new JFormattedTextField(new MaskFormatter (MASCARA_TELEFONE_FIXO));
-		textTelefone.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textTelefone.setBounds(187, 132, 321, 35);
-		contentPane.add(textTelefone);
-		
+
+		try {
+			textTelefone = new JFormattedTextField(new MaskFormatter (MASCARA_TELEFONE_FIXO));
+			textTelefone.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			textTelefone.setBounds(187, 132, 321, 35);
+			contentPane.add(textTelefone);
+		}catch(ParseException pEx) {
+			//TODO tratar			
+		}
+
 		textEmail = new JTextField();
 		textEmail.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textEmail.setColumns(10);
 		textEmail.setBounds(187, 293, 321, 35);
 		contentPane.add(textEmail);
-		
+
 		lblCelular = new JLabel("Celular");
 		lblCelular.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblCelular.setBounds(15, 207, 159, 35);
 		contentPane.add(lblCelular);
-		
-		textCelular = new JFormattedTextField(new MaskFormatter (MASCARA_TELEFONE_CELULAR));
-		textCelular.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textCelular.setBounds(187, 207, 321, 35);
-		contentPane.add(textCelular);
+		try {
+			textCelular = new JFormattedTextField(new MaskFormatter (MASCARA_TELEFONE_CELULAR));
+			textCelular.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			textCelular.setBounds(187, 207, 321, 35);
+			contentPane.add(textCelular);
+		}catch(ParseException pEx) {
+			//TODO tratar			
+		}
+
 	}
-				
+
 	protected void limparTela() {
 		funcionario = new FuncionarioVO();
 		textNome.setText("");
@@ -177,9 +187,9 @@ public class CadastroFuncionario extends JFrame {
 		funcionario.setTelefone(textTelefone.getText());
 		funcionario.setCelular(textCelular.getText());
 		funcionario.setEmail(textEmail.getText());
-			
+
 		return funcionario;
 	}
 
-	
+
 }

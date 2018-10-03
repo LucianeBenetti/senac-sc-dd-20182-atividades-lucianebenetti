@@ -1,32 +1,27 @@
 package br.sc.senac.dd.aula06.Produto.View;
 
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import java.awt.BorderLayout;
-import javax.swing.JComboBox;
 import javax.swing.JTextField;
-import javax.swing.text.MaskFormatter;
 
 import br.sc.senac.dd.aula06.Produto.Controller.ProdutoController;
 import br.sc.senac.dd.aula06.Produto.Model.ProdutoBO;
 import br.sc.senac.dd.aula06.Produto.Model.ProdutoVO;
 
-import javax.swing.JButton;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JFormattedTextField;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseListener;
-
-public class CadastroProduto {
+public class CadastroProduto extends JInternalFrame {
 
 	private ProdutoBO bo = new ProdutoBO();
 	private ProdutoVO produto = new ProdutoVO();
@@ -173,6 +168,7 @@ public class CadastroProduto {
 		txtValor.setColumns(10);
 		txtValor.setBounds(174, 213, 316, 31);
 		frmNovoProduto.getContentPane().add(txtValor);
+		this.setClosable(true);
 	}
 
 	protected void limparTela() {

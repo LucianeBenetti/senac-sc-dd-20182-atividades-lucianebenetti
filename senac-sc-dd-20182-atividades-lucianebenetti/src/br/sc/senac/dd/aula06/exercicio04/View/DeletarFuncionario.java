@@ -1,9 +1,11 @@
 package br.sc.senac.dd.aula06.exercicio04.View;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
@@ -25,7 +27,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class DeletarFuncionario extends JFrame {
+public class DeletarFuncionario extends JInternalFrame  {
 
 	private static final String MASCARA_CPF = "###.###.###-##";
 	private JPanel contentPane;
@@ -61,7 +63,8 @@ public class DeletarFuncionario extends JFrame {
 	 * Create the frame.
 	 * @throws ParseException 
 	 */
-	public DeletarFuncionario() throws ParseException {
+	public DeletarFuncionario() {
+		setClosable(true);
 		setTitle("Excluir Funcionario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 592, 352);
@@ -121,12 +124,14 @@ public class DeletarFuncionario extends JFrame {
 		contentPane.add(btnCancelar);
 		
 		btnBuscar = new JButton("Buscar");
+		btnBuscar.setEnabled(false);
 		btnBuscar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				funcionarioVO = bo.buscarFuncionarioPorCPF(textBuscaCpf.getText());
 				
 				if(funcionarioVO != null) {
+					btnBuscar.setEnabled(true);
 						textNome.setText(funcionarioVO.getNome());
 						textCpf.setText(funcionarioVO.getCpf());
 								
@@ -134,6 +139,12 @@ public class DeletarFuncionario extends JFrame {
 						JOptionPane.showMessageDialog(null, "Funcionário não encontrado.");
 					}
 				}
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				btnBuscar.setForeground(Color.BLUE);;
+			}
+			
+			
 		});
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -145,11 +156,15 @@ public class DeletarFuncionario extends JFrame {
 		btnBuscar.setBounds(439, 13, 99, 45);
 		contentPane.add(btnBuscar);
 		
+		try {
 		textBuscaCpf = new JFormattedTextField(new MaskFormatter(MASCARA_CPF));
 		textBuscaCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textBuscaCpf.setBounds(148, 17, 281, 37);
 		contentPane.add(textBuscaCpf);
 		textBuscaCpf.setColumns(10);
+		}catch(ParseException pEx) {
+			//TODO tratar			
+		}
 		
 		textNome = new JTextField();
 		textNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -157,11 +172,15 @@ public class DeletarFuncionario extends JFrame {
 		contentPane.add(textNome);
 		textNome.setColumns(10);
 		
+		try {
 		textCpf = new JFormattedTextField(new MaskFormatter(MASCARA_CPF));
 		textCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textCpf.setBounds(148, 142, 281, 34);
 		contentPane.add(textCpf);
 		textCpf.setColumns(10);
+		}catch(ParseException pEx) {
+			//TODO tratar			
+		}
 	}
 		
 		private void limparTela() {

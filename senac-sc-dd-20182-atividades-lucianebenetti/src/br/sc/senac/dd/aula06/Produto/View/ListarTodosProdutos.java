@@ -3,6 +3,7 @@ package br.sc.senac.dd.aula06.Produto.View;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.border.EmptyBorder;
@@ -25,7 +26,7 @@ import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class ListarTodosProdutos extends JFrame {
+public class ListarTodosProdutos extends JInternalFrame  {
 
 	private JPanel contentPane;
 	private JTable tblProdutos;
@@ -56,6 +57,7 @@ public class ListarTodosProdutos extends JFrame {
 	 * Create the frame.
 	 */
 	public ListarTodosProdutos() {
+		setClosable(true);
 		setTitle("Consulta de Produtos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 705, 733);

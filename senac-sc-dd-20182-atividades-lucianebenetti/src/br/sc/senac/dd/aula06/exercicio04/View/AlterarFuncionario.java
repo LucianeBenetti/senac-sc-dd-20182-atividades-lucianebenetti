@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
@@ -25,7 +26,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class AlterarFuncionario extends JFrame {
+public class AlterarFuncionario extends JInternalFrame {
 
 	private static final String MASCARA_TELEFONE_FIXO = "(##) ####-####";
 	private static final String MASCARA_TELEFONE_CELULAR ="(##) #####-####";
@@ -70,8 +71,9 @@ public class AlterarFuncionario extends JFrame {
 	 * Create the frame.
 	 * @throws ParseException 
 	 */
-	public AlterarFuncionario() throws ParseException {
-		setTitle("Atualizatr Funcion\u00E1rio");
+	public AlterarFuncionario(){
+		setClosable(true);
+		setTitle("Atualizar Funcion\u00E1rio");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 459);
 		contentPane = new JPanel();
@@ -95,34 +97,45 @@ public class AlterarFuncionario extends JFrame {
 		lblCpf.setBounds(10, 117, 76, 38);
 		contentPane.add(lblCpf);
 		
+		try {
 		textCpf = new JFormattedTextField(new MaskFormatter (MASCARA_CPF));
 		textCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textCpf.setColumns(10);
 		textCpf.setBounds(130, 122, 363, 29);
 		contentPane.add(textCpf);
+		}catch(ParseException pEx) {
+			//TODO tratar			
+		}
 		
 		lblTelefone = new JLabel("Telefone");
 		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblTelefone.setBounds(10, 169, 95, 38);
 		contentPane.add(lblTelefone);
 		
+		try {
 		textTelefone = new JFormattedTextField(new MaskFormatter (MASCARA_TELEFONE_FIXO));
 		textTelefone.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textTelefone.setColumns(10);
 		textTelefone.setBounds(130, 174, 363, 29);
 		contentPane.add(textTelefone);
+		}catch(ParseException pEx) {
+			//TODO tratar			
+		}
 		
 		lblCelular = new JLabel("Celular");
 		lblCelular.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblCelular.setBounds(10, 229, 76, 38);
 		contentPane.add(lblCelular);
 		
-		
+		try {
 		textCelular = new JFormattedTextField(new MaskFormatter (MASCARA_TELEFONE_CELULAR));
 		textCelular.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textCelular.setColumns(10);
 		textCelular.setBounds(130, 234, 363, 29);
 		contentPane.add(textCelular);
+		}catch(ParseException pEx) {
+			//TODO tratar			
+		}
 		
 		lblEmail = new JLabel("E-mail");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -140,11 +153,15 @@ public class AlterarFuncionario extends JFrame {
 		lblBuscaCpf.setBounds(10, 11, 76, 38);
 		contentPane.add(lblBuscaCpf);
 		
+		try {
 		textBuscaCpf = new JFormattedTextField(new MaskFormatter (MASCARA_CPF));
 		textBuscaCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textBuscaCpf.setColumns(10);
 		textBuscaCpf.setBounds(130, 20, 228, 29);
 		contentPane.add(textBuscaCpf);
+		}catch(ParseException pEx) {
+			//TODO tratar			
+		}
 		
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.addMouseListener(new MouseAdapter() {
