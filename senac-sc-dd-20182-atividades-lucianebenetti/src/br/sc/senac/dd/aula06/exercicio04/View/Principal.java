@@ -7,7 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import br.sc.senac.dd.aula06.Produto.View.AlterarProduto;
 import br.sc.senac.dd.aula06.Produto.View.CadastroProduto;
+import br.sc.senac.dd.aula06.Produto.View.DeletarProduto;
 import br.sc.senac.dd.aula06.Produto.View.ListarTodosProdutos;
 
 import java.awt.Toolkit;
@@ -17,17 +19,21 @@ import javax.swing.JMenuItem;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import javax.swing.JDesktopPane;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class Principal extends JFrame {
 
 	private JPanel contentPane;
-	private JDesktopPane desktopPane;
 	CadastroProduto cadastroProduto = null;
+	DeletarProduto deletarProduto = null;
+	AlterarProduto alterarProduto = null;
 	ListarTodosProdutos listarTodosProdutos = null;
 	CadastroFuncionario cadastroFuncionario = null;
 	DeletarFuncionario deletarFuncionario = null;
@@ -59,25 +65,26 @@ public class Principal extends JFrame {
 	public Principal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/icones/icons8-usu\u00E1rio.png")));
 		setTitle("Controle de Funcion\u00E1rios e Produtos");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1009, 726);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
 		JMenu mnFuncionario = new JMenu("Funcionario");
+		mnFuncionario.setFont(new Font("Segoe UI", Font.PLAIN, 22));
 		mnFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/icones/icons8-gest\u00E3o-de-cliente.png")));
 		menuBar.add(mnFuncionario);
 
 		JMenuItem mntmCadastrar = new JMenuItem("Cadastrar");
+		mntmCadastrar.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mntmCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-			if(cadastroFuncionario ==null) {
-				cadastroFuncionario = new CadastroFuncionario();
-				desktopPane.add(cadastroFuncionario);
-				cadastroFuncionario.show();
-			}
+				contentPane = new CadastroFuncionario();
+				setContentPane(contentPane);
+				revalidate();
+			
 			}
 		});
 		mntmCadastrar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
@@ -85,14 +92,13 @@ public class Principal extends JFrame {
 		mnFuncionario.add(mntmCadastrar);
 
 		JMenuItem mntmExcluir = new JMenuItem("Excluir");
+		mntmExcluir.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mntmExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			
-			if(deletarFuncionario == null) {
-				deletarFuncionario = new DeletarFuncionario();
-				desktopPane.add(deletarFuncionario);
-				deletarFuncionario.show();
-			}
+				contentPane = new DeletarFuncionario();
+				setContentPane(contentPane);
+				revalidate();
 			}
 		});
 		mntmExcluir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0));
@@ -100,14 +106,14 @@ public class Principal extends JFrame {
 		mnFuncionario.add(mntmExcluir);
 
 		JMenuItem mntmAlterar = new JMenuItem("Alterar");
+		mntmAlterar.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mntmAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(alterarFuncionario == null) {
-				alterarFuncionario = new AlterarFuncionario();
-				desktopPane.add(alterarFuncionario);
-				alterarFuncionario.show();
-				}
+				contentPane = new AlterarFuncionario();
+				setContentPane(contentPane);
+				revalidate();
+				
 			}
 		});
 		mntmAlterar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
@@ -115,13 +121,14 @@ public class Principal extends JFrame {
 		mnFuncionario.add(mntmAlterar);
 
 		JMenuItem mntmBuscar = new JMenuItem("Buscar");
+		mntmBuscar.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mntmBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(listarTodosFuncionarios == null) {
-				listarTodosFuncionarios = new ListarTodos();
-				desktopPane.add(listarTodosFuncionarios);
-				listarTodosFuncionarios.show();
-				}
+			
+					contentPane = new ListarTodos();
+					setContentPane(contentPane);
+					revalidate();
+								
 			}
 		});
 		mntmBuscar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0));
@@ -129,19 +136,19 @@ public class Principal extends JFrame {
 		mnFuncionario.add(mntmBuscar);
 
 		JMenu mnProduto = new JMenu("Produto");
+		mnProduto.setFont(new Font("Segoe UI", Font.PLAIN, 22));
 		mnProduto.setIcon(new ImageIcon(Principal.class.getResource("/icones/icons8-comprar.png")));
 		menuBar.add(mnProduto);
 
 		JMenuItem mntmCadastrarProduto = new JMenuItem("Cadastrar");
+		mntmCadastrarProduto.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mntmCadastrarProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				if(cadastroProduto == null) {
-				cadastroProduto = new CadastroProduto();
-				desktopPane.add(cadastroProduto);
-				cadastroProduto.show();
-				}
-				
+				contentPane = new CadastroProduto();
+				setContentPane(contentPane);
+				revalidate();
+								
 			}
 		});
 		mntmCadastrarProduto.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0));
@@ -149,31 +156,74 @@ public class Principal extends JFrame {
 		mnProduto.add(mntmCadastrarProduto);
 
 		JMenuItem mntmListarTodos = new JMenuItem("Listar Todos");
+		mntmListarTodos.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mntmListarTodos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				if(listarTodosProdutos == null) {
-				listarTodosProdutos = new ListarTodosProdutos();
-				desktopPane.add(listarTodosProdutos);
-				listarTodosProdutos.show();
-				}
+				contentPane = new ListarTodosProdutos();
+				setContentPane(contentPane);
+				revalidate();
+							
+			}
+		});
+		
+		JMenuItem mntmDeletar = new JMenuItem("Excluir");
+		mntmDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				contentPane = new DeletarProduto();
+				setContentPane(contentPane);
+				revalidate();
 				
 			}
 		});
-		mntmListarTodos.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0));
-		mntmListarTodos.setIcon(new ImageIcon(Principal.class.getResource("/icones/icons8-documento-regular.png")));
+		mntmDeletar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0));
+		mntmDeletar.setIcon(new ImageIcon(Principal.class.getResource("/icones/icons8-seguran\u00E7a-verificada.png")));
+		mntmDeletar.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		mnProduto.add(mntmDeletar);
+		
+		JMenuItem mntmAlterarProduto = new JMenuItem("Alterar");
+		mntmAlterarProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				contentPane = new AlterarProduto();
+				setContentPane(contentPane);
+				revalidate();
+				
+				
+			}
+		});
+		mntmAlterarProduto.setIcon(new ImageIcon(Principal.class.getResource("/icones/icons8-documento-regular.png")));
+		mntmAlterarProduto.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0));
+		mntmAlterarProduto.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		mnProduto.add(mntmAlterarProduto);
+		mntmListarTodos.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F10, 0));
+		mntmListarTodos.setIcon(new ImageIcon(Principal.class.getResource("/icones/icons8-lista-com-marcadores.png")));
 		mnProduto.add(mntmListarTodos);
 
 		JMenu mnNewMenu = new JMenu("Sobre");
+		mnNewMenu.setFont(new Font("Segoe UI", Font.PLAIN, 22));
 		mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/icones/icons8-cart\u00E3o-de-cr\u00E9dito-sem-contato.png")));
 		menuBar.add(mnNewMenu);
 
 		JMenuItem mntmManual = new JMenuItem("Manual");
-		mntmManual.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F10, 0));
+		mntmManual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+				try {
+					desktop.open(new File ("C:\\Manual-de-utilização-do-WordPress.pdf"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		mntmManual.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		mntmManual.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0));
 		mntmManual.setIcon(new ImageIcon(Principal.class.getResource("/icones/icons8-gerente-de-informa\u00E7\u00F5es-do-cliente.png")));
 		mnNewMenu.add(mntmManual);
 
 		JMenuItem mntmAjuda = new JMenuItem("Ajuda");
+		mntmAjuda.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mntmAjuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (ajuda == null) {
@@ -182,11 +232,12 @@ public class Principal extends JFrame {
 				}
 			}
 		});
-		mntmAjuda.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0));
+		mntmAjuda.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0));
 		mntmAjuda.setIcon(new ImageIcon(Principal.class.getResource("/icones/icons8-suporte-on-line-filled.png")));
 		mnNewMenu.add(mntmAjuda);
 
 		JMenuItem mntmAutores = new JMenuItem("Autores");
+		mntmAutores.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mntmAutores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -196,16 +247,16 @@ public class Principal extends JFrame {
 				}
 			}
 		});
-		mntmAutores.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0));
+		mntmAutores.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F13, 0));
 		mntmAutores.setIcon(new ImageIcon(Principal.class.getResource("/icones/icons8-\u0441harlie-\u0441haplin.png")));
 		mnNewMenu.add(mntmAutores);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		desktopPane = new JDesktopPane();
-		desktopPane.setBounds(10, 10, 1850, 900);
-		contentPane.add(desktopPane);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 987, 618);
+		contentPane.add(panel);
 	}
 }

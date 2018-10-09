@@ -29,9 +29,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.event.MouseListener;
 
-public class ListarTodos extends JInternalFrame {
+public class ListarTodos extends JPanel {
 
-	private JPanel contentPane;
 	private JTable tbFuncionario;
 	private String [] nomesColunas = new String []
 			{"Nome", "CPF", "Celular", "Telefone", "e-mail"};
@@ -60,25 +59,20 @@ public class ListarTodos extends JInternalFrame {
 	 * @throws ParseException 
 	 */
 	public ListarTodos(){
-		setClosable(true);
-		setTitle("Listar Todos Funcion\u00E1rios");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 602);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLayout(null);
 		
 		JLabel lblFuncionario = new JLabel("Funcion\u00E1rios");
 		lblFuncionario.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblFuncionario.setBounds(59, 252, 156, 49);
-		contentPane.add(lblFuncionario);
+		this.add(lblFuncionario);
 		
 		try {
 		textCPF = new JFormattedTextField(new MaskFormatter (MASCARA_CPF));
 		textCPF.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textCPF.setBounds(125, 138, 306, 46);
-		contentPane.add(textCPF);
+		this.add(textCPF);
 		textCPF.setColumns(10);
 		}catch(ParseException pEx) {
 			//TODO tratar			
@@ -94,7 +88,7 @@ public class ListarTodos extends JInternalFrame {
 				
 			));
 		tbFuncionario.setBounds(35, 301, 639, 148);
-		contentPane.add(tbFuncionario);
+		this.add(tbFuncionario);
 		
 		JButton btnListarTodos = new JButton("Listar Todos Funcionarios");
 		btnListarTodos.addMouseListener(new MouseAdapter() {
@@ -121,7 +115,7 @@ public class ListarTodos extends JInternalFrame {
 							
 		btnListarTodos.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnListarTodos.setBounds(183, 26, 328, 49);
-		contentPane.add(btnListarTodos);
+		this.add(btnListarTodos);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
@@ -131,12 +125,12 @@ public class ListarTodos extends JInternalFrame {
 		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnCancelar.setBounds(510, 481, 141, 49);
-		contentPane.add(btnCancelar);
+		this.add(btnCancelar);
 		
 		JLabel lblCpf = new JLabel("CPF");
 		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblCpf.setBounds(46, 138, 81, 42);
-		contentPane.add(lblCpf);
+		this.add(lblCpf);
 		
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.addMouseListener(new MouseAdapter() {
@@ -181,7 +175,7 @@ public class ListarTodos extends JInternalFrame {
 		
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnBuscar.setBounds(470, 135, 141, 49);
-		contentPane.add(btnBuscar);
+		this.add(btnBuscar);
 		
 		
 		

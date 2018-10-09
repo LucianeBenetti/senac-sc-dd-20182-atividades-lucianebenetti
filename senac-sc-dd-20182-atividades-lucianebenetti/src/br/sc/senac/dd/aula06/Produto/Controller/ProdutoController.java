@@ -2,6 +2,8 @@ package br.sc.senac.dd.aula06.Produto.Controller;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import br.sc.senac.dd.aula06.Produto.Model.ProdutoBO;
 import br.sc.senac.dd.aula06.Produto.Model.ProdutoVO;
 
@@ -63,6 +65,22 @@ public class ProdutoController {
 			
 		}
 		return validacao;
+	}
+
+	public void deletar(ProdutoVO produtoVO) {
+		bo.deletarProduto(produtoVO);
+		
+	}
+
+	public void atualizar(ProdutoVO produto) {
+        boolean resultado = bo.atualizar(produto);
+		
+		if(resultado) {
+			JOptionPane.showMessageDialog(null,"Produto atualizado com sucesso!");
+		}else {
+			JOptionPane.showMessageDialog(null,"Produto não foi atualizado!");
+		}
+		
 	}
 
 	

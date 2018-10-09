@@ -3,6 +3,8 @@ package br.sc.senac.dd.aula06.Produto.Model;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.sc.senac.dd.aula06.exercicio04.Model.FuncionarioVO;
+
 		
 	public class ProdutoBO {
 		ProdutoDAO dao = new ProdutoDAO();
@@ -39,5 +41,10 @@ import java.util.List;
 			
 			return produtos;
 		}
-		
+		public boolean deletarProduto(ProdutoVO produtoVO) {
+			boolean sucesso = dao.remover(produtoVO.getIdProduto());
+			return sucesso;
+			
 		}
+			
+	}

@@ -27,12 +27,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class CadastroFuncionario extends JInternalFrame  {
+public class CadastroFuncionario extends JPanel  {
 
 	private static final String MASCARA_TELEFONE_FIXO = "(##) ####-####";
 	private static final String MASCARA_TELEFONE_CELULAR ="(##) #####-####";
 	private static final String MASCARA_CPF = "###.###.###-##";
-	private JPanel contentPane;
 	private JLabel lblNome;
 	private JLabel lblCpf;
 	private JLabel lblTelefone;
@@ -65,29 +64,25 @@ public class CadastroFuncionario extends JInternalFrame  {
 	}
 
 	public CadastroFuncionario() {
-		setClosable(true);
-		setTitle("Cadastrar Funcion\u00E1rio");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 569, 501);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLayout(null);
 
 		lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNome.setBounds(15, 18, 85, 35);
-		contentPane.add(lblNome);
+		this.add(lblNome);
 
 		lblCpf = new JLabel("CPF");
 		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblCpf.setBounds(15, 73, 85, 35);
-		contentPane.add(lblCpf);
+		this.add(lblCpf);
 
 		lblTelefone = new JLabel("Telefone");
 		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblTelefone.setBounds(15, 132, 159, 35);
-		contentPane.add(lblTelefone);
+		this.add(lblTelefone);
 
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.addMouseListener(new MouseAdapter() {
@@ -108,7 +103,7 @@ public class CadastroFuncionario extends JInternalFrame  {
 		});
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnSalvar.setBounds(40, 386, 148, 41);
-		contentPane.add(btnSalvar);
+		this.add(btnSalvar);
 
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addMouseListener(new MouseAdapter() {
@@ -120,19 +115,19 @@ public class CadastroFuncionario extends JInternalFrame  {
 		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnCancelar.setBounds(324, 386, 130, 41);
-		contentPane.add(btnCancelar);
+		this.add(btnCancelar);
 
 		textNome = new JTextField();
 		textNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textNome.setBounds(187, 18, 321, 35);
-		contentPane.add(textNome);
+		this.add(textNome);
 		textNome.setColumns(10);
 
 		try {
 			textCpf = new JFormattedTextField(new MaskFormatter (MASCARA_CPF));
 			textCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
 			textCpf.setBounds(187, 73, 321, 35);
-			contentPane.add(textCpf);
+			this.add(textCpf);
 		}catch(ParseException pEx) {
 			//TODO tratar			
 		}
@@ -140,13 +135,13 @@ public class CadastroFuncionario extends JInternalFrame  {
 		lblEmail = new JLabel("E-mail");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblEmail.setBounds(15, 293, 159, 35);
-		contentPane.add(lblEmail);
+		this.add(lblEmail);
 
 		try {
 			textTelefone = new JFormattedTextField(new MaskFormatter (MASCARA_TELEFONE_FIXO));
 			textTelefone.setFont(new Font("Tahoma", Font.PLAIN, 20));
 			textTelefone.setBounds(187, 132, 321, 35);
-			contentPane.add(textTelefone);
+			this.add(textTelefone);
 		}catch(ParseException pEx) {
 			//TODO tratar			
 		}
@@ -155,17 +150,17 @@ public class CadastroFuncionario extends JInternalFrame  {
 		textEmail.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textEmail.setColumns(10);
 		textEmail.setBounds(187, 293, 321, 35);
-		contentPane.add(textEmail);
+		this.add(textEmail);
 
 		lblCelular = new JLabel("Celular");
 		lblCelular.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblCelular.setBounds(15, 207, 159, 35);
-		contentPane.add(lblCelular);
+		this.add(lblCelular);
 		try {
 			textCelular = new JFormattedTextField(new MaskFormatter (MASCARA_TELEFONE_CELULAR));
 			textCelular.setFont(new Font("Tahoma", Font.PLAIN, 20));
 			textCelular.setBounds(187, 207, 321, 35);
-			contentPane.add(textCelular);
+			this.add(textCelular);
 		}catch(ParseException pEx) {
 			//TODO tratar			
 		}

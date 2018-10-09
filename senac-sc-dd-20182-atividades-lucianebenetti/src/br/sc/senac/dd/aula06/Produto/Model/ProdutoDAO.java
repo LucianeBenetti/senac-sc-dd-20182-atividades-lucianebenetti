@@ -53,7 +53,7 @@ public class ProdutoDAO {
 				prepStmt.setString(1, p.getNome());
 				prepStmt.setString(2, p.getSecao());
 				prepStmt.setDouble(3, p.getValor());
-				prepStmt.setDouble(5, p.getIdProduto());
+				prepStmt.setDouble(4, p.getIdProduto());
 
 				int codigoRetorno = prepStmt.executeUpdate();
 

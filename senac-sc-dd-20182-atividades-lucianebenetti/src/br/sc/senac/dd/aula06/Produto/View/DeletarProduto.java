@@ -1,4 +1,4 @@
-package br.sc.senac.dd.aula06.exercicio04.View;
+package br.sc.senac.dd.aula06.Produto.View;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -10,6 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
+import br.sc.senac.dd.aula06.Produto.Controller.ProdutoController;
+import br.sc.senac.dd.aula06.Produto.Model.ProdutoBO;
+import br.sc.senac.dd.aula06.Produto.Model.ProdutoVO;
 import br.sc.senac.dd.aula06.exercicio04.Controller.FuncionarioController;
 import br.sc.senac.dd.aula06.exercicio04.Model.FuncionarioBO;
 import br.sc.senac.dd.aula06.exercicio04.Model.FuncionarioVO;
@@ -27,21 +30,19 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class DeletarFuncionario extends JPanel  {
+public class DeletarProduto extends JPanel  {
 
-	private static final String MASCARA_CPF = "###.###.###-##";
-
-	private JLabel lblBuscaCpf;
-	private JLabel lblCpf_1;
+	private JLabel lblIDProduto;
+	private JLabel lblSecao;
 	private JLabel lblNome;
 	private JButton btnExcluir;
 	private JButton btnCancelar;
 	private JButton btnBuscar;
-	private JTextField textBuscaCpf;
+	private JTextField textBuscaID;
 	private JTextField textNome;
-	private JTextField textCpf;
-	private FuncionarioVO funcionarioVO = new FuncionarioVO();
-	private FuncionarioBO bo = new FuncionarioBO();
+	private JTextField textSecao;
+	private ProdutoVO produtoVO = new ProdutoVO();
+	private ProdutoBO bo = new ProdutoBO();
 
 	/**
 	 * Launch the application.
@@ -50,7 +51,7 @@ public class DeletarFuncionario extends JPanel  {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DeletarFuncionario frame = new DeletarFuncionario();
+					DeletarProduto frame = new DeletarProduto();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,21 +64,21 @@ public class DeletarFuncionario extends JPanel  {
 	 * Create the frame.
 	 * @throws ParseException 
 	 */
-	public DeletarFuncionario() {
+	public DeletarProduto() {
 		
 		setBounds(100, 100, 592, 352);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
 		
-		lblBuscaCpf = new JLabel("CPF");
-		lblBuscaCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblBuscaCpf.setBounds(10, 11, 99, 49);
-		this.add(lblBuscaCpf);
+		lblIDProduto = new JLabel("ID do Produto");
+		lblIDProduto.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblIDProduto.setBounds(10, 11, 145, 49);
+		this.add(lblIDProduto);
 		
-		lblCpf_1 = new JLabel("CPF");
-		lblCpf_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblCpf_1.setBounds(10, 142, 99, 49);
-		this.add(lblCpf_1);
+		lblSecao = new JLabel("Se\u00E7\u00E3o");
+		lblSecao.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblSecao.setBounds(10, 142, 99, 49);
+		this.add(lblSecao);
 		
 		lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -88,8 +89,8 @@ public class DeletarFuncionario extends JPanel  {
 		btnExcluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				FuncionarioController controlador = new FuncionarioController();
-				controlador.deletar(funcionarioVO);
+				ProdutoController controlador = new ProdutoController();
+				controlador.deletar(produtoVO);
 				limparTela();
 			}
 
@@ -124,15 +125,15 @@ public class DeletarFuncionario extends JPanel  {
 		btnBuscar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				funcionarioVO = bo.buscarFuncionarioPorCPF(textBuscaCpf.getText());
+				produtoVO = bo.buscarProdutoPorId(textBuscaID.getText());
 				
-				if(funcionarioVO != null) {
+				if(produtoVO != null) {
 					btnBuscar.setEnabled(true);
-						textNome.setText(funcionarioVO.getNome());
-						textCpf.setText(funcionarioVO.getCpf());
+						textNome.setText(produtoVO.getNome());
+						textSecao.setText(produtoVO.getSecao());
 								
 					}else {
-						JOptionPane.showMessageDialog(null, "Funcionário não encontrado.");
+						JOptionPane.showMessageDialog(null, "Produto não encontrado.");
 					}
 				}
 			@Override
@@ -152,38 +153,30 @@ public class DeletarFuncionario extends JPanel  {
 		btnBuscar.setBounds(439, 13, 99, 45);
 		this.add(btnBuscar);
 		
-		try {
-		textBuscaCpf = new JFormattedTextField(new MaskFormatter(MASCARA_CPF));
-		textBuscaCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textBuscaCpf.setBounds(148, 17, 281, 37);
-		this.add(textBuscaCpf);
-		textBuscaCpf.setColumns(10);
-		}catch(ParseException pEx) {
-			//TODO tratar			
-		}
+		textBuscaID = new JTextField();
+		textBuscaID.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		textBuscaID.setBounds(158, 17, 271, 37);
+		this.add(textBuscaID);
+		textBuscaID.setColumns(10);
 		
 		textNome = new JTextField();
 		textNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textNome.setBounds(148, 79, 281, 37);
+		textNome.setBounds(158, 79, 271, 37);
 		this.add(textNome);
 		textNome.setColumns(10);
 		
-		try {
-		textCpf = new JFormattedTextField(new MaskFormatter(MASCARA_CPF));
-		textCpf.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textCpf.setBounds(148, 142, 281, 34);
-		this.add(textCpf);
-		textCpf.setColumns(10);
-		}catch(ParseException pEx) {
-			//TODO tratar			
-		}
+		textSecao = new JTextField();
+		textSecao.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		textSecao.setBounds(158, 142, 271, 34);
+		this.add(textSecao);
+		textSecao.setColumns(10);
 	}
 		
 		private void limparTela() {
-			funcionarioVO = new FuncionarioVO();
-			textBuscaCpf.setText("");
+			produtoVO = new ProdutoVO();
+			textBuscaID.setText("");
 			textNome.setText("");
-			textCpf.setText("");
+			textSecao.setText("");
 		}
 
 }
