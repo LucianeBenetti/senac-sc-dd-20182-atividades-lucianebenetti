@@ -3,18 +3,21 @@ package Clinica_Medica.VO;
 public class ProntuarioVO {
 	
 	private int pronCod;
-	private int conCod;
 	private String medicamento;
 	private String exame;
 	private long registro;
 	
-	public ProntuarioVO(int pronCod, int conCod, String medicamento, String exame, long registro) {
+	public ProntuarioVO(int pronCod, String medicamento, String exame, long registro) {
 		super();
 		this.pronCod = pronCod;
-		this.conCod = conCod;
 		this.medicamento = medicamento;
 		this.exame = exame;
 		this.registro = registro;
+	}
+
+	public ProntuarioVO() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getPronCod() {
@@ -23,14 +26,6 @@ public class ProntuarioVO {
 
 	public void setPronCod(int pronCod) {
 		this.pronCod = pronCod;
-	}
-
-	public int getConCod() {
-		return conCod;
-	}
-
-	public void setConCod(int conCod) {
-		this.conCod = conCod;
 	}
 
 	public String getMedicamento() {
@@ -55,11 +50,6 @@ public class ProntuarioVO {
 
 	public void setRegistro(long registro) {
 		this.registro = registro;
-	}
-
-	public ProntuarioVO() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	

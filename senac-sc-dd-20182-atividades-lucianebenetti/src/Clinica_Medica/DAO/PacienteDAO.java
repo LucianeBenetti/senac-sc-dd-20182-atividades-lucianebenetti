@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Clinica_Medica.Banco;
 import Clinica_Medica.VO.PacienteVO;
+import Clinica_Medica.Banco;
 
 public class PacienteDAO {
 	private static ArrayList<PacienteVO> listapacientes = new ArrayList<PacienteVO>();

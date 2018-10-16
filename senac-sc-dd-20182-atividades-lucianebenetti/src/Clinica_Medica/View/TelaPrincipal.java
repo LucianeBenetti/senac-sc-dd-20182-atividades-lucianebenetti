@@ -2,14 +2,24 @@ package Clinica_Medica.View;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import Clinica_Medica.View.Consulta.TelaCadastrarConsulta;
+import Clinica_Medica.View.Convenio.TelaCadastrarConvenio;
+import Clinica_Medica.View.Especialidade.TelaCadastrarEspecialidade;
+import Clinica_Medica.View.Especializacao.TelaCadastrarEspecializacao;
+import Clinica_Medica.View.Medico.TelaCadastrarMedico;
+import Clinica_Medica.View.Paciente.TelaCadastrarPaciente;
+import Clinica_Medica.View.Prontuario.TelaCadastrarProntuario;
+import Clinica_Medica.View.Sobre.TelaAjuda;
+import Clinica_Medica.View.Sobre.TelaSobre;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Font;
@@ -21,6 +31,12 @@ public class TelaPrincipal extends JFrame {
 	TelaCadastrarMedico cadastrarMedico = null;
 	TelaCadastrarPaciente cadastrarPaciente = null;
 	TelaCadastrarConvenio cadastrarConvenio = null;
+	TelaCadastrarEspecialidade cadastrarEspecialidade = null;
+	TelaCadastrarEspecializacao cadastrarEspecializacao = null;
+	TelaCadastrarConsulta cadastrarConsulta = null;
+	TelaCadastrarProntuario cadastrarProntuario = null;
+	TelaAjuda ajuda = null;
+	TelaSobre telaSobre = null;
 
 	/**
 	 * Launch the application.
@@ -58,6 +74,14 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnConsulta);
 		
 		JMenuItem mntmCadastrarconsulta = new JMenuItem("Cadastrar Consulta");
+		mntmCadastrarconsulta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				contentPane = new TelaCadastrarConsulta();
+				setContentPane (contentPane);
+				revalidate();
+				
+			}
+		});
 		mntmCadastrarconsulta.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mntmCadastrarconsulta.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-salvar-64.png")));
 		mnConsulta.add(mntmCadastrarconsulta);
@@ -117,6 +141,15 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnProntuario);
 		
 		JMenuItem mntmCadastrarProntuario = new JMenuItem("Cadastrar Prontuario");
+		mntmCadastrarProntuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				contentPane = new TelaCadastrarProntuario();
+				setContentPane (contentPane);
+				revalidate();
+				
+			}
+		});
 		mntmCadastrarProntuario.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-salvar-64.png")));
 		mntmCadastrarProntuario.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnProntuario.add(mntmCadastrarProntuario);
@@ -209,6 +242,14 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnEspecialidade);
 		
 		JMenuItem mntmCadastrarEspecialidade = new JMenuItem("Cadastrar Especialidade");
+		mntmCadastrarEspecialidade.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				contentPane = new TelaCadastrarEspecialidade();
+				setContentPane (contentPane);
+				revalidate();
+				
+			}
+		});
 		mntmCadastrarEspecialidade.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-salvar-64.png")));
 		mntmCadastrarEspecialidade.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnEspecialidade.add(mntmCadastrarEspecialidade);
@@ -234,6 +275,17 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnEspecializacao);
 		
 		JMenuItem mntmCadastrarEspecializacao = new JMenuItem("Cadastrar Especializacao");
+		mntmCadastrarEspecializacao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				contentPane = new TelaCadastrarEspecializacao();
+				setContentPane (contentPane);
+				revalidate();
+				
+			}
+			
+			
+		});
 		mntmCadastrarEspecializacao.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-salvar-64.png")));
 		mntmCadastrarEspecializacao.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnEspecializacao.add(mntmCadastrarEspecializacao);
@@ -259,16 +311,45 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnSobre);
 		
 		JMenuItem mntmManual = new JMenuItem("Manual");
+		mntmManual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+								
+					java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+					try {
+						desktop.open(new File ("C:\\Manual-de-utilização-do-WordPress.pdf"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			}
+		});
 		mntmManual.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-confian\u00E7a.png")));
 		mntmManual.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnSobre.add(mntmManual);
 		
 		JMenuItem mntmAjuda = new JMenuItem("Ajuda");
+		mntmAjuda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (ajuda == null) {
+					ajuda = new TelaAjuda();
+					ajuda.setVisible(true);
+				}
+			}
+		});
 		mntmAjuda.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-suporte-on-line-filled.png")));
 		mntmAjuda.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnSobre.add(mntmAjuda);
 		
 		JMenuItem mntmAutores = new JMenuItem("Autores");
+		mntmAutores.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+					
+					if(telaSobre == null) {
+					telaSobre = new TelaSobre();
+					telaSobre.setVisible(true);
+					}
+			}
+		});
 		mntmAutores.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-fila.png")));
 		mntmAutores.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnSobre.add(mntmAutores);

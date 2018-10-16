@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import Clinica_Medica.Banco;
 import Clinica_Medica.VO.EspecialidadeVO;
 
-
-
 public class EspecialidadeDAO {
 	private static ArrayList<EspecialidadeVO> listaEspecialiades = new ArrayList<EspecialidadeVO>();
 	EspecialidadeVO especialidade = new EspecialidadeVO();
@@ -66,14 +64,14 @@ public class EspecialidadeDAO {
 		return sucessoDelete;
 	}
 
-	public String consultarEspecialidadeVOPorID(int espCod) {
+	public String consultarEspecialidadeVONomeID(String espNome) {
 
-		String query = "SELECT *from especialidade " + " where espCod = ?";
+		String query = "SELECT *from especialidade " + " where espNome like ?";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
 		try {
-			prepStmt.setInt(1, espCod);
+			prepStmt.setString(1, espNome);
 			ResultSet result = prepStmt.executeQuery();
 
 			while (result.next()) {

@@ -1,4 +1,4 @@
-package Clinica_Medica.View;
+package Clinica_Medica.View.Medico;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -36,7 +36,7 @@ public class TelaCadastrarMedico extends JPanel {
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(217, 452, 119, 27);
+		btnCadastrar.setBounds(224, 452, 119, 27);
 		add(btnCadastrar);
 		
 		JLabel lblNome = new JLabel("Nome");
@@ -171,7 +171,7 @@ public class TelaCadastrarMedico extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(376, 452, 89, 28);
+		btnSair.setBounds(392, 451, 89, 28);
 		add(btnSair);
 
 	}

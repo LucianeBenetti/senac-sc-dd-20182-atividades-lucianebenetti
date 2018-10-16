@@ -1,24 +1,38 @@
-package Clinica_Medica.View;
+package Clinica_Medica.View.Convenio;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import Clinica_Medica.BO.ConvenioBO;
+import Clinica_Medica.Controller.ConvenioController;
+import Clinica_Medica.VO.ConvenioVO;
+
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaCadastrarConvenio extends JPanel {
+	
 	private JTextField txtBuscarCnpj;
 	private JTextField txtNome;
 	private JTextField txtCnpj;
+	private ConvenioVO convenio = new ConvenioVO();
+	private JTextField txtValor;
+	private ConvenioVO convenioConsultado = new ConvenioVO();
+	private ConvenioBO bo = new ConvenioBO();
 
 	/**
 	 * Create the panel.
 	 */
 	public TelaCadastrarConvenio() {
+		setBackground(new Color(230, 230, 250));
 		setLayout(null);
 		
 		JLabel lblNome = new JLabel("Nome");
@@ -55,11 +69,40 @@ public class TelaCadastrarConvenio extends JPanel {
 		txtCnpj.setColumns(10);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				convenioConsultado = bo.buscarConvenioPorCNPJ(txtBuscarCnpj.getText());
+				
+				if(convenioConsultado != null) {
+					txtNome.setText(convenioConsultado.getConvNome());
+					txtCnpj.setText(convenioConsultado.getConvCnpj());
+					txtValor.setText(convenioConsultado.getValor()+ "");
+					
+								
+					}else {
+						JOptionPane.showMessageDialog(null, "Funcionário não encontrado.");
+					}
+			}
+		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnBuscar.setBounds(351, 11, 89, 36);
 		add(btnBuscar);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				ConvenioController controlador = new ConvenioController();
+				ConvenioVO convenio = construirConvenio();
+				String mensagem = controlador.salvar(convenio);
+				JOptionPane.showMessageDialog(null, mensagem);
+				limparTela();
+				
+			}
+		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnCadastrar.setBounds(156, 242, 124, 36);
 		add(btnCadastrar);
@@ -86,7 +129,39 @@ public class TelaCadastrarConvenio extends JPanel {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 53, 430, 8);
 		add(separator);
+		
+		JLabel lblValor = new JLabel("Valor");
+		lblValor.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblValor.setBounds(10, 191, 46, 23);
+		add(lblValor);
+		
+		txtValor = new JTextField();
+		txtValor.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtValor.setColumns(10);
+		txtValor.setBounds(66, 191, 374, 26);
+		add(txtValor);
 
+	}
+
+	protected void limparTela() {
+		convenio = new ConvenioVO();
+		txtNome.setText("");
+		txtCnpj.setText("");
+		txtValor.setText("");
+		
+	}
+
+	protected ConvenioVO construirConvenio() {
+		convenio.setConvNome(txtNome.getText());
+		convenio.setConvCnpj(txtCnpj.getText());
+		
+		String valor = txtValor.getText();
+		
+		if(valor.trim() !="") {
+		convenio.setValor(Double.parseDouble(valor));
+		}
+
+		return convenio;
 	}
 
 }

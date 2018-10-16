@@ -103,11 +103,11 @@ public class EspecializacaoDAO {
 	}
 
 	
-	public boolean atualizar(EspecializacaoVO especializacaoAlterado, String espeAno) {
+	public boolean atualizar(EspecializacaoVO especializacaoAlterado, String espeCod) {
 		boolean sucessoAtualizar = false;
 		EspecializacaoVO especializacao = new EspecializacaoVO();							 
 		String query = "UPDATE especializacao SET espCod=?, medCod=?, espeAno=?"
-				+ " where espeAno = ?";
+				+ " where espeCod = ?";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);

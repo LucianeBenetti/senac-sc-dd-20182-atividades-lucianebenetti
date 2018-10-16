@@ -1,4 +1,4 @@
-package Clinica_Medica.View;
+package Clinica_Medica.View.Paciente;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.text.MaskFormatter;
+
+import Clinica_Medica.View.TelaPrincipal;
 
 import java.awt.Color;
 import javax.swing.JComboBox;

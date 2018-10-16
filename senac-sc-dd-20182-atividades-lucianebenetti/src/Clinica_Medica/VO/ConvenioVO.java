@@ -5,17 +5,19 @@ public class ConvenioVO {
 	private int convCod;
 	private String convNome;
 	private String convCnpj;
+	private double valor;
 	
-	public ConvenioVO(int convCod, String convNome, String convCnpj) {
+	public ConvenioVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ConvenioVO(int convCod, String convNome, String convCnpj, double valor) {
 		super();
 		this.convCod = convCod;
 		this.convNome = convNome;
 		this.convCnpj = convCnpj;
-	}
-
-	public ConvenioVO() {
-		super();
-		// TODO Auto-generated constructor stub
+		this.valor = valor;
 	}
 
 	public int getConvCod() {
@@ -41,7 +43,14 @@ public class ConvenioVO {
 	public void setConvCnpj(String convCnpj) {
 		this.convCnpj = convCnpj;
 	}
-	
-	
 
+	public double getValor() {
+		return valor;
+	}
+
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
+	
+	
 }

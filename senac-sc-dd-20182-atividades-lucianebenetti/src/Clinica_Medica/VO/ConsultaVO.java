@@ -1,33 +1,32 @@
 package Clinica_Medica.VO;
 
+import java.sql.Time;
 import java.util.Date;
 
 public class ConsultaVO {
-	
-	
+		
 	private int conCod;
 	private int espeCod;
 	private int pacCod;
 	private int convCod;
-	private String conTipo;
-	private Date dataMarcacao;
-	private Date dataRealizacao;
+	private int pronCod;
+	private Date conData;
+	private Time conHorario;
 	
-	public ConsultaVO(int conCod, int espeCod, int pacCod, int convCod, String conTipo, Date dataMarcacao,
-			Date dataRealizacao) {
+	public ConsultaVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ConsultaVO(int conCod, int espeCod, int pacCod, int convCod, int pronCod, Date conData, Time conHorario) {
 		super();
 		this.conCod = conCod;
 		this.espeCod = espeCod;
 		this.pacCod = pacCod;
 		this.convCod = convCod;
-		this.conTipo = conTipo;
-		this.dataMarcacao = dataMarcacao;
-		this.dataRealizacao = dataRealizacao;
-	}
-
-	public ConsultaVO() {
-		super();
-		// TODO Auto-generated constructor stub
+		this.pronCod = pronCod;
+		this.conData = conData;
+		this.conHorario = conHorario;
 	}
 
 	public int getConCod() {
@@ -62,30 +61,29 @@ public class ConsultaVO {
 		this.convCod = convCod;
 	}
 
-	public String getConTipo() {
-		return conTipo;
+	public int getPronCod() {
+		return pronCod;
 	}
 
-	public void setConTipo(String conTipo) {
-		this.conTipo = conTipo;
+	public void setPronCod(int pronCod) {
+		this.pronCod = pronCod;
 	}
 
-	public Date getDataMarcacao() {
-		return dataMarcacao;
+	public Date getConData() {
+		return conData;
 	}
 
-	public void setDataMarcacao(Date dataMarcacao) {
-		this.dataMarcacao = dataMarcacao;
+	public void setConData(Date conData) {
+		this.conData = conData;
 	}
 
-	public Date getDataRealizacao() {
-		return dataRealizacao;
+	public Time getConHorario() {
+		return conHorario;
 	}
 
-	public void setDataRealizacao(Date dataRealizacao) {
-		this.dataRealizacao = dataRealizacao;
+	public void setConHorario(Time conHorario) {
+		this.conHorario = conHorario;
 	}
-	
 	
 	
 }
