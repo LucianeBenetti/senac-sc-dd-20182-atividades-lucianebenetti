@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import Clinica_Medica.VO.PacienteVO;
-import Clinica_Medica.Banco;
 
 public class PacienteDAO {
 	private static ArrayList<PacienteVO> listapacientes = new ArrayList<PacienteVO>();
@@ -59,20 +58,19 @@ public class PacienteDAO {
 
 	}
 
-	public String consultarPcaientePorCpf(String cpf) {
+	public PacienteVO consultarPacientePorCpf(String cpf) {
 		
-		PacienteVO paciente = new PacienteVO();
-
 		String query = "SELECT *from paciente " + " where cpf = ?";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
+		PacienteVO paciente = null;
 		try {
 			prepStmt.setString(1, cpf);
 			ResultSet result = prepStmt.executeQuery();
 
 			while (result.next()) {
-				
+				paciente = new PacienteVO();
 				paciente.setPacCod(result.getInt(1));
 				paciente.setPacNome(result.getString(2));
 				paciente.setCelMen(result.getString(3));
@@ -97,7 +95,7 @@ public class PacienteDAO {
 			Banco.closeStatement(prepStmt);
 			Banco.closeConnection(conn);
 		}
-		return paciente.toString();
+		return paciente;
 	}
 
 	public boolean delete(String cpf) {

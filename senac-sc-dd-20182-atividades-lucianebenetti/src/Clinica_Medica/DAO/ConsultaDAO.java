@@ -9,9 +9,7 @@ import java.sql.Statement;
 import java.sql.Time;
 import java.util.ArrayList;
 
-import Clinica_Medica.Banco;
 import Clinica_Medica.VO.ConsultaVO;
-
 
 public class ConsultaDAO {
 	

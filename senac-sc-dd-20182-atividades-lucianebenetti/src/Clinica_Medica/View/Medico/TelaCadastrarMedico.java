@@ -9,14 +9,19 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
+import Clinica_Medica.BO.MedicoBO;
+import Clinica_Medica.Controller.MedicoController;
+import Clinica_Medica.VO.MedicoVO;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaCadastrarMedico extends JPanel {
 	private JTextField txtNome;
-	private JTextField txrCrm;
+	private JTextField txtCrm;
 	private JTextField txtCPF;
 	private JTextField txtCnpj;
 	private JFormattedTextField txtCel;
@@ -25,6 +30,11 @@ public class TelaCadastrarMedico extends JPanel {
 	private JTextField txtBuscarCpf;
 	private static final String MASCARA_CELULAR = "(##) ##### ####";
 	private static final String MASCARA_CPF = "###.###.###-##";
+	private static final String MASCARA_CNPJ = "##.###.###/####-##";
+	private MedicoVO medicoBuscado = new MedicoVO();
+	private MedicoBO bo = new MedicoBO();
+	private MedicoVO medico = new MedicoVO();
+
 
 	/**
 	 * Create the panel.
@@ -35,8 +45,20 @@ public class TelaCadastrarMedico extends JPanel {
 		setLayout(null);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				MedicoController controlador = new MedicoController();
+				MedicoVO medico = construirMedico();
+				
+				String mensagem = controlador.salvar(medico);
+				JOptionPane.showMessageDialog(null, mensagem);
+				limparTela();
+			}
+		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(224, 452, 119, 27);
+		btnCadastrar.setBounds(201, 452, 119, 27);
 		add(btnCadastrar);
 		
 		JLabel lblNome = new JLabel("Nome");
@@ -80,11 +102,11 @@ public class TelaCadastrarMedico extends JPanel {
 		add(txtNome);
 		txtNome.setColumns(10);
 		
-		txrCrm = new JTextField();
-		txrCrm.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txrCrm.setBounds(66, 154, 415, 27);
-		add(txrCrm);
-		txrCrm.setColumns(10);
+		txtCrm = new JTextField();
+		txtCrm.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtCrm.setBounds(66, 154, 415, 27);
+		add(txtCrm);
+		txtCrm.setColumns(10);
 		
 		try {
 			txtCPF = new JFormattedTextField(new MaskFormatter(MASCARA_CPF));
@@ -97,7 +119,12 @@ public class TelaCadastrarMedico extends JPanel {
 		add(txtCPF);
 		txtCPF.setColumns(10);
 		
-		txtCnpj = new JTextField();
+		try {
+			txtCnpj = new JFormattedTextField(new MaskFormatter(MASCARA_CNPJ));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		txtCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtCnpj.setBounds(66, 258, 415, 27);
 		add(txtCnpj);
@@ -148,6 +175,27 @@ public class TelaCadastrarMedico extends JPanel {
 		txtBuscarCpf.setColumns(10);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				medicoBuscado = bo.buscarMedicoPorCPF(txtBuscarCpf.getText());
+				
+				if(medicoBuscado != null) {
+					txtNome.setText(medicoBuscado.getMedNome());
+					txtCrm.setText(medicoBuscado.getCrm());
+					txtCPF.setText(medicoBuscado.getCpf());
+					txtCnpj.setText(medicoBuscado.getCnpj());
+					txtCel.setText(medicoBuscado.getCel());
+					txtCelMen.setText(medicoBuscado.getCelMen());
+					txtEmail.setText(medicoBuscado.getEmail());
+							
+								
+					}else {
+						JOptionPane.showMessageDialog(null, "Médico não encontrado.");
+					}
+			}
+		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnBuscar.setBounds(376, 27, 105, 27);
 		add(btnBuscar);
@@ -173,6 +221,41 @@ public class TelaCadastrarMedico extends JPanel {
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnSair.setBounds(392, 451, 89, 28);
 		add(btnSair);
+		
+		JButton btnLimparTela = new JButton("Limpar Tela");
+		btnLimparTela.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+					limparTela();
+			}
+		});
+		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnLimparTela.setBounds(10, 454, 138, 25);
+		add(btnLimparTela);
 
+	}
+
+	protected void limparTela() {
+		txtNome.setText("");
+		txtCrm.setText("");
+		txtCPF.setText("");
+		txtCnpj.setText("");
+		txtCel.setText("");
+		txtCelMen.setText("");
+		txtEmail.setText("");
+		
+	}
+
+	protected MedicoVO construirMedico() {
+		
+		medico.setMedNome(txtNome.getText());
+		medico.setCrm(txtCrm.getText());
+		medico.setCpf(txtCPF.getText());
+		medico.setCnpj(txtCnpj.getText());
+		medico.setCel(txtCel.getText());
+		medico.setCelMen(txtCelMen.getText());
+		medico.setEmail(txtEmail.getText());
+		
+		return medico;
 	}
 }

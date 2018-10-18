@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import Clinica_Medica.VO.MedicoVO;
-import Clinica_Medica.Banco;
 
 public class MedicoDAO {
 
@@ -18,20 +17,20 @@ public class MedicoDAO {
 	public int inserir(MedicoVO medicoVO) {
 		int novoId = -1;
 
-		String query = "INSERT INTO medico (medNome, crm, cel, celMen, email, cpf, cnpj)"
+		String query = "INSERT INTO medico (medNome, crm, celMen, cel, email, cpf, cnpj)"
 				+ " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query, Statement.RETURN_GENERATED_KEYS);
 
 		try {
-			prepStmt.setString(1, med.getMedNome());
-			prepStmt.setString(2, med.getCrm());
-			prepStmt.setString(3, med.getCel());
-			prepStmt.setString(4, med.getCelMen());
-			prepStmt.setString(5, med.getEmail());
-			prepStmt.setString(6, med.getCpf());
-			prepStmt.setString(7, med.getCnpj());
+			prepStmt.setString(1, medicoVO.getMedNome());
+			prepStmt.setString(2, medicoVO.getCrm());
+			prepStmt.setString(3, medicoVO.getCelMen());
+			prepStmt.setString(4, medicoVO.getCel());
+			prepStmt.setString(5, medicoVO.getEmail());
+			prepStmt.setString(6, medicoVO.getCpf());
+			prepStmt.setString(7, medicoVO.getCnpj());
 			
 
 			prepStmt.executeUpdate();
@@ -72,26 +71,32 @@ public class MedicoDAO {
 		return sucessoDelete;
 	}
 
-	public String consultarMedicoVOPorCpf(String cpf) {
-
+	public MedicoVO consultarMedicoVOPorCpf(String cpf) {
+		
 		String query = "SELECT *from medico " + " where cpf = ?";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
+		MedicoVO medico = null;
+		ArrayList<MedicoVO> medicos = new ArrayList<MedicoVO>();
+
 		try {
 			prepStmt.setString(1, cpf);
 			ResultSet result = prepStmt.executeQuery();
 
 			while (result.next()) {
+				medico = new MedicoVO();
 
-				med.setMedCod(result.getInt(1));
-				med.setMedNome(result.getString(2));
-				med.setCrm(result.getString(3));
-				med.setCel(result.getString(4));
-				med.setCelMen(result.getString(5));
-				med.setEmail(result.getString(6));
-				med.setCpf(result.getString(7));
-				med.setCnpj(result.getString(8));
+				medico.setMedCod(result.getInt(1));
+				medico.setMedNome(result.getString(2));
+				medico.setCrm(result.getString(3));
+				medico.setCelMen(result.getString(4));
+				medico.setCel(result.getString(5));
+				medico.setEmail(result.getString(6));
+				medico.setCpf(result.getString(7));
+				medico.setCnpj(result.getString(8));
+				
+				medicos.add(medico);
 				
 			}
 		} catch (SQLException ex) {
@@ -100,7 +105,7 @@ public class MedicoDAO {
 			Banco.closeStatement(prepStmt);
 			Banco.closeConnection(conn);
 		}
-		return med.toString();
+		return medico;
 	}
 
 	public boolean atualizar(MedicoVO medicoVOAlterado, String cpfAnterior) {
@@ -135,7 +140,7 @@ public class MedicoDAO {
 		return sucessoAtualizar;
 	}
 
-	public String listarTodos() {
+	public ArrayList<MedicoVO> listarTodos() {
 
 		String query = "select * from medico";
 
@@ -162,7 +167,7 @@ public class MedicoDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return listamedicos.toString();
+		return listamedicos;
 	}
 
 }

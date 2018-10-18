@@ -1,5 +1,7 @@
 package Clinica_Medica.BO;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 import Clinica_Medica.DAO.ConvenioDAO;
@@ -25,4 +27,8 @@ public class ConvenioBO {
 		return convenioBuscado;
 	}
 
+	public ArrayList<ConvenioVO> buscarConvenio() {
+		ArrayList<ConvenioVO> convenioBuscado = dao.listarTodos();
+		return convenioBuscado;
+	}
 }

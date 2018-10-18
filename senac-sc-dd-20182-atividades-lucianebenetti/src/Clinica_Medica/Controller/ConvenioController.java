@@ -1,5 +1,7 @@
 package Clinica_Medica.Controller;
 
+import java.util.ArrayList;
+
 import Clinica_Medica.BO.ConvenioBO;
 import Clinica_Medica.VO.ConvenioVO;
 
@@ -15,7 +17,7 @@ public class ConvenioController {
 		if(validacao == "") {
 				
 			if(bo.inserir(convenio)) {
-				validacao ="Convenio salvo com sucesso!";
+				validacao ="Convênio salvo com sucesso!";
 			}else {
 				validacao ="Erro ao salvar convenio!";
 			}
@@ -30,11 +32,16 @@ public class ConvenioController {
 			validacao = "CNPJ está nulo!";
 		}else {	
 			if(convenio.getConvNome().trim().equals("") || convenio.getConvCnpj().trim().equals("") ) {
-				validacao += "- Nome e CNPJ são obriatórios. \n";
+				validacao += " - Nome e CNPJ são obrigatórios. \n";
 			}
 			
 		}
 		return validacao;
 	}
 
+	public ArrayList<ConvenioVO> ConsultarConvenio() {
+		return bo.buscarConvenio();
+	}
+
+	
 }

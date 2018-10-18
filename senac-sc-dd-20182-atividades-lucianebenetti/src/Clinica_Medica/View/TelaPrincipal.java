@@ -6,12 +6,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import Clinica_Medica.View.Consulta.TelaCadastrarConsulta;
+import Clinica_Medica.View.Consulta.TelaExcluirConsulta;
 import Clinica_Medica.View.Convenio.TelaCadastrarConvenio;
+import Clinica_Medica.View.Convenio.TelaExcluirConvenio;
 import Clinica_Medica.View.Especialidade.TelaCadastrarEspecialidade;
+import Clinica_Medica.View.Especialidade.TelaExcluirEspecialidade;
 import Clinica_Medica.View.Especializacao.TelaCadastrarEspecializacao;
+import Clinica_Medica.View.Especializacao.TelaExcluirEspecializacao;
 import Clinica_Medica.View.Medico.TelaCadastrarMedico;
+import Clinica_Medica.View.Medico.TelaExcluirMedico;
 import Clinica_Medica.View.Paciente.TelaCadastrarPaciente;
+import Clinica_Medica.View.Paciente.TelaExcluirPaciente;
 import Clinica_Medica.View.Prontuario.TelaCadastrarProntuario;
+import Clinica_Medica.View.Prontuario.TelaExcluirProntuario;
 import Clinica_Medica.View.Sobre.TelaAjuda;
 import Clinica_Medica.View.Sobre.TelaSobre;
 import javax.swing.JMenuBar;
@@ -24,6 +31,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaPrincipal extends JFrame {
 
@@ -35,6 +44,13 @@ public class TelaPrincipal extends JFrame {
 	TelaCadastrarEspecializacao cadastrarEspecializacao = null;
 	TelaCadastrarConsulta cadastrarConsulta = null;
 	TelaCadastrarProntuario cadastrarProntuario = null;
+	TelaExcluirConsulta excluirConsulta = null;
+	TelaExcluirMedico cexcluirMedico = null;
+	TelaExcluirPaciente excluirPaciente = null;
+	TelaExcluirConvenio excluirConvenio = null;
+	TelaExcluirEspecialidade excluirEspecialidade = null;
+	TelaExcluirEspecializacao excluirEspecializacao = null;
+	TelaExcluirProntuario excluirProntuario = null;
 	TelaAjuda ajuda = null;
 	TelaSobre telaSobre = null;
 
@@ -87,6 +103,14 @@ public class TelaPrincipal extends JFrame {
 		mnConsulta.add(mntmCadastrarconsulta);
 		
 		JMenuItem mntmExcluirConsulta = new JMenuItem("Excluir Consulta");
+		mntmExcluirConsulta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				contentPane = new TelaExcluirConsulta();
+				setContentPane (contentPane);
+				revalidate();
+			}
+		});
 		mntmExcluirConsulta.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-cancel-48.png")));
 		mntmExcluirConsulta.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnConsulta.add(mntmExcluirConsulta);
@@ -121,6 +145,13 @@ public class TelaPrincipal extends JFrame {
 		mnPaciente.add(mntmCadastrar);
 		
 		JMenuItem mntmExcluirPaciente = new JMenuItem("Excluir Paciente");
+		mntmExcluirPaciente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane = new TelaExcluirPaciente();
+				setContentPane (contentPane);
+				revalidate();
+			}
+		});
 		mntmExcluirPaciente.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-cancel-48.png")));
 		mntmExcluirPaciente.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnPaciente.add(mntmExcluirPaciente);
@@ -155,6 +186,14 @@ public class TelaPrincipal extends JFrame {
 		mnProntuario.add(mntmCadastrarProntuario);
 		
 		JMenuItem mntmExcluirProntuario = new JMenuItem("Excluir Prontuario");
+		mntmExcluirProntuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				contentPane = new TelaExcluirProntuario();
+				setContentPane (contentPane);
+				revalidate();
+			}
+		});
 		mntmExcluirProntuario.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-cancel-48.png")));
 		mntmExcluirProntuario.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnProntuario.add(mntmExcluirProntuario);
@@ -188,6 +227,14 @@ public class TelaPrincipal extends JFrame {
 		mnConvenio.add(mntmCadastrarConvenio);
 		
 		JMenuItem mntmExcluirConvenio = new JMenuItem("Excluir Convenio");
+		mntmExcluirConvenio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				contentPane = new TelaExcluirConvenio();
+				setContentPane (contentPane);
+				revalidate();
+			}
+		});
 		mntmExcluirConvenio.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-cancel-48.png")));
 		mntmExcluirConvenio.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnConvenio.add(mntmExcluirConvenio);
@@ -222,6 +269,14 @@ public class TelaPrincipal extends JFrame {
 		mnMdico.add(mntmCadastrarMedico);
 		
 		JMenuItem mntmExcluirMedico = new JMenuItem("Excluir Medico");
+		mntmExcluirMedico.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				contentPane = new TelaExcluirMedico();
+				setContentPane (contentPane);
+				revalidate();
+			}
+		});
 		mntmExcluirMedico.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-cancel-48.png")));
 		mntmExcluirMedico.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnMdico.add(mntmExcluirMedico);
@@ -244,6 +299,7 @@ public class TelaPrincipal extends JFrame {
 		JMenuItem mntmCadastrarEspecialidade = new JMenuItem("Cadastrar Especialidade");
 		mntmCadastrarEspecialidade.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				contentPane = new TelaCadastrarEspecialidade();
 				setContentPane (contentPane);
 				revalidate();
@@ -255,6 +311,14 @@ public class TelaPrincipal extends JFrame {
 		mnEspecialidade.add(mntmCadastrarEspecialidade);
 		
 		JMenuItem mntmExcluirEspecialidade = new JMenuItem("Excluir Especialidade");
+		mntmExcluirEspecialidade.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				contentPane = new TelaExcluirEspecialidade();
+				setContentPane (contentPane);
+				revalidate();
+			}
+		});
 		mntmExcluirEspecialidade.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-cancel-48.png")));
 		mntmExcluirEspecialidade.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnEspecialidade.add(mntmExcluirEspecialidade);
@@ -284,13 +348,21 @@ public class TelaPrincipal extends JFrame {
 				
 			}
 			
-			
 		});
 		mntmCadastrarEspecializacao.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-salvar-64.png")));
 		mntmCadastrarEspecializacao.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnEspecializacao.add(mntmCadastrarEspecializacao);
 		
 		JMenuItem mntmExcluirEspecializacao = new JMenuItem("Excluir Especializacao");
+		mntmExcluirEspecializacao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				contentPane = new TelaExcluirEspecializacao();
+				setContentPane (contentPane);
+				revalidate();
+				
+			}
+		});
 		mntmExcluirEspecializacao.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-cancel-48.png")));
 		mntmExcluirEspecializacao.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnEspecializacao.add(mntmExcluirEspecializacao);

@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import java.awt.Font;
@@ -11,18 +12,35 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
+
+import Clinica_Medica.Controller.ConvenioController;
+import Clinica_Medica.Controller.EspecialidadeController;
+import Clinica_Medica.Controller.EspecializacaoController;
+import Clinica_Medica.Controller.MedicoController;
+import Clinica_Medica.VO.ConvenioVO;
+import Clinica_Medica.VO.EspecialidadeVO;
+import Clinica_Medica.VO.EspecializacaoVO;
+import Clinica_Medica.VO.MedicoVO;
+
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TelaCadastrarConsulta extends JPanel {
 	private JComboBox cbConvenio;
 	private JComboBox cbNomeMedico;
 	private JComboBox cbEspecialidade;
 	private JTextField txtBuscarNomePaciente;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_3;
-	private JTextField textField_2;
-	private JTextField textField_4;
+	private JTextField txtIdPaciente;
+	private JTextField txtIdConvenio;
+	private JTextField txtNomePaciente;
+	private JTextField txtIdEspecializacao;
+	private JTextField txtIdProntuario;
+	private JDateChooser dateChooserDataConsulta;
+	private JDateChooser dateChooserHoraConsulta;
+	private JDateChooser dateChooserNascimento;
 
 	/**
 	 * Create the panel.
@@ -72,17 +90,17 @@ public class TelaCadastrarConsulta extends JPanel {
 		
 		JLabel lblEspecialidade = new JLabel("Especialidade");
 		lblEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblEspecialidade.setBounds(26, 241, 128, 31);
+		lblEspecialidade.setBounds(26, 293, 128, 31);
 		add(lblEspecialidade);
 		
 		JLabel lblNomeMdico = new JLabel("Nome M\u00E9dico");
 		lblNomeMdico.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNomeMdico.setBounds(26, 315, 130, 23);
+		lblNomeMdico.setBounds(25, 245, 130, 23);
 		add(lblNomeMdico);
 		
 		JLabel lblIdEspecializacao = new JLabel("ID Especializacao");
 		lblIdEspecializacao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblIdEspecializacao.setBounds(509, 315, 152, 23);
+		lblIdEspecializacao.setBounds(509, 245, 152, 23);
 		add(lblIdEspecializacao);
 		
 		JLabel lblData = new JLabel("Data da Consulta");
@@ -113,25 +131,25 @@ public class TelaCadastrarConsulta extends JPanel {
 		lblDataRealizao.setBounds(338, 364, 162, 23);
 		add(lblDataRealizao);
 		
-		textField = new JTextField();
-		textField.setBounds(671, 127, 52, 31);
-		add(textField);
-		textField.setColumns(10);
+		txtIdPaciente = new JTextField();
+		txtIdPaciente.setBounds(671, 127, 52, 31);
+		add(txtIdPaciente);
+		txtIdPaciente.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(671, 190, 48, 27);
-		add(textField_1);
+		txtIdConvenio = new JTextField();
+		txtIdConvenio.setColumns(10);
+		txtIdConvenio.setBounds(671, 190, 48, 27);
+		add(txtIdConvenio);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(441, 448, 115, 35);
+		btnCadastrar.setBounds(315, 448, 115, 35);
 		add(btnCadastrar);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(165, 124, 379, 26);
-		add(textField_3);
-		textField_3.setColumns(10);
+		txtNomePaciente = new JTextField();
+		txtNomePaciente.setBounds(165, 124, 379, 26);
+		add(txtNomePaciente);
+		txtNomePaciente.setColumns(10);
 		
 		JLabel lblDataNascimento = new JLabel("Data Nascimento");
 		lblDataNascimento.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -141,38 +159,50 @@ public class TelaCadastrarConsulta extends JPanel {
 		
 		String[] tipos = {"----------- Selecione -----------", "Particular", "Convênio"};
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(675, 316, 48, 27);
-		add(textField_2);
+		txtIdEspecializacao = new JTextField();
+		txtIdEspecializacao.setColumns(10);
+		txtIdEspecializacao.setBounds(671, 246, 48, 27);
+		add(txtIdEspecializacao);
 		
 		String[] convenios = {"----------- Selecione -----------"};
 		cbConvenio = new JComboBox(convenios);
+		cbConvenio.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				preencherConvenio();
+			}
+		});
 		cbConvenio.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		cbConvenio.setBounds(164, 185, 274, 30);
 		add(cbConvenio);
 		
-		String[] especialidades = {"----------- Selecione -----------"};
-		cbEspecialidade = new JComboBox(especialidades);
+		String[] esp = {"----------- Selecione -----------"};
+		cbEspecialidade = new JComboBox(esp);
 		cbEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cbEspecialidade.setBounds(164, 241, 274, 30);
+		cbEspecialidade.setBounds(164, 293, 274, 30);
 		add(cbEspecialidade);
 		
-		String[] medicos = {"----------- Selecione -----------"};
-		cbNomeMedico = new JComboBox(medicos);
+		String[] med = {"----------- Selecione -----------"};
+		cbNomeMedico = new JComboBox(med);
+		cbNomeMedico.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				preencherMedico();
+			}
+		});
 		cbNomeMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cbNomeMedico.setBounds(165, 308, 273, 31);
+		cbNomeMedico.setBounds(165, 237, 273, 31);
 		add(cbNomeMedico);
 		
-		JDateChooser dateChooserData = new JDateChooser();
-		dateChooserData.setBounds(188, 360, 87, 31);
-		add(dateChooserData);
+		dateChooserDataConsulta = new JDateChooser();
+		dateChooserDataConsulta.setBounds(188, 360, 87, 31);
+		add(dateChooserDataConsulta);
 		
-		JDateChooser dateChooserHora = new JDateChooser();
-		dateChooserHora.setBounds(509, 360, 87, 31);
-		add(dateChooserHora);
+		dateChooserHoraConsulta = new JDateChooser();
+		dateChooserHoraConsulta.setBounds(509, 360, 87, 31);
+		add(dateChooserHoraConsulta);
 		
-		JDateChooser dateChooserNascimento = new JDateChooser();
+		dateChooserNascimento = new JDateChooser();
 		dateChooserNascimento.setBounds(199, 53, 121, 25);
 		add(dateChooserNascimento);
 		
@@ -181,11 +211,69 @@ public class TelaCadastrarConsulta extends JPanel {
 		lblIdProntuario.setBounds(357, 53, 130, 22);
 		add(lblIdProntuario);
 		
-		textField_4 = new JTextField();
-		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textField_4.setBounds(509, 53, 86, 25);
-		add(textField_4);
-		textField_4.setColumns(10);
+		txtIdProntuario = new JTextField();
+		txtIdProntuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtIdProntuario.setBounds(509, 53, 86, 25);
+		add(txtIdProntuario);
+		txtIdProntuario.setColumns(10);
+		
+		JButton btnLimparTela = new JButton("Limpar Tela");
+		btnLimparTela.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				limparTela();
+			}
+		});
+		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnLimparTela.setBounds(26, 448, 142, 35);
+		add(btnLimparTela);
 
+	}
+
+	protected void preencherMedico() {
+		String espNome = null;
+		String medNome = null;
+		int espeCod = 0;
+		MedicoController controlador = new MedicoController();
+		EspecialidadeController controladorEspecialidade = new EspecialidadeController();
+	    ArrayList<MedicoVO> listaMedico = new ArrayList<MedicoVO>();
+	    ArrayList<EspecialidadeVO> listaEspecialidade = new ArrayList<EspecialidadeVO>(); 
+	    
+	    	listaMedico = controlador.ConsultarMedico();
+	    	listaEspecialidade = controladorEspecialidade.ConsultarEspecialidade(espNome, espeCod, medNome);
+	    	DefaultComboBoxModel medicos = new DefaultComboBoxModel(listaMedico.toArray());
+	    	DefaultComboBoxModel especialidades = new DefaultComboBoxModel(listaEspecialidade.toArray());
+	    	cbNomeMedico.setModel(medicos);
+	       	cbEspecialidade.setModel(especialidades);
+	       	
+		
+	}
+
+	protected void preencherConvenio() {
+		ConvenioController controlador = new ConvenioController();
+	    ConvenioVO convenio = new ConvenioVO();
+	    ArrayList<ConvenioVO> listaConvenio = new ArrayList<ConvenioVO>();
+	    
+	    	listaConvenio = controlador.ConsultarConvenio();
+	    	DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaConvenio.toArray());
+	    	cbConvenio.setModel(defaultComboBox);
+		
+	}
+
+	protected void limparTela() {
+		txtBuscarNomePaciente.setText("");
+		txtIdConvenio.setText("");
+		txtIdEspecializacao.setText("");
+		txtIdPaciente.setText("");
+		txtIdProntuario.setText("");
+		txtNomePaciente.setText("");
+		cbConvenio.setSelectedIndex(0);
+		cbEspecialidade.setSelectedIndex(0);
+		cbNomeMedico.setSelectedIndex(0);
+		dateChooserDataConsulta.setDate(null);
+		dateChooserHoraConsulta.setDate(null);
+		dateChooserNascimento.setDate(null);
+	
+		
 	}
 }

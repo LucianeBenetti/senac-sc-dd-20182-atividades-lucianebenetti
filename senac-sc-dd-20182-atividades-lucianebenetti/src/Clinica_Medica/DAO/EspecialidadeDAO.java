@@ -7,10 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Clinica_Medica.Banco;
 import Clinica_Medica.VO.EspecialidadeVO;
+import Clinica_Medica.VO.EspecializacaoVO;
+import Clinica_Medica.VO.MedicoVO;
+
 
 public class EspecialidadeDAO {
+	
 	private static ArrayList<EspecialidadeVO> listaEspecialiades = new ArrayList<EspecialidadeVO>();
 	EspecialidadeVO especialidade = new EspecialidadeVO();
 
@@ -64,18 +67,21 @@ public class EspecialidadeDAO {
 		return sucessoDelete;
 	}
 
-	public String consultarEspecialidadeVONomeID(String espNome) {
+	public EspecialidadeVO consultarEspecialidadeVONome(String espNome, String espInstituicao) {
 
-		String query = "SELECT *from especialidade " + " where espNome like ?";
+		String query = "SELECT *from especialidade " + " where espNome like ? and espInstituicao like ?";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
+		EspecialidadeVO especialidade = null;
 		try {
-			prepStmt.setString(1, espNome);
+			prepStmt.setString(1, '%' + espNome + '%');
+			prepStmt.setString(2, '%' + espInstituicao + '%');
 			ResultSet result = prepStmt.executeQuery();
 
 			while (result.next()) {
-
+				
+				especialidade = new EspecialidadeVO();
 				especialidade.setEspCod(result.getInt(1));
 				especialidade.setEspNome(result.getString(2));
 				especialidade.setEspInstituicao(result.getString(3));
@@ -87,7 +93,7 @@ public class EspecialidadeDAO {
 			Banco.closeStatement(prepStmt);
 			Banco.closeConnection(conn);
 		}
-		return especialidade.toString();
+		return especialidade;
 	}
 
 	public boolean atualizarEspecialidadeVO(EspecialidadeVO especialidade, int espCod) {
@@ -141,4 +147,77 @@ public class EspecialidadeDAO {
 		return listaEspecialiades.toString();
 	}
 
+	public ArrayList<EspecialidadeVO> consultarEspecialidadeNome(String espNome) {
+
+		String query = "SELECT *from especialidade " + " where espNome like ? ";
+
+		Connection conn = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
+		EspecialidadeVO especialidade = null;
+		ArrayList<EspecialidadeVO> especialidades = new ArrayList<EspecialidadeVO>();
+		try {
+			prepStmt.setString(1, '%' + espNome+ '%');
+			
+			ResultSet result = prepStmt.executeQuery();
+
+			while (result.next()) {
+				
+				especialidade = new EspecialidadeVO();
+				especialidade.setEspCod(result.getInt(1));
+				especialidade.setEspNome(result.getString(2));
+				especialidade.setEspInstituicao(result.getString(3));
+				
+				especialidades.add(especialidade);
+
+			}
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			Banco.closeStatement(prepStmt);
+			Banco.closeConnection(conn);
+		}
+		return especialidades;
+	}
+
+	public ArrayList<EspecialidadeVO> listarEspecialidades(String espNome, int espeCod, String medNome) {
+			
+		String query = "SELECT especialidade.espNome, medico.medNome, especializacao.espeCod from especializacao inner join especialidade on "
+				+ " especializacao.espCod = especialidade.espCod inner join medico on especializacao.medCod = medico.medCod " + " where espNome like ? and espeCod = ? and medNome like ?";
+
+		Connection conn = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
+		EspecialidadeVO especialidade = null;
+		EspecializacaoVO especializacao = null;
+		MedicoVO medico = null;
+		ArrayList<EspecialidadeVO> especialidades = new ArrayList<EspecialidadeVO>();
+		ArrayList<EspecializacaoVO> especializacoes = new ArrayList<EspecializacaoVO>();
+		ArrayList<MedicoVO> medicos = new ArrayList<MedicoVO>();
+		try {
+			prepStmt.setString(1, '%' + espNome+ '%');
+			prepStmt.setInt(2, espeCod);
+			prepStmt.setString(3, '%' + medNome+ '%');
+			
+			ResultSet result = prepStmt.executeQuery();
+
+			while (result.next()) {
+				
+				especialidade = new EspecialidadeVO();
+				especializacao = new EspecializacaoVO();
+				especialidade.setEspNome(result.getString(2));
+				especializacao.setEspeCod(result.getInt(1));
+				medico.setMedNome(result.getString(2));
+				
+				especialidades.add(especialidade);
+				especializacoes.add(especializacao);
+				medicos.add(medico);
+				
+			}
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			Banco.closeStatement(prepStmt);
+			Banco.closeConnection(conn);
+		}
+		return especialidades;
+	}
 }

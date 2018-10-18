@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Clinica_Medica.Banco;
 import Clinica_Medica.VO.EspecializacaoVO;
 
 public class EspecializacaoDAO {
@@ -49,26 +48,25 @@ public class EspecializacaoDAO {
 
 	}
 
-	public String consultaPorAno(String espeAno) {
+	public EspecializacaoVO consultaPorID(int i) {
 		
-		EspecializacaoVO especializacao = new EspecializacaoVO();
+		EspecializacaoVO especializacao = null;
 
-		String query = "SELECT *from especializacao " + " where espeAno = ?";
+		String query = "SELECT *from especializacao " + " where espeCod = ?";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
 		try {
-			prepStmt.setString(1, espeAno);
+			prepStmt.setInt(1, i);
 			ResultSet result = prepStmt.executeQuery();
 
 			while (result.next()) {
-				
+				especializacao = new EspecializacaoVO();
 				especializacao.setEspeCod(result.getInt(1));
 				especializacao.setEspCod(result.getInt(2));
 				especializacao.setMedCod(result.getInt(3));
 				especializacao.setEspeAno(result.getString(4));
-				
-				
+						
 			}
 		} catch (SQLException ex) {
 			System.out.println("Erro ao executar Query de Consultar do Especializacão! Causa: \n: " + ex.getMessage());
@@ -76,7 +74,7 @@ public class EspecializacaoDAO {
 			Banco.closeStatement(prepStmt);
 			Banco.closeConnection(conn);
 		}
-		return especializacao.toString();
+		return especializacao;
 	}
 
 	public boolean delete(int espeCod) {

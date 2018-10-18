@@ -3,23 +3,23 @@ package Clinica_Medica.View.Paciente;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.text.ParseException;
-
+import java.util.List;
 import javax.swing.JSeparator;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.text.MaskFormatter;
 
+import Clinica_Medica.BO.PacienteBO;
+import Clinica_Medica.Controller.PacienteController;
+import Clinica_Medica.VO.PacienteVO;
 import Clinica_Medica.View.TelaPrincipal;
-
 import java.awt.Color;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -44,7 +44,10 @@ public class TelaCadastrarPaciente extends JPanel {
 	private static final String MASCARA_CPF = "###.###.###-##";
 	private static final String MASCARA_TELEFONE_FIXO = "(##) #### ####";
 	private static final String MASCARA_CEP= "#####-###";
-	private TelaPrincipal telaPrincipal = new TelaPrincipal();
+	private static final String MASCARA_CNPJ = "##.###.###/####-##";
+	private PacienteVO paciente = new PacienteVO();
+	private PacienteVO pacienteBuscado = new PacienteVO();
+	private PacienteBO bo = new PacienteBO();
 	
 	/**
 	 * Create the panel.
@@ -134,11 +137,50 @@ public class TelaCadastrarPaciente extends JPanel {
 		add(separator);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				PacienteController controlador = new PacienteController();
+				PacienteVO paciente = construirPaciente();
+
+				String mensagem = controlador.salvar(paciente);
+				JOptionPane.showMessageDialog(null, mensagem);
+				limparTela();
+			}
+		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(365, 509, 151, 37);
+		btnCadastrar.setBounds(317, 509, 151, 37);
 		add(btnCadastrar);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				pacienteBuscado = bo.buscarPacientePorCpf(txtCpfBusca.getText());
+				
+				if(pacienteBuscado != null) {
+					txtBairro.setText(pacienteBuscado.getBairro());
+					txtCelular.setText(pacienteBuscado.getCelMen());
+					txtCep.setText(pacienteBuscado.getCep());
+					txtCidade.setText(pacienteBuscado.getCidade());
+					txtCnpj.setText(pacienteBuscado.getCnpj());
+					txtComplemento.setText(pacienteBuscado.getComplemento());
+					txtCpf.setText(pacienteBuscado.getCpf());
+					txtEmail.setText(pacienteBuscado.getEmail());
+					txtFoneCom.setText(pacienteBuscado.getFoneCom());
+					txtFoneRes.setText(pacienteBuscado.getFoneRes());
+					txtLogradouro.setText(pacienteBuscado.getLogradouro());
+					txtNome.setText(pacienteBuscado.getPacNome());
+					txtNumLog.setText(pacienteBuscado.getNumLog());
+					cbEstado.setSelectedItem(pacienteBuscado.getUf());
+				
+									
+					}else {
+						JOptionPane.showMessageDialog(null, "Paciente não encontrado.");
+					}
+				
+			}
+		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnBuscar.setBounds(317, 20, 89, 37);
 		add(btnBuscar);
@@ -171,7 +213,12 @@ public class TelaCadastrarPaciente extends JPanel {
 		txtCpf.setBounds(66, 150, 247, 25);
 		add(txtCpf);
 		
-		txtCnpj = new JTextField();
+		try {
+			txtCnpj = new JFormattedTextField(new MaskFormatter(MASCARA_CNPJ));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		txtCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtCnpj.setColumns(10);
 		txtCnpj.setBounds(394, 150, 305, 25);
@@ -200,7 +247,7 @@ public class TelaCadastrarPaciente extends JPanel {
 		add(txtFoneRes);
 		
 		try {
-			txtFoneCom = txtFoneRes = new JFormattedTextField(new MaskFormatter(MASCARA_TELEFONE_FIXO));
+			txtFoneCom = new JFormattedTextField(new MaskFormatter(MASCARA_TELEFONE_FIXO));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -257,7 +304,6 @@ public class TelaCadastrarPaciente extends JPanel {
 		txtCep.setBounds(529, 460, 170, 25);
 		add(txtCep);
 		
-		
 		String[] estados = {"------------- Selecione -------------", "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espirito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraná", "Pernambuco","Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins"};
 		cbEstado = new JComboBox(estados);
 		cbEstado.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -283,6 +329,56 @@ public class TelaCadastrarPaciente extends JPanel {
 		});
 		btnSair.setBounds(581, 509, 118, 37);
 		add(btnSair);
+		
+		JButton btnLimparTela = new JButton("Limpar Tela");
+		btnLimparTela.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				limparTela();
+			}
+		});
+		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnLimparTela.setBounds(66, 509, 137, 37);
+		add(btnLimparTela);
 
+	}
+
+	protected PacienteVO construirPaciente() {
+		
+		paciente.setBairro(txtBairro.getText());
+		paciente.setCelMen(txtCelular.getText());
+		paciente.setCep(txtCep.getText());
+		paciente.setCidade(txtCidade.getText());
+		paciente.setCnpj(txtCnpj.getText());
+		paciente.setComplemento(txtComplemento.getText());
+		paciente.setCpf(txtCpf.getText());
+		paciente.setEmail(txtEmail.getText());
+		paciente.setFoneCom(txtFoneCom.getText());
+		paciente.setFoneRes(txtFoneRes.getText());
+		paciente.setLogradouro(txtLogradouro.getText());
+		paciente.setPacNome(txtNome.getText());
+		paciente.setNumLog(txtNumLog.getText());
+		paciente.setUf((String) cbEstado.getSelectedItem());
+			
+		return paciente;
+	}
+
+	protected void limparTela() {
+		txtCelular.setText("");
+		txtBairro.setText("");
+		txtCep.setText("");
+		txtCidade.setText("");
+		txtCnpj.setText("");
+		txtComplemento.setText("");
+		txtCpf.setText("");
+		txtCpfBusca.setText("");
+		txtEmail.setText("");
+		txtFoneCom.setText("");
+		txtFoneRes.setText("");
+		txtLogradouro.setText("");
+		txtNome.setText("");
+		txtNumLog.setText("");
+		cbEstado.setSelectedIndex(0);
+		
 	}
 }

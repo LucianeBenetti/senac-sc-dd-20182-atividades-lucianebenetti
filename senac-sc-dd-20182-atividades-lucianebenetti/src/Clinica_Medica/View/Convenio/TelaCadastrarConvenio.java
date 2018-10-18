@@ -4,12 +4,15 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import Clinica_Medica.BO.ConvenioBO;
 import Clinica_Medica.Controller.ConvenioController;
 import Clinica_Medica.VO.ConvenioVO;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+
 import java.awt.Font;
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
@@ -17,6 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 
 public class TelaCadastrarConvenio extends JPanel {
 	
@@ -27,6 +31,7 @@ public class TelaCadastrarConvenio extends JPanel {
 	private JTextField txtValor;
 	private ConvenioVO convenioConsultado = new ConvenioVO();
 	private ConvenioBO bo = new ConvenioBO();
+	private static final String MASCARA_CNPJ = "##.###.###/####-##";
 
 	/**
 	 * Create the panel.
@@ -50,21 +55,31 @@ public class TelaCadastrarConvenio extends JPanel {
 		lblBuscarCnpj.setBounds(10, 19, 46, 23);
 		add(lblBuscarCnpj);
 		
-		txtBuscarCnpj = new JTextField();
+		try {
+			txtBuscarCnpj = new JFormattedTextField(new MaskFormatter(MASCARA_CNPJ));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		txtBuscarCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtBuscarCnpj.setBounds(66, 11, 264, 33);
+		txtBuscarCnpj.setBounds(66, 11, 351, 33);
 		add(txtBuscarCnpj);
 		txtBuscarCnpj.setColumns(10);
 		
 		txtNome = new JTextField();
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNome.setBounds(66, 86, 374, 26);
+		txtNome.setBounds(66, 86, 461, 26);
 		add(txtNome);
 		txtNome.setColumns(10);
 		
-		txtCnpj = new JTextField();
+		try {
+			txtCnpj = new JFormattedTextField(new MaskFormatter(MASCARA_CNPJ));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		txtCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtCnpj.setBounds(66, 140, 374, 26);
+		txtCnpj.setBounds(66, 140, 461, 26);
 		add(txtCnpj);
 		txtCnpj.setColumns(10);
 		
@@ -82,12 +97,12 @@ public class TelaCadastrarConvenio extends JPanel {
 					
 								
 					}else {
-						JOptionPane.showMessageDialog(null, "Funcionário não encontrado.");
+						JOptionPane.showMessageDialog(null, "Médico não encontrado.");
 					}
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscar.setBounds(351, 11, 89, 36);
+		btnBuscar.setBounds(438, 12, 89, 36);
 		add(btnBuscar);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -97,6 +112,7 @@ public class TelaCadastrarConvenio extends JPanel {
 				
 				ConvenioController controlador = new ConvenioController();
 				ConvenioVO convenio = construirConvenio();
+				
 				String mensagem = controlador.salvar(convenio);
 				JOptionPane.showMessageDialog(null, mensagem);
 				limparTela();
@@ -104,7 +120,7 @@ public class TelaCadastrarConvenio extends JPanel {
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(156, 242, 124, 36);
+		btnCadastrar.setBounds(233, 242, 124, 36);
 		add(btnCadastrar);
 		
 		JButton btnSair = new JButton("Sair");
@@ -123,7 +139,7 @@ public class TelaCadastrarConvenio extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(351, 242, 89, 36);
+		btnSair.setBounds(419, 242, 108, 36);
 		add(btnSair);
 		
 		JSeparator separator = new JSeparator();
@@ -138,8 +154,19 @@ public class TelaCadastrarConvenio extends JPanel {
 		txtValor = new JTextField();
 		txtValor.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtValor.setColumns(10);
-		txtValor.setBounds(66, 191, 374, 26);
+		txtValor.setBounds(66, 191, 461, 26);
 		add(txtValor);
+		
+		JButton btnLimparTela = new JButton("Limpar Tela");
+		btnLimparTela.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				limparTela();
+			}
+		});
+		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnLimparTela.setBounds(10, 242, 136, 36);
+		add(btnLimparTela);
 
 	}
 

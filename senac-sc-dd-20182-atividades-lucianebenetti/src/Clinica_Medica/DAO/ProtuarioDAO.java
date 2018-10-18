@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import Clinica_Medica.VO.ProntuarioVO;
-import Clinica_Medica.Banco;
 
 public class ProtuarioDAO {
 	

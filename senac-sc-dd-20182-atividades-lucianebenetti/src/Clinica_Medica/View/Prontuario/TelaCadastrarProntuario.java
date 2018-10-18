@@ -1,6 +1,7 @@
 package Clinica_Medica.View.Prontuario;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -19,6 +20,11 @@ import java.awt.Color;
 public class TelaCadastrarProntuario extends JPanel {
 	private JTextField txtBuscarNome;
 	private JTextField txtNomePaciente;
+	private JTextArea txtAreaRegistro;
+	private JDateChooser dateChooserDataConsulta;
+	private JTextArea txtAreaMedicamentos;
+	private JTextArea txtAreaExames;
+	
 
 	/**
 	 * Create the panel.
@@ -42,9 +48,9 @@ public class TelaCadastrarProntuario extends JPanel {
 		add(txtBuscarNome);
 		txtBuscarNome.setColumns(10);
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(157, 57, 87, 32);
-		add(dateChooser);
+		dateChooserDataConsulta = new JDateChooser();
+		dateChooserDataConsulta.setBounds(157, 57, 87, 32);
+		add(dateChooserDataConsulta);
 		
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -57,7 +63,7 @@ public class TelaCadastrarProntuario extends JPanel {
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(418, 452, 150, 39);
+		btnCadastrar.setBounds(325, 452, 150, 39);
 		add(btnCadastrar);
 		
 		JButton btnSair = new JButton("Sair");
@@ -76,7 +82,7 @@ public class TelaCadastrarProntuario extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(611, 452, 106, 39);
+		btnSair.setBounds(603, 452, 114, 39);
 		add(btnSair);
 		
 		JLabel lblMedicamentos = new JLabel("Medicamentos");
@@ -84,7 +90,8 @@ public class TelaCadastrarProntuario extends JPanel {
 		lblMedicamentos.setBounds(21, 218, 126, 22);
 		add(lblMedicamentos);
 		
-		JTextArea txtAreaMedicamentos = new JTextArea();
+		txtAreaMedicamentos = new JTextArea();
+		txtAreaMedicamentos.setFont(new Font("Monospaced", Font.PLAIN, 15));
 		txtAreaMedicamentos.setBounds(155, 194, 562, 46);
 		add(txtAreaMedicamentos);
 		
@@ -93,18 +100,21 @@ public class TelaCadastrarProntuario extends JPanel {
 		lblExames.setBounds(21, 286, 94, 22);
 		add(lblExames);
 		
-		JTextArea textAreaExames = new JTextArea();
-		textAreaExames.setBounds(157, 262, 560, 46);
-		add(textAreaExames);
-		
+		txtAreaExames = new JTextArea();
+		txtAreaExames.setFont(new Font("Monospaced", Font.PLAIN, 15));
+		txtAreaExames.setBounds(157, 262, 560, 46);
+		add(txtAreaExames);
+			
 		JLabel lblRegistro = new JLabel("Registro");
 		lblRegistro.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblRegistro.setBounds(21, 349, 94, 22);
 		add(lblRegistro);
 		
-		JTextArea textAreaRegistro = new JTextArea();
-		textAreaRegistro.setBounds(157, 319, 560, 122);
-		add(textAreaRegistro);
+		txtAreaRegistro = new JTextArea();
+		txtAreaRegistro.setFont(new Font("Monospaced", Font.PLAIN, 15));
+	
+		txtAreaRegistro.setBounds(157, 319, 560, 122);
+		add(txtAreaRegistro);
 		
 		JLabel lblNomePaciente = new JLabel("Nome Paciente");
 		lblNomePaciente.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -115,6 +125,22 @@ public class TelaCadastrarProntuario extends JPanel {
 		txtNomePaciente.setColumns(10);
 		txtNomePaciente.setBounds(157, 151, 377, 32);
 		add(txtNomePaciente);
+		
+		JButton btnLimparTela = new JButton("Limpar Tela");
+		btnLimparTela.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtAreaMedicamentos.setText("");
+				txtBuscarNome.setText("");
+				txtNomePaciente.setText("");
+				txtAreaExames.setText("");
+				txtAreaRegistro.setText("");
+				dateChooserDataConsulta.setDate(null);
+				
+			}
+		});
+		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnLimparTela.setBounds(61, 452, 140, 39);
+		add(btnLimparTela);
 
 	}
 }

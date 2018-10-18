@@ -1,4 +1,4 @@
-package Clinica_Medica;
+package Clinica_Medica.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,7 +10,7 @@ import java.sql.Statement;
 public class Banco {
 
 	private static final String DRIVER_MYSQL = "com.mysql.jdbc.Driver";
-	private static final String NOME_ESQUEMA = "caminhosuave";
+	private static final String NOME_ESQUEMA = "avimed";
 	private static final String URL_CONEXAO = "jdbc:mysql://localhost:3306/" + NOME_ESQUEMA;
 	private static final String USUARIO = "root";
 	private static final String SENHA = "";

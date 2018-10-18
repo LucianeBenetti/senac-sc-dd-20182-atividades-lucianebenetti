@@ -8,9 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Clinica_Medica.Banco;
 import Clinica_Medica.VO.ConvenioVO;
-
 
 public class ConvenioDAO {
 	private static ArrayList<ConvenioVO> listaConvenios = new ArrayList<ConvenioVO>();
@@ -52,7 +50,7 @@ public class ConvenioDAO {
 
 	public ConvenioVO consultarConvenioPorCnpj(String convCnpj) {
 		
-		ConvenioVO convenio = new ConvenioVO();
+		ConvenioVO convenio = null;
 
 		String query = "SELECT *from convenio " + " where convCnpj = ?";
 
@@ -63,7 +61,7 @@ public class ConvenioDAO {
 			ResultSet result = prepStmt.executeQuery();
 
 			while (result.next()) {
-				
+				convenio = new ConvenioVO();
 				convenio.setConvCod(result.getInt(1));
 				convenio.setConvNome(result.getString(2));
 				convenio.setConvCnpj(result.getString(3));
@@ -133,7 +131,7 @@ public class ConvenioDAO {
 		return sucessoAtualizar;
 	}
 	
-	public String listarTodos() {
+	public ArrayList<ConvenioVO> listarTodos() {
 
 		String query = "select * from convenio";
 
@@ -156,9 +154,8 @@ public class ConvenioDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return listaConvenios.toString();
+		return listaConvenios;
 	}
 
-
-
+	
 }
