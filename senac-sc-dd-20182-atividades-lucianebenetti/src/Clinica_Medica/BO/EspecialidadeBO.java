@@ -39,4 +39,12 @@ public class EspecialidadeBO {
 		return especialidadeBuscada;
 	}
 
+
+	public boolean atualizarEspecialidade(EspecialidadeVO especialidade, int espCod) {
+		
+		return dao.atualizarEspecialidadeVO(especialidade, especialidade.getEspCod());
+	}
+
+
+	
 }

@@ -2,6 +2,7 @@ package Clinica_Medica.VO;
 
 public class ConvenioVO {
 	
+	
 	private int convCod;
 	private String convNome;
 	private String convCnpj;
@@ -52,5 +53,8 @@ public class ConvenioVO {
 		this.valor = valor;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return  convNome;
+	}
 }

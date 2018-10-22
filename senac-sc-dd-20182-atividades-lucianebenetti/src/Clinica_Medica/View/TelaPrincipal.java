@@ -7,18 +7,25 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import Clinica_Medica.View.Consulta.TelaCadastrarConsulta;
 import Clinica_Medica.View.Consulta.TelaExcluirConsulta;
+import Clinica_Medica.View.Consulta.TelaListarTodasConsultas;
 import Clinica_Medica.View.Convenio.TelaCadastrarConvenio;
 import Clinica_Medica.View.Convenio.TelaExcluirConvenio;
+import Clinica_Medica.View.Convenio.TelaListarTodosConvenios;
 import Clinica_Medica.View.Especialidade.TelaCadastrarEspecialidade;
 import Clinica_Medica.View.Especialidade.TelaExcluirEspecialidade;
+import Clinica_Medica.View.Especialidade.TelaListarTodasEspecialidades;
 import Clinica_Medica.View.Especializacao.TelaCadastrarEspecializacao;
 import Clinica_Medica.View.Especializacao.TelaExcluirEspecializacao;
+import Clinica_Medica.View.Especializacao.TelaListarTodasEspecializacoes;
 import Clinica_Medica.View.Medico.TelaCadastrarMedico;
 import Clinica_Medica.View.Medico.TelaExcluirMedico;
+import Clinica_Medica.View.Medico.TelaListarTodosMedicos;
 import Clinica_Medica.View.Paciente.TelaCadastrarPaciente;
 import Clinica_Medica.View.Paciente.TelaExcluirPaciente;
+import Clinica_Medica.View.Paciente.TelaListarTodosPacientes;
 import Clinica_Medica.View.Prontuario.TelaCadastrarProntuario;
 import Clinica_Medica.View.Prontuario.TelaExcluirProntuario;
+import Clinica_Medica.View.Prontuario.TelaListarTodosProntuarios;
 import Clinica_Medica.View.Sobre.TelaAjuda;
 import Clinica_Medica.View.Sobre.TelaSobre;
 import javax.swing.JMenuBar;
@@ -51,6 +58,13 @@ public class TelaPrincipal extends JFrame {
 	TelaExcluirEspecialidade excluirEspecialidade = null;
 	TelaExcluirEspecializacao excluirEspecializacao = null;
 	TelaExcluirProntuario excluirProntuario = null;
+	TelaListarTodasConsultas listarConsultas = null;
+	TelaListarTodosMedicos listarMedicos = null;
+	TelaListarTodosPacientes listarPacientes = null;
+	TelaListarTodosConvenios listarConvenios = null;
+	TelaListarTodasEspecialidades listarEspecialidades = null;
+	TelaListarTodasEspecializacoes listarEspecializacoes = null;
+	TelaListarTodosProntuarios listarProntuarios = null;
 	TelaAjuda ajuda = null;
 	TelaSobre telaSobre = null;
 
@@ -89,7 +103,7 @@ public class TelaPrincipal extends JFrame {
 		mnConsulta.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-stethoscope-50.png")));
 		menuBar.add(mnConsulta);
 		
-		JMenuItem mntmCadastrarconsulta = new JMenuItem("Cadastrar Consulta");
+		JMenuItem mntmCadastrarconsulta = new JMenuItem("Cadastrar/Alterar Consulta");
 		mntmCadastrarconsulta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				contentPane = new TelaCadastrarConsulta();
@@ -115,12 +129,14 @@ public class TelaPrincipal extends JFrame {
 		mntmExcluirConsulta.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnConsulta.add(mntmExcluirConsulta);
 		
-		JMenuItem mntmAlterarConsulta = new JMenuItem("Alterar Consulta");
-		mntmAlterarConsulta.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-add-list-48.png")));
-		mntmAlterarConsulta.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		mnConsulta.add(mntmAlterarConsulta);
-		
 		JMenuItem mntmListarTodos = new JMenuItem("Listar Todos");
+		mntmListarTodos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				contentPane = new TelaListarTodasConsultas();
+				setContentPane (contentPane);
+				revalidate();
+			}
+		});
 		mntmListarTodos.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-list-48.png")));
 		mntmListarTodos.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnConsulta.add(mntmListarTodos);
@@ -130,7 +146,7 @@ public class TelaPrincipal extends JFrame {
 		mnPaciente.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		menuBar.add(mnPaciente);
 		
-		JMenuItem mntmCadastrar = new JMenuItem("Cadastrar Paciente");
+		JMenuItem mntmCadastrar = new JMenuItem("Cadastrar/Alterar Paciente");
 		mntmCadastrar.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-salvar-64.png")));
 		mntmCadastrar.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mntmCadastrar.addActionListener(new ActionListener() {
@@ -156,12 +172,15 @@ public class TelaPrincipal extends JFrame {
 		mntmExcluirPaciente.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnPaciente.add(mntmExcluirPaciente);
 		
-		JMenuItem mntmAlterarPaciente = new JMenuItem("Alterar Paciente");
-		mntmAlterarPaciente.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-add-list-48.png")));
-		mntmAlterarPaciente.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		mnPaciente.add(mntmAlterarPaciente);
-		
 		JMenuItem mntmListarTodos_1 = new JMenuItem("Listar Todos");
+		mntmListarTodos_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				contentPane = new TelaListarTodosPacientes();
+				setContentPane (contentPane);
+				revalidate();
+			}
+		});
 		mntmListarTodos_1.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-list-48.png")));
 		mntmListarTodos_1.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnPaciente.add(mntmListarTodos_1);
@@ -171,7 +190,7 @@ public class TelaPrincipal extends JFrame {
 		mnProntuario.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		menuBar.add(mnProntuario);
 		
-		JMenuItem mntmCadastrarProntuario = new JMenuItem("Cadastrar Prontuario");
+		JMenuItem mntmCadastrarProntuario = new JMenuItem("Cadastrar/Alterar Prontuario");
 		mntmCadastrarProntuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -198,12 +217,16 @@ public class TelaPrincipal extends JFrame {
 		mntmExcluirProntuario.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnProntuario.add(mntmExcluirProntuario);
 		
-		JMenuItem mntmAlterarProntuario = new JMenuItem("Alterar Prontuario");
-		mntmAlterarProntuario.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-add-list-48.png")));
-		mntmAlterarProntuario.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		mnProntuario.add(mntmAlterarProntuario);
-		
 		JMenuItem mntmListarProntuario = new JMenuItem("Listar Prontuario");
+		mntmListarProntuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				contentPane = new TelaListarTodosProntuarios();
+				setContentPane (contentPane);
+				revalidate();
+				
+			}
+		});
 		mntmListarProntuario.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-list-48.png")));
 		mntmListarProntuario.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnProntuario.add(mntmListarProntuario);
@@ -213,7 +236,7 @@ public class TelaPrincipal extends JFrame {
 		mnConvenio.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		menuBar.add(mnConvenio);
 		
-		JMenuItem mntmCadastrarConvenio = new JMenuItem("Cadastrar Convenio");
+		JMenuItem mntmCadastrarConvenio = new JMenuItem("Cadastrar/Alterar Convenio");
 		mntmCadastrarConvenio.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-salvar-64.png")));
 		mntmCadastrarConvenio.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mntmCadastrarConvenio.addActionListener(new ActionListener() {
@@ -239,12 +262,15 @@ public class TelaPrincipal extends JFrame {
 		mntmExcluirConvenio.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnConvenio.add(mntmExcluirConvenio);
 		
-		JMenuItem mntmAlterarConvenio = new JMenuItem("Alterar Convenio");
-		mntmAlterarConvenio.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-add-list-48.png")));
-		mntmAlterarConvenio.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		mnConvenio.add(mntmAlterarConvenio);
-		
 		JMenuItem mntmListarTodos_2 = new JMenuItem("Listar Todos");
+		mntmListarTodos_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				contentPane = new TelaListarTodosConvenios();
+				setContentPane (contentPane);
+				revalidate();
+			}
+		});
 		mntmListarTodos_2.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-list-48.png")));
 		mntmListarTodos_2.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnConvenio.add(mntmListarTodos_2);
@@ -254,7 +280,7 @@ public class TelaPrincipal extends JFrame {
 		mnMdico.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		menuBar.add(mnMdico);
 		
-		JMenuItem mntmCadastrarMedico = new JMenuItem("Cadastrar Medico");
+		JMenuItem mntmCadastrarMedico = new JMenuItem("Cadastrar/Alterar Medico");
 		mntmCadastrarMedico.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-salvar-64.png")));
 		mntmCadastrarMedico.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mntmCadastrarMedico.addActionListener(new ActionListener() {
@@ -281,12 +307,15 @@ public class TelaPrincipal extends JFrame {
 		mntmExcluirMedico.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnMdico.add(mntmExcluirMedico);
 		
-		JMenuItem mntmAlterarMedico = new JMenuItem("Alterar Medico");
-		mntmAlterarMedico.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-add-list-48.png")));
-		mntmAlterarMedico.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		mnMdico.add(mntmAlterarMedico);
-		
 		JMenuItem mntmListarTodos_3 = new JMenuItem("Listar Todos");
+		mntmListarTodos_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				contentPane = new TelaListarTodosMedicos();
+				setContentPane (contentPane);
+				revalidate();
+			}
+		});
 		mntmListarTodos_3.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-list-48.png")));
 		mntmListarTodos_3.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnMdico.add(mntmListarTodos_3);
@@ -296,7 +325,7 @@ public class TelaPrincipal extends JFrame {
 		mnEspecialidade.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		menuBar.add(mnEspecialidade);
 		
-		JMenuItem mntmCadastrarEspecialidade = new JMenuItem("Cadastrar Especialidade");
+		JMenuItem mntmCadastrarEspecialidade = new JMenuItem("Cadastrar/Alterar Especialidade");
 		mntmCadastrarEspecialidade.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -323,12 +352,15 @@ public class TelaPrincipal extends JFrame {
 		mntmExcluirEspecialidade.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnEspecialidade.add(mntmExcluirEspecialidade);
 		
-		JMenuItem mntmAlterarEspecialidade = new JMenuItem("Alterar Especialidade");
-		mntmAlterarEspecialidade.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-add-list-48.png")));
-		mntmAlterarEspecialidade.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		mnEspecialidade.add(mntmAlterarEspecialidade);
-		
 		JMenuItem mntmListarEspecialidade = new JMenuItem("Listar Especialidade");
+		mntmListarEspecialidade.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				contentPane = new TelaListarTodasEspecialidades();
+				setContentPane (contentPane);
+				revalidate();
+			}
+		});
 		mntmListarEspecialidade.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-list-48.png")));
 		mntmListarEspecialidade.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnEspecialidade.add(mntmListarEspecialidade);
@@ -338,7 +370,7 @@ public class TelaPrincipal extends JFrame {
 		mnEspecializacao.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		menuBar.add(mnEspecializacao);
 		
-		JMenuItem mntmCadastrarEspecializacao = new JMenuItem("Cadastrar Especializacao");
+		JMenuItem mntmCadastrarEspecializacao = new JMenuItem("Cadastrar/Alterar Especializacao");
 		mntmCadastrarEspecializacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -367,12 +399,15 @@ public class TelaPrincipal extends JFrame {
 		mntmExcluirEspecializacao.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnEspecializacao.add(mntmExcluirEspecializacao);
 		
-		JMenuItem mntmAlterarEspecializacao = new JMenuItem("Alterar Especializacao");
-		mntmAlterarEspecializacao.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-add-list-48.png")));
-		mntmAlterarEspecializacao.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		mnEspecializacao.add(mntmAlterarEspecializacao);
-		
 		JMenuItem mntmListasTodas = new JMenuItem("Listas Todas");
+		mntmListasTodas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				contentPane = new TelaListarTodasEspecializacoes();
+				setContentPane (contentPane);
+				revalidate();
+			}
+		});
 		mntmListasTodas.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-list-48.png")));
 		mntmListasTodas.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnEspecializacao.add(mntmListasTodas);

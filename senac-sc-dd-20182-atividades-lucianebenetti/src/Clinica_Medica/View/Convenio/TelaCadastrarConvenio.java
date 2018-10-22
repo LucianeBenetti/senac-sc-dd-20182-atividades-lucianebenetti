@@ -8,6 +8,7 @@ import javax.swing.text.MaskFormatter;
 
 import Clinica_Medica.BO.ConvenioBO;
 import Clinica_Medica.Controller.ConvenioController;
+import Clinica_Medica.DAO.ConvenioDAO;
 import Clinica_Medica.VO.ConvenioVO;
 
 import javax.swing.JButton;
@@ -30,7 +31,6 @@ public class TelaCadastrarConvenio extends JPanel {
 	private ConvenioVO convenio = new ConvenioVO();
 	private JTextField txtValor;
 	private ConvenioVO convenioConsultado = new ConvenioVO();
-	private ConvenioBO bo = new ConvenioBO();
 	private static final String MASCARA_CNPJ = "##.###.###/####-##";
 
 	/**
@@ -42,17 +42,17 @@ public class TelaCadastrarConvenio extends JPanel {
 		
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNome.setBounds(10, 86, 46, 23);
+		lblNome.setBounds(10, 117, 46, 23);
 		add(lblNome);
 		
 		JLabel lblCnpj = new JLabel("CNPJ");
 		lblCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCnpj.setBounds(10, 140, 46, 23);
+		lblCnpj.setBounds(10, 171, 46, 23);
 		add(lblCnpj);
 		
 		JLabel lblBuscarCnpj = new JLabel("CNPJ");
 		lblBuscarCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblBuscarCnpj.setBounds(10, 19, 46, 23);
+		lblBuscarCnpj.setBounds(10, 37, 46, 23);
 		add(lblBuscarCnpj);
 		
 		try {
@@ -62,13 +62,13 @@ public class TelaCadastrarConvenio extends JPanel {
 			e1.printStackTrace();
 		}
 		txtBuscarCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtBuscarCnpj.setBounds(66, 11, 351, 33);
+		txtBuscarCnpj.setBounds(66, 29, 351, 33);
 		add(txtBuscarCnpj);
 		txtBuscarCnpj.setColumns(10);
 		
 		txtNome = new JTextField();
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNome.setBounds(66, 86, 461, 26);
+		txtNome.setBounds(66, 117, 461, 26);
 		add(txtNome);
 		txtNome.setColumns(10);
 		
@@ -79,7 +79,7 @@ public class TelaCadastrarConvenio extends JPanel {
 			e1.printStackTrace();
 		}
 		txtCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtCnpj.setBounds(66, 140, 461, 26);
+		txtCnpj.setBounds(66, 171, 461, 26);
 		add(txtCnpj);
 		txtCnpj.setColumns(10);
 		
@@ -87,22 +87,20 @@ public class TelaCadastrarConvenio extends JPanel {
 		btnBuscar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				convenioConsultado = bo.buscarConvenioPorCNPJ(txtBuscarCnpj.getText());
+				ConvenioController controller = new ConvenioController();
+				convenioConsultado = controller.buscarConvenioPorCNPJ(txtBuscarCnpj.getText());
 				
 				if(convenioConsultado != null) {
-					txtNome.setText(convenioConsultado.getConvNome());
-					txtCnpj.setText(convenioConsultado.getConvCnpj());
-					txtValor.setText(convenioConsultado.getValor()+ "");
 					
-								
+					convenioConsultado = consutarConvenio();
+													
 					}else {
-						JOptionPane.showMessageDialog(null, "Médico não encontrado.");
+						JOptionPane.showMessageDialog(null, "Convênio não encontrado.");
 					}
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscar.setBounds(438, 12, 89, 36);
+		btnBuscar.setBounds(438, 30, 89, 36);
 		add(btnBuscar);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -120,7 +118,7 @@ public class TelaCadastrarConvenio extends JPanel {
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(233, 242, 124, 36);
+		btnCadastrar.setBounds(289, 296, 124, 36);
 		add(btnCadastrar);
 		
 		JButton btnSair = new JButton("Sair");
@@ -139,22 +137,18 @@ public class TelaCadastrarConvenio extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(419, 242, 108, 36);
+		btnSair.setBounds(419, 296, 108, 36);
 		add(btnSair);
-		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 53, 430, 8);
-		add(separator);
 		
 		JLabel lblValor = new JLabel("Valor");
 		lblValor.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblValor.setBounds(10, 191, 46, 23);
+		lblValor.setBounds(10, 222, 46, 23);
 		add(lblValor);
 		
 		txtValor = new JTextField();
 		txtValor.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtValor.setColumns(10);
-		txtValor.setBounds(66, 191, 461, 26);
+		txtValor.setBounds(66, 222, 461, 26);
 		add(txtValor);
 		
 		JButton btnLimparTela = new JButton("Limpar Tela");
@@ -165,9 +159,38 @@ public class TelaCadastrarConvenio extends JPanel {
 			}
 		});
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnLimparTela.setBounds(10, 242, 136, 36);
+		btnLimparTela.setBounds(10, 296, 140, 36);
 		add(btnLimparTela);
+		
+		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				String conCnpj = null;
+				ConvenioController dao = new ConvenioController();
+				ConvenioVO convenio = construirConvenio();
+				String mensagem = dao.atualizarConvenio(convenio, conCnpj);
+				JOptionPane.showMessageDialog(null, mensagem);
+				limparTela();				
+			}
+		});
+		btnAtualizar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnAtualizar.setBounds(160, 296, 119, 36);
+		add(btnAtualizar);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(10, 77, 517, 2);
+		add(separator_1);
 
+	}
+
+	protected ConvenioVO consutarConvenio() {
+		txtNome.setText(convenioConsultado.getConvNome());
+		txtCnpj.setText(convenioConsultado.getConvCnpj());
+		txtValor.setText(convenioConsultado.getValor()+ "");
+		
+		return convenioConsultado;
 	}
 
 	protected void limparTela() {
@@ -175,6 +198,7 @@ public class TelaCadastrarConvenio extends JPanel {
 		txtNome.setText("");
 		txtCnpj.setText("");
 		txtValor.setText("");
+		txtBuscarCnpj.setText("");
 		
 	}
 
@@ -190,5 +214,4 @@ public class TelaCadastrarConvenio extends JPanel {
 
 		return convenio;
 	}
-
 }

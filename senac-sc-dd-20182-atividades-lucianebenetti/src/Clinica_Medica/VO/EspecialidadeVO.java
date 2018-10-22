@@ -41,6 +41,11 @@ public class EspecialidadeVO {
 	public void setEspInstituicao(String espInstituicao) {
 		this.espInstituicao = espInstituicao;
 	}
+
+	@Override
+	public String toString() {
+		return espNome;
+	}
 	
 	
 }

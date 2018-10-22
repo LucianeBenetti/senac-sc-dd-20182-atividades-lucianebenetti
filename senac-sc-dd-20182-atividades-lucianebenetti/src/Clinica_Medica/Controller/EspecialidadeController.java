@@ -51,4 +51,18 @@ public class EspecialidadeController {
 		return bo.consultarEspecialidade(espNome, espeCod, medNome);
 	}
 
+	public String atualizar(EspecialidadeVO especialidade, int espCod) {
+		String validacao = validarEspecialidade(especialidade);
+		if (validacao == "") {
+
+			if (bo.atualizarEspecialidade(especialidade, espCod)) {
+				validacao = "Especialidade salvo com sucesso!";
+			} else {
+				validacao = "Erro ao salvar Especialidade!";
+			}
+		}
+		return validacao;
+	}
+
+	
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import Clinica_Medica.VO.ProntuarioVO;
 
-public class ProtuarioDAO {
+public class ProntuarioDAO {
 	
 	private static ArrayList<ProntuarioVO> listaprontuarios = new ArrayList<ProntuarioVO>();
 	ProntuarioVO prontuario = new ProntuarioVO();
@@ -27,7 +27,7 @@ public class ProtuarioDAO {
 			
 			prepStmt.setString(1, prontuario.getMedicamento());
 			prepStmt.setString(2, prontuario.getExame());
-			prepStmt.setLong(3, prontuario.getRegistro());
+			prepStmt.setString(3, prontuario.getRegistro());
 		
 			prepStmt.executeUpdate();
 
@@ -82,7 +82,7 @@ public class ProtuarioDAO {
 				prontuario.setPronCod(result.getInt(1));
 				prontuario.setMedicamento(result.getString(2));
 				prontuario.setExame(result.getString(3));
-				prontuario.setRegistro(result.getLong(4));
+				prontuario.setRegistro(result.getString(4));
 				
 			}
 		} catch (SQLException ex) {
@@ -107,7 +107,7 @@ public class ProtuarioDAO {
 			
 			prepStmt.setString(1, prontuario.getMedicamento());
 			prepStmt.setString(2, prontuario.getExame());
-			prepStmt.setLong(3, prontuario.getRegistro());
+			prepStmt.setString(3, prontuario.getRegistro());
 			prepStmt.setInt(4, prontuario.getPronCod());	
 			
 			int codigoRetorno = prepStmt.executeUpdate();
@@ -124,7 +124,7 @@ public class ProtuarioDAO {
 		return sucessoAtualizar;
 	}
 
-	public String listarTodos() {
+	public ArrayList<ProntuarioVO> listarTodos() {
 
 		String query = "select * from prontuario";
 
@@ -139,7 +139,7 @@ public class ProtuarioDAO {
 				prontuario.setPronCod(result.getInt(1));
 				prontuario.setMedicamento(result.getString(2));
 				prontuario.setExame(result.getString(3));
-				prontuario.setRegistro(result.getLong(4));
+				prontuario.setRegistro(result.getString(4));
 				
 				listaprontuarios.add(prontuario);
 			}
@@ -147,7 +147,7 @@ public class ProtuarioDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return listaprontuarios.toString();
+		return listaprontuarios;
 	}
 
 

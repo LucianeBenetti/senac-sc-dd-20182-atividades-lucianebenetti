@@ -1,6 +1,7 @@
 package Clinica_Medica.BO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -34,6 +35,23 @@ public class MedicoBO {
 		ArrayList<MedicoVO> medicoBuscado = dao.listarTodos();
 		return medicoBuscado;
 	}
+
+	public boolean atualizarMedico(MedicoVO medico, String cpf) {
+		
+		return dao.atualizar(medico, cpf);
+	}
+
+	public boolean excluirMedico(MedicoVO medicoExcluido) {
+		boolean sucesso = dao.delete(medicoExcluido.getCpf());
+		return sucesso;
+	}
+
+	public List<MedicoVO> listarTodosMedicos() {
+		ArrayList<MedicoVO> medicos = dao.listarTodos();
+		return medicos;
+	}
+
+	
 
 	
 

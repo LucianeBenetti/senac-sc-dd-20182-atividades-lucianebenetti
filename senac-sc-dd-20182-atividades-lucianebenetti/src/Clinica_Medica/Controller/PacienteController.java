@@ -1,6 +1,9 @@
 package Clinica_Medica.Controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Clinica_Medica.BO.PacienteBO;
 import Clinica_Medica.VO.PacienteVO;
 
@@ -35,6 +38,36 @@ public class PacienteController {
 			
 		}
 		return validacao;
+	}
+
+	public PacienteVO buscarPacientePorCpf(String cpf) {
+		
+		return bo.buscarPacientePorCpf(cpf);
+	}
+
+	public void excluir(PacienteVO paciente) {
+		
+		bo.excluirPaciente(paciente);
+	}
+
+	public String atualizarPaciente(PacienteVO paciente, String cpf) {
+		
+		String validacao = validarPaciente(paciente);
+		
+		if(validacao == "") {
+				
+			if(bo.atualizarPaciente(paciente, cpf)) {
+				validacao ="Paciente atualizado com sucesso!";
+			}else {
+				validacao ="Erro ao atualizar Paciente!";
+			}
+		}
+			return validacao;
+	}
+
+	public List<PacienteVO> listarTodosPacientes() {
+
+		return bo.listarTodosPacientes();
 	}
 
 

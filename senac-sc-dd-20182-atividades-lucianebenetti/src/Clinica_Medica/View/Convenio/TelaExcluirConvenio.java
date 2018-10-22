@@ -4,11 +4,18 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
+
+import Clinica_Medica.Controller.ConvenioController;
+import Clinica_Medica.VO.ConvenioVO;
+
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JSeparator;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 
 public class TelaExcluirConvenio extends JPanel {
 
@@ -16,6 +23,8 @@ public class TelaExcluirConvenio extends JPanel {
 	private JTextField txtCnpj;
 	private JTextField txtNome;
 	private JTextField txtValor;
+	private ConvenioVO convenio = new ConvenioVO();
+	private ConvenioVO convenioConsultado = new ConvenioVO();
 	/**
 	 * Create the panel.
 	 */
@@ -37,7 +46,12 @@ public class TelaExcluirConvenio extends JPanel {
 		lblValor.setBounds(10, 176, 58, 27);
 		add(lblValor);
 		
-		txtCnpj = new JTextField();
+		try {
+			txtCnpj = new JFormattedTextField(new MaskFormatter(MASCARA_CNPJ));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		txtCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtCnpj.setBounds(90, 25, 197, 30);
 		add(txtCnpj);
@@ -56,6 +70,23 @@ public class TelaExcluirConvenio extends JPanel {
 		txtValor.setColumns(10);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				ConvenioController controller = new ConvenioController();
+				convenioConsultado = controller.buscarConvenioPorCNPJ(txtCnpj.getText());
+				
+				if(convenioConsultado != null) {
+					
+					convenioConsultado = consutarConvenio();
+					
+								
+					}else {
+						JOptionPane.showMessageDialog(null, "Convênio não encontrado.");
+					}
+			}
+		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnBuscar.setBounds(341, 24, 99, 31);
 		add(btnBuscar);
@@ -72,6 +103,16 @@ public class TelaExcluirConvenio extends JPanel {
 		add(btnLimparTela);
 		
 		JButton btnNewButton_2 = new JButton("Excluir");
+		btnNewButton_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				ConvenioController dao = new ConvenioController();
+				ConvenioVO convenioExcluido = construirConvenio();
+				dao.excluirConvenio(convenioExcluido);
+				JOptionPane.showMessageDialog(null, "Convênio excluído!");
+				limparTela();
+			}
+		});
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnNewButton_2.setBounds(188, 258, 99, 31);
 		add(btnNewButton_2);
@@ -107,5 +148,24 @@ public class TelaExcluirConvenio extends JPanel {
 		txtValor.setText("");
 		
 	}
+	protected ConvenioVO construirConvenio() {
+		convenio.setConvNome(txtNome.getText());
+		convenio.setConvCnpj(txtCnpj.getText());
+		
+		String valor = txtValor.getText();
+		
+		if(valor.trim() !="") {
+		convenio.setValor(Double.parseDouble(valor));
+		}
 
+		return convenio;
+	}
+	
+	protected ConvenioVO consutarConvenio() {
+		txtNome.setText(convenioConsultado.getConvNome());
+		txtCnpj.setText(convenioConsultado.getConvCnpj());
+		txtValor.setText(convenioConsultado.getValor()+ "");
+		
+		return convenioConsultado;
+	}
 }

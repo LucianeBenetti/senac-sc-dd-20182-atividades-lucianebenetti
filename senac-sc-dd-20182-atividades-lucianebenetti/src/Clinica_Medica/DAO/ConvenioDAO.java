@@ -78,7 +78,7 @@ public class ConvenioDAO {
 		return convenio;
 	}
 
-	public boolean delete(int convCnpj) {
+	public boolean delete(String convCnpj) {
 		boolean sucessoDelete = false;
 
 		String query = "DELETE from convenio where convCnpj = ? ";
@@ -87,7 +87,7 @@ public class ConvenioDAO {
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
 
 		try {
-			prepStmt.setInt(1, convCnpj);
+			prepStmt.setString(1, convCnpj);
 			int codigoRetorno = prepStmt.executeUpdate();
 			if (codigoRetorno == 1) {
 				sucessoDelete = true;
@@ -102,11 +102,10 @@ public class ConvenioDAO {
 	}
 
 	
-	public boolean atualizar(ConvenioVO convenioAlterado, String conCnpj) {
+	public boolean atualizar(ConvenioVO convenio, String convCnpj) {
 		boolean sucessoAtualizar = false;
-		ConvenioVO convenio = new ConvenioVO();							 
-		String query = "UPDATE convenio SETconvNome=?, convCnpj=?, valor=?"
-				+ " where convCnpj = ?";
+						 
+		String query = "UPDATE convenio SET convNome=?, convCnpj=?, valor=? " + " where convCnpj = ?";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
@@ -116,7 +115,8 @@ public class ConvenioDAO {
 			prepStmt.setString(1, convenio.getConvNome());
 			prepStmt.setString(2, convenio.getConvCnpj());
 			prepStmt.setDouble(3, convenio.getValor());
-
+			prepStmt.setString(4, convenio.getConvCnpj());
+			
 			int codigoRetorno = prepStmt.executeUpdate();
 
 			if (codigoRetorno == 1) {
@@ -157,5 +157,6 @@ public class ConvenioDAO {
 		return listaConvenios;
 	}
 
+	
 	
 }

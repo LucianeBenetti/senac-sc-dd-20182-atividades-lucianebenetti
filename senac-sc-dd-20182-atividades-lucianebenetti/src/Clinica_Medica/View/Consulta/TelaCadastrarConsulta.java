@@ -143,7 +143,7 @@ public class TelaCadastrarConsulta extends JPanel {
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(315, 448, 115, 35);
+		btnCadastrar.setBounds(429, 448, 115, 35);
 		add(btnCadastrar);
 		
 		txtNomePaciente = new JTextField();
@@ -227,6 +227,11 @@ public class TelaCadastrarConsulta extends JPanel {
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnLimparTela.setBounds(26, 448, 142, 35);
 		add(btnLimparTela);
+		
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnAlterar.setBounds(225, 448, 130, 35);
+		add(btnAlterar);
 
 	}
 

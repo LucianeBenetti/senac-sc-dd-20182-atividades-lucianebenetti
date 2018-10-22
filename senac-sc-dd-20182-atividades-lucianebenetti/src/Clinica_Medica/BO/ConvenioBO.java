@@ -31,4 +31,14 @@ public class ConvenioBO {
 		ArrayList<ConvenioVO> convenioBuscado = dao.listarTodos();
 		return convenioBuscado;
 	}
+
+	public boolean atualizarConvenio(ConvenioVO convenio, String conCnpj) {
+		return dao.atualizar(convenio, conCnpj);
+		
+	}
+
+	public boolean excluirConvenio(ConvenioVO convenio) {
+		boolean sucesso = dao.delete(convenio.getConvCnpj());
+		return sucesso;
+	}
 }

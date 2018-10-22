@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.text.MaskFormatter;
-
 import Clinica_Medica.BO.PacienteBO;
 import Clinica_Medica.Controller.PacienteController;
 import Clinica_Medica.VO.PacienteVO;
@@ -22,6 +21,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaCadastrarPaciente extends JPanel {
 	
@@ -149,32 +150,21 @@ public class TelaCadastrarPaciente extends JPanel {
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(317, 509, 151, 37);
+		btnCadastrar.setBounds(389, 509, 130, 37);
 		add(btnCadastrar);
 		
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				pacienteBuscado = bo.buscarPacientePorCpf(txtCpfBusca.getText());
+				PacienteController dao = new PacienteController();
+				
+				pacienteBuscado = dao.buscarPacientePorCpf(txtCpfBusca.getText());
 				
 				if(pacienteBuscado != null) {
-					txtBairro.setText(pacienteBuscado.getBairro());
-					txtCelular.setText(pacienteBuscado.getCelMen());
-					txtCep.setText(pacienteBuscado.getCep());
-					txtCidade.setText(pacienteBuscado.getCidade());
-					txtCnpj.setText(pacienteBuscado.getCnpj());
-					txtComplemento.setText(pacienteBuscado.getComplemento());
-					txtCpf.setText(pacienteBuscado.getCpf());
-					txtEmail.setText(pacienteBuscado.getEmail());
-					txtFoneCom.setText(pacienteBuscado.getFoneCom());
-					txtFoneRes.setText(pacienteBuscado.getFoneRes());
-					txtLogradouro.setText(pacienteBuscado.getLogradouro());
-					txtNome.setText(pacienteBuscado.getPacNome());
-					txtNumLog.setText(pacienteBuscado.getNumLog());
-					cbEstado.setSelectedItem(pacienteBuscado.getUf());
-				
-									
+					
+					pacienteBuscado = buscarPaciente();
+															
 					}else {
 						JOptionPane.showMessageDialog(null, "Paciente não encontrado.");
 					}
@@ -338,9 +328,45 @@ public class TelaCadastrarPaciente extends JPanel {
 			}
 		});
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnLimparTela.setBounds(66, 509, 137, 37);
+		btnLimparTela.setBounds(10, 509, 137, 37);
 		add(btnLimparTela);
+		
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				String cpf = null;
+				PacienteController dao = new PacienteController();
+				PacienteVO paciente = construirPaciente();
+				String mensagem = dao.atualizarPaciente(paciente, cpf);
+				JOptionPane.showMessageDialog(null, mensagem);
+				limparTela();
+			}
+		});
+		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnAlterar.setBounds(202, 509, 124, 37);
+		add(btnAlterar);
 
+	}
+
+	protected PacienteVO buscarPaciente() {
+		txtBairro.setText(pacienteBuscado.getBairro());
+		txtCelular.setText(pacienteBuscado.getCelMen());
+		txtCep.setText(pacienteBuscado.getCep());
+		txtCidade.setText(pacienteBuscado.getCidade());
+		txtCnpj.setText(pacienteBuscado.getCnpj());
+		txtComplemento.setText(pacienteBuscado.getComplemento());
+		txtCpf.setText(pacienteBuscado.getCpf());
+		txtEmail.setText(pacienteBuscado.getEmail());
+		txtFoneCom.setText(pacienteBuscado.getFoneCom());
+		txtFoneRes.setText(pacienteBuscado.getFoneRes());
+		txtLogradouro.setText(pacienteBuscado.getLogradouro());
+		txtNome.setText(pacienteBuscado.getPacNome());
+		txtNumLog.setText(pacienteBuscado.getNumLog());
+		cbEstado.setSelectedItem(pacienteBuscado.getUf());
+		
+		return pacienteBuscado;
 	}
 
 	protected PacienteVO construirPaciente() {

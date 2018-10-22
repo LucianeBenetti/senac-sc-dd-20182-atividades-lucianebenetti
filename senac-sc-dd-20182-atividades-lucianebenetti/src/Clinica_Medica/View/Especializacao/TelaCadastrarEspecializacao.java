@@ -64,7 +64,7 @@ public class TelaCadastrarEspecializacao extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(387, 242, 107, 31);
+		btnSair.setBounds(446, 242, 107, 31);
 		add(btnSair);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -89,7 +89,7 @@ public class TelaCadastrarEspecializacao extends JPanel {
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(213, 242, 114, 31);
+		btnCadastrar.setBounds(322, 242, 114, 31);
 		add(btnCadastrar);
 		
 		txtIdMedico = new JTextField();
@@ -100,7 +100,7 @@ public class TelaCadastrarEspecializacao extends JPanel {
 		
 		txtNomeMedico = new JTextField();
 		txtNomeMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNomeMedico.setBounds(237, 44, 257, 31);
+		txtNomeMedico.setBounds(237, 44, 316, 31);
 		add(txtNomeMedico);
 		txtNomeMedico.setColumns(10);
 		
@@ -112,7 +112,7 @@ public class TelaCadastrarEspecializacao extends JPanel {
 		
 		txtNomeEspecialidade = new JTextField();
 		txtNomeEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNomeEspecialidade.setBounds(237, 103, 257, 31);
+		txtNomeEspecialidade.setBounds(237, 103, 316, 31);
 		add(txtNomeEspecialidade);
 		txtNomeEspecialidade.setColumns(10);
 		
@@ -130,8 +130,13 @@ public class TelaCadastrarEspecializacao extends JPanel {
 			}
 		});
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnLimparTela.setBounds(25, 246, 142, 31);
+		btnLimparTela.setBounds(25, 242, 142, 31);
 		add(btnLimparTela);
+		
+		JButton btnAltetrar = new JButton("Alterar");
+		btnAltetrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnAltetrar.setBounds(186, 242, 126, 31);
+		add(btnAltetrar);
 
 	}
 

@@ -125,7 +125,7 @@ public class PacienteDAO {
 	public boolean atualizar(PacienteVO pacienteAlterado, String cpfAnterior) {
 		boolean sucessoAtualizar = false;
 										 
-		String query = "UPDATE paciente SET pacNome=?, celMen=?, foneRes=?, foneCom=?, email=?, cpf=?, cnpj=?, logradouro=?, numLog=?, complemento=?, bairro=?, cidade=?, uf=?, cep=?"
+		String query = "UPDATE paciente SET pacNome=?, celMen=?, foneRes=?, foneCom=?, email=?, cpf=?, cnpj=?, logradouro=?, numLog=?, complemento=?, bairro=?, cidade=?, uf=?, cep=? "
 				+ " where cpf = ?";
 
 		Connection conn = Banco.getConnection();
@@ -146,7 +146,7 @@ public class PacienteDAO {
 			prepStmt.setString(12, pacienteAlterado.getCidade());
 			prepStmt.setString(13, pacienteAlterado.getUf());
 			prepStmt.setString(14, pacienteAlterado.getCep());
-			prepStmt.setString(16, pacienteAlterado.getCpf());
+			prepStmt.setString(15, pacienteAlterado.getCpf());
 
 			int codigoRetorno = prepStmt.executeUpdate();
 
@@ -162,7 +162,7 @@ public class PacienteDAO {
 		return sucessoAtualizar;
 	}
 	
-	public String listarTodos() {
+	public ArrayList<PacienteVO> listarTodos() {
 
 		String query = "select * from paciente";
 
@@ -182,13 +182,7 @@ public class PacienteDAO {
 				paciente.setEmail(result.getString(6));
 				paciente.setCpf(result.getString(7));
 				paciente.setCnpj(result.getString(8));
-				paciente.setLogradouro(result.getString(9));
-				paciente.setNumLog(result.getString(10));
-				paciente.setComplemento(result.getString(11));
-				paciente.setBairro(result.getString(12));
-				paciente.setCidade(result.getString(13));
-				paciente.setUf(result.getString(14));
-				paciente.setCep(result.getString(15));
+				
 				
 
 				listapacientes.add(paciente);
@@ -197,7 +191,7 @@ public class PacienteDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return listapacientes.toString();
+		return listapacientes;
 	}
 
 }

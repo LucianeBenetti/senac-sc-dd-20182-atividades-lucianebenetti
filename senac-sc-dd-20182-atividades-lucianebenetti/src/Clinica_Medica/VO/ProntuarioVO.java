@@ -1,13 +1,15 @@
 package Clinica_Medica.VO;
 
+import java.util.ArrayList;
+
 public class ProntuarioVO {
 	
 	private int pronCod;
 	private String medicamento;
 	private String exame;
-	private long registro;
+	private String registro;
 	
-	public ProntuarioVO(int pronCod, String medicamento, String exame, long registro) {
+	public ProntuarioVO(int pronCod, String medicamento, String exame, String registro) {
 		super();
 		this.pronCod = pronCod;
 		this.medicamento = medicamento;
@@ -44,14 +46,13 @@ public class ProntuarioVO {
 		this.exame = exame;
 	}
 
-	public long getRegistro() {
+	public String getRegistro() {
 		return registro;
 	}
 
-	public void setRegistro(long registro) {
+	public void setRegistro(String registro) {
 		this.registro = registro;
 	}
 	
 	
-
 }

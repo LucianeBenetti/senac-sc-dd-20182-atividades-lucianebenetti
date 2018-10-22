@@ -5,6 +5,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
+import Clinica_Medica.Controller.MedicoController;
+import Clinica_Medica.VO.MedicoVO;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JSeparator;
@@ -22,7 +24,14 @@ public class TelaExcluirMedico extends JPanel {
 	private static final String MASCARA_CELULAR = "(##) ##### ####";
 	private static final String MASCARA_CPF = "###.###.###-##";
 	private static final String MASCARA_CNPJ = "##.###.###/####-##";
+	private MedicoVO medicoBuscado = new MedicoVO();
+	private MedicoVO medico = new MedicoVO();
+	private JTextField txtCpf;
+	private JTextField txtCelMen;
+	private JTextField txtEmail;
+
 	/**
+	 * 
 	 * Create the panel.
 	 */
 	public TelaExcluirMedico() {
@@ -35,6 +44,7 @@ public class TelaExcluirMedico extends JPanel {
 		
 		try {
 			txtBuscarCpf = new JFormattedTextField(new MaskFormatter(MASCARA_CPF));
+			txtBuscarCpf.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		} catch (ParseException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -44,8 +54,23 @@ public class TelaExcluirMedico extends JPanel {
 		txtBuscarCpf.setColumns(10);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				MedicoController dao = new MedicoController();
+				medicoBuscado = dao.buscarMedicoPorCPF(txtBuscarCpf.getText());
+				
+				if(medicoBuscado != null) {
+					medicoBuscado = buscarMedico();
+								
+					}else {
+						JOptionPane.showMessageDialog(null, "Médico não encontrado.");
+					}
+			}
+		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscar.setBounds(458, 29, 89, 28);
+		btnBuscar.setBounds(430, 29, 89, 28);
 		add(btnBuscar);
 		
 		JSeparator separator = new JSeparator();
@@ -54,12 +79,12 @@ public class TelaExcluirMedico extends JPanel {
 		
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNome.setBounds(10, 149, 62, 23);
+		lblNome.setBounds(10, 123, 62, 23);
 		add(lblNome);
 		
 		txtNome = new JTextField();
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNome.setBounds(95, 146, 452, 26);
+		txtNome.setBounds(95, 123, 549, 26);
 		add(txtNome);
 		txtNome.setColumns(10);
 		
@@ -70,18 +95,18 @@ public class TelaExcluirMedico extends JPanel {
 		
 		txtCrm = new JTextField();
 		txtCrm.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtCrm.setBounds(95, 201, 452, 26);
+		txtCrm.setBounds(95, 171, 195, 26);
 		add(txtCrm);
 		txtCrm.setColumns(10);
 		
 		JLabel lblCrm = new JLabel("CRM");
 		lblCrm.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCrm.setBounds(10, 204, 54, 23);
+		lblCrm.setBounds(10, 173, 54, 23);
 		add(lblCrm);
 		
-		JLabel lblCelular = new JLabel("Celular");
+		JLabel lblCelular = new JLabel(" Celular Principal");
 		lblCelular.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCelular.setBounds(10, 309, 76, 24);
+		lblCelular.setBounds(10, 309, 136, 24);
 		add(lblCelular);
 		
 		try {
@@ -102,7 +127,7 @@ public class TelaExcluirMedico extends JPanel {
 			e1.printStackTrace();
 		}
 		txtCelular.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtCelular.setBounds(95, 307, 214, 28);
+		txtCelular.setBounds(180, 307, 232, 28);
 		add(txtCelular);
 		txtCelular.setColumns(10);
 		
@@ -114,12 +139,23 @@ public class TelaExcluirMedico extends JPanel {
 			}
 		});
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnLimparTela.setBounds(29, 384, 125, 28);
+		btnLimparTela.setBounds(21, 458, 125, 31);
 		add(btnLimparTela);
 		
 		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				MedicoController dao = new MedicoController();
+				MedicoVO medicoExcluido = construirMedico();
+				dao.excluirMedico(medicoExcluido);
+				JOptionPane.showMessageDialog(null, "Medico excluído!");
+				limparTela();
+			}
+		});
 		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnExcluir.setBounds(252, 384, 100, 28);
+		btnExcluir.setBounds(283, 458, 100, 31);
 		add(btnExcluir);
 		
 		JButton btnSair = new JButton("Sair");
@@ -138,17 +174,88 @@ public class TelaExcluirMedico extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(447, 384, 102, 28);
+		btnSair.setBounds(542, 458, 102, 31);
 		add(btnSair);
+		
+		JLabel lblCpf = new JLabel("CPF");
+		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblCpf.setBounds(10, 219, 54, 23);
+		add(lblCpf);
+		
+		try {
+			txtCpf = new JFormattedTextField(new MaskFormatter(MASCARA_CPF));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		txtCpf.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtCpf.setBounds(94, 215, 318, 28);
+		add(txtCpf);
+		txtCpf.setColumns(10);
+		
+		JLabel lblCelularMensagem = new JLabel("Celular Mensagem");
+		lblCelularMensagem.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblCelularMensagem.setBounds(18, 358, 158, 28);
+		add(lblCelularMensagem);
+		
+		try {
+			txtCelMen = new JFormattedTextField(new MaskFormatter(MASCARA_CELULAR));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		txtCelMen.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtCelMen.setBounds(180, 358, 232, 27);
+		add(txtCelMen);
+		txtCelMen.setColumns(10);
+		
+		JLabel lblEmail = new JLabel("e-mail");
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblEmail.setBounds(18, 397, 62, 26);
+		add(lblEmail);
+		
+		txtEmail = new JTextField();
+		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtEmail.setBounds(118, 397, 526, 26);
+		add(txtEmail);
+		txtEmail.setColumns(10);
 
 	}
 
 	protected void limparTela() {
 		txtBuscarCpf.setText("");
 		txtCelular.setText("");
+		txtCelMen.setText("");
+		txtCpf.setText("");
 		txtCnpj.setText("");
 		txtCrm.setText("");
 		txtNome.setText("");
+		txtEmail.setText("");
 	}
+	
+protected MedicoVO construirMedico() {
+		
+	medico.setMedNome(txtNome.getText());
+	medico.setCrm(txtCrm.getText());
+	medico.setCpf(txtCpf.getText());
+	medico.setCnpj(txtCnpj.getText());
+	medico.setCel(txtCelular.getText());
+	medico.setCelMen(txtCelMen.getText());
+	medico.setEmail(txtEmail.getText());
+		
+		return medico;
+	}
+
+protected MedicoVO buscarMedico() {
+	txtNome.setText(medicoBuscado.getMedNome());
+	txtCrm.setText(medicoBuscado.getCrm());
+	txtCpf.setText(medicoBuscado.getCpf());
+	txtCnpj.setText(medicoBuscado.getCnpj());
+	txtCelular.setText(medicoBuscado.getCel());
+	txtCelMen.setText(medicoBuscado.getCelMen());
+	txtEmail.setText(medicoBuscado.getEmail());
+
+	return medicoBuscado;
+}
 
 }

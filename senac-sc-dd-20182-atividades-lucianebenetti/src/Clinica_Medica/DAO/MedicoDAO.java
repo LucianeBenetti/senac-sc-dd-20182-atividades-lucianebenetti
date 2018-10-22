@@ -125,6 +125,7 @@ public class MedicoDAO {
 			prepStmt.setString(5, medicoVOAlterado.getEmail());
 			prepStmt.setString(6, medicoVOAlterado.getCpf());
 			prepStmt.setString(7, medicoVOAlterado.getCnpj());
+			prepStmt.setString(8, medicoVOAlterado.getCpf());
 			
 			int codigoRetorno = prepStmt.executeUpdate();
 
