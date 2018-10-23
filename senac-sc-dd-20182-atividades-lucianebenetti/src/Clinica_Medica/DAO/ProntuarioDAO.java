@@ -44,16 +44,16 @@ public class ProntuarioDAO {
 		return novoId;
 	}
 
-	public boolean delete(String pronCod) {
+	public boolean delete(String codigoProntuario) {
 		boolean sucessoDelete = false;
 
-		String query = "DELETE from prontuario where pronCod = ? ";
+		String query = "DELETE from prontuario where codigoProntuario = ? ";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
 
 		try {
-			prepStmt.setString(1, pronCod);
+			prepStmt.setString(1, codigoProntuario);
 			int codigoRetorno = prepStmt.executeUpdate();
 			if (codigoRetorno == 1) {
 				sucessoDelete = true;
@@ -67,19 +67,19 @@ public class ProntuarioDAO {
 		return sucessoDelete;
 	}
 
-	public String consultarProntuarioPorId(String pronCod) {
+	public String consultarProntuarioPorId(String codigoProntuario) {
 
-		String query = "SELECT *from prontuario " + " where pronCod = ?";
+		String query = "SELECT *from prontuario " + " where codigoProntuario = ?";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
 		try {
-			prepStmt.setString(1, pronCod);
+			prepStmt.setString(1, codigoProntuario);
 			ResultSet result = prepStmt.executeQuery();
 
 			while (result.next()) {
 				
-				prontuario.setPronCod(result.getInt(1));
+				prontuario.setCodigoProntuario(result.getInt(1));
 				prontuario.setMedicamento(result.getString(2));
 				prontuario.setExame(result.getString(3));
 				prontuario.setRegistro(result.getString(4));
@@ -98,7 +98,7 @@ public class ProntuarioDAO {
 		boolean sucessoAtualizar = false;
 
 		String query = "UPDATE prontuario SET medicamento=?, exame=?, registro=?"
-				+ " where pronCod = ?";
+				+ " where codigoProntuario = ?";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
@@ -108,7 +108,7 @@ public class ProntuarioDAO {
 			prepStmt.setString(1, prontuario.getMedicamento());
 			prepStmt.setString(2, prontuario.getExame());
 			prepStmt.setString(3, prontuario.getRegistro());
-			prepStmt.setInt(4, prontuario.getPronCod());	
+			prepStmt.setInt(4, prontuario.getCodigoProntuario());	
 			
 			int codigoRetorno = prepStmt.executeUpdate();
 
@@ -136,7 +136,7 @@ public class ProntuarioDAO {
 			while (result.next()) {
 				ProntuarioVO prontuario = new ProntuarioVO();
 
-				prontuario.setPronCod(result.getInt(1));
+				prontuario.setCodigoProntuario(result.getInt(1));
 				prontuario.setMedicamento(result.getString(2));
 				prontuario.setExame(result.getString(3));
 				prontuario.setRegistro(result.getString(4));

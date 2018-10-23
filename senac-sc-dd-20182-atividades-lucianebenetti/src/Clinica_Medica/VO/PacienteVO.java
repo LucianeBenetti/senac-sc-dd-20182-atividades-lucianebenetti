@@ -2,14 +2,14 @@ package Clinica_Medica.VO;
 
 public class PacienteVO {
 
-	 private int pacCod;
-	 private String pacNome;
-	 private String celMen;
-	 private String foneRes;
-	 private String foneCom; 
-	 private String email;
-	 private String cpf;
-	 private String cnpj;
+	 private int codigoPaciente;
+	 private String nomePaciente;
+	 private String celMensagemPaciente;
+	 private String foneResidencial;
+	 private String foneComercial; 
+	 private String emailPaciente;
+	 private String cpfPaciente;
+	 private String cnpjPaciente;
 	 private String logradouro;
 	 private String numLog;
 	 private String complemento;
@@ -17,19 +17,108 @@ public class PacienteVO {
 	 private String cidade;
 	 private String uf;
 	 private String cep;
-	
-	 public PacienteVO(int pacCod, String pacNome, String celMen, String foneRes, String foneCom, String email,
-			String cpf, String cnpj, String logradouro, String numLog, String complemento, String bairro, String cidade,
-			String uf, String cep) {
+	public int getCodigoPaciente() {
+		return codigoPaciente;
+	}
+	public void setCodigoPaciente(int codigoPaciente) {
+		this.codigoPaciente = codigoPaciente;
+	}
+	public String getNomePaciente() {
+		return nomePaciente;
+	}
+	public void setNomePaciente(String nomePaciente) {
+		this.nomePaciente = nomePaciente;
+	}
+	public String getCelMensagemPaciente() {
+		return celMensagemPaciente;
+	}
+	public void setCelMensagemPaciente(String celMensagemPaciente) {
+		this.celMensagemPaciente = celMensagemPaciente;
+	}
+	public String getFoneResidencial() {
+		return foneResidencial;
+	}
+	public void setFoneResidencial(String foneResidencial) {
+		this.foneResidencial = foneResidencial;
+	}
+	public String getFoneComercial() {
+		return foneComercial;
+	}
+	public void setFoneComercial(String foneComercial) {
+		this.foneComercial = foneComercial;
+	}
+	public String getEmailPaciente() {
+		return emailPaciente;
+	}
+	public void setEmailPaciente(String emailPaciente) {
+		this.emailPaciente = emailPaciente;
+	}
+	public String getCpfPaciente() {
+		return cpfPaciente;
+	}
+	public void setCpfPaciente(String cpfPaciente) {
+		this.cpfPaciente = cpfPaciente;
+	}
+	public String getCnpjPaciente() {
+		return cnpjPaciente;
+	}
+	public void setCnpjPaciente(String cnpjPaciente) {
+		this.cnpjPaciente = cnpjPaciente;
+	}
+	public String getLogradouro() {
+		return logradouro;
+	}
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+	public String getNumLog() {
+		return numLog;
+	}
+	public void setNumLog(String numLog) {
+		this.numLog = numLog;
+	}
+	public String getComplemento() {
+		return complemento;
+	}
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+	public String getBairro() {
+		return bairro;
+	}
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+	public String getCidade() {
+		return cidade;
+	}
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+	public String getUf() {
+		return uf;
+	}
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+	public String getCep() {
+		return cep;
+	}
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+	public PacienteVO(int codigoPaciente, String nomePaciente, String celMensagemPaciente, String foneResidencial,
+			String foneComercial, String emailPaciente, String cpfPaciente, String cnpjPaciente, String logradouro,
+			String numLog, String complemento, String bairro, String cidade, String uf, String cep) {
 		super();
-		this.pacCod = pacCod;
-		this.pacNome = pacNome;
-		this.celMen = celMen;
-		this.foneRes = foneRes;
-		this.foneCom = foneCom;
-		this.email = email;
-		this.cpf = cpf;
-		this.cnpj = cnpj;
+		this.codigoPaciente = codigoPaciente;
+		this.nomePaciente = nomePaciente;
+		this.celMensagemPaciente = celMensagemPaciente;
+		this.foneResidencial = foneResidencial;
+		this.foneComercial = foneComercial;
+		this.emailPaciente = emailPaciente;
+		this.cpfPaciente = cpfPaciente;
+		this.cnpjPaciente = cnpjPaciente;
 		this.logradouro = logradouro;
 		this.numLog = numLog;
 		this.complemento = complemento;
@@ -38,133 +127,10 @@ public class PacienteVO {
 		this.uf = uf;
 		this.cep = cep;
 	}
-
 	public PacienteVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public int getPacCod() {
-		return pacCod;
-	}
-
-	public void setPacCod(int pacCod) {
-		this.pacCod = pacCod;
-	}
-
-	public String getPacNome() {
-		return pacNome;
-	}
-
-	public void setPacNome(String pacNome) {
-		this.pacNome = pacNome;
-	}
-
-	public String getCelMen() {
-		return celMen;
-	}
-
-	public void setCelMen(String celMen) {
-		this.celMen = celMen;
-	}
-
-	public String getFoneRes() {
-		return foneRes;
-	}
-
-	public void setFoneRes(String foneRes) {
-		this.foneRes = foneRes;
-	}
-
-	public String getFoneCom() {
-		return foneCom;
-	}
-
-	public void setFoneCom(String foneCom) {
-		this.foneCom = foneCom;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-
-	public String getLogradouro() {
-		return logradouro;
-	}
-
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-
-	public String getNumLog() {
-		return numLog;
-	}
-
-	public void setNumLog(String numLog) {
-		this.numLog = numLog;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-	public String getUf() {
-		return uf;
-	}
-
-	public void setUf(String uf) {
-		this.uf = uf;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
 	
-	 
 	
-	 
 }

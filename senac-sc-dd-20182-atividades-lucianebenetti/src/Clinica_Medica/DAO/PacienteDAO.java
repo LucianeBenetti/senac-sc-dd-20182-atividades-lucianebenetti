@@ -16,19 +16,19 @@ public class PacienteDAO {
 
 		int novoId = 0;
 
-		String sql = "INSERT INTO paciente (pacNome, celMen, foneRes, foneCom, email, cpf, cnpj, logradouro, numLog, complemento, bairro, cidade, uf, cep)" + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO paciente (nomePaciente, celMensagemPaciente, foneResidencial, foneComercial, emailPaciente, cpfPaciente, cnpjPaciente, logradouro, numeroLogradouro, complemento, bairro, cidade, uf, cep)" + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, sql, Statement.RETURN_GENERATED_KEYS);
 
 		try {
-			prepStmt.setString(1, paciente.getPacNome());
-			prepStmt.setString(2, paciente.getCelMen());
-			prepStmt.setString(3, paciente.getFoneRes());
-			prepStmt.setString(4, paciente.getFoneCom());
-			prepStmt.setString(5, paciente.getEmail());
-			prepStmt.setString(6, paciente.getCpf());
-			prepStmt.setString(7, paciente.getCnpj());
+			prepStmt.setString(1, paciente.getNomePaciente());
+			prepStmt.setString(2, paciente.getCelMensagemPaciente());
+			prepStmt.setString(3, paciente.getFoneResidencial());
+			prepStmt.setString(4, paciente.getFoneComercial());
+			prepStmt.setString(5, paciente.getEmailPaciente());
+			prepStmt.setString(6, paciente.getCpfPaciente());
+			prepStmt.setString(7, paciente.getCnpjPaciente());
 			prepStmt.setString(8, paciente.getLogradouro());
 			prepStmt.setString(9, paciente.getNumLog());
 			prepStmt.setString(10, paciente.getComplemento());
@@ -58,27 +58,27 @@ public class PacienteDAO {
 
 	}
 
-	public PacienteVO consultarPacientePorCpf(String cpf) {
+	public PacienteVO consultarPacientePorCpf(String cpfPaciente) {
 		
-		String query = "SELECT *from paciente " + " where cpf = ?";
+		String query = "SELECT *from paciente " + " where cpfPaciente = ?";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
 		PacienteVO paciente = null;
 		try {
-			prepStmt.setString(1, cpf);
+			prepStmt.setString(1, cpfPaciente);
 			ResultSet result = prepStmt.executeQuery();
 
 			while (result.next()) {
 				paciente = new PacienteVO();
-				paciente.setPacCod(result.getInt(1));
-				paciente.setPacNome(result.getString(2));
-				paciente.setCelMen(result.getString(3));
-				paciente.setFoneRes(result.getString(4));
-				paciente.setFoneCom(result.getString(5));
-				paciente.setEmail(result.getString(6));
-				paciente.setCpf(result.getString(7));
-				paciente.setCnpj(result.getString(8));
+				paciente.setCodigoPaciente(result.getInt(1));
+				paciente.setNomePaciente(result.getString(2));
+				paciente.setCelMensagemPaciente(result.getString(3));
+				paciente.setFoneResidencial(result.getString(4));
+				paciente.setFoneComercial(result.getString(5));
+				paciente.setEmailPaciente(result.getString(6));
+				paciente.setCpfPaciente(result.getString(7));
+				paciente.setCnpjPaciente(result.getString(8));
 				paciente.setLogradouro(result.getString(9));
 				paciente.setNumLog(result.getString(10));
 				paciente.setComplemento(result.getString(11));
@@ -98,16 +98,16 @@ public class PacienteDAO {
 		return paciente;
 	}
 
-	public boolean delete(String cpf) {
+	public boolean delete(String cpfPaciente) {
 		boolean sucessoDelete = false;
 
-		String query = "DELETE from paciente where cpf = ? ";
+		String query = "DELETE from paciente where cpfPaciente = ? ";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
 
 		try {
-			prepStmt.setString(1, cpf);
+			prepStmt.setString(1, cpfPaciente);
 			int codigoRetorno = prepStmt.executeUpdate();
 			if (codigoRetorno == 1) {
 				sucessoDelete = true;
@@ -125,20 +125,20 @@ public class PacienteDAO {
 	public boolean atualizar(PacienteVO pacienteAlterado, String cpfAnterior) {
 		boolean sucessoAtualizar = false;
 										 
-		String query = "UPDATE paciente SET pacNome=?, celMen=?, foneRes=?, foneCom=?, email=?, cpf=?, cnpj=?, logradouro=?, numLog=?, complemento=?, bairro=?, cidade=?, uf=?, cep=? "
-				+ " where cpf = ?";
+		String query = "UPDATE paciente SET nomePaciente=?, celMensagemPaciente=?, foneResidencial=?, foneComercial=?, emailPaciente=?, cpfPaciente=?, cnpjPaciente=?, logradouro=?, numeroLogradouro=?, complemento=?, bairro=?, cidade=?, uf=?, cep=? "
+				+ " where cpfPaciente = ?";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
 
 		try {
-			prepStmt.setString(1, pacienteAlterado.getPacNome());
-			prepStmt.setString(2, pacienteAlterado.getCelMen());
-			prepStmt.setString(3, pacienteAlterado.getFoneRes());
-			prepStmt.setString(4, pacienteAlterado.getFoneCom());
-			prepStmt.setString(5, pacienteAlterado.getEmail());
-			prepStmt.setString(6, pacienteAlterado.getCpf());
-			prepStmt.setString(7, pacienteAlterado.getCnpj());
+			prepStmt.setString(1, pacienteAlterado.getNomePaciente());
+			prepStmt.setString(2, pacienteAlterado.getCelMensagemPaciente());
+			prepStmt.setString(3, pacienteAlterado.getFoneResidencial());
+			prepStmt.setString(4, pacienteAlterado.getFoneComercial());
+			prepStmt.setString(5, pacienteAlterado.getEmailPaciente());
+			prepStmt.setString(6, pacienteAlterado.getCpfPaciente());
+			prepStmt.setString(7, pacienteAlterado.getCnpjPaciente());
 			prepStmt.setString(8, pacienteAlterado.getLogradouro());
 			prepStmt.setString(9, pacienteAlterado.getNumLog());
 			prepStmt.setString(10, pacienteAlterado.getComplemento());
@@ -146,7 +146,7 @@ public class PacienteDAO {
 			prepStmt.setString(12, pacienteAlterado.getCidade());
 			prepStmt.setString(13, pacienteAlterado.getUf());
 			prepStmt.setString(14, pacienteAlterado.getCep());
-			prepStmt.setString(15, pacienteAlterado.getCpf());
+			prepStmt.setString(15, pacienteAlterado.getCpfPaciente());
 
 			int codigoRetorno = prepStmt.executeUpdate();
 
@@ -174,18 +174,16 @@ public class PacienteDAO {
 			while (result.next()) {
 				PacienteVO paciente = new PacienteVO();
 
-				paciente.setPacCod(result.getInt(1));
-				paciente.setPacNome(result.getString(2));
-				paciente.setCelMen(result.getString(3));
-				paciente.setFoneRes(result.getString(4));
-				paciente.setFoneCom(result.getString(5));
-				paciente.setEmail(result.getString(6));
-				paciente.setCpf(result.getString(7));
-				paciente.setCnpj(result.getString(8));
+				paciente.setCodigoPaciente(result.getInt(1));
+				paciente.setNomePaciente(result.getString(2));
+				paciente.setCelMensagemPaciente(result.getString(3));
+				paciente.setFoneResidencial(result.getString(4));
+				paciente.setFoneComercial(result.getString(5));
+				paciente.setEmailPaciente(result.getString(6));
+				paciente.setCpfPaciente(result.getString(7));
+				paciente.setCnpjPaciente(result.getString(8));
 				
-				
-
-				listapacientes.add(paciente);
+					listapacientes.add(paciente);
 			}
 
 		} catch (SQLException e) {

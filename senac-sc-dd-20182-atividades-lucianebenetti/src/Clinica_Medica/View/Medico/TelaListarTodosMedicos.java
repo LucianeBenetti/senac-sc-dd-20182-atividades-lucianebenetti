@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Color;
 
 public class TelaListarTodosMedicos extends JPanel {
 	private JTable tbMedicos;
@@ -24,6 +25,7 @@ public class TelaListarTodosMedicos extends JPanel {
 	 * Create the panel.
 	 */
 	public TelaListarTodosMedicos() {
+		setBackground(new Color(173, 216, 230));
 		setLayout(null);
 		
 		JButton btnListarTodosOs = new JButton("Listar Todos os Medicos");
@@ -35,8 +37,8 @@ public class TelaListarTodosMedicos extends JPanel {
 
 				DefaultTableModel tabela = (DefaultTableModel) tbMedicos.getModel();
 				for (MedicoVO medico : medicos) {
-					tabela.addRow(new Object[] { medico.getMedNome(), medico.getCrm(),
-							medico.getCpf(), medico.getCnpj(), medico.getCel(), medico.getCelMen(), medico.getEmail()
+					tabela.addRow(new Object[] { medico.getNomeMedico(), medico.getCrm(),
+							medico.getCpfMedico(), medico.getCnpjMedico(), medico.getCelularMedico(), medico.getCelMensagemMedico(), medico.getEmailMedico()
 
 					});
 				}

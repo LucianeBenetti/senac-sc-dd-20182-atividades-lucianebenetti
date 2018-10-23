@@ -37,7 +37,7 @@ public class TelaCadastrarConvenio extends JPanel {
 	 * Create the panel.
 	 */
 	public TelaCadastrarConvenio() {
-		setBackground(new Color(230, 230, 250));
+		setBackground(new Color(173, 216, 230));
 		setLayout(null);
 		
 		JLabel lblNome = new JLabel("Nome");
@@ -186,8 +186,8 @@ public class TelaCadastrarConvenio extends JPanel {
 	}
 
 	protected ConvenioVO consutarConvenio() {
-		txtNome.setText(convenioConsultado.getConvNome());
-		txtCnpj.setText(convenioConsultado.getConvCnpj());
+		txtNome.setText(convenioConsultado.getNomeConvenio());
+		txtCnpj.setText(convenioConsultado.getCnpjConvenio());
 		txtValor.setText(convenioConsultado.getValor()+ "");
 		
 		return convenioConsultado;
@@ -203,8 +203,8 @@ public class TelaCadastrarConvenio extends JPanel {
 	}
 
 	protected ConvenioVO construirConvenio() {
-		convenio.setConvNome(txtNome.getText());
-		convenio.setConvCnpj(txtCnpj.getText());
+		convenio.setNomeConvenio(txtNome.getText());
+		convenio.setCnpjConvenio(txtCnpj.getText());
 		
 		String valor = txtValor.getText();
 		

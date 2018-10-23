@@ -17,7 +17,7 @@ public class PacienteBO {
 	
 
 	public boolean inserir(PacienteVO paciente) {
-		if (dao.consultarPacientePorCpf(paciente.getCpf()) != null) {
+		if (dao.consultarPacientePorCpf(paciente.getCpfPaciente()) != null) {
 			JOptionPane.showMessageDialog(null, "Paciente já cadastrado! Tente novamente.");
 			
 		} else {
@@ -39,7 +39,7 @@ public class PacienteBO {
 	}
 
 	public boolean excluirPaciente(PacienteVO paciente) {
-		boolean sucesso = dao.delete(paciente.getCpf());
+		boolean sucesso = dao.delete(paciente.getCpfPaciente());
 		return sucesso;
 		
 	}

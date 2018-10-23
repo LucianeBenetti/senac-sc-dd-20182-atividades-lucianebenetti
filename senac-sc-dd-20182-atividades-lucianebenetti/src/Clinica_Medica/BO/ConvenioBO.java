@@ -1,6 +1,7 @@
 package Clinica_Medica.BO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -12,7 +13,7 @@ public class ConvenioBO {
 
 	public boolean inserir(ConvenioVO convenio) {
 
-		if (dao.consultarConvenioPorCnpj(convenio.getConvCnpj()) != null) {
+		if (dao.consultarConvenioPorCnpj(convenio.getCnpjConvenio()) != null) {
 			JOptionPane.showMessageDialog(null, "Convênio já cadastrado! Tente novamente.");
 		} else {
 
@@ -38,7 +39,12 @@ public class ConvenioBO {
 	}
 
 	public boolean excluirConvenio(ConvenioVO convenio) {
-		boolean sucesso = dao.delete(convenio.getConvCnpj());
+		boolean sucesso = dao.delete(convenio.getCnpjConvenio());
 		return sucesso;
+	}
+
+	public List<ConvenioVO> listarTodosConvenios() {
+		ArrayList<ConvenioVO> convenios = dao.listarTodos();
+		return convenios;
 	}
 }

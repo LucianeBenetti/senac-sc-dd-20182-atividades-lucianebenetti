@@ -14,6 +14,7 @@ import Clinica_Medica.VO.ProntuarioVO;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.awt.Color;
 
 public class TelaListarTodosProntuarios extends JPanel {
 	private JTable tbProntuarios;
@@ -22,6 +23,7 @@ public class TelaListarTodosProntuarios extends JPanel {
 	 * Create the panel.
 	 */
 	public TelaListarTodosProntuarios() {
+		setBackground(new Color(173, 216, 230));
 		setLayout(null);
 
 		JButton btnListarTodosProntuarios = new JButton("Listar Todos Prontuarios");
@@ -34,7 +36,7 @@ public class TelaListarTodosProntuarios extends JPanel {
 
 				DefaultTableModel tabela = (DefaultTableModel) tbProntuarios.getModel();
 				for (ProntuarioVO prontuario : prontuarios) {
-					tabela.addRow(new Object[] { prontuario.getPronCod(), prontuario.getMedicamento(),
+					tabela.addRow(new Object[] { prontuario.getCodigoProntuario(), prontuario.getMedicamento(),
 							prontuario.getExame(), prontuario.getRegistro()
 
 					});
@@ -47,8 +49,9 @@ public class TelaListarTodosProntuarios extends JPanel {
 		add(btnListarTodosProntuarios);
 
 		JLabel lblProntuarios = new JLabel("Prontuarios");
+		lblProntuarios.setBackground(new Color(173, 216, 230));
 		lblProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblProntuarios.setBounds(21, 106, 138, 22);
+		lblProntuarios.setBounds(21, 124, 150, 31);
 		add(lblProntuarios);
 
 		tbProntuarios = new JTable();

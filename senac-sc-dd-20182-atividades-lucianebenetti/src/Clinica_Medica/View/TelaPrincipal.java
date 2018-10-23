@@ -40,6 +40,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Color;
 
 public class TelaPrincipal extends JFrame {
 
@@ -461,6 +462,7 @@ public class TelaPrincipal extends JFrame {
 		mntmAutores.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnSobre.add(mntmAutores);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(230, 230, 250));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);

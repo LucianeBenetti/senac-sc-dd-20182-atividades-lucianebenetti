@@ -14,7 +14,7 @@ public class EspecializacaoBO {
 	
 	public boolean inserir(EspecializacaoVO especializacao) {
 				
-			if (dao.consultaPorID(especializacao.getEspeCod()) != null) {
+			if (dao.consultaPorID(especializacao.getCodigoEspecializacao()) != null) {
 				JOptionPane.showMessageDialog(null, "Especialização já cadastrada! Tente novamente.");
 				
 			} else {

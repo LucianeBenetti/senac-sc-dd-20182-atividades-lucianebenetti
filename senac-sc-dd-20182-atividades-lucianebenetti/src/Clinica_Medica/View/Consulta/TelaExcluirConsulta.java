@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
 import javax.swing.JSeparator;
+import java.awt.Color;
 
 public class TelaExcluirConsulta extends JPanel {
 
@@ -15,6 +16,7 @@ public class TelaExcluirConsulta extends JPanel {
 	 * Create the panel.
 	 */
 	public TelaExcluirConsulta() {
+		setBackground(new Color(173, 216, 230));
 		setLayout(null);
 		
 		JButton btnSair = new JButton("Sair");
@@ -33,26 +35,26 @@ public class TelaExcluirConsulta extends JPanel {
                         }
 			}
 		});
-		btnSair.setBounds(351, 246, 89, 31);
+		btnSair.setBounds(436, 267, 89, 31);
 		add(btnSair);
 		
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscar.setBounds(351, 11, 89, 31);
+		btnBuscar.setBounds(436, 11, 89, 31);
 		add(btnBuscar);
 		
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnExcluir.setBounds(200, 246, 100, 31);
+		btnExcluir.setBounds(230, 267, 100, 31);
 		add(btnExcluir);
 		
 		JButton btnLimparTela = new JButton("Limpar Tela");
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnLimparTela.setBounds(10, 246, 134, 31);
+		btnLimparTela.setBounds(10, 267, 134, 31);
 		add(btnLimparTela);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 53, 430, 2);
+		separator.setBounds(10, 53, 515, 16);
 		add(separator);
 
 	}

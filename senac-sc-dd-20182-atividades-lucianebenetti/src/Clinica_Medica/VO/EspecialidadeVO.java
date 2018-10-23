@@ -2,49 +2,58 @@ package Clinica_Medica.VO;
 
 public class EspecialidadeVO {
 
-	private int espCod;
-	private String espNome;
-	private String espInstituicao;
+	private int codigoEspecialidade;
+	private String nomeEspecialidade;
+	private String Instituicao;
+	
 	
 	public EspecialidadeVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public EspecialidadeVO(int espCod, String espNome, String espInstituicao) {
+
+	public EspecialidadeVO(int codigoEspecialidade, String nomeEspecialidade, String instituicao) {
 		super();
-		this.espCod = espCod;
-		this.espNome = espNome;
-		this.espInstituicao = espInstituicao;
+		this.codigoEspecialidade = codigoEspecialidade;
+		this.nomeEspecialidade = nomeEspecialidade;
+		Instituicao = instituicao;
 	}
 
-	public int getEspCod() {
-		return espCod;
+
+	public int getCodigoEspecialidade() {
+		return codigoEspecialidade;
 	}
 
-	public void setEspCod(int espCod) {
-		this.espCod = espCod;
+
+	public void setCodigoEspecialidade(int codigoEspecialidade) {
+		this.codigoEspecialidade = codigoEspecialidade;
 	}
 
-	public String getEspNome() {
-		return espNome;
+
+	public String getNomeEspecialidade() {
+		return nomeEspecialidade;
 	}
 
-	public void setEspNome(String espNome) {
-		this.espNome = espNome;
+
+	public void setNomeEspecialidade(String nomeEspecialidade) {
+		this.nomeEspecialidade = nomeEspecialidade;
 	}
 
-	public String getEspInstituicao() {
-		return espInstituicao;
+
+	public String getInstituicao() {
+		return Instituicao;
 	}
 
-	public void setEspInstituicao(String espInstituicao) {
-		this.espInstituicao = espInstituicao;
+
+	public void setInstituicao(String instituicao) {
+		Instituicao = instituicao;
 	}
+
 
 	@Override
 	public String toString() {
-		return espNome;
+		return nomeEspecialidade;
 	}
 	
 	

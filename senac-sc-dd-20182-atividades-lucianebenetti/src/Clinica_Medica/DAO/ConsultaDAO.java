@@ -19,19 +19,19 @@ public class ConsultaDAO {
 
 		int novoId = 0;
 
-		String sql = "INSERT INTO consulta (espeCod, pacCod, convCod, pronCod, conData, conHorario)" + " VALUES (?,?,?,?,?,?)";
+		String sql = "INSERT INTO consulta (codigoEspecializacao, codigoPaciente, codigoConvenio, codigoProntuario, dataConsulta, horarioConsulta)" + " VALUES (?,?,?,?,?,?)";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, sql, Statement.RETURN_GENERATED_KEYS);
 
 		try {
 			
-			prepStmt.setInt(1, consulta.getEspeCod());
-			prepStmt.setInt(2, consulta.getPacCod());
-			prepStmt.setInt(3, consulta.getConvCod());
-			prepStmt.setInt(4, consulta.getPronCod());
-			prepStmt.setDate(5, (Date) consulta.getConData());
-			prepStmt.setTime(6, (Time) consulta.getConHorario());
+			prepStmt.setInt(1, consulta.getEspecializacaoVO().getCodigoEspecializacao());
+			prepStmt.setInt(2, consulta.getPacienteVO().getCodigoPaciente());
+			prepStmt.setInt(3, consulta.getConvenioVO().getCodigoConvenio());
+			prepStmt.setInt(4, consulta.getProntuarioVO().getCodigoProntuario());
+			prepStmt.setDate(5, (Date) consulta.getDataConsulta());
+			prepStmt.setTime(6, (Time) consulta.getHorarioConsulta());
 		
 			prepStmt.executeUpdate();
 
@@ -57,7 +57,7 @@ public class ConsultaDAO {
 		
 		ConsultaVO consulta = new ConsultaVO();
 
-		String query = "SELECT *from consulta " + " where pacNome like ?";//refazer o select
+		String query = "SELECT *from consulta " + " where nomePaciente like ?";//refazer o select
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
@@ -67,13 +67,13 @@ public class ConsultaDAO {
 
 			while (result.next()) {
 				
-				consulta.setConCod(result.getInt(1));
-				consulta.setEspeCod(result.getInt(2));
-				consulta.setPacCod(result.getInt(3));
-				consulta.setPronCod(result.getInt(4));
-				consulta.setConvCod(result.getInt(5));
-				consulta.setConData(result.getDate(6));
-				consulta.setConHorario(result.getTime(7));
+				consulta.getConvenioVO().setCodigoConvenio(result.getInt(1));		
+				consulta.getEspecializacaoVO().setCodigoEspecializacao(result.getInt(2));
+				consulta.getPacienteVO().setCodigoPaciente(result.getInt(3));
+				consulta.getProntuarioVO().setCodigoProntuario(result.getInt(4));
+				consulta.getConvenioVO().setCodigoConvenio(result.getInt(5));
+				consulta.setDataConsulta(result.getDate(6));
+				consulta.setHorarioConsulta(result.getTime(7));
 				
 			}
 		} catch (SQLException ex) {
@@ -85,16 +85,16 @@ public class ConsultaDAO {
 		return consulta.toString();
 	}
 
-	public boolean delete(int conCod) {
+	public boolean delete(int codigoConsulta) {
 		boolean sucessoDelete = false;
 
-		String query = "DELETE from consulta where conCod = ? ";
+		String query = "DELETE from consulta where codigoConsulta = ? ";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
 
 		try {
-			prepStmt.setInt(1, conCod);
+			prepStmt.setInt(1, codigoConsulta);
 			int codigoRetorno = prepStmt.executeUpdate();
 			if (codigoRetorno == 1) {
 				sucessoDelete = true;
@@ -109,10 +109,10 @@ public class ConsultaDAO {
 	}
 
 	
-	public boolean atualizar(ConsultaVO consultaAlterado, String conCod) {
+	public boolean atualizar(ConsultaVO consultaAlterado, String codigoConsulta) {
 		boolean sucessoAtualizar = false;
 		ConsultaVO consulta = new ConsultaVO();						 
-		String query = "UPDATE consulta SET espeCod=?, pacCod=?, convCod=?, pronCod=?, conData=?, conHorario=?"
+		String query = "UPDATE consulta SET codigoEspecializacao=?, codigoPaciente=?, codigoConvenio=?, codigoProntuario=?, dataConsulta=?, horarioConsulta=?"
 				+ " where conCod =?";
 
 		Connection conn = Banco.getConnection();
@@ -120,13 +120,13 @@ public class ConsultaDAO {
 
 		try {
 
-			prepStmt.setInt(1, consulta.getEspeCod());
-			prepStmt.setInt(2, consulta.getPacCod());
-			prepStmt.setInt(3, consulta.getConvCod());
-			prepStmt.setInt(4, consulta.getPronCod());
-			prepStmt.setDate(5, (Date) consulta.getConData());
-			prepStmt.setTime(6, (Time) consulta.getConHorario());
-			prepStmt.setInt(7, consulta.getConCod());
+			prepStmt.setInt(1, consulta.getEspecializacaoVO().getCodigoEspecializacao());
+			prepStmt.setInt(2, consulta.getPacienteVO().getCodigoPaciente());
+			prepStmt.setInt(3, consulta.getConvenioVO().getCodigoConvenio());
+			prepStmt.setInt(4, consulta.getProntuarioVO().getCodigoProntuario());
+			prepStmt.setDate(5, (Date) consulta.getDataConsulta());
+			prepStmt.setTime(6, (Time) consulta.getHorarioConsulta());
+			prepStmt.setInt(7, consulta.getCodigoConsulta());
 
 			int codigoRetorno = prepStmt.executeUpdate();
 
@@ -154,13 +154,13 @@ public class ConsultaDAO {
 			while (result.next()) {
 				ConsultaVO consulta = new ConsultaVO();
 
-				consulta.setConCod(result.getInt(1));
-				consulta.setEspeCod(result.getInt(2));
-				consulta.setPacCod(result.getInt(3));
-				consulta.setPronCod(result.getInt(4));
-				consulta.setConvCod(result.getInt(5));
-				consulta.setConData(result.getDate(6));
-				consulta.setConHorario(result.getTime(7));
+				consulta.getConvenioVO().setCodigoConvenio(result.getInt(1));		
+				consulta.getEspecializacaoVO().setCodigoEspecializacao(result.getInt(2));
+				consulta.getPacienteVO().setCodigoPaciente(result.getInt(3));
+				consulta.getProntuarioVO().setCodigoProntuario(result.getInt(4));
+				consulta.getConvenioVO().setCodigoConvenio(result.getInt(5));
+				consulta.setDataConsulta(result.getDate(6));
+				consulta.setHorarioConsulta(result.getTime(7));
 				
 				listaConsultas.add(consulta);
 			}

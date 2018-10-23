@@ -29,10 +29,10 @@ public class EspecialidadeController {
 	private String validarEspecialidade(EspecialidadeVO especialidade) {
 				
 		String validacao = "";
-		if(especialidade.getEspNome() == null) {
+		if(especialidade.getNomeEspecialidade() == null) {
 			validacao = "Nome está nulo!";
 		}else {	
-			if(especialidade.getEspNome().trim().equals("") || especialidade.getEspInstituicao().trim().equals("") ) {
+			if(especialidade.getNomeEspecialidade().trim().equals("") || especialidade.getInstituicao().trim().equals("") ) {
 				validacao += "- Nome e Instituição são obrigatórios. \n";
 			}
 			
@@ -44,11 +44,6 @@ public class EspecialidadeController {
 	public List<EspecialidadeVO> exibirEspecialidadePorNome(String nome) {
 		
 		return bo.exibirEspecialidadePorNome(nome);
-	}
-
-	public ArrayList<EspecialidadeVO> ConsultarEspecialidade(String espNome, int espeCod, String medNome) {
-		
-		return bo.consultarEspecialidade(espNome, espeCod, medNome);
 	}
 
 	public String atualizar(EspecialidadeVO especialidade, int espCod) {

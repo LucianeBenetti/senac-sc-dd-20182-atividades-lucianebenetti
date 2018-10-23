@@ -41,7 +41,7 @@ public class TelaCadastrarMedico extends JPanel {
 	 * @throws ParseException
 	 */
 	public TelaCadastrarMedico() {
-		setBackground(new Color(230, 230, 250));
+		setBackground(new Color(173, 216, 230));
 		setLayout(null);
 
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -247,13 +247,13 @@ public class TelaCadastrarMedico extends JPanel {
 	}
 
 	protected MedicoVO buscarMedico() {
-		txtNome.setText(medicoBuscado.getMedNome());
+		txtNome.setText(medicoBuscado.getNomeMedico());
 		txtCrm.setText(medicoBuscado.getCrm());
-		txtCPF.setText(medicoBuscado.getCpf());
-		txtCnpj.setText(medicoBuscado.getCnpj());
-		txtCel.setText(medicoBuscado.getCel());
-		txtCelMen.setText(medicoBuscado.getCelMen());
-		txtEmail.setText(medicoBuscado.getEmail());
+		txtCPF.setText(medicoBuscado.getCpfMedico());
+		txtCnpj.setText(medicoBuscado.getCnpjMedico());
+		txtCel.setText(medicoBuscado.getCelularMedico());
+		txtCelMen.setText(medicoBuscado.getCelMensagemMedico());
+		txtEmail.setText(medicoBuscado.getEmailMedico());
 
 		return medicoBuscado;
 	}
@@ -272,13 +272,13 @@ public class TelaCadastrarMedico extends JPanel {
 
 	protected MedicoVO construirMedico() {
 
-		medico.setMedNome(txtNome.getText());
+		medico.setNomeMedico(txtNome.getText());
 		medico.setCrm(txtCrm.getText());
-		medico.setCpf(txtCPF.getText());
-		medico.setCnpj(txtCnpj.getText());
-		medico.setCel(txtCel.getText());
-		medico.setCelMen(txtCelMen.getText());
-		medico.setEmail(txtEmail.getText());
+		medico.setCpfMedico(txtCPF.getText());
+		medico.setCnpjMedico(txtCnpj.getText());
+		medico.setCelularMedico(txtCel.getText());
+		medico.setCelMensagemMedico(txtCelMen.getText());
+		medico.setEmailMedico(txtEmail.getText());
 
 		return medico;
 	}

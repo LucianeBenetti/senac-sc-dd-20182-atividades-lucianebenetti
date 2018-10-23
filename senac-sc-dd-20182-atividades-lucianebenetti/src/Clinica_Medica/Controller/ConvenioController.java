@@ -1,6 +1,7 @@
 package Clinica_Medica.Controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Clinica_Medica.BO.ConvenioBO;
 import Clinica_Medica.VO.ConvenioVO;
@@ -27,10 +28,10 @@ public class ConvenioController {
 	private String validarConvenio(ConvenioVO convenio) {
 
 		String validacao = "";
-		if (convenio.getConvCnpj() == null) {
+		if (convenio.getCnpjConvenio() == null) {
 			validacao = "CNPJ está nulo!";
 		} else {
-			if (convenio.getConvNome().trim().equals("") || convenio.getConvCnpj().trim().equals("")) {
+			if (convenio.getNomeConvenio().trim().equals("") || convenio.getCnpjConvenio().trim().equals("")) {
 				validacao += " - Nome e CNPJ são obrigatórios. \n";
 			}
 
@@ -66,6 +67,11 @@ public class ConvenioController {
 
 		bo.excluirConvenio(convenio);
 	
+	}
+
+	public List<ConvenioVO> listarTodosConvenios() {
+
+		return bo.listarTodosConvenios();
 	}
 
 }

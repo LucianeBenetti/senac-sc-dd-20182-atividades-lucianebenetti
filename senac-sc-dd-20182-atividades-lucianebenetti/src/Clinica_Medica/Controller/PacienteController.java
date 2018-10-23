@@ -29,10 +29,10 @@ public class PacienteController {
 	private String validarPaciente(PacienteVO paciente) {
 				
 		String validacao = "";
-		if(paciente.getPacNome() == null) {
+		if(paciente.getNomePaciente() == null) {
 			validacao = "Nome está nulo!";
 		}else {	
-			if(paciente.getPacNome().trim().equals("") || paciente.getCpf().trim().equals("")) {
+			if(paciente.getNomePaciente().trim().equals("") || paciente.getCpfPaciente().trim().equals("")) {
 				validacao += "- Nome e CPF são obrigatórios. \n";
 			}
 			

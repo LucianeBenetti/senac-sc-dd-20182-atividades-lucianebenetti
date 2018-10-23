@@ -15,7 +15,7 @@ public class MedicoBO {
 
 	public boolean inserir(MedicoVO medico) {
 
-		if (dao.consultarMedicoVOPorCpf(medico.getCpf()) != null) {
+		if (dao.consultarMedicoVOPorCpf(medico.getCpfMedico()) != null) {
 			JOptionPane.showMessageDialog(null, "Médico já cadastrado! Tente novamente.");
 		} else {
 
@@ -42,7 +42,7 @@ public class MedicoBO {
 	}
 
 	public boolean excluirMedico(MedicoVO medicoExcluido) {
-		boolean sucesso = dao.delete(medicoExcluido.getCpf());
+		boolean sucesso = dao.delete(medicoExcluido.getCpfMedico());
 		return sucesso;
 	}
 

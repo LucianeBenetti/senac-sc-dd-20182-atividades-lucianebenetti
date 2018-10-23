@@ -9,6 +9,7 @@ import java.awt.Font;
 import javax.swing.JSeparator;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Color;
 
 public class TelaExcluirEspecialidade extends JPanel {
 
@@ -16,6 +17,7 @@ public class TelaExcluirEspecialidade extends JPanel {
 	 * Create the panel.
 	 */
 	public TelaExcluirEspecialidade() {
+		setBackground(new Color(173, 216, 230));
 		setLayout(null);
 		
 		JButton btnBuscar = new JButton("Buscar");

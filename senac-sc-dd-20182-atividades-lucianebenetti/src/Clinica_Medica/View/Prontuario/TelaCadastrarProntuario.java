@@ -30,7 +30,7 @@ public class TelaCadastrarProntuario extends JPanel {
 	 * Create the panel.
 	 */
 	public TelaCadastrarProntuario() {
-		setBackground(new Color(230, 230, 250));
+		setBackground(new Color(173, 216, 230));
 		setLayout(null);
 		
 		JLabel lblBuscarNomePaciente = new JLabel("Nome Paciente");
@@ -99,22 +99,11 @@ public class TelaCadastrarProntuario extends JPanel {
 		lblExames.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblExames.setBounds(21, 286, 94, 22);
 		add(lblExames);
-		
-		txtAreaExames = new JTextArea();
-		txtAreaExames.setFont(new Font("Monospaced", Font.PLAIN, 15));
-		txtAreaExames.setBounds(157, 262, 560, 46);
-		add(txtAreaExames);
 			
 		JLabel lblRegistro = new JLabel("Registro");
 		lblRegistro.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblRegistro.setBounds(21, 349, 94, 22);
 		add(lblRegistro);
-		
-		txtAreaRegistro = new JTextArea();
-		txtAreaRegistro.setFont(new Font("Monospaced", Font.PLAIN, 15));
-	
-		txtAreaRegistro.setBounds(157, 319, 560, 122);
-		add(txtAreaRegistro);
 		
 		JLabel lblNomePaciente = new JLabel("Nome Paciente");
 		lblNomePaciente.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -142,6 +131,26 @@ public class TelaCadastrarProntuario extends JPanel {
 		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnAlterar.setBounds(199, 463, 140, 39);
 		add(btnAlterar);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(145, 321, 583, 126);
+		add(scrollPane);
+		
+		txtAreaRegistro = new JTextArea();
+		scrollPane.setViewportView(txtAreaRegistro);
+		txtAreaRegistro.setFont(new Font("Monospaced", Font.PLAIN, 15));
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(157, 256, 2, 2);
+		add(scrollPane_1);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(155, 256, 562, 54);
+		add(scrollPane_2);
+		
+		txtAreaExames = new JTextArea();
+		scrollPane_2.setViewportView(txtAreaExames);
+		txtAreaExames.setFont(new Font("Monospaced", Font.PLAIN, 15));
 
 	}
 
@@ -155,6 +164,4 @@ public class TelaCadastrarProntuario extends JPanel {
 		dateChooserDataConsulta.setDate(null);
 		
 	}
-	
-	
 }

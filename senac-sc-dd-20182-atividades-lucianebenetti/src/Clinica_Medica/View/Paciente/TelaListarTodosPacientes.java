@@ -13,6 +13,7 @@ import Clinica_Medica.VO.PacienteVO;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.awt.Color;
 
 public class TelaListarTodosPacientes extends JPanel {
 	private JTable tbPacientes;
@@ -21,6 +22,7 @@ public class TelaListarTodosPacientes extends JPanel {
 	 * Create the panel.
 	 */
 	public TelaListarTodosPacientes() {
+		setBackground(new Color(173, 216, 230));
 		setLayout(null);
 		
 		JButton btnListarTodosPacientes = new JButton("Listar Todos Pacientes");
@@ -33,8 +35,8 @@ public class TelaListarTodosPacientes extends JPanel {
 
 				DefaultTableModel tabela = (DefaultTableModel) tbPacientes.getModel();
 				for (PacienteVO paciente : pacientes) {
-					tabela.addRow(new Object[] { paciente.getPacNome(), paciente.getCpf(),
-							paciente.getCnpj(), paciente.getCelMen(), paciente.getFoneRes(), paciente.getFoneCom(), paciente.getEmail()
+					tabela.addRow(new Object[] { paciente.getNomePaciente(), paciente.getCpfPaciente(),
+							paciente.getCnpjPaciente(), paciente.getCelMensagemPaciente(), paciente.getFoneResidencial(), paciente.getFoneComercial(), paciente.getEmailPaciente()
 
 					});
 				}

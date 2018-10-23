@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Color;
 
 public class TelaExcluirProntuario extends JPanel {
 	private JTextField txtBuscarCpf;
@@ -29,6 +30,7 @@ public class TelaExcluirProntuario extends JPanel {
 	 * Create the panel.
 	 */
 	public TelaExcluirProntuario() {
+		setBackground(new Color(173, 216, 230));
 		setLayout(null);
 		
 		JLabel lblCpfPaciente = new JLabel("CPF Paciente");
@@ -38,6 +40,7 @@ public class TelaExcluirProntuario extends JPanel {
 		
 		try {
 			txtBuscarCpf = new JFormattedTextField(new MaskFormatter(MASCARA_CPF));
+			txtBuscarCpf.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,6 +100,7 @@ public class TelaExcluirProntuario extends JPanel {
 		add(lblNomePaciente);
 		
 		txtNome = new JTextField();
+		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtNome.setBounds(151, 133, 395, 25);
 		add(txtNome);
 		txtNome.setColumns(10);

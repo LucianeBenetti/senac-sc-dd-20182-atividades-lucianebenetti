@@ -1,48 +1,47 @@
 package Clinica_Medica.VO;
 
 public class ConvenioVO {
-	
-	
-	private int convCod;
-	private String convNome;
-	private String convCnpj;
+
+	private int codigoConvenio;
+	private String nomeConvenio;
+	private String cnpjConvenio;
 	private double valor;
-	
+
 	public ConvenioVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ConvenioVO(int convCod, String convNome, String convCnpj, double valor) {
+	public ConvenioVO(int codigoConvenio, String nomeConvenio, String cnpjConvenio, double valor) {
 		super();
-		this.convCod = convCod;
-		this.convNome = convNome;
-		this.convCnpj = convCnpj;
+		this.codigoConvenio = codigoConvenio;
+		this.nomeConvenio = nomeConvenio;
+		this.cnpjConvenio = cnpjConvenio;
 		this.valor = valor;
 	}
 
-	public int getConvCod() {
-		return convCod;
+	public int getCodigoConvenio() {
+		return codigoConvenio;
 	}
 
-	public void setConvCod(int convCod) {
-		this.convCod = convCod;
+	public void setCodigoConvenio(int codigoConvenio) {
+		this.codigoConvenio = codigoConvenio;
 	}
 
-	public String getConvNome() {
-		return convNome;
+	public String getNomeConvenio() {
+		return nomeConvenio;
 	}
 
-	public void setConvNome(String convNome) {
-		this.convNome = convNome;
+	public void setNomeConvenio(String nomeConvenio) {
+		this.nomeConvenio = nomeConvenio;
 	}
 
-	public String getConvCnpj() {
-		return convCnpj;
+	public String getCnpjConvenio() {
+		return cnpjConvenio;
 	}
 
-	public void setConvCnpj(String convCnpj) {
-		this.convCnpj = convCnpj;
+	public void setCnpjConvenio(String cnpjConvenio) {
+		this.cnpjConvenio = cnpjConvenio;
 	}
 
 	public double getValor() {
@@ -52,9 +51,9 @@ public class ConvenioVO {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	
+
 	@Override
 	public String toString() {
-		return  convNome;
+		return nomeConvenio;
 	}
 }

@@ -1,56 +1,61 @@
 package Clinica_Medica.VO;
 
+import java.util.Date;
+
 public class EspecializacaoVO {
 	
-		private int espeCod;
-	    private int espCod;
-	    private int medCod;
-	    private String espeAno;
-
-	    public EspecializacaoVO(int espeCod, int espCod, int medCod, String espeAno) {
+		private int codigoEspecializacao;
+	    private EspecialidadeVO especialidadeVO;
+	    private MedicoVO medicoVO;
+	    private String anoEspecializacao;
+		
+	    
+	    public EspecializacaoVO(int codigoEspecializacao, EspecialidadeVO especialidadeVO, MedicoVO medicoVO,
+				String anoEspecializacao) {
 			super();
-			this.espeCod = espeCod;
-			this.espCod = espCod;
-			this.medCod = medCod;
-			this.espeAno = espeAno;
+			this.codigoEspecializacao = codigoEspecializacao;
+			this.especialidadeVO = especialidadeVO;
+			this.medicoVO = medicoVO;
+			this.anoEspecializacao = anoEspecializacao;
+		}
+
+		public int getCodigoEspecializacao() {
+			return codigoEspecializacao;
+		}
+
+		public void setCodigoEspecializacao(int codigoEspecializacao) {
+			this.codigoEspecializacao = codigoEspecializacao;
+		}
+
+		public EspecialidadeVO getEspecialidadeVO() {
+			return especialidadeVO;
+		}
+
+		public void setEspecialidadeVO(EspecialidadeVO especialidadeVO) {
+			this.especialidadeVO = especialidadeVO;
+		}
+
+		public MedicoVO getMedicoVO() {
+			return medicoVO;
+		}
+
+		public void setMedicoVO(MedicoVO medicoVO) {
+			this.medicoVO = medicoVO;
+		}
+
+		public String getAnoEspecializacao() {
+			return anoEspecializacao;
+		}
+
+		public void setAnoEspecializacao(String anoEspecializacao) {
+			this.anoEspecializacao = anoEspecializacao;
 		}
 
 		public EspecializacaoVO() {
 			super();
 			// TODO Auto-generated constructor stub
 		}
-
-		public int getEspeCod() {
-			return espeCod;
-		}
-
-		public void setEspeCod(int espeCod) {
-			this.espeCod = espeCod;
-		}
-
-		public int getEspCod() {
-			return espCod;
-		}
-
-		public void setEspCod(int espCod) {
-			this.espCod = espCod;
-		}
-
-		public int getMedCod() {
-			return medCod;
-		}
-
-		public void setMedCod(int medCod) {
-			this.medCod = medCod;
-		}
-
-		public String getEspeAno() {
-			return espeAno;
-		}
-
-		public void setEspeAno(String espeAno) {
-			this.espeAno = espeAno;
-		}
-
- 
+		
+	  
+	    
 }

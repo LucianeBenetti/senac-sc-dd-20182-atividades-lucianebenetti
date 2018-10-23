@@ -34,7 +34,7 @@ public class TelaCadastrarEspecialidade extends JPanel {
 	 * Create the panel.
 	 */
 	public TelaCadastrarEspecialidade() {
-		setBackground(new Color(230, 230, 250));
+		setBackground(new Color(173, 216, 230));
 		setLayout(null);
 
 		JLabel lblBuscarNome = new JLabel("Nome");
@@ -194,8 +194,8 @@ public class TelaCadastrarEspecialidade extends JPanel {
 	protected EspecialidadeVO construirEspecialidade() {
 	
 	
-		especialidade.setEspNome(txtNome.getText());
-		especialidade.setEspInstituicao(txtInstituicao.getText());
+		especialidade.setNomeEspecialidade(txtNome.getText());
+		especialidade.setInstituicao(txtInstituicao.getText());
 		
 		return especialidade;
 	}
@@ -231,8 +231,8 @@ public class TelaCadastrarEspecialidade extends JPanel {
 			// Crio uma nova linha na tabela
 			// Preencher a linha com os atributos do produto
 			// na ORDEM do cabeçalho da tabela
-			Object[] novaLinha = new Object[] { especialidade.getEspCod(), especialidade.getEspNome(),
-					especialidade.getEspInstituicao(),
+			Object[] novaLinha = new Object[] { especialidade.getCodigoEspecialidade(), especialidade.getNomeEspecialidade(),
+					especialidade.getInstituicao(),
 
 			};
 			modelo.addRow(novaLinha);

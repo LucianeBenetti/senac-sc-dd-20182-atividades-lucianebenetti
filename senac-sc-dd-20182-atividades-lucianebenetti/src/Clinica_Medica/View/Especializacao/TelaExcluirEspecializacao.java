@@ -9,6 +9,7 @@ import javax.swing.JSeparator;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Color;
 
 public class TelaExcluirEspecializacao extends JPanel {
 	private JTextField txtId;
@@ -20,6 +21,7 @@ public class TelaExcluirEspecializacao extends JPanel {
 	 * Create the panel.
 	 */
 	public TelaExcluirEspecializacao() {
+		setBackground(new Color(173, 216, 230));
 		setLayout(null);
 		
 		JButton btnLimparTela = new JButton("Limpar Tela");
@@ -30,12 +32,12 @@ public class TelaExcluirEspecializacao extends JPanel {
 			}
 		});
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnLimparTela.setBounds(10, 262, 125, 31);
+		btnLimparTela.setBounds(10, 287, 134, 31);
 		add(btnLimparTela);
 		
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnExcluir.setBounds(176, 262, 98, 31);
+		btnExcluir.setBounds(206, 287, 98, 31);
 		add(btnExcluir);
 		
 		JButton btnSair = new JButton("Sair");
@@ -55,12 +57,12 @@ public class TelaExcluirEspecializacao extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(322, 262, 105, 31);
+		btnSair.setBounds(381, 287, 105, 31);
 		add(btnSair);
 		
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscar.setBounds(338, 25, 89, 31);
+		btnBuscar.setBounds(397, 25, 89, 31);
 		add(btnBuscar);
 		
 		JLabel lblId = new JLabel("ID");
@@ -91,13 +93,13 @@ public class TelaExcluirEspecializacao extends JPanel {
 		
 		txtNome = new JTextField();
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNome.setBounds(113, 102, 314, 28);
+		txtNome.setBounds(113, 102, 373, 28);
 		add(txtNome);
 		txtNome.setColumns(10);
 		
 		txtInstituicao = new JTextField();
 		txtInstituicao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtInstituicao.setBounds(113, 153, 314, 31);
+		txtInstituicao.setBounds(113, 153, 373, 31);
 		add(txtInstituicao);
 		txtInstituicao.setColumns(10);
 		
@@ -108,7 +110,7 @@ public class TelaExcluirEspecializacao extends JPanel {
 		txtAno.setColumns(10);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 77, 430, 14);
+		separator.setBounds(10, 77, 476, 14);
 		add(separator);
 
 	}

@@ -16,7 +16,7 @@ public class EspecialidadeBO {
 
 	public boolean inserir(EspecialidadeVO especialidade) {
 		
-		if (dao.consultarEspecialidadeVONome(especialidade.getEspNome(), especialidade.getEspInstituicao() ) != null) {
+		if (dao.consultarEspecialidadeVONome(especialidade.getNomeEspecialidade(), especialidade.getInstituicao() ) != null) {
 			JOptionPane.showMessageDialog(null, "Especialidade já cadastrada! Tente novamente.");
 			
 		} else {
@@ -34,15 +34,9 @@ public class EspecialidadeBO {
 	}
 
 
-	public ArrayList<EspecialidadeVO> consultarEspecialidade(String espNome, int espeCod, String medNome) {
-		ArrayList<EspecialidadeVO> especialidadeBuscada = dao.listarEspecialidades(espNome, espeCod, medNome);
-		return especialidadeBuscada;
-	}
-
-
 	public boolean atualizarEspecialidade(EspecialidadeVO especialidade, int espCod) {
 		
-		return dao.atualizarEspecialidadeVO(especialidade, especialidade.getEspCod());
+		return dao.atualizarEspecialidadeVO(especialidade, especialidade.getCodigoEspecialidade());
 	}
 
 

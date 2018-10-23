@@ -5,85 +5,72 @@ import java.util.Date;
 
 public class ConsultaVO {
 		
-	private int conCod;
-	private int espeCod;
-	private int pacCod;
-	private int convCod;
-	private int pronCod;
-	private Date conData;
-	private Time conHorario;
-	
+	private int codigoConsulta;
+	private EspecializacaoVO especializacaoVO;
+	private PacienteVO pacienteVO;
+	private ConvenioVO convenioVO;
+	private ProntuarioVO prontuarioVO;
+	private Date dataConsulta;
+	private Time horarioConsulta;
+
 	public ConsultaVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public ConsultaVO(int conCod, int espeCod, int pacCod, int convCod, int pronCod, Date conData, Time conHorario) {
+	public ConsultaVO(int codigoConsulta, EspecializacaoVO especializacaoVO, PacienteVO pacienteVO,
+			ConvenioVO convenioVO, ProntuarioVO prontuarioVO, Date dataConsulta, Time horarioConsulta) {
 		super();
-		this.conCod = conCod;
-		this.espeCod = espeCod;
-		this.pacCod = pacCod;
-		this.convCod = convCod;
-		this.pronCod = pronCod;
-		this.conData = conData;
-		this.conHorario = conHorario;
+		this.codigoConsulta = codigoConsulta;
+		this.especializacaoVO = especializacaoVO;
+		this.pacienteVO = pacienteVO;
+		this.convenioVO = convenioVO;
+		this.prontuarioVO = prontuarioVO;
+		this.dataConsulta = dataConsulta;
+		this.horarioConsulta = horarioConsulta;
 	}
-
-	public int getConCod() {
-		return conCod;
+	public int getCodigoConsulta() {
+		return codigoConsulta;
 	}
-
-	public void setConCod(int conCod) {
-		this.conCod = conCod;
+	public void setCodigoConsulta(int codigoConsulta) {
+		this.codigoConsulta = codigoConsulta;
 	}
-
-	public int getEspeCod() {
-		return espeCod;
+	public EspecializacaoVO getEspecializacaoVO() {
+		return especializacaoVO;
 	}
-
-	public void setEspeCod(int espeCod) {
-		this.espeCod = espeCod;
+	public void setEspecializacaoVO(EspecializacaoVO especializacaoVO) {
+		this.especializacaoVO = especializacaoVO;
 	}
-
-	public int getPacCod() {
-		return pacCod;
+	public PacienteVO getPacienteVO() {
+		return pacienteVO;
 	}
-
-	public void setPacCod(int pacCod) {
-		this.pacCod = pacCod;
+	public void setPacienteVO(PacienteVO pacienteVO) {
+		this.pacienteVO = pacienteVO;
 	}
-
-	public int getConvCod() {
-		return convCod;
+	public ConvenioVO getConvenioVO() {
+		return convenioVO;
 	}
-
-	public void setConvCod(int convCod) {
-		this.convCod = convCod;
+	public void setConvenioVO(ConvenioVO convenioVO) {
+		this.convenioVO = convenioVO;
 	}
-
-	public int getPronCod() {
-		return pronCod;
+	public ProntuarioVO getProntuarioVO() {
+		return prontuarioVO;
 	}
-
-	public void setPronCod(int pronCod) {
-		this.pronCod = pronCod;
+	public void setProntuarioVO(ProntuarioVO prontuarioVO) {
+		this.prontuarioVO = prontuarioVO;
 	}
-
-	public Date getConData() {
-		return conData;
+	public Date getDataConsulta() {
+		return dataConsulta;
 	}
-
-	public void setConData(Date conData) {
-		this.conData = conData;
+	public void setDataConsulta(Date dataConsulta) {
+		this.dataConsulta = dataConsulta;
 	}
-
-	public Time getConHorario() {
-		return conHorario;
+	public Time getHorarioConsulta() {
+		return horarioConsulta;
 	}
-
-	public void setConHorario(Time conHorario) {
-		this.conHorario = conHorario;
+	public void setHorarioConsulta(Time horarioConsulta) {
+		this.horarioConsulta = horarioConsulta;
 	}
+	
 	
 	
 }

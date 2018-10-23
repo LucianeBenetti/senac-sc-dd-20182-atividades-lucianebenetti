@@ -28,10 +28,10 @@ public class MedicoController {
 	private String validarMedico(MedicoVO medico) {
 				
 		String validacao = "";
-		if(medico.getCpf() == null) {
+		if(medico.getCpfMedico() == null) {
 			validacao = "CPF está nulo!";
 		}else {	
-			if(medico.getMedNome().trim().equals("") || medico.getCrm().trim().equals("") ) {
+			if(medico.getNomeMedico().trim().equals("") || medico.getCrm().trim().equals("") ) {
 				validacao += "- Nome e CRM são obrigatórios. \n";
 			}
 			
@@ -39,7 +39,7 @@ public class MedicoController {
 		return validacao;
 	}
 
-	public ArrayList<MedicoVO> ConsultarMedico() {
+	public ArrayList<MedicoVO> consultarMedico() {
 		
 		return bo.buscarMedico();
 	}

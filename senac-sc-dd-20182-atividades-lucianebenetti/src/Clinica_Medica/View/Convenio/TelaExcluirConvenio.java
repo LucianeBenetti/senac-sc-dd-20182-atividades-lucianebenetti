@@ -16,6 +16,7 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
+import java.awt.Color;
 
 public class TelaExcluirConvenio extends JPanel {
 
@@ -29,6 +30,7 @@ public class TelaExcluirConvenio extends JPanel {
 	 * Create the panel.
 	 */
 	public TelaExcluirConvenio() {
+		setBackground(new Color(173, 216, 230));
 		setLayout(null);
 		
 		JLabel lblCNPJ = new JLabel("CNPJ");
@@ -53,13 +55,13 @@ public class TelaExcluirConvenio extends JPanel {
 			e1.printStackTrace();
 		}
 		txtCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtCnpj.setBounds(90, 25, 197, 30);
+		txtCnpj.setBounds(90, 25, 251, 30);
 		add(txtCnpj);
 		txtCnpj.setColumns(10);
 		
 		txtNome = new JTextField();
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNome.setBounds(107, 112, 321, 30);
+		txtNome.setBounds(107, 112, 379, 30);
 		add(txtNome);
 		txtNome.setColumns(10);
 		
@@ -88,7 +90,7 @@ public class TelaExcluirConvenio extends JPanel {
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscar.setBounds(341, 24, 99, 31);
+		btnBuscar.setBounds(387, 24, 99, 31);
 		add(btnBuscar);
 		
 		JButton btnLimparTela = new JButton("Limpar Tela");
@@ -114,7 +116,7 @@ public class TelaExcluirConvenio extends JPanel {
 			}
 		});
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_2.setBounds(188, 258, 99, 31);
+		btnNewButton_2.setBounds(230, 258, 99, 31);
 		add(btnNewButton_2);
 		
 		JButton btnSair = new JButton("Sair");
@@ -133,11 +135,11 @@ public class TelaExcluirConvenio extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(351, 258, 89, 31);
+		btnSair.setBounds(397, 258, 89, 31);
 		add(btnSair);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 72, 430, 14);
+		separator.setBounds(10, 72, 476, 14);
 		add(separator);
 		
 
@@ -149,8 +151,8 @@ public class TelaExcluirConvenio extends JPanel {
 		
 	}
 	protected ConvenioVO construirConvenio() {
-		convenio.setConvNome(txtNome.getText());
-		convenio.setConvCnpj(txtCnpj.getText());
+		convenio.setNomeConvenio(txtNome.getText());
+		convenio.setCnpjConvenio(txtCnpj.getText());
 		
 		String valor = txtValor.getText();
 		
@@ -162,8 +164,8 @@ public class TelaExcluirConvenio extends JPanel {
 	}
 	
 	protected ConvenioVO consutarConvenio() {
-		txtNome.setText(convenioConsultado.getConvNome());
-		txtCnpj.setText(convenioConsultado.getConvCnpj());
+		txtNome.setText(convenioConsultado.getNomeConvenio());
+		txtCnpj.setText(convenioConsultado.getCnpjConvenio());
 		txtValor.setText(convenioConsultado.getValor()+ "");
 		
 		return convenioConsultado;

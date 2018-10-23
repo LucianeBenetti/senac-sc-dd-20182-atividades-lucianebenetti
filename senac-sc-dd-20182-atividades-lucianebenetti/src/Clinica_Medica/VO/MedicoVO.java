@@ -2,47 +2,29 @@ package Clinica_Medica.VO;
 
 public class MedicoVO {
 
-		private int medCod;
-	    private String medNome;
+		private int codigoMedico;
+	    private String nomeMedico;
 	    private String crm;
-	    private String celMen;
-	    private String cel;
-	    private String email;
-	    private String cpf;
-	    private String cnpj;
+	    private String celMensagemMedico;
+	    private String celularMedico;
+	    private String emailMedico;
+	    private String cpfMedico;
+	    private String cnpjMedico;
 		
-	    public MedicoVO(int medCod, String medNome, String crm, String celMen, String cel, String email, String cpf,
-				String cnpj) {
-			super();
-			this.medCod = medCod;
-			this.medNome = medNome;
-			this.crm = crm;
-			this.celMen = celMen;
-			this.cel = cel;
-			this.email = email;
-			this.cpf = cpf;
-			this.cnpj = cnpj;
+		public int getCodigoMedico() {
+			return codigoMedico;
 		}
 
-		public MedicoVO() {
-			super();
-			// TODO Auto-generated constructor stub
+		public void setCodigoMedico(int codigoMedico) {
+			this.codigoMedico = codigoMedico;
 		}
 
-		public int getMedCod() {
-			return medCod;
+		public String getNomeMedico() {
+			return nomeMedico;
 		}
 
-		public void setMedCod(int medCod) {
-			this.medCod = medCod;
-		}
-
-		public String getMedNome() {
-			return medNome;
-		}
-
-		public void setMedNome(String medNome) {
-			this.medNome = medNome;
+		public void setNomeMedico(String nomeMedico) {
+			this.nomeMedico = nomeMedico;
 		}
 
 		public String getCrm() {
@@ -53,49 +35,70 @@ public class MedicoVO {
 			this.crm = crm;
 		}
 
-		public String getCelMen() {
-			return celMen;
+		public String getCelMensagemMedico() {
+			return celMensagemMedico;
 		}
 
-		public void setCelMen(String celMen) {
-			this.celMen = celMen;
+		public void setCelMensagemMedico(String celMensagemMedico) {
+			this.celMensagemMedico = celMensagemMedico;
 		}
 
-		public String getCel() {
-			return cel;
+		public String getCelularMedico() {
+			return celularMedico;
 		}
 
-		public void setCel(String cel) {
-			this.cel = cel;
+		public void setCelularMedico(String celularMedico) {
+			this.celularMedico = celularMedico;
 		}
 
-		public String getEmail() {
-			return email;
+		public String getEmailMedico() {
+			return emailMedico;
 		}
 
-		public void setEmail(String email) {
-			this.email = email;
+		public void setEmailMedico(String emailMedico) {
+			this.emailMedico = emailMedico;
 		}
 
-		public String getCpf() {
-			return cpf;
+		public String getCpfMedico() {
+			return cpfMedico;
 		}
 
-		public void setCpf(String cpf) {
-			this.cpf = cpf;
+		public void setCpfMedico(String cpfMedico) {
+			this.cpfMedico = cpfMedico;
 		}
 
-		public String getCnpj() {
-			return cnpj;
+		public String getCnpjMedico() {
+			return cnpjMedico;
 		}
 
-		public void setCnpj(String cnpj) {
-			this.cnpj = cnpj;
+		public void setCnpjMedico(String cnpjMedico) {
+			this.cnpjMedico = cnpjMedico;
 		}
+
+		public MedicoVO() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		public MedicoVO(int codigoMedico, String nomeMedico, String crm, String celMensagemMedico, String celularMedico,
+				String emailMedico, String cpfMedico, String cnpjMedico) {
+			super();
+			this.codigoMedico = codigoMedico;
+			this.nomeMedico = nomeMedico;
+			this.crm = crm;
+			this.celMensagemMedico = celMensagemMedico;
+			this.celularMedico = celularMedico;
+			this.emailMedico = emailMedico;
+			this.cpfMedico = cpfMedico;
+			this.cnpjMedico = cnpjMedico;
+		}
+
+
+
 
 		@Override
 		public String toString() {
-			return  medNome;
+			return  nomeMedico;
 		}
 	    
 		

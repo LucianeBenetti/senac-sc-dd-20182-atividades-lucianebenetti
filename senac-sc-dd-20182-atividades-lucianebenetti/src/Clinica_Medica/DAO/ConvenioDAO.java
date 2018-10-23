@@ -17,24 +17,24 @@ public class ConvenioDAO {
 
 		int novoId = 0;
 
-		String sql = "INSERT INTO convenio (convNome, convCnpj, valor)" + " VALUES (?,?,?)";
+		String sql = "INSERT INTO convenio (nomeConvenio, cnpjConvenio, valorConvenio)" + " VALUES (?,?,?)";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, sql, Statement.RETURN_GENERATED_KEYS);
 
 		try {
-					
-			prepStmt.setString(1, convenio.getConvNome());
-			prepStmt.setString(2, convenio.getConvCnpj());
+
+			prepStmt.setString(1, convenio.getNomeConvenio());
+			prepStmt.setString(2, convenio.getCnpjConvenio());
 			prepStmt.setDouble(3, convenio.getValor());
-		
+
 			prepStmt.executeUpdate();
 
 			ResultSet generatedKeys = prepStmt.getGeneratedKeys();
 
 			if (generatedKeys.next()) {
 				novoId = generatedKeys.getInt(1);
-				
+
 			}
 
 		} catch (SQLException e) {
@@ -48,26 +48,25 @@ public class ConvenioDAO {
 
 	}
 
-	public ConvenioVO consultarConvenioPorCnpj(String convCnpj) {
-		
+	public ConvenioVO consultarConvenioPorCnpj(String cnpjConvenio) {
+
 		ConvenioVO convenio = null;
 
-		String query = "SELECT *from convenio " + " where convCnpj = ?";
+		String query = "SELECT *from convenio " + " where cnpjConvenio = ?";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
 		try {
-			prepStmt.setString(1, convCnpj);
+			prepStmt.setString(1, cnpjConvenio);
 			ResultSet result = prepStmt.executeQuery();
 
 			while (result.next()) {
 				convenio = new ConvenioVO();
-				convenio.setConvCod(result.getInt(1));
-				convenio.setConvNome(result.getString(2));
-				convenio.setConvCnpj(result.getString(3));
+				convenio.setCodigoConvenio(result.getInt(1));
+				convenio.setNomeConvenio(result.getString(2));
+				convenio.setCnpjConvenio(result.getString(3));
 				convenio.setValor(result.getDouble(4));
-			
-								
+
 			}
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
@@ -78,16 +77,16 @@ public class ConvenioDAO {
 		return convenio;
 	}
 
-	public boolean delete(String convCnpj) {
+	public boolean delete(String cnpjConvenio) {
 		boolean sucessoDelete = false;
 
-		String query = "DELETE from convenio where convCnpj = ? ";
+		String query = "DELETE from convenio where cnpjConvenio = ? ";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
 
 		try {
-			prepStmt.setString(1, convCnpj);
+			prepStmt.setString(1, cnpjConvenio);
 			int codigoRetorno = prepStmt.executeUpdate();
 			if (codigoRetorno == 1) {
 				sucessoDelete = true;
@@ -101,22 +100,21 @@ public class ConvenioDAO {
 		return sucessoDelete;
 	}
 
-	
-	public boolean atualizar(ConvenioVO convenio, String convCnpj) {
+	public boolean atualizar(ConvenioVO convenio, String cnpjConvenio) {
 		boolean sucessoAtualizar = false;
-						 
-		String query = "UPDATE convenio SET convNome=?, convCnpj=?, valor=? " + " where convCnpj = ?";
+
+		String query = "UPDATE convenio SET nomeConvenio=?, cnpjConvenio=?, valorConvenio=? " + " where cnpjConvenio = ?";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
 
 		try {
 
-			prepStmt.setString(1, convenio.getConvNome());
-			prepStmt.setString(2, convenio.getConvCnpj());
+			prepStmt.setString(1, convenio.getNomeConvenio());
+			prepStmt.setString(2, convenio.getCnpjConvenio());
 			prepStmt.setDouble(3, convenio.getValor());
-			prepStmt.setString(4, convenio.getConvCnpj());
-			
+			prepStmt.setString(4, convenio.getCnpjConvenio());
+
 			int codigoRetorno = prepStmt.executeUpdate();
 
 			if (codigoRetorno == 1) {
@@ -130,7 +128,7 @@ public class ConvenioDAO {
 		}
 		return sucessoAtualizar;
 	}
-	
+
 	public ArrayList<ConvenioVO> listarTodos() {
 
 		String query = "select * from convenio";
@@ -143,9 +141,9 @@ public class ConvenioDAO {
 			while (result.next()) {
 				ConvenioVO convenio = new ConvenioVO();
 
-				convenio.setConvCod(result.getInt(1));
-				convenio.setConvNome(result.getString(2));
-				convenio.setConvCnpj(result.getString(3));
+				convenio.setCodigoConvenio(result.getInt(1));
+				convenio.setNomeConvenio(result.getString(2));
+				convenio.setCnpjConvenio(result.getString(3));
 				convenio.setValor(result.getDouble(4));
 
 				listaConvenios.add(convenio);
@@ -157,6 +155,4 @@ public class ConvenioDAO {
 		return listaConvenios;
 	}
 
-	
-	
 }

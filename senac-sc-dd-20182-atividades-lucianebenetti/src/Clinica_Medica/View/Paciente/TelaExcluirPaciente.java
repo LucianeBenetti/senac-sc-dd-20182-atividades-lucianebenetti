@@ -53,7 +53,7 @@ public class TelaExcluirPaciente extends JPanel {
 	 * Create the panel.
 	 */
 	public TelaExcluirPaciente() {
-setBackground(new Color(230, 230, 250));
+setBackground(new Color(173, 216, 230));
 		
 		setLayout(null);
 		
@@ -333,17 +333,17 @@ setBackground(new Color(230, 230, 250));
 	protected PacienteVO construirPaciente() {
 		
 		paciente.setBairro(txtBairro.getText());
-		paciente.setCelMen(txtCelular.getText());
+		paciente.setCelMensagemPaciente(txtCelular.getText());
 		paciente.setCep(txtCep.getText());
 		paciente.setCidade(txtCidade.getText());
-		paciente.setCnpj(txtCnpj.getText());
+		paciente.setCnpjPaciente(txtCnpj.getText());
 		paciente.setComplemento(txtComplemento.getText());
-		paciente.setCpf(txtCpf.getText());
-		paciente.setEmail(txtEmail.getText());
-		paciente.setFoneCom(txtFoneCom.getText());
-		paciente.setFoneRes(txtFoneRes.getText());
+		paciente.setCpfPaciente(txtCpf.getText());
+		paciente.setEmailPaciente(txtEmail.getText());
+		paciente.setFoneComercial(txtFoneCom.getText());
+		paciente.setFoneResidencial(txtFoneRes.getText());
 		paciente.setLogradouro(txtLogradouro.getText());
-		paciente.setPacNome(txtNome.getText());
+		paciente.setNomePaciente(txtNome.getText());
 		paciente.setNumLog(txtNumLog.getText());
 		paciente.setUf((String) cbEstado.getSelectedItem());
 			
@@ -372,17 +372,17 @@ setBackground(new Color(230, 230, 250));
 
 	protected PacienteVO buscarPaciente() {
 		txtBairro.setText(pacienteBuscado.getBairro());
-		txtCelular.setText(pacienteBuscado.getCelMen());
+		txtCelular.setText(pacienteBuscado.getCelMensagemPaciente());
 		txtCep.setText(pacienteBuscado.getCep());
 		txtCidade.setText(pacienteBuscado.getCidade());
-		txtCnpj.setText(pacienteBuscado.getCnpj());
+		txtCnpj.setText(pacienteBuscado.getCnpjPaciente());
 		txtComplemento.setText(pacienteBuscado.getComplemento());
-		txtCpf.setText(pacienteBuscado.getCpf());
-		txtEmail.setText(pacienteBuscado.getEmail());
-		txtFoneCom.setText(pacienteBuscado.getFoneCom());
-		txtFoneRes.setText(pacienteBuscado.getFoneRes());
+		txtCpf.setText(pacienteBuscado.getCpfPaciente());
+		txtEmail.setText(pacienteBuscado.getEmailPaciente());
+		txtFoneCom.setText(pacienteBuscado.getFoneComercial());
+		txtFoneRes.setText(pacienteBuscado.getFoneResidencial());
 		txtLogradouro.setText(pacienteBuscado.getLogradouro());
-		txtNome.setText(pacienteBuscado.getPacNome());
+		txtNome.setText(pacienteBuscado.getNomePaciente());
 		txtNumLog.setText(pacienteBuscado.getNumLog());
 		cbEstado.setSelectedItem(pacienteBuscado.getUf());
 		

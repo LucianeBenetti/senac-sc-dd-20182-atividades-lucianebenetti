@@ -28,15 +28,17 @@ public class EspecializacaoController {
 	private String validarEspecializacao(EspecializacaoVO especializacao) {
 				
 		String validacao = "";
-		if(especializacao.getEspeAno() == null) {
+		if(especializacao.getAnoEspecializacao() == null) {
 			validacao = "O ano está nulo!";
-		}else {	
-			if(especializacao.getEspeAno().trim().equals("")) {
-				validacao += "- Ano é obrigatório. \n";
-			}
-			
+					
 		}
 		return validacao;
+	}
+
+	public ArrayList<EspecialidadeVO> ConsultarEspecialidade(String nomeEspecializacao, int codigoEspecializacao,
+			String nomeMedico) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

@@ -17,20 +17,20 @@ public class MedicoDAO {
 	public int inserir(MedicoVO medicoVO) {
 		int novoId = -1;
 
-		String query = "INSERT INTO medico (medNome, crm, celMen, cel, email, cpf, cnpj)"
+		String query = "INSERT INTO medico (nomeMedico, crm, celMensagemMedico, celularMedico, emailMedico, cpfMedico, cnpjMedico)"
 				+ " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query, Statement.RETURN_GENERATED_KEYS);
 
 		try {
-			prepStmt.setString(1, medicoVO.getMedNome());
+			prepStmt.setString(1, medicoVO.getNomeMedico());
 			prepStmt.setString(2, medicoVO.getCrm());
-			prepStmt.setString(3, medicoVO.getCelMen());
-			prepStmt.setString(4, medicoVO.getCel());
-			prepStmt.setString(5, medicoVO.getEmail());
-			prepStmt.setString(6, medicoVO.getCpf());
-			prepStmt.setString(7, medicoVO.getCnpj());
+			prepStmt.setString(3, medicoVO.getCelMensagemMedico());
+			prepStmt.setString(4, medicoVO.getCelularMedico());
+			prepStmt.setString(5, medicoVO.getEmailMedico());
+			prepStmt.setString(6, medicoVO.getCpfMedico());
+			prepStmt.setString(7, medicoVO.getCnpjMedico());
 			
 
 			prepStmt.executeUpdate();
@@ -48,16 +48,16 @@ public class MedicoDAO {
 		return novoId;
 	}
 
-	public boolean delete(String cpf) {
+	public boolean delete(String cpfMedico) {
 		boolean sucessoDelete = false;
 
-		String query = "DELETE from medico where cpf = ? ";
+		String query = "DELETE from medico where cpfMedico = ? ";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
 
 		try {
-			prepStmt.setString(1, cpf);
+			prepStmt.setString(1, cpfMedico);
 			int codigoRetorno = prepStmt.executeUpdate();
 			if (codigoRetorno == 1) {
 				sucessoDelete = true;
@@ -71,9 +71,9 @@ public class MedicoDAO {
 		return sucessoDelete;
 	}
 
-	public MedicoVO consultarMedicoVOPorCpf(String cpf) {
+	public MedicoVO consultarMedicoVOPorCpf(String cpfMedico) {
 		
-		String query = "SELECT *from medico " + " where cpf = ?";
+		String query = "SELECT *from medico " + " where cpfMedico = ?";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
@@ -81,20 +81,20 @@ public class MedicoDAO {
 		ArrayList<MedicoVO> medicos = new ArrayList<MedicoVO>();
 
 		try {
-			prepStmt.setString(1, cpf);
+			prepStmt.setString(1, cpfMedico);
 			ResultSet result = prepStmt.executeQuery();
 
 			while (result.next()) {
 				medico = new MedicoVO();
 
-				medico.setMedCod(result.getInt(1));
-				medico.setMedNome(result.getString(2));
+				medico.setCodigoMedico(result.getInt(1));
+				medico.setNomeMedico(result.getString(2));
 				medico.setCrm(result.getString(3));
-				medico.setCelMen(result.getString(4));
-				medico.setCel(result.getString(5));
-				medico.setEmail(result.getString(6));
-				medico.setCpf(result.getString(7));
-				medico.setCnpj(result.getString(8));
+				medico.setCelMensagemMedico(result.getString(4));
+				medico.setCelularMedico(result.getString(5));
+				medico.setEmailMedico(result.getString(6));
+				medico.setCpfMedico(result.getString(7));
+				medico.setCnpjMedico(result.getString(8));
 				
 				medicos.add(medico);
 				
@@ -111,21 +111,21 @@ public class MedicoDAO {
 	public boolean atualizar(MedicoVO medicoVOAlterado, String cpfAnterior) {
 		boolean sucessoAtualizar = false;
 
-		String query = "UPDATE medico SET medNome=?, crm=?, cel=?, celMen=?, email=?, cpf=?, cnpj=?"
-				+ " where cpf = ?";
+		String query = "UPDATE medico SET nomeMedico=?, crm=?, celularMedico=?, celMensagemMedico=?, emailMedico=?, cpfMedico=?, cnpjMedico=?"
+				+ " where cpfMedico = ?";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
 
 		try {
-			prepStmt.setString(1, medicoVOAlterado.getMedNome());
+			prepStmt.setString(1, medicoVOAlterado.getNomeMedico());
 			prepStmt.setString(2, medicoVOAlterado.getCrm());
-			prepStmt.setString(3, medicoVOAlterado.getCel());
-			prepStmt.setString(4, medicoVOAlterado.getCelMen());
-			prepStmt.setString(5, medicoVOAlterado.getEmail());
-			prepStmt.setString(6, medicoVOAlterado.getCpf());
-			prepStmt.setString(7, medicoVOAlterado.getCnpj());
-			prepStmt.setString(8, medicoVOAlterado.getCpf());
+			prepStmt.setString(3, medicoVOAlterado.getCelMensagemMedico());
+			prepStmt.setString(4, medicoVOAlterado.getCelularMedico());
+			prepStmt.setString(5, medicoVOAlterado.getEmailMedico());
+			prepStmt.setString(6, medicoVOAlterado.getCpfMedico());
+			prepStmt.setString(7, medicoVOAlterado.getCnpjMedico());
+			prepStmt.setString(8, medicoVOAlterado.getCpfMedico());
 			
 			int codigoRetorno = prepStmt.executeUpdate();
 
@@ -153,14 +153,14 @@ public class MedicoDAO {
 			while (result.next()) {
 				MedicoVO medico = new MedicoVO();
 
-				medico.setMedCod(result.getInt(1));
-				medico.setMedNome(result.getString(2));
+				medico.setCodigoMedico(result.getInt(1));
+				medico.setNomeMedico(result.getString(2));
 				medico.setCrm(result.getString(3));
-				medico.setCel(result.getString(4));
-				medico.setCelMen(result.getString(5));
-				medico.setEmail(result.getString(6));
-				medico.setCpf(result.getString(7));
-				medico.setCnpj(result.getString(8));
+				medico.setCelMensagemMedico(result.getString(4));
+				medico.setCelularMedico(result.getString(5));
+				medico.setEmailMedico(result.getString(6));
+				medico.setCpfMedico(result.getString(7));
+				medico.setCnpjMedico(result.getString(8));
 				
 				listamedicos.add(medico);
 			}

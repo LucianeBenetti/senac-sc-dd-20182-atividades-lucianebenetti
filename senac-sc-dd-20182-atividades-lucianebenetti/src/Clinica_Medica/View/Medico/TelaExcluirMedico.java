@@ -14,6 +14,7 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
+import java.awt.Color;
 
 public class TelaExcluirMedico extends JPanel {
 	private JTextField txtBuscarCpf;
@@ -35,6 +36,7 @@ public class TelaExcluirMedico extends JPanel {
 	 * Create the panel.
 	 */
 	public TelaExcluirMedico() {
+		setBackground(new Color(173, 216, 230));
 		setLayout(null);
 		
 		JLabel lblBuscarCpf = new JLabel("CPF");
@@ -235,25 +237,25 @@ public class TelaExcluirMedico extends JPanel {
 	
 protected MedicoVO construirMedico() {
 		
-	medico.setMedNome(txtNome.getText());
+	medico.setNomeMedico(txtNome.getText());
 	medico.setCrm(txtCrm.getText());
-	medico.setCpf(txtCpf.getText());
-	medico.setCnpj(txtCnpj.getText());
-	medico.setCel(txtCelular.getText());
-	medico.setCelMen(txtCelMen.getText());
-	medico.setEmail(txtEmail.getText());
+	medico.setCpfMedico(txtCpf.getText());
+	medico.setCnpjMedico(txtCnpj.getText());
+	medico.setCelularMedico(txtCelular.getText());
+	medico.setCelMensagemMedico(txtCelMen.getText());
+	medico.setEmailMedico(txtEmail.getText());
 		
 		return medico;
 	}
 
 protected MedicoVO buscarMedico() {
-	txtNome.setText(medicoBuscado.getMedNome());
+	txtNome.setText(medicoBuscado.getNomeMedico());
 	txtCrm.setText(medicoBuscado.getCrm());
-	txtCpf.setText(medicoBuscado.getCpf());
-	txtCnpj.setText(medicoBuscado.getCnpj());
-	txtCelular.setText(medicoBuscado.getCel());
-	txtCelMen.setText(medicoBuscado.getCelMen());
-	txtEmail.setText(medicoBuscado.getEmail());
+	txtCpf.setText(medicoBuscado.getCpfMedico());
+	txtCnpj.setText(medicoBuscado.getCnpjMedico());
+	txtCelular.setText(medicoBuscado.getCelularMedico());
+	txtCelMen.setText(medicoBuscado.getCelMensagemMedico());
+	txtEmail.setText(medicoBuscado.getEmailMedico());
 
 	return medicoBuscado;
 }

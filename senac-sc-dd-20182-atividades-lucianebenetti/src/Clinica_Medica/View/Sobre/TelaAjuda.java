@@ -49,7 +49,7 @@ public class TelaAjuda extends JFrame {
 		contentPane.setLayout(null);
 		
 		JEditorPane dtrpnDicasGesto = new JEditorPane();
-		dtrpnDicasGesto.setBackground(new Color(220, 220, 220));
+		dtrpnDicasGesto.setBackground(new Color(173, 216, 230));
 		dtrpnDicasGesto.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		dtrpnDicasGesto.setText("Dicas:\r\n\r\n- Gest\u00E3o e controle da Cl\u00EDnica M\u00E9dica - utilizar o Menus para:\r\n\t- Cadastrar.\r\n\t- Excluir.\r\n\t- Alterar.\r\n\t- Buscar informa\u00E7\u00F5es.");
 		dtrpnDicasGesto.setBounds(23, 55, 608, 197);
