@@ -11,9 +11,8 @@ import Clinica_Medica.VO.EspecialidadeVO;
 import Clinica_Medica.VO.EspecializacaoVO;
 import Clinica_Medica.VO.MedicoVO;
 
-
 public class EspecialidadeDAO {
-	
+
 	private static ArrayList<EspecialidadeVO> listaEspecialiades = new ArrayList<EspecialidadeVO>();
 	EspecialidadeVO especialidade = new EspecialidadeVO();
 
@@ -47,7 +46,7 @@ public class EspecialidadeDAO {
 	public boolean deleteEspecialidadeVO(int codigoEspecialidade) {
 		boolean sucessoDelete = false;
 
-		String query = "DELETE from especialidade where espCod = ? ";
+		String query = "DELETE from especialidade where codigoEspecialidade = ? ";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
@@ -80,7 +79,7 @@ public class EspecialidadeDAO {
 			ResultSet result = prepStmt.executeQuery();
 
 			while (result.next()) {
-				
+
 				especialidade = new EspecialidadeVO();
 				especialidade.setCodigoEspecialidade(result.getInt(1));
 				especialidade.setNomeEspecialidade(result.getString(2));
@@ -96,34 +95,7 @@ public class EspecialidadeDAO {
 		return especialidade;
 	}
 
-	public boolean atualizarEspecialidadeVO(EspecialidadeVO especialidade, int espCod) {
-		boolean sucessoAtualizar = false;
-
-		String query = "UPDATE especialidade SET nomeEspecialidade=?, instituicao=? " + " where codigoEspecialidade = ?";
-
-		Connection conn = Banco.getConnection();
-		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
-
-		try {
-			prepStmt.setString(1, especialidade.getNomeEspecialidade());
-			prepStmt.setString(2, especialidade.getInstituicao());
-			prepStmt.setInt(3, especialidade.getCodigoEspecialidade());
-
-			int codigoRetorno = prepStmt.executeUpdate();
-
-			if (codigoRetorno == 1) {
-				sucessoAtualizar = true;
-			}
-		} catch (SQLException ex) {
-			System.out.println("Erro ao executar Query de Atualização do Especialidade! Causa: \n: " + ex.getMessage());
-		} finally {
-			Banco.closePreparedStatement(prepStmt);
-			Banco.closeConnection(conn);
-		}
-		return sucessoAtualizar;
-	}
-
-	public String listarTodasEspecialidades() {
+	public  ArrayList<EspecialidadeVO> listarTodasEspecialidades() {
 
 		String query = "select * from especialidade";
 
@@ -144,7 +116,7 @@ public class EspecialidadeDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return listaEspecialiades.toString();
+		return listaEspecialiades;
 	}
 
 	public ArrayList<EspecialidadeVO> consultarEspecialidadeNome(String nomeEspecialidade) {
@@ -156,17 +128,17 @@ public class EspecialidadeDAO {
 		EspecialidadeVO especialidade = null;
 		ArrayList<EspecialidadeVO> especialidades = new ArrayList<EspecialidadeVO>();
 		try {
-			prepStmt.setString(1, '%' + nomeEspecialidade+ '%');
-			
+			prepStmt.setString(1, '%' + nomeEspecialidade + '%');
+
 			ResultSet result = prepStmt.executeQuery();
 
 			while (result.next()) {
-				
+
 				especialidade = new EspecialidadeVO();
 				especialidade.setCodigoEspecialidade(result.getInt(1));
 				especialidade.setNomeEspecialidade(result.getString(2));
 				especialidade.setInstituicao(result.getString(3));
-				
+
 				especialidades.add(especialidade);
 
 			}
@@ -179,5 +151,31 @@ public class EspecialidadeDAO {
 		return especialidades;
 	}
 
-	
+	public EspecialidadeVO atualizarEspecialidade(EspecialidadeVO especialidade, int codigoEspecialidade) {
+
+		String query = "UPDATE especialidade SET nomeEspecialidade=?, instituicao=? "
+				+ " where codigoEspecialidade = ? ";
+
+		Connection conn = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
+
+		try {
+			prepStmt.setString(1, especialidade.getNomeEspecialidade());
+			prepStmt.setString(2, especialidade.getInstituicao());
+			prepStmt.setInt(3, especialidade.getCodigoEspecialidade());
+
+			int codigoRetorno = prepStmt.executeUpdate();
+
+			if (codigoRetorno == 1) {
+
+			}
+		} catch (SQLException ex) {
+			System.out.println("Erro ao executar Query de Atualização do Especialidade! Causa: \n: " + ex.getMessage());
+		} finally {
+			Banco.closePreparedStatement(prepStmt);
+			Banco.closeConnection(conn);
+		}
+		return especialidade;
+	}
+
 }

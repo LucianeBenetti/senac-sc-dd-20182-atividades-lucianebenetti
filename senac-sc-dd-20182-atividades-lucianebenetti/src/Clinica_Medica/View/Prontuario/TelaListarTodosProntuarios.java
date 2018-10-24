@@ -15,6 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.awt.Color;
+import javax.swing.JScrollPane;
 
 public class TelaListarTodosProntuarios extends JPanel {
 	private JTable tbProntuarios;
@@ -54,13 +55,6 @@ public class TelaListarTodosProntuarios extends JPanel {
 		lblProntuarios.setBounds(21, 124, 150, 31);
 		add(lblProntuarios);
 
-		tbProntuarios = new JTable();
-		tbProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		tbProntuarios.setModel(new DefaultTableModel(new Object[][] { { "ID", "Medicamento", "Exames", "Registro" }, },
-				new String[] { "ID", "Medicamento", "Exames", "Registro" }));
-		tbProntuarios.setBounds(21, 157, 565, 224);
-		add(tbProntuarios);
-
 		JButton btnSair = new JButton("Sair");
 		btnSair.addMouseListener(new MouseAdapter() {
 			@Override
@@ -78,6 +72,16 @@ public class TelaListarTodosProntuarios extends JPanel {
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnSair.setBounds(471, 419, 115, 31);
 		add(btnSair);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(21, 183, 565, 193);
+		add(scrollPane);
+		
+				tbProntuarios = new JTable();
+				scrollPane.setViewportView(tbProntuarios);
+				tbProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 16));
+				tbProntuarios.setModel(new DefaultTableModel(new Object[][] { { "ID", "Medicamento", "Exames", "Registro" }, },
+						new String[] { "ID", "Medicamento", "Exames", "Registro" }));
 
 	}
 

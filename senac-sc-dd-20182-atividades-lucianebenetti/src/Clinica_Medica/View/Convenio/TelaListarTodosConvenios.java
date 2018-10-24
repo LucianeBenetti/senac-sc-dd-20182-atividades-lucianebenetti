@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 
 public class TelaListarTodosConvenios extends JPanel {
 	private JTable tbConvenio;
@@ -49,19 +50,6 @@ public class TelaListarTodosConvenios extends JPanel {
 		btnListarTodosConvenios.setBounds(258, 24, 226, 31);
 		add(btnListarTodosConvenios);
 		
-		tbConvenio = new JTable();
-		tbConvenio.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		tbConvenio.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"ID", "Nome", "CNPJ", "Valor"},
-			},
-			new String[] {
-				"ID", "Nome", "CNPJ", "Valor"
-			}
-		));
-		tbConvenio.setBounds(22, 90, 681, 181);
-		add(tbConvenio);
-		
 		JButton btnSair = new JButton("Sair");
 		btnSair.addMouseListener(new MouseAdapter() {
 			@Override
@@ -85,6 +73,22 @@ public class TelaListarTodosConvenios extends JPanel {
 		lblConvenios.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblConvenios.setBounds(22, 66, 102, 22);
 		add(lblConvenios);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(32, 99, 681, 157);
+		add(scrollPane);
+		
+		tbConvenio = new JTable();
+		scrollPane.setViewportView(tbConvenio);
+		tbConvenio.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		tbConvenio.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"ID", "Nome", "CNPJ", "Valor"},
+			},
+			new String[] {
+				"ID", "Nome", "CNPJ", "Valor"
+			}
+		));
 
 	}
 }

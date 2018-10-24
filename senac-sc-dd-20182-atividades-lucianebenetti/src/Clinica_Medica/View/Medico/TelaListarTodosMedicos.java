@@ -17,6 +17,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
+import javax.swing.JScrollPane;
+import javax.swing.JLabel;
 
 public class TelaListarTodosMedicos extends JPanel {
 	private JTable tbMedicos;
@@ -48,19 +50,6 @@ public class TelaListarTodosMedicos extends JPanel {
 		btnListarTodosOs.setBounds(226, 31, 280, 40);
 		add(btnListarTodosOs);
 		
-		tbMedicos = new JTable();
-		tbMedicos.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tbMedicos.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"Nome", "CRM", "CPF", "CNPJ", "Celular", "Whats App", "e-mail"},
-			},
-			new String[] {
-				"Nome", "CRM", "CPF", "CNPJ", "Celular", "Whats App", "e-mail"
-			}
-		));
-		tbMedicos.setBounds(10, 110, 811, 303);
-		add(tbMedicos);
-		
 		JButton btnSair = new JButton("Sair");
 		btnSair.addMouseListener(new MouseAdapter() {
 			@Override
@@ -79,6 +68,27 @@ public class TelaListarTodosMedicos extends JPanel {
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnSair.setBounds(714, 447, 96, 31);
 		add(btnSair);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 139, 811, 274);
+		add(scrollPane);
+		
+		tbMedicos = new JTable();
+		scrollPane.setViewportView(tbMedicos);
+		tbMedicos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tbMedicos.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"Nome", "CRM", "CPF", "CNPJ", "Celular", "Whats App", "e-mail"},
+			},
+			new String[] {
+				"Nome", "CRM", "CPF", "CNPJ", "Celular", "Whats App", "e-mail"
+			}
+		));
+		
+		JLabel lblMedicos = new JLabel("Medicos");
+		lblMedicos.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblMedicos.setBounds(10, 114, 120, 22);
+		add(lblMedicos);
 
 	}
 

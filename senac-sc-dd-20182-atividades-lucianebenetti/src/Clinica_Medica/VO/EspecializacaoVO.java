@@ -3,59 +3,56 @@ package Clinica_Medica.VO;
 import java.util.Date;
 
 public class EspecializacaoVO {
-	
-		private int codigoEspecializacao;
-	    private EspecialidadeVO especialidadeVO;
-	    private MedicoVO medicoVO;
-	    private String anoEspecializacao;
-		
-	    
-	    public EspecializacaoVO(int codigoEspecializacao, EspecialidadeVO especialidadeVO, MedicoVO medicoVO,
-				String anoEspecializacao) {
-			super();
-			this.codigoEspecializacao = codigoEspecializacao;
-			this.especialidadeVO = especialidadeVO;
-			this.medicoVO = medicoVO;
-			this.anoEspecializacao = anoEspecializacao;
-		}
 
-		public int getCodigoEspecializacao() {
-			return codigoEspecializacao;
-		}
+	private int codigoEspecializacao;
+	private EspecialidadeVO especialidadeVO;
+	private MedicoVO medicoVO;
+	private String anoEspecializacao;
 
-		public void setCodigoEspecializacao(int codigoEspecializacao) {
-			this.codigoEspecializacao = codigoEspecializacao;
-		}
+	public EspecializacaoVO(int codigoEspecializacao, EspecialidadeVO especialidadeVO, MedicoVO medicoVO,
+			String anoEspecializacao) {
+		super();
+		this.codigoEspecializacao = codigoEspecializacao;
+		this.especialidadeVO = especialidadeVO;
+		this.medicoVO = medicoVO;
+		this.anoEspecializacao = anoEspecializacao;
+	}
 
-		public EspecialidadeVO getEspecialidadeVO() {
-			return especialidadeVO;
-		}
+	public int getCodigoEspecializacao() {
+		return codigoEspecializacao;
+	}
 
-		public void setEspecialidadeVO(EspecialidadeVO especialidadeVO) {
-			this.especialidadeVO = especialidadeVO;
-		}
+	public void setCodigoEspecializacao(int codigoEspecializacao) {
+		this.codigoEspecializacao = codigoEspecializacao;
+	}
 
-		public MedicoVO getMedicoVO() {
-			return medicoVO;
-		}
+	public EspecialidadeVO getEspecialidadeVO() {
+		return especialidadeVO;
+	}
 
-		public void setMedicoVO(MedicoVO medicoVO) {
-			this.medicoVO = medicoVO;
-		}
+	public void setEspecialidadeVO(EspecialidadeVO especialidadeVO) {
+		this.especialidadeVO = especialidadeVO;
+	}
 
-		public String getAnoEspecializacao() {
-			return anoEspecializacao;
-		}
+	public MedicoVO getMedicoVO() {
+		return medicoVO;
+	}
 
-		public void setAnoEspecializacao(String anoEspecializacao) {
-			this.anoEspecializacao = anoEspecializacao;
-		}
+	public void setMedicoVO(MedicoVO medicoVO) {
+		this.medicoVO = medicoVO;
+	}
 
-		public EspecializacaoVO() {
-			super();
-			// TODO Auto-generated constructor stub
-		}
-		
-	  
-	    
+	public String getAnoEspecializacao() {
+		return anoEspecializacao;
+	}
+
+	public void setAnoEspecializacao(String anoEspecializacao) {
+		this.anoEspecializacao = anoEspecializacao;
+	}
+
+	public EspecializacaoVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 }

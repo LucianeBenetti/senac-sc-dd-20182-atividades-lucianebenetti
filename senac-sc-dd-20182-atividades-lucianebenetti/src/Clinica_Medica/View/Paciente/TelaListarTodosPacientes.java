@@ -14,6 +14,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.awt.Color;
+import javax.swing.JScrollPane;
+import javax.swing.JLabel;
 
 public class TelaListarTodosPacientes extends JPanel {
 	private JTable tbPacientes;
@@ -43,21 +45,8 @@ public class TelaListarTodosPacientes extends JPanel {
 			}
 		});
 		btnListarTodosPacientes.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnListarTodosPacientes.setBounds(341, 34, 324, 36);
+		btnListarTodosPacientes.setBounds(269, 42, 324, 36);
 		add(btnListarTodosPacientes);
-		
-		tbPacientes = new JTable();
-		tbPacientes.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		tbPacientes.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"Nome", "CPF", "CNPJ", "Celular", "Fone Residencial", "Fone Comercial", "e-mail"},
-			},
-			new String[] {
-				"Nome", "CPF", "CNPJ", "Celular", "Fone Residencial", "Fone Comercial", "e-mail"
-			}
-		));
-		tbPacientes.setBounds(10, 109, 857, 264);
-		add(tbPacientes);
 		
 		JButton btnSair = new JButton("Sair");
 		btnSair.addMouseListener(new MouseAdapter() {
@@ -77,6 +66,27 @@ public class TelaListarTodosPacientes extends JPanel {
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnSair.setBounds(777, 410, 90, 36);
 		add(btnSair);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 132, 857, 241);
+		add(scrollPane);
+		
+		tbPacientes = new JTable();
+		scrollPane.setViewportView(tbPacientes);
+		tbPacientes.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		tbPacientes.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"Nome", "CPF", "CNPJ", "Celular", "Fone Residencial", "Fone Comercial", "e-mail"},
+			},
+			new String[] {
+				"Nome", "CPF", "CNPJ", "Celular", "Fone Residencial", "Fone Comercial", "e-mail"
+			}
+		));
+		
+		JLabel lblPacientes = new JLabel("Pacientes");
+		lblPacientes.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblPacientes.setBounds(10, 111, 124, 22);
+		add(lblPacientes);
 
 	}
 

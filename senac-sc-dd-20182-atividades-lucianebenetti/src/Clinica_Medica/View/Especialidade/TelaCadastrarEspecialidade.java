@@ -7,6 +7,8 @@ import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
+
+import Clinica_Medica.BO.EspecialidadeBO;
 import Clinica_Medica.Controller.EspecialidadeController;
 import Clinica_Medica.VO.EspecialidadeVO;
 import javax.swing.JSeparator;
@@ -19,6 +21,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JScrollPane;
 
 public class TelaCadastrarEspecialidade extends JPanel {
 
@@ -30,6 +33,7 @@ public class TelaCadastrarEspecialidade extends JPanel {
 	private EspecialidadeVO especialidade = new EspecialidadeVO();
 	private EspecialidadeVO especialidadeConsultada = new EspecialidadeVO();
 	private JTextField txtId;
+
 	/**
 	 * Create the panel.
 	 */
@@ -44,7 +48,7 @@ public class TelaCadastrarEspecialidade extends JPanel {
 
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNome.setBounds(10, 259, 66, 22);
+		lblNome.setBounds(10, 280, 66, 22);
 		add(lblNome);
 
 		JLabel lblInstituicao = new JLabel("Instituicao");
@@ -52,26 +56,8 @@ public class TelaCadastrarEspecialidade extends JPanel {
 		lblInstituicao.setBounds(10, 323, 92, 22);
 		add(lblInstituicao);
 
-		tbEspecialidade = new JTable();
-		tbEspecialidade.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int selecionado = tbEspecialidade.getSelectedRow();   
-				
-				txtId.setText(tbEspecialidade.getValueAt(selecionado,0) + " ");
-				txtNome.setText((String) tbEspecialidade.getValueAt(selecionado,1));
-				txtInstituicao.setText((String) tbEspecialidade.getValueAt(selecionado,2));
-							
-			}
-		});
-		tbEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tbEspecialidade.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome", "Instituição" }, },
-				new String[] { "ID", "Nome", "Instituição" }));
-		tbEspecialidade.setBounds(10, 56, 588, 131);
-		add(tbEspecialidade);
-
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 172, 492, 2);
+		separator.setBounds(10, 61, 588, 12);
 		add(separator);
 
 		JButton btnSair = new JButton("Sair");
@@ -119,10 +105,10 @@ public class TelaCadastrarEspecialidade extends JPanel {
 				if (txtBuscarNome.getText() != null) {
 					especialidades = controlador.exibirEspecialidadePorNome(txtBuscarNome.getText());
 					atualizarTabelaEspecialidades(especialidades);
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(null, "Especialidade não encontrada!!");
 				}
-				
+
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -138,7 +124,7 @@ public class TelaCadastrarEspecialidade extends JPanel {
 		txtNome = new JTextField();
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtNome.setColumns(10);
-		txtNome.setBounds(112, 258, 486, 33);
+		txtNome.setBounds(112, 275, 486, 33);
 		add(txtNome);
 
 		txtInstituicao = new JTextField();
@@ -158,42 +144,77 @@ public class TelaCadastrarEspecialidade extends JPanel {
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnLimparTela.setBounds(10, 389, 144, 32);
 		add(btnLimparTela);
-		
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 174, 569, -92);
+		add(scrollPane);
+
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(20, 84, 578, 136);
+		add(scrollPane_1);
+
+		tbEspecialidade = new JTable();
+		scrollPane_1.setViewportView(tbEspecialidade);
+		tbEspecialidade.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int selecionado = tbEspecialidade.getSelectedRow();
+				
+				txtId.setText(tbEspecialidade.getValueAt(selecionado, 0) + "");
+				txtNome.setText((String) tbEspecialidade.getValueAt(selecionado, 1));
+				txtInstituicao.setText((String) tbEspecialidade.getValueAt(selecionado, 2));
+
+			}
+		});
+		tbEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tbEspecialidade.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome", "Instituição" }, },
+				new String[] { "ID", "Nome", "Instituição" }));
+
 		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnAlterar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			
-				int espCod = 0;				
+				
+				EspecialidadeBO bo = new EspecialidadeBO();
+				int codigo = Integer.parseInt(txtId.getText());
 				EspecialidadeController controlador = new EspecialidadeController();
 				EspecialidadeVO especialidade = construirEspecialidade();
-
-				String mensagem = controlador.atualizar(especialidade, espCod);
-				JOptionPane.showMessageDialog(null, mensagem);
-				limparTela();
 				
+				String codigoEsp = txtId.getText();
+				if(codigoEsp.trim() !="") {
+					especialidade.setCodigoEspecialidade(Integer.parseInt(codigoEsp));
+					}
+				
+				controlador.atualizar(especialidade, codigo);
+				if(controlador != null) {
+				JOptionPane.showMessageDialog(null, "Especialidade alterada com sucesso!");
+				limparTela();
+				}else {
+					JOptionPane.showMessageDialog(null, "Não foi possível alterar Especialidade!");
+				}
+
 			}
 		});
-		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnAlterar.setBounds(174, 390, 129, 31);
+		btnAlterar.setBounds(189, 390, 110, 31);
 		add(btnAlterar);
-		
-		JLabel lblId = new JLabel("ID");
-		lblId.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblId.setBounds(10, 217, 66, 31);
-		add(lblId);
-		
+
 		txtId = new JTextField();
+		txtId.setEditable(false);
 		txtId.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtId.setBounds(112, 217, 86, 30);
+		txtId.setBounds(112, 231, 86, 33);
 		add(txtId);
 		txtId.setColumns(10);
+
+		JLabel lblid = new JLabel("ID");
+		lblid.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblid.setBounds(10, 238, 59, 31);
+		add(lblid);
 
 	}
 
 	protected EspecialidadeVO construirEspecialidade() {
-	
-	
+
 		especialidade.setNomeEspecialidade(txtNome.getText());
 		especialidade.setInstituicao(txtInstituicao.getText());
 		
@@ -205,6 +226,7 @@ public class TelaCadastrarEspecialidade extends JPanel {
 		txtNome.setText("");
 		txtInstituicao.setText("");
 		txtId.setText("");
+
 		limparTabela();
 
 	}
@@ -220,7 +242,7 @@ public class TelaCadastrarEspecialidade extends JPanel {
 			}
 		}
 	}
-	
+
 	private void atualizarTabelaEspecialidades(List<EspecialidadeVO> especialidades) {
 		tbEspecialidade.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome", "Instituição" }, },
 				new String[] { "ID", "Nome", "Instituição" }));
@@ -231,8 +253,8 @@ public class TelaCadastrarEspecialidade extends JPanel {
 			// Crio uma nova linha na tabela
 			// Preencher a linha com os atributos do produto
 			// na ORDEM do cabeçalho da tabela
-			Object[] novaLinha = new Object[] { especialidade.getCodigoEspecialidade(), especialidade.getNomeEspecialidade(),
-					especialidade.getInstituicao(),
+			Object[] novaLinha = new Object[] { especialidade.getCodigoEspecialidade(),
+					especialidade.getNomeEspecialidade(), especialidade.getInstituicao(),
 
 			};
 			modelo.addRow(novaLinha);

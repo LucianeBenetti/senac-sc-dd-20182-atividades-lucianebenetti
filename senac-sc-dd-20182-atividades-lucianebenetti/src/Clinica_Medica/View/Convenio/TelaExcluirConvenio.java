@@ -164,6 +164,7 @@ public class TelaExcluirConvenio extends JPanel {
 	}
 	
 	protected ConvenioVO consutarConvenio() {
+		
 		txtNome.setText(convenioConsultado.getNomeConvenio());
 		txtCnpj.setText(convenioConsultado.getCnpjConvenio());
 		txtValor.setText(convenioConsultado.getValor()+ "");
