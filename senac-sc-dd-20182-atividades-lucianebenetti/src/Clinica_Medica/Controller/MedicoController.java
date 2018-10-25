@@ -71,8 +71,18 @@ public class MedicoController {
 	}
 
 	public List<MedicoVO> listarTodosMedicos() {
-		// TODO Auto-generated method stub
+
 		return bo.listarTodosMedicos();
+	}
+
+	public ArrayList<MedicoVO> ConsultarMedico() {
+
+		return bo.buscarMedico();
+	}
+
+	public List<MedicoVO> exibirMedicoPorNome(MedicoVO medico) {
+		
+		return bo.exibirMedicoPorNome(medico);
 	}
 
 }

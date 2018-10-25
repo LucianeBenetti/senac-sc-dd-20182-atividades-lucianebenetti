@@ -1,126 +1,258 @@
 package Clinica_Medica.View.Especializacao;
 
 import javax.swing.JPanel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import Clinica_Medica.Controller.EspecialidadeController;
+import Clinica_Medica.Controller.EspecializacaoController;
+import Clinica_Medica.Controller.MedicoController;
+import Clinica_Medica.VO.EspecialidadeVO;
+import Clinica_Medica.VO.EspecializacaoVO;
+import Clinica_Medica.VO.MedicoVO;
+
 import javax.swing.JSeparator;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.Color;
 
 public class TelaExcluirEspecializacao extends JPanel {
-	private JTextField txtId;
-	private JTextField txtNome;
-	private JTextField txtInstituicao;
-	private JTextField txtAno;
 
+	private JTextField txtIdMedico;
+	private JTextField txtNomeMedico;
+	private JTextField txtIdEspecialidade;
+	private JTextField txtNomeEspecialidade;
+	private JTextField txtAno;
+	private EspecializacaoVO especializacao = new EspecializacaoVO();
+	private EspecializacaoVO especializacaoExcluida = new EspecializacaoVO();
+	private MedicoVO medico = new MedicoVO();
+	private EspecialidadeVO especialidade = new EspecialidadeVO();
+	private JComboBox cbMedico;
+	private JComboBox cbEspecialidade;
 	/**
 	 * Create the panel.
 	 */
 	public TelaExcluirEspecializacao() {
 		setBackground(new Color(173, 216, 230));
 		setLayout(null);
-		
+
+		JLabel lblMedico = new JLabel("M\u00E9dico");
+		lblMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblMedico.setBounds(21, 170, 91, 31);
+		add(lblMedico);
+
+		JLabel lblEspecialidade = new JLabel("Especialidade");
+		lblEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblEspecialidade.setBounds(21, 236, 142, 26);
+		add(lblEspecialidade);
+
+		JLabel lblAno = new JLabel("Ano");
+		lblAno.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblAno.setBounds(21, 291, 46, 31);
+		add(lblAno);
+
+		JButton btnSair = new JButton("Sair");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int opcao;
+				Object[] BtSair = { "Sim", "Não" };
+
+				opcao = JOptionPane.showOptionDialog(null, "Deseja sair desta operação?", "Fechar",
+						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, BtSair, BtSair[0]);
+				if (opcao == JOptionPane.YES_OPTION) {
+					setVisible(false);
+				}
+			}
+		});
+		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnSair.setBounds(566, 347, 107, 31);
+		add(btnSair);
+
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EspecializacaoController controlador = new EspecializacaoController();
+				EspecializacaoVO especializacao = construirEspecializacao();
+			
+				controlador.excluirEspecializacao(especializacaoExcluida);
+				JOptionPane.showMessageDialog(null, "Especialidade excluída!");
+				limparTela();
+
+			}
+		});
+		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnExcluir.setBounds(298, 347, 114, 31);
+		add(btnExcluir);
+
+		txtIdMedico = new JTextField();
+		txtIdMedico.setEditable(false);
+		txtIdMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtIdMedico.setBounds(161, 175, 62, 31);
+		add(txtIdMedico);
+		txtIdMedico.setColumns(10);
+
+		txtNomeMedico = new JTextField();
+		txtNomeMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtNomeMedico.setBounds(233, 175, 440, 31);
+		add(txtNomeMedico);
+		txtNomeMedico.setColumns(10);
+
+		String[] med = { "----------- Selecione -----------" };
+		cbMedico = new JComboBox(med);
+		cbMedico.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				preencherMedico();
+			}
+		});
+		cbMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		cbMedico.setBounds(161, 17, 307, 34);
+		add(cbMedico);
+
+		String[] espec = { "----------- Selecione -----------" };
+		cbEspecialidade = new JComboBox(espec);
+		cbEspecialidade.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				preencherEspecialidade();
+			}
+
+		});
+		cbEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		cbEspecialidade.setBounds(161, 64, 307, 34);
+		add(cbEspecialidade);
+
+		txtIdEspecialidade = new JTextField();
+		txtIdEspecialidade.setEditable(false);
+		txtIdEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtIdEspecialidade.setBounds(161, 234, 62, 31);
+		add(txtIdEspecialidade);
+		txtIdEspecialidade.setColumns(10);
+
+		txtNomeEspecialidade = new JTextField();
+		txtNomeEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtNomeEspecialidade.setBounds(233, 234, 440, 31);
+		add(txtNomeEspecialidade);
+		txtNomeEspecialidade.setColumns(10);
+
+		txtAno = new JTextField();
+		txtAno.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtAno.setBounds(77, 289, 101, 34);
+		add(txtAno);
+		txtAno.setColumns(10);
+
 		JButton btnLimparTela = new JButton("Limpar Tela");
 		btnLimparTela.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent arg0) {
 				limparTela();
 			}
 		});
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnLimparTela.setBounds(10, 287, 134, 31);
+		btnLimparTela.setBounds(21, 347, 142, 31);
 		add(btnLimparTela);
-		
-		JButton btnExcluir = new JButton("Excluir");
-		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnExcluir.setBounds(206, 287, 98, 31);
-		add(btnExcluir);
-		
-		JButton btnSair = new JButton("Sair");
-		btnSair.addMouseListener(new MouseAdapter() {
+
+		JLabel lblBuscarMedico = new JLabel("Medico");
+		lblBuscarMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblBuscarMedico.setBounds(21, 21, 91, 26);
+		add(lblBuscarMedico);
+
+		JLabel lblBuscarEspecialidade = new JLabel("Especialidade");
+		lblBuscarEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblBuscarEspecialidade.setBounds(21, 68, 118, 26);
+		add(lblBuscarEspecialidade);
+
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				int opcao;
-                Object[] BtSair={"Sim","Não"};
-                 
-                opcao = JOptionPane.showOptionDialog(null,"Deseja sair desta operação?", 
-                        "Fechar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
-                        null, BtSair, BtSair[0]);
-                        if(opcao == JOptionPane.YES_OPTION) {
-                        	 setVisible(false);
-                        }
+				MedicoVO medicoBuscado;
+				EspecialidadeVO especialidadeBuscada;
+
+				medicoBuscado = (MedicoVO) cbMedico.getSelectedItem();
+				especialidadeBuscada = (EspecialidadeVO) cbEspecialidade.getSelectedItem();
+				EspecialidadeController controlador = new EspecialidadeController();
+				MedicoController controlerMedico = new MedicoController();
+				List<EspecialidadeVO> especialidades = null;
+				List<MedicoVO> medicos = null;
+				especialidades = controlador.exibirEspecialidadePorNome(especialidadeBuscada);
+				medicos = controlerMedico.exibirMedicoPorNome(medicoBuscado);
+
+				if (especialidades != null && medicos != null) {
+
+					txtNomeEspecialidade.setText(especialidadeBuscada.getNomeEspecialidade());
+					txtIdEspecialidade.setText(especialidadeBuscada.getCodigoEspecialidade() + "");
+					txtNomeMedico.setText(medicoBuscado.getNomeMedico());
+					txtIdMedico.setText(medicoBuscado.getCodigoMedico() + "");
+					txtAno.setText(especializacao.getAnoEspecializacao());
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Escolha o médico e a especialidade! Tente novamente!");
+				}
 			}
 		});
-		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(381, 287, 105, 31);
-		add(btnSair);
-		
-		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscar.setBounds(397, 25, 89, 31);
+		btnBuscar.setBounds(582, 35, 91, 31);
 		add(btnBuscar);
-		
-		JLabel lblId = new JLabel("ID");
-		lblId.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblId.setBounds(10, 25, 57, 31);
-		add(lblId);
-		
-		JLabel lblNome = new JLabel("Nome");
-		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNome.setBounds(10, 102, 57, 25);
-		add(lblNome);
-		
-		JLabel lblInstituicao = new JLabel("Institui\u00E7\u00E3o");
-		lblInstituicao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblInstituicao.setBounds(10, 153, 93, 28);
-		add(lblInstituicao);
-		
-		JLabel lblAno = new JLabel("Ano");
-		lblAno.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblAno.setBounds(10, 208, 46, 28);
-		add(lblAno);
-		
-		txtId = new JTextField();
-		txtId.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtId.setBounds(80, 25, 98, 31);
-		add(txtId);
-		txtId.setColumns(10);
-		
-		txtNome = new JTextField();
-		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNome.setBounds(113, 102, 373, 28);
-		add(txtNome);
-		txtNome.setColumns(10);
-		
-		txtInstituicao = new JTextField();
-		txtInstituicao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtInstituicao.setBounds(113, 153, 373, 31);
-		add(txtInstituicao);
-		txtInstituicao.setColumns(10);
-		
-		txtAno = new JTextField();
-		txtAno.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtAno.setBounds(112, 208, 89, 28);
-		add(txtAno);
-		txtAno.setColumns(10);
-		
+
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 77, 476, 14);
+		separator.setBounds(21, 124, 653, 14);
 		add(separator);
 
 	}
 
-	protected void limparTela() {
-		txtAno.setText("");
-		txtId.setText("");
-		txtInstituicao.setText("");
-		txtNome.setText("");
-		
+	protected EspecializacaoVO construirEspecializacao() {
+
+		medico = (MedicoVO) cbMedico.getSelectedItem();
+		especialidade = (EspecialidadeVO) cbEspecialidade.getSelectedItem();
+
+		especializacao.setMedicoVO(medico);
+		especializacao.setEspecialidadeVO(especialidade);
+		especializacao.setAnoEspecializacao(txtAno.getText());
+
+		return especializacao;
 	}
 
+	protected void limparTela() {
+		txtAno.setText("");
+		txtIdEspecialidade.setText("");
+		txtIdMedico.setText("");
+		txtNomeEspecialidade.setText("");
+		txtNomeMedico.setText("");
+		cbEspecialidade.setSelectedIndex(0);
+		cbMedico.setSelectedIndex(0);
+
+	}
+
+	protected void preencherMedico() {
+
+		MedicoController controlador = new MedicoController();
+		ArrayList<MedicoVO> listaMedico = new ArrayList<MedicoVO>();
+
+		listaMedico = controlador.consultarMedico();
+		DefaultComboBoxModel medicos = new DefaultComboBoxModel(listaMedico.toArray());
+		cbMedico.setModel(medicos);
+
+	}
+
+	protected void preencherEspecialidade() {
+
+		EspecialidadeController controlador = new EspecialidadeController();
+		ArrayList<EspecialidadeVO> listaEspecialidade = new ArrayList<EspecialidadeVO>();
+
+		listaEspecialidade = controlador.consultarEspecialidade();
+		DefaultComboBoxModel especialidades = new DefaultComboBoxModel(listaEspecialidade.toArray());
+		cbEspecialidade.setModel(especialidades);
+
+	}
 }

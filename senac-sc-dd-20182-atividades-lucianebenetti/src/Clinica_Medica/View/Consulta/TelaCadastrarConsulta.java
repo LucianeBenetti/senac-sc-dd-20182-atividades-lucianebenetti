@@ -156,9 +156,7 @@ public class TelaCadastrarConsulta extends JPanel {
 		lblDataNascimento.setBounds(26, 53, 162, 25);
 		add(lblDataNascimento);
 
-
-		String[] tipos = {"----------- Selecione -----------", "Particular", "Convênio"};
-
+	
 		txtIdEspecializacao = new JTextField();
 		txtIdEspecializacao.setColumns(10);
 		txtIdEspecializacao.setBounds(671, 246, 48, 27);
@@ -246,7 +244,7 @@ public class TelaCadastrarConsulta extends JPanel {
 		ArrayList<EspecialidadeVO> listaEspecializacao = new ArrayList<EspecialidadeVO>(); 
 
 		listaMedico = controlador.consultarMedico();
-		listaEspecializacao = controladorEspecializacao.ConsultarEspecialidade(nomeEspecializacao, codigoEspecializacao, nomeMedico);
+	//	listaEspecializacao = controladorEspecializacao.ConsultarEspecialidade(nomeEspecializacao, codigoEspecializacao, nomeMedico);
 		DefaultComboBoxModel medicos = new DefaultComboBoxModel(listaMedico.toArray());
 		DefaultComboBoxModel especialidades = new DefaultComboBoxModel(listaEspecializacao.toArray());
 		cbNomeMedico.setModel(medicos);

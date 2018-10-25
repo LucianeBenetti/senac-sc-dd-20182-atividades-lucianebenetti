@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 import Clinica_Medica.DAO.EspecialidadeDAO;
 import Clinica_Medica.VO.EspecialidadeVO;
-import Clinica_Medica.VO.MedicoVO;
+import Clinica_Medica.VO.EspecializacaoVO;
 
 public class EspecialidadeBO {
 
@@ -50,4 +50,16 @@ public class EspecialidadeBO {
 		return especialidades;
 	}
 
+	public ArrayList<EspecialidadeVO> buscarEspecilidades() {
+		ArrayList<EspecialidadeVO> especialidadeBuscada = dao.listarTodasEspecialidades();
+		return especialidadeBuscada;
+	}
+
+	public List<EspecialidadeVO> exibirEspecialidadePorNome(EspecialidadeVO especialidade) {
+		ArrayList<EspecialidadeVO> especialidades = dao.consultarEspecialidadeNome(especialidade.getNomeEspecialidade());
+		
+		return especialidades;
+	}
+
+	
 }

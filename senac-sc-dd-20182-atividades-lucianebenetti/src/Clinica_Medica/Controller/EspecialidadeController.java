@@ -5,6 +5,7 @@ import java.util.List;
 
 import Clinica_Medica.BO.EspecialidadeBO;
 import Clinica_Medica.VO.EspecialidadeVO;
+import Clinica_Medica.VO.EspecializacaoVO;
 
 public class EspecialidadeController {
 
@@ -63,5 +64,18 @@ public class EspecialidadeController {
 
 		return bo.listarTodasEspecialidades();
 	}
+
+	
+	public ArrayList<EspecialidadeVO> consultarEspecialidade() {
+		
+		return bo.buscarEspecilidades();
+	}
+
+	public List<EspecialidadeVO> exibirEspecialidadePorNome(EspecialidadeVO especialidade) {
+		// TODO Auto-generated method stub
+		return bo.exibirEspecialidadePorNome(especialidade);
+	}
+
+	
 
 }

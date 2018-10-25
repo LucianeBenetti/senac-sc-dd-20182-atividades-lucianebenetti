@@ -1,12 +1,12 @@
 package Clinica_Medica.BO;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import javax.swing.JOptionPane;
-
 import Clinica_Medica.DAO.EspecializacaoDAO;
 import Clinica_Medica.VO.EspecialidadeVO;
 import Clinica_Medica.VO.EspecializacaoVO;
+import Clinica_Medica.VO.MedicoVO;
 
 public class EspecializacaoBO {
 	
@@ -14,7 +14,7 @@ public class EspecializacaoBO {
 	
 	public boolean inserir(EspecializacaoVO especializacao) {
 				
-			if (dao.consultaPorID(especializacao.getCodigoEspecializacao()) != null) {
+			if (dao.listarEspecializacoes(especializacao.getMedicoVO().getCodigoMedico(), especializacao.getEspecialidadeVO().getCodigoEspecialidade()) != null) {
 				JOptionPane.showMessageDialog(null, "Especialização já cadastrada! Tente novamente.");
 				
 			} else {
@@ -24,6 +24,13 @@ public class EspecializacaoBO {
 			}
 			return false;
 		}
+
+	public boolean excluirEspecializacao(EspecializacaoVO especializacao) {
+		boolean sucesso = dao.delete(especializacao.getCodigoEspecializacao());
+		return sucesso;
+	}
+
+	
 
 	
 }

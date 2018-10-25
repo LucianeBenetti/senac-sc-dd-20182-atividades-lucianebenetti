@@ -156,18 +156,15 @@ public class TelaCadastrarPaciente extends JPanel {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				PacienteController dao = new PacienteController();
-				
 				pacienteBuscado = dao.buscarPacientePorCpf(txtCpfBusca.getText());
 				
-				if(pacienteBuscado != null) {
-					
+				if (pacienteBuscado != null) {
 					pacienteBuscado = buscarPaciente();
-															
-					}else {
-						JOptionPane.showMessageDialog(null, "Paciente não encontrado.");
-					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Paciente não encontrado.");
+				}
 				
 			}
 		});

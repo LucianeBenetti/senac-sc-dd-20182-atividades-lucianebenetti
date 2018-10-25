@@ -176,7 +176,6 @@ public class TelaCadastrarEspecialidade extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				EspecialidadeBO bo = new EspecialidadeBO();
 				int codigo = Integer.parseInt(txtId.getText());
 				EspecialidadeController controlador = new EspecialidadeController();
 				EspecialidadeVO especialidade = construirEspecialidade();

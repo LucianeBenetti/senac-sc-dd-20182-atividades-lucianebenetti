@@ -51,6 +51,12 @@ public class MedicoBO {
 		return medicos;
 	}
 
+	public List<MedicoVO> exibirMedicoPorNome(MedicoVO medico) {
+		
+		ArrayList<MedicoVO> medicos = dao.exibirMedicoPorNome(medico.getNomeMedico());
+		return medicos;
+	}
+
 	
 
 	

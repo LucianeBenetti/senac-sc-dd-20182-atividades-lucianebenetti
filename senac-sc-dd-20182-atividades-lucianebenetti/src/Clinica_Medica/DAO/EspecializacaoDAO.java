@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import Clinica_Medica.VO.ConvenioVO;
 import Clinica_Medica.VO.EspecialidadeVO;
 import Clinica_Medica.VO.EspecializacaoVO;
 import Clinica_Medica.VO.MedicoVO;
@@ -159,32 +160,54 @@ public class EspecializacaoDAO {
 		return listaEspecializacao.toString();
 	}
 
-	public ArrayList<EspecializacaoVO> listarEspecialidades(String nomeEspecialidade, int codigoEspecializacao, String nomeMedico) {
+	public ArrayList<EspecializacaoVO> listarEspecializacoes(int codigoMedico, int  codigoEspecialidade) {
 		
-		String query = "SELECT especialidade.nomeEspecialidaed, medico.nomeMedico, especializacao.codigoEspecializacao from especializacao inner join especialidade on "
-				+ " especializacao.codigoEspecialidae = especialidade.codigoEspecialidae inner join medico on especializacao.codigoMedico = medico.codigoMedico " + " where nomeEspecialidade like ? and codigoEspecializacao = ? and nomeMedico like ?";
+		String query = "SELECT * from especializacao";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
-		EspecialidadeVO especialidade = null;
-		EspecializacaoVO especializacao = null;
-		MedicoVO medico = null;
-		ArrayList<EspecializacaoVO> especializacoes = new ArrayList<EspecializacaoVO>();
-		
 		try {
-			prepStmt.setString(1, '%' + nomeEspecialidade+ '%');
-			prepStmt.setInt(2, codigoEspecializacao);
-			prepStmt.setString(3, '%' + nomeMedico+ '%');
+			ResultSet result = prepStmt.executeQuery();
+
+			while (result.next()) {
+				EspecializacaoVO especializacao = new EspecializacaoVO();
+				especializacao.setCodigoEspecializacao(result.getInt(1));
+				especializacao.getEspecialidadeVO().setCodigoEspecialidade(result.getInt(2));
+				especializacao.getMedicoVO().setCodigoMedico(result.getInt(3));
+				especializacao.setAnoEspecializacao(result.getString(4));
+
+				listaEspecializacao.add(especializacao);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaEspecializacao;
+	}
+	
+
+	public ArrayList<EspecializacaoVO> buscarEspecializacoes(String ano) {
+		
+	String query = "SELECT especialidade.nomeEspecialidade, medico.nomeMedico, especializacao.anoEspecializacao from especializacao inner join especialidade on "
+				+ " especializacao.codigoEspecialidade = especialidade.codigoEspecialidade inner join medico on especializacao.codigoMedico = medico.codigoMedico "
+			+"where ano = ?";
+
+		ArrayList<EspecializacaoVO> especializacoes = new ArrayList<EspecializacaoVO>();
+		EspecializacaoVO especializacao = null;
+		Connection conn = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
+		try {
+			prepStmt.setString(1, ano);
 			
 			ResultSet result = prepStmt.executeQuery();
 
 			while (result.next()) {
-				
 				especializacao = new EspecializacaoVO();
-				especializacao.getEspecialidadeVO().setNomeEspecialidade(result.getString(2));
 				especializacao.setCodigoEspecializacao(result.getInt(1));
 				especializacao.getMedicoVO().setNomeMedico(result.getString(2));
-				
+				especializacao.getEspecialidadeVO().setNomeEspecialidade(result.getString(3));
+				especializacao.setAnoEspecializacao(result.getString(4));
+
 				especializacoes.add(especializacao);
 			}
 		} catch (SQLException ex) {
@@ -195,5 +218,6 @@ public class EspecializacaoDAO {
 		}
 		return especializacoes;
 	}
+
 
 }
