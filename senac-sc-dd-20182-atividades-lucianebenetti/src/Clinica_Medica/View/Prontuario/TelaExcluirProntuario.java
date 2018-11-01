@@ -111,6 +111,7 @@ public class TelaExcluirProntuario extends JPanel {
 		add(lblIdProntuario);
 		
 		txtIdProntuario = new JTextField();
+		txtIdProntuario.setEditable(false);
 		txtIdProntuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtIdProntuario.setBounds(151, 197, 86, 25);
 		add(txtIdProntuario);

@@ -74,7 +74,7 @@ public class TelaListarTodosProntuarios extends JPanel {
 		add(btnSair);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(21, 183, 565, 193);
+		scrollPane.setBounds(21, 154, 565, 193);
 		add(scrollPane);
 		
 				tbProntuarios = new JTable();

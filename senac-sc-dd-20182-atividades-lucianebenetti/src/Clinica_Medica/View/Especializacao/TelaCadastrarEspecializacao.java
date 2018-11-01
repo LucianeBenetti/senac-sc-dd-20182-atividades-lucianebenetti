@@ -12,6 +12,7 @@ import Clinica_Medica.Controller.EspecialidadeController;
 import Clinica_Medica.Controller.EspecializacaoController;
 import Clinica_Medica.Controller.MedicoController;
 import Clinica_Medica.Controller.PacienteController;
+import Clinica_Medica.VO.ConvenioVO;
 import Clinica_Medica.VO.EspecialidadeVO;
 import Clinica_Medica.VO.EspecializacaoVO;
 import Clinica_Medica.VO.MedicoVO;
@@ -43,6 +44,7 @@ public class TelaCadastrarEspecializacao extends JPanel {
 	private EspecialidadeVO especialidade = new EspecialidadeVO();
 	private JComboBox cbMedico;
 	private JComboBox cbEspecialidade;
+	private JTextField txtIdEspecializacao;
 
 	/**
 	 * Create the panel.
@@ -53,7 +55,7 @@ public class TelaCadastrarEspecializacao extends JPanel {
 
 		JLabel lblMedico = new JLabel("M\u00E9dico");
 		lblMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblMedico.setBounds(21, 170, 91, 31);
+		lblMedico.setBounds(21, 175, 91, 31);
 		add(lblMedico);
 
 		JLabel lblEspecialidade = new JLabel("Especialidade");
@@ -97,7 +99,7 @@ public class TelaCadastrarEspecializacao extends JPanel {
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(297, 347, 114, 31);
+		btnCadastrar.setBounds(388, 347, 114, 31);
 		add(btnCadastrar);
 
 		txtIdMedico = new JTextField();
@@ -182,30 +184,10 @@ public class TelaCadastrarEspecializacao extends JPanel {
 		btnBuscar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MedicoVO medicoBuscado;
-				EspecialidadeVO especialidadeBuscada;
 				
-				medicoBuscado = (MedicoVO) cbMedico.getSelectedItem();
-				especialidadeBuscada = (EspecialidadeVO) cbEspecialidade.getSelectedItem();
-				EspecialidadeController controlador = new EspecialidadeController();
-				MedicoController controllerMedico = new MedicoController();
-				List<EspecialidadeVO> especialidades = null;
-				List<MedicoVO> medicos = null;
-				especialidades = controlador.exibirEspecialidadePorNome(especialidadeBuscada);
-				medicos = controllerMedico.exibirMedicoPorNome(medicoBuscado);
-				
-			
-				if (especialidades != null && medicos != null) {
-
-					txtNomeEspecialidade.setText(especialidadeBuscada.getNomeEspecialidade());
-					txtIdEspecialidade.setText(especialidadeBuscada.getCodigoEspecialidade() + "");
-					txtNomeMedico.setText(medicoBuscado.getNomeMedico());
-					txtIdMedico.setText(medicoBuscado.getCodigoMedico() + "");
-
-				} else {
-					JOptionPane.showMessageDialog(null, "Escolha o médico e a especialidade! Tente novamente!");
-				}
-			}
+				buscarMedico();
+				buscarEspecialidade();
+							}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnBuscar.setBounds(582, 35, 91, 31);
@@ -215,6 +197,81 @@ public class TelaCadastrarEspecializacao extends JPanel {
 		separator.setBounds(21, 124, 653, 14);
 		add(separator);
 
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+							
+				EspecializacaoController controlador = new EspecializacaoController();
+				EspecializacaoVO especializacao = construirEspecializacao();
+
+				int codigoEsp = Integer.parseInt(txtIdEspecializacao.getText());
+				
+				controlador.atualizar(especializacao, codigoEsp);
+				if (controlador != null) {
+					JOptionPane.showMessageDialog(null, "Especializacao alterada com sucesso!");
+					limparTela();
+				} else {
+					JOptionPane.showMessageDialog(null, "Não foi possível alterar Especializacao!");
+				}
+
+			}
+		});
+		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnAlterar.setBounds(201, 347, 133, 30);
+		add(btnAlterar);
+		
+		JLabel lblIdEsepcializacao = new JLabel("ID");
+		lblIdEsepcializacao.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblIdEsepcializacao.setBounds(21, 137, 62, 26);
+		add(lblIdEsepcializacao);
+		
+		txtIdEspecializacao = new JTextField();
+		txtIdEspecializacao.setEditable(false);
+		txtIdEspecializacao.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtIdEspecializacao.setBounds(77, 137, 86, 26);
+		add(txtIdEspecializacao);
+		txtIdEspecializacao.setColumns(10);
+
+	}
+
+	protected void buscarEspecialidade() {
+	
+		EspecialidadeVO especialidadeBuscada;
+		especialidadeBuscada = (EspecialidadeVO) cbEspecialidade.getSelectedItem();
+		EspecialidadeController controlador = new EspecialidadeController();
+		List<EspecialidadeVO> especialidades = null;
+		especialidades = controlador.exibirEspecialidadePorNome(especialidadeBuscada);
+		
+		if (especialidades != null) {
+
+			txtNomeEspecialidade.setText(especialidadeBuscada.getNomeEspecialidade());
+			txtIdEspecialidade.setText(especialidadeBuscada.getCodigoEspecialidade() + "");
+		
+		} else {
+			JOptionPane.showMessageDialog(null, "Escolha o médico e a especialidade! Tente novamente!");
+		}
+	}
+
+	protected void buscarMedico() {
+		
+		MedicoVO medicoBuscado;
+		medicoBuscado = (MedicoVO) cbMedico.getSelectedItem();
+		MedicoController controllerMedico = new MedicoController();
+		List<MedicoVO> medicos = null;
+		medicos = controllerMedico.exibirMedicoPorNome(medicoBuscado);
+
+		if (medicos != null) {
+
+			txtNomeMedico.setText(medicoBuscado.getNomeMedico());
+			txtIdMedico.setText(medicoBuscado.getCodigoMedico() + "");
+			
+
+		} else {
+			JOptionPane.showMessageDialog(null, "Escolha o médico e a especialidade! Tente novamente!");
+		}
+		
 	}
 
 	protected EspecializacaoVO construirEspecializacao() {
@@ -225,6 +282,8 @@ public class TelaCadastrarEspecializacao extends JPanel {
 		especializacao.setMedicoVO(medico);
 		especializacao.setEspecialidadeVO(especialidade);
 		especializacao.setAnoEspecializacao(txtAno.getText());
+		especializacao.getEspecialidadeVO().setCodigoEspecialidade(Integer.parseInt(txtIdEspecialidade.getText()));
+		especializacao.getMedicoVO().setCodigoMedico(Integer.parseInt(txtIdMedico.getText()));
 
 		return especializacao;
 	}
@@ -237,6 +296,7 @@ public class TelaCadastrarEspecializacao extends JPanel {
 		txtNomeMedico.setText("");
 		cbEspecialidade.setSelectedIndex(0);
 		cbMedico.setSelectedIndex(0);
+		txtIdEspecializacao.setText("");
 
 	}
 

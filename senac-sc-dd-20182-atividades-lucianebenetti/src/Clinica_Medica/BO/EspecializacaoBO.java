@@ -13,10 +13,9 @@ public class EspecializacaoBO {
 	EspecializacaoDAO dao = new EspecializacaoDAO();
 	
 	public boolean inserir(EspecializacaoVO especializacao) {
-				
-			if (dao.listarEspecializacoes(especializacao.getMedicoVO().getCodigoMedico(), especializacao.getEspecialidadeVO().getCodigoEspecialidade()) != null) {
+			
+			if (dao.existeEspecializacao(especializacao)) {
 				JOptionPane.showMessageDialog(null, "Especialização já cadastrada! Tente novamente.");
-				
 			} else {
 
 				int idGerado = dao.inserirEspecializacao(especializacao);
@@ -24,13 +23,34 @@ public class EspecializacaoBO {
 			}
 			return false;
 		}
+	
 
 	public boolean excluirEspecializacao(EspecializacaoVO especializacao) {
 		boolean sucesso = dao.delete(especializacao.getCodigoEspecializacao());
 		return sucesso;
 	}
 
-	
+		
+	public EspecializacaoVO atualizar(EspecializacaoVO especializacao, int codigoEspecializacao) {
+		EspecializacaoVO especializacaoBuscada = dao.atualizarEspecializacao(especializacao, especializacao.getCodigoEspecializacao());
 
-	
+		return especializacaoBuscada;
+
+	}
+
+	public ArrayList<EspecializacaoVO> listarTodasEspecializacoes() {
+		
+		ArrayList<EspecializacaoVO> especialiacoes = dao.listarTodasEspecializacoes();
+		return especialiacoes;
+	}
+
+	public ArrayList<EspecializacaoVO> listarTodasEspecializacoesPorMedicoEspecialidade(EspecialidadeVO especialidade, MedicoVO medico) {
+		return dao.listarEspecializacoesDoMedicoPorEspecialidade(especialidade.getCodigoEspecialidade(), medico.getCodigoMedico());
+	}
+
+	public List<EspecializacaoVO> existeEspecializacaoPorNome(String nomeMedico, String nomeEspecialidade) {
+		ArrayList<EspecializacaoVO> especializacoes = dao.existeEspecializacaoPorNome(nomeMedico, nomeEspecialidade);
+		return especializacoes;
+	}
+
 }

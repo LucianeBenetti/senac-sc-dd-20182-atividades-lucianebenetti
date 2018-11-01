@@ -9,25 +9,36 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
+import Clinica_Medica.Controller.PacienteController;
+import Clinica_Medica.VO.PacienteVO;
 import Clinica_Medica.VO.ProntuarioVO;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JTextArea;
 import javax.swing.DropMode;
 import java.awt.Color;
+import java.awt.BorderLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaCadastrarProntuario extends JPanel {
-	private JTextField txtBuscarNome;
+	
+	private static final String MASCARA_CPF = "###.###.###-##";
+	private JTextField txtBuscarCPF;
 	private JTextField txtNomePaciente;
 	private JTextArea txtAreaRegistro;
 	private JDateChooser dateChooserDataConsulta;
 	private JTextArea txtAreaMedicamentos;
 	private JTextArea txtAreaExames;
 	private ProntuarioVO prontuario = new ProntuarioVO();
+	private PacienteVO pacienteBuscado = new PacienteVO();
 
 	/**
 	 * Create the panel.
@@ -36,7 +47,7 @@ public class TelaCadastrarProntuario extends JPanel {
 		setBackground(new Color(173, 216, 230));
 		setLayout(null);
 
-		JLabel lblBuscarNomePaciente = new JLabel("Nome Paciente");
+		JLabel lblBuscarNomePaciente = new JLabel("CPF Paciente");
 		lblBuscarNomePaciente.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblBuscarNomePaciente.setBounds(21, 24, 126, 22);
 		add(lblBuscarNomePaciente);
@@ -46,22 +57,42 @@ public class TelaCadastrarProntuario extends JPanel {
 		lblDataConsulta.setBounds(21, 57, 126, 22);
 		add(lblDataConsulta);
 
-		txtBuscarNome = new JTextField();
-		txtBuscarNome.setBounds(157, 16, 377, 32);
-		add(txtBuscarNome);
-		txtBuscarNome.setColumns(10);
+		try {
+			txtBuscarCPF = new JFormattedTextField(new MaskFormatter(MASCARA_CPF));
+			txtBuscarCPF.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		txtBuscarCPF.setBounds(157, 16, 377, 32);
+		add(txtBuscarCPF);
+		txtBuscarCPF.setColumns(10);
 
 		dateChooserDataConsulta = new JDateChooser();
 		dateChooserDataConsulta.setBounds(157, 57, 87, 32);
 		add(dateChooserDataConsulta);
 
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			
+				PacienteController dao = new PacienteController();
+				pacienteBuscado = dao.buscarPacientePorCpf(txtBuscarCPF.getText());
+				
+				if (pacienteBuscado != null) {
+					pacienteBuscado = buscarPaciente();
+				} else {
+					JOptionPane.showMessageDialog(null, "Paciente não encontrado.");
+				}
+			}
+		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnBuscar.setBounds(603, 16, 89, 39);
 		add(btnBuscar);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(21, 133, 696, 8);
+		separator.setBounds(21, 121, 696, 8);
 		add(separator);
 
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -108,6 +139,7 @@ public class TelaCadastrarProntuario extends JPanel {
 		add(lblNomePaciente);
 
 		txtNomePaciente = new JTextField();
+		txtNomePaciente.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtNomePaciente.setColumns(10);
 		txtNomePaciente.setBounds(157, 151, 377, 32);
 		add(txtNomePaciente);
@@ -135,7 +167,7 @@ public class TelaCadastrarProntuario extends JPanel {
 
 		txtAreaRegistro = new JTextArea();
 		scrollPane.setViewportView(txtAreaRegistro);
-		txtAreaRegistro.setFont(new Font("Monospaced", Font.PLAIN, 15));
+		txtAreaRegistro.setFont(new Font("Dialog", Font.PLAIN, 16));
 
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(157, 256, 2, 2);
@@ -146,6 +178,7 @@ public class TelaCadastrarProntuario extends JPanel {
 		add(scrollPane_2);
 
 		txtAreaExames = new JTextArea();
+		txtAreaExames.setFont(new Font("Dialog", Font.PLAIN, 16));
 		scrollPane_2.setViewportView(txtAreaExames);
 
 		JScrollPane scrollPane_3 = new JScrollPane();
@@ -154,17 +187,31 @@ public class TelaCadastrarProntuario extends JPanel {
 
 		txtAreaMedicamentos = new JTextArea();
 		scrollPane_3.setViewportView(txtAreaMedicamentos);
-		txtAreaMedicamentos.setFont(new Font("Monospaced", Font.PLAIN, 15));
+		txtAreaMedicamentos.setFont(new Font("Dialog", Font.PLAIN, 16));
+		
+		JLabel lblHoraConsulta = new JLabel("Hora Consulta");
+		lblHoraConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblHoraConsulta.setBounds(278, 59, 126, 32);
+		add(lblHoraConsulta);
+		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(437, 57, 87, 32);
+		add(dateChooser);
 
 	}
 
 	protected void limparTela() {
 		txtAreaMedicamentos.setText("");
-		txtBuscarNome.setText("");
+		txtBuscarCPF.setText("");
 		txtNomePaciente.setText("");
 		txtAreaExames.setText("");
 		txtAreaRegistro.setText("");
 		dateChooserDataConsulta.setDate(null);
 	}
-
+	protected PacienteVO buscarPaciente() {
+	
+		txtNomePaciente.setText(pacienteBuscado.getNomePaciente());
+				
+		return pacienteBuscado;
+	}
 }

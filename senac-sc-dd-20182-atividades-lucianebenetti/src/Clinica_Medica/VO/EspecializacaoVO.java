@@ -1,7 +1,5 @@
 package Clinica_Medica.VO;
 
-import java.util.Date;
-
 public class EspecializacaoVO {
 
 	private int codigoEspecializacao;
