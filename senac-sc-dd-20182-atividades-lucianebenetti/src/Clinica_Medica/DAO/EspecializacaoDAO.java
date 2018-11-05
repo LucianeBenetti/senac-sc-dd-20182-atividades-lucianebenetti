@@ -14,7 +14,9 @@ import Clinica_Medica.VO.MedicoVO;
 public class EspecializacaoDAO {
 
 	private static ArrayList<EspecializacaoVO> listaEspecializacao = new ArrayList<EspecializacaoVO>();
-
+	private EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO();
+	private MedicoDAO medicoDAO = new MedicoDAO();
+	
 	public int inserirEspecializacao(EspecializacaoVO especializacao) {
 
 		int novoId = 0;
@@ -123,8 +125,11 @@ public class EspecializacaoDAO {
 			while (result.next()) {
 				EspecializacaoVO especializacao = new EspecializacaoVO();
 				especializacao.setCodigoEspecializacao(result.getInt(1));
-				especializacao.getEspecialidadeVO().setCodigoEspecialidade(result.getInt(2));
-				especializacao.getMedicoVO().setCodigoMedico(result.getInt(3));
+				
+				EspecialidadeVO especialidadeVO = especialidadeDAO.consultarPorId(result.getInt(2));
+				especializacao.setEspecialidadeVO(especialidadeVO);
+				MedicoVO medicoVO = medicoDAO.consultarPorId(result.getInt(3));
+				especializacao.setMedicoVO(medicoVO);
 				especializacao.setAnoEspecializacao(result.getString(4));
 
 				listaEspecializacao.add(especializacao);
@@ -149,8 +154,11 @@ public class EspecializacaoDAO {
 			while (result.next()) {
 				EspecializacaoVO especializacao = new EspecializacaoVO();
 				especializacao.setCodigoEspecializacao(result.getInt(1));
-				especializacao.getEspecialidadeVO().setCodigoEspecialidade(result.getInt(2));
-				especializacao.getMedicoVO().setCodigoMedico(result.getInt(3));
+				
+				EspecialidadeVO especialidadeVO = especialidadeDAO.consultarPorId(result.getInt(2));
+				especializacao.setEspecialidadeVO(especialidadeVO);
+				MedicoVO medicoVO = medicoDAO.consultarPorId(result.getInt(3));
+				especializacao.setMedicoVO(medicoVO);
 				especializacao.setAnoEspecializacao(result.getString(4));
 
 				listaEspecializacao.add(especializacao);
@@ -200,7 +208,6 @@ public class EspecializacaoDAO {
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
-		EspecializacaoVO especializacao = null;
 		ArrayList<EspecializacaoVO> especializacoes = new ArrayList<EspecializacaoVO>();
 		try {
 			prepStmt.setString(1, '%' + nomeMedico + '%');
@@ -210,11 +217,14 @@ public class EspecializacaoDAO {
 
 			while (result.next()) {
 
-				especializacao = new EspecializacaoVO();
-				especializacao.getEspecialidadeVO().setCodigoEspecialidade(result.getInt(1));
-				especializacao.getMedicoVO().setCodigoMedico(result.getInt(2));
-				especializacao.setAnoEspecializacao(result.getString(3));
-
+				EspecializacaoVO especializacao = new EspecializacaoVO();
+				especializacao.setCodigoEspecializacao(result.getInt(1));
+				
+				EspecialidadeVO especialidadeVO = especialidadeDAO.consultarPorId(result.getInt(2));
+				especializacao.setEspecialidadeVO(especialidadeVO);
+				MedicoVO medicoVO = medicoDAO.consultarPorId(result.getInt(3));
+				especializacao.setMedicoVO(medicoVO);
+				especializacao.setAnoEspecializacao(result.getString(4));
 				especializacoes.add(especializacao);
 
 			}

@@ -11,25 +11,25 @@ import javax.swing.JSeparator;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
-
+import Clinica_Medica.Controller.ConsultaController;
 import Clinica_Medica.Controller.ConvenioController;
 import Clinica_Medica.Controller.EspecialidadeController;
 import Clinica_Medica.Controller.EspecializacaoController;
 import Clinica_Medica.Controller.MedicoController;
 import Clinica_Medica.Controller.PacienteController;
+import Clinica_Medica.VO.ConsultaVO;
 import Clinica_Medica.VO.ConvenioVO;
 import Clinica_Medica.VO.EspecialidadeVO;
 import Clinica_Medica.VO.EspecializacaoVO;
 import Clinica_Medica.VO.MedicoVO;
 import Clinica_Medica.VO.PacienteVO;
-
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Time;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +38,7 @@ public class TelaCadastrarConsulta extends JPanel {
 	private JComboBox cbConvenio;
 	private JComboBox cbNomeMedico;
 	private JComboBox cbEspecialidade;
+	private JComboBox cbHorarioConsulta;
 	private JTextField txtBuscarCPF;
 	private JTextField txtIdPaciente;
 	private JTextField txtIdConvenio;
@@ -45,7 +46,7 @@ public class TelaCadastrarConsulta extends JPanel {
 	private JTextField txtIdEspecializacao;
 	private JTextField txtIdProntuario;
 	private JDateChooser dateChooserDataConsulta;
-	private JDateChooser dateChooserHoraConsulta;
+	private ConsultaVO consulta = new ConsultaVO();
 	private static final String MASCARA_CPF = "###.###.###-##";
 	PacienteVO pacienteBuscado = new PacienteVO();
 
@@ -154,7 +155,7 @@ public class TelaCadastrarConsulta extends JPanel {
 
 		JLabel lblDataRealizao = new JLabel("Hora da Consulta");
 		lblDataRealizao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblDataRealizao.setBounds(338, 364, 162, 23);
+		lblDataRealizao.setBounds(382, 364, 162, 23);
 		add(lblDataRealizao);
 
 		txtIdPaciente = new JTextField();
@@ -172,6 +173,18 @@ public class TelaCadastrarConsulta extends JPanel {
 		add(txtIdConvenio);
 
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				ConsultaController controlador = new ConsultaController();
+				ConsultaVO consulta = construirConsulta();
+				
+				String mensagem = controlador.salvar(consulta);
+				JOptionPane.showMessageDialog(null, mensagem);
+				limparTela();
+			}
+		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnCadastrar.setBounds(429, 448, 115, 35);
 		add(btnCadastrar);
@@ -220,12 +233,8 @@ public class TelaCadastrarConsulta extends JPanel {
 		add(cbNomeMedico);
 
 		dateChooserDataConsulta = new JDateChooser();
-		dateChooserDataConsulta.setBounds(188, 360, 87, 31);
+		dateChooserDataConsulta.setBounds(174, 360, 181, 31);
 		add(dateChooserDataConsulta);
-
-		dateChooserHoraConsulta = new JDateChooser();
-		dateChooserHoraConsulta.setBounds(509, 360, 87, 31);
-		add(dateChooserHoraConsulta);
 
 		JLabel lblIdProntuario = new JLabel("ID Prontuario");
 		lblIdProntuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -254,7 +263,24 @@ public class TelaCadastrarConsulta extends JPanel {
 		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnAlterar.setBounds(225, 448, 130, 35);
 		add(btnAlterar);
+		
+		String[] horarios = {"--- Selecione ---", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"};
+		cbHorarioConsulta = new JComboBox(horarios);
+		cbHorarioConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		cbHorarioConsulta.setBounds(554, 360, 152, 29);
+		add(cbHorarioConsulta);
 
+	}
+
+	protected ConsultaVO construirConsulta() {
+	
+		consulta.getEspecializacaoVO().setCodigoEspecializacao(Integer.parseInt(txtIdEspecializacao.getText()));
+		consulta.getConvenioVO().setCodigoConvenio(Integer.parseInt(txtIdConvenio.getText()));
+		consulta.getProntuarioVO().setCodigoProntuario(Integer.parseInt(txtIdProntuario.getText()));
+		consulta.setDataConsulta(dateChooserDataConsulta.getDate());
+		consulta.setHorarioConsulta((Time) cbHorarioConsulta.getSelectedItem());
+		
+		return consulta;
 	}
 
 	protected PacienteVO buscarPaciente() {
@@ -293,14 +319,9 @@ public class TelaCadastrarConsulta extends JPanel {
 		listaConvenio = controlador.ConsultarConvenio();
 		DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaConvenio.toArray());
 		cbConvenio.setModel(defaultComboBox);
-		String id = null;
-		for (int i = 0; i < listaConvenio.size(); i++) {
-
-		id+=listaConvenio.get(convenio.getCodigoConvenio());
-			
-		}
-		txtIdConvenio.setText(id);
-
+		
+		//txtIdConvenio.setText(listaConvenio.get(convenio.getCodigoConvenio())); 
+		
 	}
 
 	protected void limparTela() {
@@ -312,9 +333,9 @@ public class TelaCadastrarConsulta extends JPanel {
 		txtNomePaciente.setText("");
 		cbConvenio.setSelectedIndex(0);
 		cbEspecialidade.setSelectedIndex(0);
+		cbHorarioConsulta.setSelectedIndex(0);
 		cbNomeMedico.setSelectedIndex(0);
 		dateChooserDataConsulta.setDate(null);
-		dateChooserHoraConsulta.setDate(null);
-
 	}
+	
 }

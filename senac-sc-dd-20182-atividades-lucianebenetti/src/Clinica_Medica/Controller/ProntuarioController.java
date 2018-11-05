@@ -15,4 +15,33 @@ public class ProntuarioController {
 		return bo.listarProntuarios();
 	}
 
+	public String salvar(ProntuarioVO prontuario) {
+		
+		String validacao = validarProntuario(prontuario);
+
+		if (validacao == "") {
+
+			if (bo.inserir(prontuario)) {
+				validacao = "Prontuario salvo com sucesso!";
+			} else {
+				validacao = "Erro ao salvar prontuario!";
+			}
+		}
+		return validacao;
+	}
+
+	private String validarProntuario(ProntuarioVO prontuario) {
+
+		String validacao = "";
+		if (prontuario.getMedicamento()== null) {
+			validacao = "A área de medicamentos está nulo!";
+		} else {
+			if (prontuario.getMedicamento().trim().equals("") || prontuario.getRegistro().trim().equals("")) {
+				validacao += " - Medicamentos e Registro são obrigatórios. \n";
+			}
+
+		}
+		return validacao;
+	}
+
 }

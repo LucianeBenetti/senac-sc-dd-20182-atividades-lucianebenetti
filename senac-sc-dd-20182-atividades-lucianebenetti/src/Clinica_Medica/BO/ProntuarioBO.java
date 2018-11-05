@@ -7,16 +7,21 @@ import java.util.List;
 import Clinica_Medica.DAO.ProntuarioDAO;
 import Clinica_Medica.VO.ProntuarioVO;
 
-
 public class ProntuarioBO {
-	
+
 	ProntuarioDAO dao = new ProntuarioDAO();
-	
+
 	public List<ProntuarioVO> listarProntuarios() {
 
-          ArrayList<ProntuarioVO> prontuarios = dao.listarTodos(); 
-		 return prontuarios;
+		ArrayList<ProntuarioVO> prontuarios = dao.listarTodos();
+		return prontuarios;
 	}
 
-}
+	public boolean inserir(ProntuarioVO prontuario) {
 
+		int idGerado = dao.inserir(prontuario);
+
+		return idGerado > 0;
+
+	}
+}

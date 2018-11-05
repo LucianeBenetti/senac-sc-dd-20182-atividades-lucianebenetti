@@ -67,13 +67,12 @@ public class ConsultaDAO {
 
 			while (result.next()) {
 				
-				consulta.getConvenioVO().setCodigoConvenio(result.getInt(1));		
-				consulta.getEspecializacaoVO().setCodigoEspecializacao(result.getInt(2));
-				consulta.getPacienteVO().setCodigoPaciente(result.getInt(3));
+				consulta.getEspecializacaoVO().setCodigoEspecializacao(result.getInt(1));
+				consulta.getPacienteVO().setCodigoPaciente(result.getInt(2));
+				consulta.getConvenioVO().setCodigoConvenio(result.getInt(3));
 				consulta.getProntuarioVO().setCodigoProntuario(result.getInt(4));
-				consulta.getConvenioVO().setCodigoConvenio(result.getInt(5));
-				consulta.setDataConsulta(result.getDate(6));
-				consulta.setHorarioConsulta(result.getTime(7));
+				consulta.setDataConsulta(result.getDate(5));
+				consulta.setHorarioConsulta(result.getTime(6));
 				
 			}
 		} catch (SQLException ex) {
@@ -142,7 +141,7 @@ public class ConsultaDAO {
 		return sucessoAtualizar;
 	}
 	
-	public String listarTodos() {
+	public ArrayList<ConsultaVO> listarTodos() {
 
 		String query = "select * from consulta";
 
@@ -154,13 +153,12 @@ public class ConsultaDAO {
 			while (result.next()) {
 				ConsultaVO consulta = new ConsultaVO();
 
-				consulta.getConvenioVO().setCodigoConvenio(result.getInt(1));		
-				consulta.getEspecializacaoVO().setCodigoEspecializacao(result.getInt(2));
-				consulta.getPacienteVO().setCodigoPaciente(result.getInt(3));
+				consulta.getEspecializacaoVO().setCodigoEspecializacao(result.getInt(1));
+				consulta.getPacienteVO().setCodigoPaciente(result.getInt(2));
+				consulta.getConvenioVO().setCodigoConvenio(result.getInt(3));
 				consulta.getProntuarioVO().setCodigoProntuario(result.getInt(4));
-				consulta.getConvenioVO().setCodigoConvenio(result.getInt(5));
-				consulta.setDataConsulta(result.getDate(6));
-				consulta.setHorarioConsulta(result.getTime(7));
+				consulta.setDataConsulta(result.getDate(5));
+				consulta.setHorarioConsulta(result.getTime(6));
 				
 				listaConsultas.add(consulta);
 			}
@@ -168,7 +166,7 @@ public class ConsultaDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return listaConsultas.toString();
+		return listaConsultas;
 	}
 
 

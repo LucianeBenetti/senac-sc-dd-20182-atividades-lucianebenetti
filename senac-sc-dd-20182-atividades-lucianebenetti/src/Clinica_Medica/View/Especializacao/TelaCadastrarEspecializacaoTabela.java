@@ -31,10 +31,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JComboBox;
 
 public class TelaCadastrarEspecializacaoTabela extends JPanel {
-
-	private JTextField txtIdMedico;
 	private JTextField txtNomeMedico;
-	private JTextField txtIdEspecialidade;
 	private JTextField txtNomeEspecialidade;
 	private JTextField txtAno;
 	private EspecializacaoVO especializacao = new EspecializacaoVO();
@@ -54,7 +51,7 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 
 		JLabel lblMedico = new JLabel("M\u00E9dico");
 		lblMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblMedico.setBounds(45, 515, 91, 31);
+		lblMedico.setBounds(45, 529, 91, 31);
 		add(lblMedico);
 
 		JLabel lblEspecialidade = new JLabel("Especialidade");
@@ -81,7 +78,7 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(590, 687, 107, 31);
+		btnSair.setBounds(616, 687, 107, 31);
 		add(btnSair);
 
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -98,19 +95,12 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(412, 687, 114, 31);
+		btnCadastrar.setBounds(434, 687, 114, 31);
 		add(btnCadastrar);
-
-		txtIdMedico = new JTextField();
-		txtIdMedico.setEditable(false);
-		txtIdMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtIdMedico.setBounds(185, 515, 62, 31);
-		add(txtIdMedico);
-		txtIdMedico.setColumns(10);
 
 		txtNomeMedico = new JTextField();
 		txtNomeMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNomeMedico.setBounds(257, 515, 440, 31);
+		txtNomeMedico.setBounds(225, 527, 440, 31);
 		add(txtNomeMedico);
 		txtNomeMedico.setColumns(10);
 
@@ -139,16 +129,9 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 		cbEspecialidade.setBounds(161, 64, 366, 34);
 		add(cbEspecialidade);
 
-		txtIdEspecialidade = new JTextField();
-		txtIdEspecialidade.setEditable(false);
-		txtIdEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtIdEspecialidade.setBounds(185, 574, 62, 31);
-		add(txtIdEspecialidade);
-		txtIdEspecialidade.setColumns(10);
-
 		txtNomeEspecialidade = new JTextField();
 		txtNomeEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNomeEspecialidade.setBounds(257, 574, 440, 31);
+		txtNomeEspecialidade.setBounds(225, 574, 440, 31);
 		add(txtNomeEspecialidade);
 		txtNomeEspecialidade.setColumns(10);
 
@@ -188,7 +171,6 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 
 				medicoBuscado = (MedicoVO) cbMedico.getSelectedItem();
 				especialidadeBuscada = (EspecialidadeVO) cbEspecialidade.getSelectedItem();
-				//especializacaoBuscada = (EspecializacaoVO) txtIdEspecializacao.getText();
 				
 				EspecialidadeController controlador = new EspecialidadeController();
 				MedicoController controllerMedico = new MedicoController();
@@ -199,14 +181,24 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 				
 				especialidades = controlador.exibirEspecialidadePorNome(especialidadeBuscada);
 				medicos = controllerMedico.exibirMedicoPorNome(medicoBuscado);
-				//especializacoes = controllerEspecializacao.buscarEspecializacaoPorId(especializacaoBuscada);
 
-				if (especialidades != null && medicos != null) {
+				if (especialidadeBuscada.getNomeEspecialidade() != null && medicoBuscado.getNomeMedico() != null) {
+					
+					List<EspecializacaoVO> especializacoes = controllerEspecializacao.
+							existeCadastro(medicoBuscado.getNomeMedico(), especialidadeBuscada.getNomeEspecialidade());
 					//Preencher a lista de especializacoes em uma tabela (o item selecionado será editável)
-					ArrayList<EspecializacaoVO> especializacoes = controllerEspecializacao.listarEspecializacoesPorMedicoEspecialidade(especialidadeBuscada, medicoBuscado);
+					
+					//TODO passar para o BO
+					if(especializacoes.size() > 0) {
+						
+					}else {
+						JOptionPane.showMessageDialog(null, "Especializacao não encontrada!!");
+					}
+					
+					ArrayList<EspecializacaoVO> especializacoesVO = controllerEspecializacao.listarEspecializacoesPorMedicoEspecialidade(especialidadeBuscada, medicoBuscado);
 					atualizarTabelaEspecializacoes(especializacoes);
 				} else {
-					JOptionPane.showMessageDialog(null, "Especialidade não encontrada!!");
+					
 				}
 			}
 		});
@@ -246,18 +238,18 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 			}
 		});
 		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnAlterar.setBounds(225, 687, 133, 30);
+		btnAlterar.setBounds(241, 687, 133, 30);
 		add(btnAlterar);
 		
-		JLabel lblIdEsepcializacao = new JLabel("ID");
+		JLabel lblIdEsepcializacao = new JLabel("ID Especializacao");
 		lblIdEsepcializacao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblIdEsepcializacao.setBounds(45, 477, 62, 26);
+		lblIdEsepcializacao.setBounds(45, 477, 157, 26);
 		add(lblIdEsepcializacao);
 		
 		txtIdEspecializacao = new JTextField();
 		txtIdEspecializacao.setEditable(false);
 		txtIdEspecializacao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtIdEspecializacao.setBounds(101, 477, 86, 26);
+		txtIdEspecializacao.setBounds(225, 473, 86, 34);
 		add(txtIdEspecializacao);
 		txtIdEspecializacao.setColumns(10);
 		
@@ -266,16 +258,27 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 		add(separator_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(21, 179, 653, 232);
+		scrollPane.setBounds(21, 179, 717, 232);
 		add(scrollPane);
 		
 		tbEspecializacao = new JTable();
+		tbEspecializacao.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int selecionado = tbEspecializacao.getSelectedRow();
+				
+				txtIdEspecializacao.setText(tbEspecializacao.getValueAt(selecionado, 0) + "");
+				txtNomeMedico.setText((String) tbEspecializacao.getValueAt(selecionado, 1));
+				txtNomeEspecialidade.setText((String) tbEspecializacao.getValueAt(selecionado, 2));
+				txtAno.setText((String) tbEspecializacao.getValueAt(selecionado, 3));
+			}
+		});
 		tbEspecializacao.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"ID", "Nome Medico", "Especialidade", "Ano"},
+				{"ID", "Nome Medico", "Especialidade", "Ano", "Instituicao"},
 			},
 			new String[] {
-				"ID", "Nome Medico", "Especialidade", "Ano"
+				"ID", "Nome Medico", "Especialidade", "Ano", "Instituicao"
 			}
 		));
 		scrollPane.setViewportView(tbEspecializacao);
@@ -290,16 +293,12 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 		especializacao.setMedicoVO(medico);
 		especializacao.setEspecialidadeVO(especialidade);
 		especializacao.setAnoEspecializacao(txtAno.getText());
-		especializacao.getEspecialidadeVO().setCodigoEspecialidade(Integer.parseInt(txtIdEspecialidade.getText()));
-		especializacao.getMedicoVO().setCodigoMedico(Integer.parseInt(txtIdMedico.getText()));
-
+		
 		return especializacao;
 	}
 
 	protected void limparTela() {
 		txtAno.setText("");
-		txtIdEspecialidade.setText("");
-		txtIdMedico.setText("");
 		txtNomeEspecialidade.setText("");
 		txtNomeMedico.setText("");
 		cbEspecialidade.setSelectedIndex(0);
@@ -345,8 +344,8 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 	}
 
 	private void atualizarTabelaEspecializacoes(List<EspecializacaoVO> especializacoes) {
-		tbEspecializacao.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome Medico", "Especialidade", "Ano" }, },
-				new String[] { "ID", "Nome Medico", "Especialidade", "Ano" }));
+		tbEspecializacao.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome Medico", "Especialidade", "Ano", "Instituicao"}, },
+				new String[] { "ID", "Nome Medico", "Especialidade", "Ano", "Instituicao" }));
 
 		DefaultTableModel modelo = (DefaultTableModel) tbEspecializacao.getModel();
 
@@ -355,7 +354,7 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 			// Preencher a linha com os atributos 
 			// na ORDEM do cabeçalho da tabela
 			Object[] novaLinha = new Object[] { especializacao.getCodigoEspecializacao(), especializacao.getMedicoVO().getNomeMedico(),
-					especializacao.getEspecialidadeVO().getNomeEspecialidade(), especializacao.getAnoEspecializacao(),
+					especializacao.getEspecialidadeVO().getNomeEspecialidade(), especializacao.getAnoEspecializacao(), especializacao.getEspecialidadeVO().getInstituicao(),
 
 			};
 			modelo.addRow(novaLinha);

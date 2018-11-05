@@ -208,5 +208,42 @@ public class MedicoDAO {
 		return medicos;
 	}
 
+	public MedicoVO consultarPorId(int id) {
+		String query = "SELECT *from medico " + " where codigoMedico = ?";
 
-}
+		Connection conn = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
+		MedicoVO medico = null;
+		ArrayList<MedicoVO> medicos = new ArrayList<MedicoVO>();
+
+		try {
+			prepStmt.setInt(1, id);
+			ResultSet result = prepStmt.executeQuery();
+
+			while (result.next()) {
+				medico = new MedicoVO();
+
+				medico.setCodigoMedico(result.getInt(1));
+				medico.setNomeMedico(result.getString(2));
+				medico.setCrm(result.getString(3));
+				medico.setCelMensagemMedico(result.getString(4));
+				medico.setCelularMedico(result.getString(5));
+				medico.setEmailMedico(result.getString(6));
+				medico.setCpfMedico(result.getString(7));
+				medico.setCnpjMedico(result.getString(8));
+				
+				medicos.add(medico);
+				
+			}
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			Banco.closeStatement(prepStmt);
+			Banco.closeConnection(conn);
+		}
+		return medico;
+	}
+	}
+
+
+

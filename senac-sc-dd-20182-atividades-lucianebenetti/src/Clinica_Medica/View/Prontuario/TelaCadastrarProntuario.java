@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import Clinica_Medica.Controller.PacienteController;
+import Clinica_Medica.Controller.ProntuarioController;
 import Clinica_Medica.VO.PacienteVO;
 import Clinica_Medica.VO.ProntuarioVO;
 
@@ -27,6 +28,7 @@ import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JComboBox;
 
 public class TelaCadastrarProntuario extends JPanel {
 	
@@ -37,6 +39,7 @@ public class TelaCadastrarProntuario extends JPanel {
 	private JDateChooser dateChooserDataConsulta;
 	private JTextArea txtAreaMedicamentos;
 	private JTextArea txtAreaExames;
+	private JComboBox cbHorarioConsulta;
 	private ProntuarioVO prontuario = new ProntuarioVO();
 	private PacienteVO pacienteBuscado = new PacienteVO();
 
@@ -54,7 +57,7 @@ public class TelaCadastrarProntuario extends JPanel {
 
 		JLabel lblDataConsulta = new JLabel("Data Consulta");
 		lblDataConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblDataConsulta.setBounds(21, 57, 126, 22);
+		lblDataConsulta.setBounds(21, 67, 126, 22);
 		add(lblDataConsulta);
 
 		try {
@@ -69,7 +72,7 @@ public class TelaCadastrarProntuario extends JPanel {
 		txtBuscarCPF.setColumns(10);
 
 		dateChooserDataConsulta = new JDateChooser();
-		dateChooserDataConsulta.setBounds(157, 57, 87, 32);
+		dateChooserDataConsulta.setBounds(157, 57, 140, 32);
 		add(dateChooserDataConsulta);
 
 		JButton btnBuscar = new JButton("Buscar");
@@ -94,11 +97,6 @@ public class TelaCadastrarProntuario extends JPanel {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(21, 121, 696, 8);
 		add(separator);
-
-		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(398, 463, 150, 39);
-		add(btnCadastrar);
 
 		JButton btnSair = new JButton("Sair");
 		btnSair.addActionListener(new ActionListener() {
@@ -189,15 +187,44 @@ public class TelaCadastrarProntuario extends JPanel {
 		scrollPane_3.setViewportView(txtAreaMedicamentos);
 		txtAreaMedicamentos.setFont(new Font("Dialog", Font.PLAIN, 16));
 		
-		JLabel lblHoraConsulta = new JLabel("Hora Consulta");
+		JLabel lblHoraConsulta = new JLabel("Horario Consulta");
 		lblHoraConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblHoraConsulta.setBounds(278, 59, 126, 32);
+		lblHoraConsulta.setBounds(307, 62, 152, 32);
 		add(lblHoraConsulta);
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(437, 57, 87, 32);
-		add(dateChooser);
+		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				ProntuarioController controlador = new ProntuarioController();
+				ProntuarioVO prontuario = construirProntuario();
+				
+				String mensagem = controlador.salvar(prontuario);
+				JOptionPane.showMessageDialog(null, mensagem);
+				limparTela();
+			}	
+		});
+		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnCadastrar.setBounds(398, 463, 150, 39);
+		add(btnCadastrar);
+		
+		String[] horarios = {"--- Selecione ---", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"};
+		cbHorarioConsulta = new JComboBox(horarios);
+		cbHorarioConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		cbHorarioConsulta.setBounds(456, 64, 160, 28);
+		add(cbHorarioConsulta);
 
+	}
+
+	protected ProntuarioVO construirProntuario() {
+		
+		prontuario.setMedicamento(txtAreaMedicamentos.getText());
+		prontuario.setExame(txtAreaExames.getText());
+		prontuario.setRegistro(txtAreaRegistro.getText());
+		
+		return prontuario;
+	
 	}
 
 	protected void limparTela() {

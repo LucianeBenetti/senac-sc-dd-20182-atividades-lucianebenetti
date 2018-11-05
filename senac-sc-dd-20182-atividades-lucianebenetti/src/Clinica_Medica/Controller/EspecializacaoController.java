@@ -50,6 +50,7 @@ public class EspecializacaoController {
 	}
 
 	public void excluirEspecializacao(EspecializacaoVO especializacaoExcluida) {
+	
 		bo.excluirEspecializacao(especializacaoExcluida);
 
 	}
@@ -70,6 +71,11 @@ public class EspecializacaoController {
 	public ArrayList<EspecializacaoVO> listarTodasEspecializacoes() {
 
 		return bo.listarTodasEspecializacoes();
+	}
+
+	public List<EspecializacaoVO> existeCadastro(String nomeMedico, String nomeEspecialidade) {
+		 return bo.existeEspecializacaoPorNome(nomeMedico, nomeEspecialidade);
+		
 	}
 
 	

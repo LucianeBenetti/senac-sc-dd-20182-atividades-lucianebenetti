@@ -44,11 +44,15 @@ public class EspecializacaoBO {
 		return especialiacoes;
 	}
 
-	public ArrayList<EspecializacaoVO> listarTodasEspecializacoesPorMedicoEspecialidade(EspecialidadeVO especialidade, MedicoVO medico) {
+	public ArrayList<EspecializacaoVO> listarTodasEspecializacoesPorMedicoEspecialidade(MedicoVO medico, EspecialidadeVO especialidade ) {
+		if (dao.existeEspecializacaoPorNome(medico.getNomeMedico(), especialidade.getNomeEspecialidade())) {
+			JOptionPane.showMessageDialog(null, "Especialização já cadastrada! Tente novamente.");
+		} else {
 		return dao.listarEspecializacoesDoMedicoPorEspecialidade(especialidade.getCodigoEspecialidade(), medico.getCodigoMedico());
 	}
 
 	public List<EspecializacaoVO> existeEspecializacaoPorNome(String nomeMedico, String nomeEspecialidade) {
+			
 		ArrayList<EspecializacaoVO> especializacoes = dao.existeEspecializacaoPorNome(nomeMedico, nomeEspecialidade);
 		return especializacoes;
 	}

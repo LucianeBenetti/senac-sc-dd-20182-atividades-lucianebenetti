@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Time;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.awt.Font;
@@ -24,6 +25,7 @@ import com.toedter.calendar.JDateChooser;
 import Clinica_Medica.Controller.ConvenioController;
 import Clinica_Medica.Controller.EspecializacaoController;
 import Clinica_Medica.Controller.MedicoController;
+import Clinica_Medica.VO.ConsultaVO;
 import Clinica_Medica.VO.ConvenioVO;
 import Clinica_Medica.VO.EspecialidadeVO;
 import Clinica_Medica.VO.MedicoVO;
@@ -35,6 +37,7 @@ public class TelaExcluirConsulta extends JPanel {
 	private JComboBox cbConvenio;
 	private JComboBox cbNomeMedico;
 	private JComboBox cbEspecialidade;
+	private JComboBox cbHorarioConsulta;
 	private JTextField txtBuscarCPFPaciente;
 	private JTextField txtIdPaciente;
 	private JTextField txtIdConvenio;
@@ -42,7 +45,7 @@ public class TelaExcluirConsulta extends JPanel {
 	private JTextField txtIdEspecializacao;
 	private JTextField txtIdProntuario;
 	private JDateChooser dateChooserDataConsulta;
-	private JDateChooser dateChooserHoraConsulta;
+	private ConsultaVO consulta = new ConsultaVO();
 	private static final String MASCARA_CPF = "###.###.###-##";
 
 	/**
@@ -136,7 +139,7 @@ public class TelaExcluirConsulta extends JPanel {
 
 		JLabel lblDataRealizao = new JLabel("Hora da Consulta");
 		lblDataRealizao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblDataRealizao.setBounds(338, 364, 162, 23);
+		lblDataRealizao.setBounds(421, 364, 152, 23);
 		add(lblDataRealizao);
 
 		txtIdPaciente = new JTextField();
@@ -202,12 +205,8 @@ public class TelaExcluirConsulta extends JPanel {
 		add(cbNomeMedico);
 
 		dateChooserDataConsulta = new JDateChooser();
-		dateChooserDataConsulta.setBounds(188, 360, 87, 31);
+		dateChooserDataConsulta.setBounds(188, 360, 168, 31);
 		add(dateChooserDataConsulta);
-
-		dateChooserHoraConsulta = new JDateChooser();
-		dateChooserHoraConsulta.setBounds(509, 360, 87, 31);
-		add(dateChooserHoraConsulta);
 
 		JLabel lblIdProntuario = new JLabel("ID Prontuario");
 		lblIdProntuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -217,7 +216,7 @@ public class TelaExcluirConsulta extends JPanel {
 		txtIdProntuario = new JTextField();
 		txtIdProntuario.setEditable(false);
 		txtIdProntuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtIdProntuario.setBounds(199, 53, 86, 25);
+		txtIdProntuario.setBounds(199, 53, 86, 27);
 		add(txtIdProntuario);
 		txtIdProntuario.setColumns(10);
 
@@ -231,6 +230,12 @@ public class TelaExcluirConsulta extends JPanel {
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnLimparTela.setBounds(26, 448, 142, 35);
 		add(btnLimparTela);
+		
+		String[] horarios = {"--- Selecione ---", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"};
+		cbHorarioConsulta = new JComboBox(horarios);
+		cbHorarioConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		cbHorarioConsulta.setBounds(579, 360, 128, 28);
+		add(cbHorarioConsulta);
 
 	}
 
@@ -274,10 +279,20 @@ public class TelaExcluirConsulta extends JPanel {
 		txtNomePaciente.setText("");
 		cbConvenio.setSelectedIndex(0);
 		cbEspecialidade.setSelectedIndex(0);
+		cbHorarioConsulta.setSelectedIndex(0);
 		cbNomeMedico.setSelectedIndex(0);
 		dateChooserDataConsulta.setDate(null);
-		dateChooserHoraConsulta.setDate(null);
-
+		
+	}
+	protected ConsultaVO construirConsulta() {
+		
+		consulta.getEspecializacaoVO().setCodigoEspecializacao(Integer.parseInt(txtIdEspecializacao.getText()));
+		consulta.getConvenioVO().setCodigoConvenio(Integer.parseInt(txtIdConvenio.getText()));
+		consulta.getProntuarioVO().setCodigoProntuario(Integer.parseInt(txtIdProntuario.getText()));
+		consulta.setDataConsulta(dateChooserDataConsulta.getDate());
+		consulta.setHorarioConsulta((Time) cbHorarioConsulta.getSelectedItem());
+		
+		return consulta;
 	}
 
 }

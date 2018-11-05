@@ -4,18 +4,22 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.JSeparator;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import Clinica_Medica.Controller.ConsultaController;
+import Clinica_Medica.VO.ConsultaVO;
+
 import javax.swing.JLabel;
 
 public class TelaListarTodasConsultas extends JPanel {
-	private JTable table;
+	private JTable tbConsultas;
 
 	/**
 	 * Create the panel.
@@ -25,6 +29,21 @@ public class TelaListarTodasConsultas extends JPanel {
 		setLayout(null);
 		
 		JButton btnListarTodasConsultas = new JButton("Listar Todas Consultas");
+		btnListarTodasConsultas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				ConsultaController controlador = new ConsultaController();
+				ArrayList<ConsultaVO> consultas = (ArrayList<ConsultaVO>) controlador.listarTodasConsultas();
+
+				DefaultTableModel tabela = (DefaultTableModel) tbConsultas.getModel();
+				for (ConsultaVO consulta : consultas) {
+					tabela.addRow(new Object[] { consulta.getCodigoConsulta(), consulta.getPacienteVO().getNomePaciente(),
+							consulta.getConvenioVO().getNomeConvenio(), consulta.getDataConsulta(), consulta.getHorarioConsulta()
+
+					});
+				}
+			}
+		});
 		btnListarTodasConsultas.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnListarTodasConsultas.setBounds(252, 31, 238, 31);
 		add(btnListarTodasConsultas);
@@ -56,17 +75,17 @@ public class TelaListarTodasConsultas extends JPanel {
 		scrollPane.setBounds(26, 153, 768, 161);
 		add(scrollPane);
 		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(
+		tbConsultas = new JTable();
+		scrollPane.setViewportView(tbConsultas);
+		tbConsultas.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"ID", "Nome Paciente", "Convenio", "Nome Medico", "Especialidade", "Data Consulta"},
+				{"ID", "Nome Paciente", "Convenio", "Data Consulta", "Horario"},
 			},
 			new String[] {
-				"ID", "Nome Paciente", "Convenio", "Nome Medico", "Especialidade", "Data Consulta"
+				"ID", "Nome Paciente", "Convenio", "Data Consulta", "Horario"
 			}
 		));
-		table.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tbConsultas.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
 		JLabel lblConsultas = new JLabel("Consultas");
 		lblConsultas.setFont(new Font("Tahoma", Font.PLAIN, 18));

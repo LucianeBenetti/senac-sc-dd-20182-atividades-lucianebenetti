@@ -178,4 +178,28 @@ public class EspecialidadeDAO {
 		return especialidade;
 	}
 
+	public EspecialidadeVO consultarPorId(int id) {
+		String query = "SELECT * FROM especialidade WHERE codigoEspecialidade = ? ";
+
+		Connection conn = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
+		EspecialidadeVO especialidade = null;
+		try {
+			prepStmt.setInt(1, id);
+			ResultSet result = prepStmt.executeQuery();
+
+			while (result.next()) {
+				especialidade = new EspecialidadeVO();
+				especialidade.setCodigoEspecialidade(result.getInt(1));
+				especialidade.setNomeEspecialidade(result.getString(2));
+				especialidade.setInstituicao(result.getString(3));
+			}
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			Banco.closeStatement(prepStmt);
+			Banco.closeConnection(conn);
+		}
+		return especialidade;
+	}
 }

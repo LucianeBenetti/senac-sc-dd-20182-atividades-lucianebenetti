@@ -71,11 +71,11 @@ public class TelaListarTodasEspecializacoes extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(510, 383, 95, 31);
+		btnSair.setBounds(496, 607, 95, 31);
 		add(btnSair);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(23, 154, 568, 160);
+		scrollPane.setBounds(23, 154, 568, 356);
 		add(scrollPane);
 		
 		tbEspecializacoes = new JTable();

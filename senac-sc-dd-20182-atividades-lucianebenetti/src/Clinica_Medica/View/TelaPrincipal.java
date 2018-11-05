@@ -15,6 +15,7 @@ import Clinica_Medica.View.Especialidade.TelaCadastrarEspecialidade;
 import Clinica_Medica.View.Especialidade.TelaExcluirEspecialidade;
 import Clinica_Medica.View.Especialidade.TelaListarTodasEspecialidades;
 import Clinica_Medica.View.Especializacao.TelaCadastrarEspecializacao;
+import Clinica_Medica.View.Especializacao.TelaCadastrarEspecializacaoTabela;
 import Clinica_Medica.View.Especializacao.TelaExcluirEspecializacao;
 import Clinica_Medica.View.Especializacao.TelaListarTodasEspecializacoes;
 import Clinica_Medica.View.Medico.TelaCadastrarMedico;
@@ -49,7 +50,7 @@ public class TelaPrincipal extends JFrame {
 	TelaCadastrarPaciente cadastrarPaciente = null;
 	TelaCadastrarConvenio cadastrarConvenio = null;
 	TelaCadastrarEspecialidade cadastrarEspecialidade = null;
-	TelaCadastrarEspecializacao cadastrarEspecializacao = null;
+	TelaCadastrarEspecializacaoTabela cadastrarEspecializacao = null;
 	TelaCadastrarConsulta cadastrarConsulta = null;
 	TelaCadastrarProntuario cadastrarProntuario = null;
 	TelaExcluirConsulta excluirConsulta = null;
@@ -375,7 +376,7 @@ public class TelaPrincipal extends JFrame {
 		mntmCadastrarEspecializacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				contentPane = new TelaCadastrarEspecializacao();
+				contentPane = new TelaCadastrarEspecializacaoTabela();
 				setContentPane (contentPane);
 				revalidate();
 				
