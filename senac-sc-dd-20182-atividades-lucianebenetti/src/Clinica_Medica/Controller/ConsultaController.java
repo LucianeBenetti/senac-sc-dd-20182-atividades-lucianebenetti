@@ -28,7 +28,7 @@ public class ConsultaController {
 
 		String validacao = "";
 		if (consulta.getDataConsulta() == null) {
-			validacao = "CNPJ está nulo!";
+			validacao = "Data está nula!";
 		} else {
 			if (consulta.getDataConsulta().equals("") || consulta.getHorarioConsulta().equals("")) {
 				validacao += " - Data  e Horario são obrigatórios. \n";

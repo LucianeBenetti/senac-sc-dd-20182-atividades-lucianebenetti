@@ -4,21 +4,25 @@ import java.sql.Time;
 import java.util.Date;
 
 public class ConsultaVO {
-		
+
 	private int codigoConsulta;
 	private EspecializacaoVO especializacaoVO;
 	private PacienteVO pacienteVO;
 	private ConvenioVO convenioVO;
 	private ProntuarioVO prontuarioVO;
 	private Date dataConsulta;
-	private Time horarioConsulta;
-
+	private String horarioConsulta;
+	
+	
+	public int getCodigoConsulta() {
+		return codigoConsulta;
+	}
 	public ConsultaVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public ConsultaVO(int codigoConsulta, EspecializacaoVO especializacaoVO, PacienteVO pacienteVO,
-			ConvenioVO convenioVO, ProntuarioVO prontuarioVO, Date dataConsulta, Time horarioConsulta) {
+			ConvenioVO convenioVO, ProntuarioVO prontuarioVO, Date dataConsulta, String horarioConsulta) {
 		super();
 		this.codigoConsulta = codigoConsulta;
 		this.especializacaoVO = especializacaoVO;
@@ -27,9 +31,6 @@ public class ConsultaVO {
 		this.prontuarioVO = prontuarioVO;
 		this.dataConsulta = dataConsulta;
 		this.horarioConsulta = horarioConsulta;
-	}
-	public int getCodigoConsulta() {
-		return codigoConsulta;
 	}
 	public void setCodigoConsulta(int codigoConsulta) {
 		this.codigoConsulta = codigoConsulta;
@@ -64,13 +65,13 @@ public class ConsultaVO {
 	public void setDataConsulta(Date dataConsulta) {
 		this.dataConsulta = dataConsulta;
 	}
-	public Time getHorarioConsulta() {
+	public String getHorarioConsulta() {
 		return horarioConsulta;
 	}
-	public void setHorarioConsulta(Time horarioConsulta) {
+	public void setHorarioConsulta(String horarioConsulta) {
 		this.horarioConsulta = horarioConsulta;
 	}
-	
+
 	
 	
 }

@@ -155,4 +155,32 @@ public class ConvenioDAO {
 		return listaConvenios;
 	}
 
+	public ConvenioVO consultarPorId(int id) {
+		ConvenioVO convenio = null;
+
+		String query = "SELECT *from convenio " + " where codigoConvenio = ?";
+
+		Connection conn = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
+		try {
+			prepStmt.setInt(1, id);
+			ResultSet result = prepStmt.executeQuery();
+
+			while (result.next()) {
+				convenio = new ConvenioVO();
+				convenio.setCodigoConvenio(result.getInt(1));
+				convenio.setNomeConvenio(result.getString(2));
+				convenio.setCnpjConvenio(result.getString(3));
+				convenio.setValor(result.getDouble(4));
+
+			}
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			Banco.closeStatement(prepStmt);
+			Banco.closeConnection(conn);
+		}
+		return convenio;
+	}
+
 }

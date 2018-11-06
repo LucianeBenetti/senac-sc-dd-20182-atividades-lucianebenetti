@@ -10,36 +10,46 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 import Clinica_Medica.VO.ConsultaVO;
+import Clinica_Medica.VO.ConvenioVO;
+import Clinica_Medica.VO.EspecializacaoVO;
+import Clinica_Medica.VO.MedicoVO;
+import Clinica_Medica.VO.PacienteVO;
+import Clinica_Medica.VO.ProntuarioVO;
 
 public class ConsultaDAO {
-	
+
 	private static ArrayList<ConsultaVO> listaConsultas = new ArrayList<ConsultaVO>();
+	private EspecializacaoDAO especializacaoDAO = new EspecializacaoDAO();
+	private ConvenioDAO convenioDAO = new ConvenioDAO();
+	private PacienteDAO pacienteDAO = new PacienteDAO();
+	private ProntuarioDAO prontuarioDAO = new ProntuarioDAO();
 
 	public int inserirConsulta(ConsultaVO consulta) {
 
 		int novoId = 0;
 
-		String sql = "INSERT INTO consulta (codigoEspecializacao, codigoPaciente, codigoConvenio, codigoProntuario, dataConsulta, horarioConsulta)" + " VALUES (?,?,?,?,?,?)";
+		String sql = "INSERT INTO consulta (codigoEspecializacao, codigoPaciente, codigoConvenio, codigoProntuario, dataConsulta, horarioConsulta)"
+				+ " VALUES (?,?,?,?,?,?)";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, sql, Statement.RETURN_GENERATED_KEYS);
 
 		try {
-			
+
 			prepStmt.setInt(1, consulta.getEspecializacaoVO().getCodigoEspecializacao());
 			prepStmt.setInt(2, consulta.getPacienteVO().getCodigoPaciente());
 			prepStmt.setInt(3, consulta.getConvenioVO().getCodigoConvenio());
 			prepStmt.setInt(4, consulta.getProntuarioVO().getCodigoProntuario());
 			prepStmt.setDate(5, (Date) consulta.getDataConsulta());
-			prepStmt.setTime(6, (Time) consulta.getHorarioConsulta());
-		
+			prepStmt.setString(6, consulta.getHorarioConsulta());
+
 			prepStmt.executeUpdate();
 
 			ResultSet generatedKeys = prepStmt.getGeneratedKeys();
 
 			if (generatedKeys.next()) {
 				novoId = generatedKeys.getInt(1);
-				
+
 			}
 
 		} catch (SQLException e) {
@@ -54,10 +64,10 @@ public class ConsultaDAO {
 	}
 
 	public String consultarPorPaciente(String paciente) {
-		
+
 		ConsultaVO consulta = new ConsultaVO();
 
-		String query = "SELECT *from consulta " + " where nomePaciente like ?";//refazer o select
+		String query = "SELECT * from consulta " + " where nomePaciente like ?";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
@@ -67,13 +77,17 @@ public class ConsultaDAO {
 
 			while (result.next()) {
 				
-				consulta.getEspecializacaoVO().setCodigoEspecializacao(result.getInt(1));
-				consulta.getPacienteVO().setCodigoPaciente(result.getInt(2));
-				consulta.getConvenioVO().setCodigoConvenio(result.getInt(3));
-				consulta.getProntuarioVO().setCodigoProntuario(result.getInt(4));
-				consulta.setDataConsulta(result.getDate(5));
-				consulta.setHorarioConsulta(result.getTime(6));
-				
+				consulta.setCodigoConsulta(result.getInt(1));
+				EspecializacaoVO especializacaoVO = especializacaoDAO.consultarPorId(result.getInt(2));
+				consulta.setEspecializacaoVO(especializacaoVO);
+				PacienteVO pacienteVO = pacienteDAO.consultarPorId(result.getInt(3));
+				consulta.setPacienteVO(pacienteVO);
+				ConvenioVO convenioVO = convenioDAO.consultarPorId(result.getInt(4));
+				consulta.setConvenioVO(convenioVO);
+				ProntuarioVO prontuarioVO = prontuarioDAO.consultarProntuarioPorId(result.getInt(5));
+				consulta.setProntuarioVO(prontuarioVO);
+				consulta.setDataConsulta(result.getDate(6));
+				consulta.setHorarioConsulta(result.getString(7));
 			}
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
@@ -107,12 +121,11 @@ public class ConsultaDAO {
 		return sucessoDelete;
 	}
 
-	
 	public boolean atualizar(ConsultaVO consultaAlterado, String codigoConsulta) {
 		boolean sucessoAtualizar = false;
-		ConsultaVO consulta = new ConsultaVO();						 
-		String query = "UPDATE consulta SET codigoEspecializacao=?, codigoPaciente=?, codigoConvenio=?, codigoProntuario=?, dataConsulta=?, horarioConsulta=?"
-				+ " where conCod =?";
+		ConsultaVO consulta = new ConsultaVO();
+		String query = "UPDATE consulta SET codigoEspecializacao=?, codigoPaciente=?, codigoConvenio=?, codigoProntuario = ?, dataConsulta=?, horarioConsulta=?"
+				+ " where codigoConsulta =?";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
@@ -124,8 +137,7 @@ public class ConsultaDAO {
 			prepStmt.setInt(3, consulta.getConvenioVO().getCodigoConvenio());
 			prepStmt.setInt(4, consulta.getProntuarioVO().getCodigoProntuario());
 			prepStmt.setDate(5, (Date) consulta.getDataConsulta());
-			prepStmt.setTime(6, (Time) consulta.getHorarioConsulta());
-			prepStmt.setInt(7, consulta.getCodigoConsulta());
+			prepStmt.setString(6, consulta.getHorarioConsulta());
 
 			int codigoRetorno = prepStmt.executeUpdate();
 
@@ -140,7 +152,7 @@ public class ConsultaDAO {
 		}
 		return sucessoAtualizar;
 	}
-	
+
 	public ArrayList<ConsultaVO> listarTodos() {
 
 		String query = "select * from consulta";
@@ -151,15 +163,20 @@ public class ConsultaDAO {
 			ResultSet result = prepStmt.executeQuery();
 
 			while (result.next()) {
+								
 				ConsultaVO consulta = new ConsultaVO();
+				consulta.setCodigoConsulta(result.getInt(1));
+				EspecializacaoVO especializacaoVO = especializacaoDAO.consultarPorId(result.getInt(2));
+				consulta.setEspecializacaoVO(especializacaoVO);
+				PacienteVO pacienteVO = pacienteDAO.consultarPorId(result.getInt(3));
+				consulta.setPacienteVO(pacienteVO);
+				ConvenioVO convenioVO = convenioDAO.consultarPorId(result.getInt(4));
+				consulta.setConvenioVO(convenioVO);
+				ProntuarioVO prontuarioVO = prontuarioDAO.consultarProntuarioPorId(result.getInt(5));
+				consulta.setProntuarioVO(prontuarioVO);
+				consulta.setDataConsulta(result.getDate(6));
+				consulta.setHorarioConsulta(result.getString(7));
 
-				consulta.getEspecializacaoVO().setCodigoEspecializacao(result.getInt(1));
-				consulta.getPacienteVO().setCodigoPaciente(result.getInt(2));
-				consulta.getConvenioVO().setCodigoConvenio(result.getInt(3));
-				consulta.getProntuarioVO().setCodigoProntuario(result.getInt(4));
-				consulta.setDataConsulta(result.getDate(5));
-				consulta.setHorarioConsulta(result.getTime(6));
-				
 				listaConsultas.add(consulta);
 			}
 
@@ -168,6 +185,5 @@ public class ConsultaDAO {
 		}
 		return listaConsultas;
 	}
-
 
 }

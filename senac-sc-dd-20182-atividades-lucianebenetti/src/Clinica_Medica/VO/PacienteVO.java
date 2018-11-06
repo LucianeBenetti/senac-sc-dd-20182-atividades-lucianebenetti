@@ -17,6 +17,7 @@ public class PacienteVO {
 	 private String cidade;
 	 private String uf;
 	 private String cep;
+	 
 	public int getCodigoPaciente() {
 		return codigoPaciente;
 	}

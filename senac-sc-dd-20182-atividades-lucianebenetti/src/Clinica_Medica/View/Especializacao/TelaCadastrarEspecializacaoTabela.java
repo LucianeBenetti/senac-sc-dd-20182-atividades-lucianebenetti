@@ -51,17 +51,17 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 
 		JLabel lblMedico = new JLabel("M\u00E9dico");
 		lblMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblMedico.setBounds(45, 529, 91, 31);
+		lblMedico.setBounds(21, 428, 91, 31);
 		add(lblMedico);
 
 		JLabel lblEspecialidade = new JLabel("Especialidade");
 		lblEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblEspecialidade.setBounds(45, 576, 142, 26);
+		lblEspecialidade.setBounds(21, 483, 142, 26);
 		add(lblEspecialidade);
 
 		JLabel lblAno = new JLabel("Ano");
 		lblAno.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblAno.setBounds(45, 631, 46, 31);
+		lblAno.setBounds(21, 539, 46, 31);
 		add(lblAno);
 
 		JButton btnSair = new JButton("Sair");
@@ -78,7 +78,7 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(616, 687, 107, 31);
+		btnSair.setBounds(601, 585, 107, 31);
 		add(btnSair);
 
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -95,12 +95,12 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(434, 687, 114, 31);
+		btnCadastrar.setBounds(425, 585, 114, 31);
 		add(btnCadastrar);
 
 		txtNomeMedico = new JTextField();
 		txtNomeMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNomeMedico.setBounds(225, 527, 440, 31);
+		txtNomeMedico.setBounds(225, 428, 440, 31);
 		add(txtNomeMedico);
 		txtNomeMedico.setColumns(10);
 
@@ -131,13 +131,13 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 
 		txtNomeEspecialidade = new JTextField();
 		txtNomeEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNomeEspecialidade.setBounds(225, 574, 440, 31);
+		txtNomeEspecialidade.setBounds(225, 481, 440, 31);
 		add(txtNomeEspecialidade);
 		txtNomeEspecialidade.setColumns(10);
 
 		txtAno = new JTextField();
 		txtAno.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtAno.setBounds(101, 629, 101, 34);
+		txtAno.setBounds(104, 537, 101, 34);
 		add(txtAno);
 		txtAno.setColumns(10);
 
@@ -149,7 +149,7 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 			}
 		});
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnLimparTela.setBounds(45, 687, 142, 31);
+		btnLimparTela.setBounds(31, 585, 142, 31);
 		add(btnLimparTela);
 
 		JLabel lblBuscarMedico = new JLabel("Medico");
@@ -184,18 +184,18 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 
 				if (especialidadeBuscada.getNomeEspecialidade() != null && medicoBuscado.getNomeMedico() != null) {
 					
-					List<EspecializacaoVO> especializacoes = controllerEspecializacao.
-							existeCadastro(medicoBuscado.getNomeMedico(), especialidadeBuscada.getNomeEspecialidade());
+				//	List<EspecializacaoVO> especializacoes = controllerEspecializacao.
+				//			existeCadastro(medicoBuscado.getNomeMedico(), especialidadeBuscada.getNomeEspecialidade());
 					//Preencher a lista de especializacoes em uma tabela (o item selecionado será editável)
 					
 					//TODO passar para o BO
-					if(especializacoes.size() > 0) {
+				//	if(especializacoes.size() > 0) {
 						
-					}else {
-						JOptionPane.showMessageDialog(null, "Especializacao não encontrada!!");
-					}
+				//	}else {
+					//	JOptionPane.showMessageDialog(null, "Especializacao não encontrada!!");
+				//	}
 					
-					ArrayList<EspecializacaoVO> especializacoesVO = controllerEspecializacao.listarEspecializacoesPorMedicoEspecialidade(especialidadeBuscada, medicoBuscado);
+					ArrayList<EspecializacaoVO> especializacoes = controllerEspecializacao.listarEspecializacoesPorMedicoEspecialidade(medicoBuscado, especialidadeBuscada);
 					atualizarTabelaEspecializacoes(especializacoes);
 				} else {
 					
@@ -207,7 +207,7 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 		add(btnBuscar);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(21, 124, 653, 14);
+		separator.setBounds(21, 124, 717, 14);
 		add(separator);
 
 		JButton btnAlterar = new JButton("Alterar");
@@ -238,27 +238,27 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 			}
 		});
 		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnAlterar.setBounds(241, 687, 133, 30);
+		btnAlterar.setBounds(240, 585, 133, 30);
 		add(btnAlterar);
 		
 		JLabel lblIdEsepcializacao = new JLabel("ID Especializacao");
 		lblIdEsepcializacao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblIdEsepcializacao.setBounds(45, 477, 157, 26);
+		lblIdEsepcializacao.setBounds(21, 374, 157, 26);
 		add(lblIdEsepcializacao);
 		
 		txtIdEspecializacao = new JTextField();
 		txtIdEspecializacao.setEditable(false);
 		txtIdEspecializacao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtIdEspecializacao.setBounds(225, 473, 86, 34);
+		txtIdEspecializacao.setBounds(225, 370, 86, 34);
 		add(txtIdEspecializacao);
 		txtIdEspecializacao.setColumns(10);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(21, 445, 670, 16);
+		separator_1.setBounds(27, 347, 711, 16);
 		add(separator_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(21, 179, 717, 232);
+		scrollPane.setBounds(21, 150, 717, 172);
 		add(scrollPane);
 		
 		tbEspecializacao = new JTable();
@@ -303,6 +303,8 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 		txtNomeMedico.setText("");
 		cbEspecialidade.setSelectedIndex(0);
 		cbMedico.setSelectedIndex(0);
+		cbEspecialidade.setSelectedItem(null);
+		cbMedico.setSelectedItem(null);
 		txtIdEspecializacao.setText("");
 		
 		limparTabela();

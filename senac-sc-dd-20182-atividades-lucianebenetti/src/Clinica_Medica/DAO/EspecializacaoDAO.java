@@ -219,7 +219,6 @@ public class EspecializacaoDAO {
 
 				EspecializacaoVO especializacao = new EspecializacaoVO();
 				especializacao.setCodigoEspecializacao(result.getInt(1));
-				
 				EspecialidadeVO especialidadeVO = especialidadeDAO.consultarPorId(result.getInt(2));
 				especializacao.setEspecialidadeVO(especialidadeVO);
 				MedicoVO medicoVO = medicoDAO.consultarPorId(result.getInt(3));
@@ -236,4 +235,35 @@ public class EspecializacaoDAO {
 		}
 		return especializacoes;
 }
+
+
+	public EspecializacaoVO consultarPorId(int id) {
+		String query = "SELECT * FROM especializacao WHERE codigoEspecializacao = ? ";
+
+		Connection conn = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
+		EspecializacaoVO especializacao = null;
+		try {
+			prepStmt.setInt(1, id);
+			ResultSet result = prepStmt.executeQuery();
+
+			while (result.next()) {
+				especializacao = new EspecializacaoVO();
+				
+				especializacao.setCodigoEspecializacao(result.getInt(1));
+				EspecialidadeVO especialidadeVO = especialidadeDAO.consultarPorId(result.getInt(2));
+				especializacao.setEspecialidadeVO(especialidadeVO);
+				MedicoVO medicoVO = medicoDAO.consultarPorId(result.getInt(3));
+				especializacao.setMedicoVO(medicoVO);
+				especializacao.setAnoEspecializacao(result.getString(4));
+			
+			}
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			Banco.closeStatement(prepStmt);
+			Banco.closeConnection(conn);
+		}
+		return especializacao;
+	}
 }

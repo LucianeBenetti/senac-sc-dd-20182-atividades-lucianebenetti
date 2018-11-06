@@ -288,9 +288,8 @@ public class TelaExcluirConsulta extends JPanel {
 		
 		consulta.getEspecializacaoVO().setCodigoEspecializacao(Integer.parseInt(txtIdEspecializacao.getText()));
 		consulta.getConvenioVO().setCodigoConvenio(Integer.parseInt(txtIdConvenio.getText()));
-		consulta.getProntuarioVO().setCodigoProntuario(Integer.parseInt(txtIdProntuario.getText()));
 		consulta.setDataConsulta(dateChooserDataConsulta.getDate());
-		consulta.setHorarioConsulta((Time) cbHorarioConsulta.getSelectedItem());
+		consulta.setHorarioConsulta((String) cbHorarioConsulta.getSelectedItem());
 		
 		return consulta;
 	}

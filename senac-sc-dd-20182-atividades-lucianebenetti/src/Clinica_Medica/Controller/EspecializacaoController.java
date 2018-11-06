@@ -62,9 +62,8 @@ public class EspecializacaoController {
 
 	}
 
-	public ArrayList<EspecializacaoVO> listarEspecializacoesPorMedicoEspecialidade(EspecialidadeVO especialidade,
-			MedicoVO medico) {
-		return bo.listarTodasEspecializacoesPorMedicoEspecialidade(especialidade, medico);
+	public ArrayList<EspecializacaoVO> listarEspecializacoesPorMedicoEspecialidade(MedicoVO medico, EspecialidadeVO especialidade) {
+		return bo.listarTodasEspecializacoesPorMedicoEspecialidade(medico, especialidade);
 	}
 
 	

@@ -37,10 +37,9 @@ public class TelaListarTodasConsultas extends JPanel {
 
 				DefaultTableModel tabela = (DefaultTableModel) tbConsultas.getModel();
 				for (ConsultaVO consulta : consultas) {
-					tabela.addRow(new Object[] { consulta.getCodigoConsulta(), consulta.getPacienteVO().getNomePaciente(),
+					tabela.addRow(new Object[] { consulta.getCodigoConsulta(), consulta.getPacienteVO().getNomePaciente(), 
 							consulta.getConvenioVO().getNomeConvenio(), consulta.getDataConsulta(), consulta.getHorarioConsulta()
-
-					});
+						});
 				}
 			}
 		});

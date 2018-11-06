@@ -192,4 +192,43 @@ public class PacienteDAO {
 		return listapacientes;
 	}
 
+	public PacienteVO consultarPorId(int id) {
+		String query = "SELECT *from paciente " + " where codigoPaciente = ?";
+
+		Connection conn = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
+		PacienteVO paciente = null;
+		try {
+			prepStmt.setInt(1, id);
+			ResultSet result = prepStmt.executeQuery();
+
+			while (result.next()) {
+			
+				paciente = new PacienteVO();
+				paciente.setCodigoPaciente(result.getInt(1));
+				paciente.setNomePaciente(result.getString(2));
+				paciente.setCelMensagemPaciente(result.getString(3));
+				paciente.setFoneResidencial(result.getString(4));
+				paciente.setFoneComercial(result.getString(5));
+				paciente.setEmailPaciente(result.getString(6));
+				paciente.setCpfPaciente(result.getString(7));
+				paciente.setCnpjPaciente(result.getString(8));
+				paciente.setLogradouro(result.getString(9));
+				paciente.setNumLog(result.getString(10));
+				paciente.setComplemento(result.getString(11));
+				paciente.setBairro(result.getString(12));
+				paciente.setCidade(result.getString(13));
+				paciente.setUf(result.getString(14));
+				paciente.setCep(result.getString(15));
+				
+
+			}
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			Banco.closeStatement(prepStmt);
+			Banco.closeConnection(conn);
+		}
+		return paciente;
+	}
 }

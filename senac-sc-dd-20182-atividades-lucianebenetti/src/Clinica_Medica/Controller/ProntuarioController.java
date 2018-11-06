@@ -34,7 +34,7 @@ public class ProntuarioController {
 
 		String validacao = "";
 		if (prontuario.getMedicamento()== null) {
-			validacao = "A área de medicamentos está nulo!";
+			validacao = "A área de medicamentos está nula!";
 		} else {
 			if (prontuario.getMedicamento().trim().equals("") || prontuario.getRegistro().trim().equals("")) {
 				validacao += " - Medicamentos e Registro são obrigatórios. \n";

@@ -40,7 +40,7 @@ public class TelaListarTodasEspecializacoes extends JPanel {
 				DefaultTableModel tabela = (DefaultTableModel) tbEspecializacoes.getModel();
 				for (EspecializacaoVO especializacao : especializacoes) {
 					tabela.addRow(new Object[] { especializacao.getCodigoEspecializacao(), especializacao.getMedicoVO().getNomeMedico(), especializacao.getEspecialidadeVO().getNomeEspecialidade(),
-							especializacao.getAnoEspecializacao()
+							especializacao.getAnoEspecializacao(), especializacao.getEspecialidadeVO().getInstituicao()
 				
 					});
 				}
@@ -51,7 +51,7 @@ public class TelaListarTodasEspecializacoes extends JPanel {
 		add(btnListarTodasEspecializacoes);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 86, 568, 9);
+		separator.setBounds(10, 86, 631, 9);
 		add(separator);
 		
 		JButton btnSair = new JButton("Sair");
@@ -71,20 +71,20 @@ public class TelaListarTodasEspecializacoes extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(496, 607, 95, 31);
+		btnSair.setBounds(546, 553, 95, 31);
 		add(btnSair);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(23, 154, 568, 356);
+		scrollPane.setBounds(23, 154, 618, 356);
 		add(scrollPane);
 		
 		tbEspecializacoes = new JTable();
 		tbEspecializacoes.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"ID", "Medico", "Especialidade", "Ano"},
+				{"ID", "Medico", "Especialidade", "Ano", "Instituicao"},
 			},
 			new String[] {
-				"ID", "Medico", "Especialidade", "Ano"
+				"ID", "Medico", "Especialidade", "Ano", "Instituicao"
 			}
 		));
 		tbEspecializacoes.setFont(new Font("Tahoma", Font.PLAIN, 18));

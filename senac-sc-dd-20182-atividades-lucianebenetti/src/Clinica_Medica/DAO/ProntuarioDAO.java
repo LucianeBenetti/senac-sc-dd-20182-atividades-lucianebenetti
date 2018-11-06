@@ -14,11 +14,11 @@ public class ProntuarioDAO {
 	private static ArrayList<ProntuarioVO> listaprontuarios = new ArrayList<ProntuarioVO>();
 	ProntuarioVO prontuario = new ProntuarioVO();
 
-	public int inserir(ProntuarioVO prontuarioVO) {
+	public int inserir(ProntuarioVO prontuario) {
 		int novoId = -1;
 
-		String query = "INSERT INTO prontuario (medicamento, exame, registro)"
-				+ " VALUES (?, ?, ?)";
+		String query = " INSERT INTO prontuario (medicamento, exame, registro) "
+				+ " VALUES (?, ?, ?) ";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query, Statement.RETURN_GENERATED_KEYS);
@@ -47,7 +47,7 @@ public class ProntuarioDAO {
 	public boolean delete(String codigoProntuario) {
 		boolean sucessoDelete = false;
 
-		String query = "DELETE from prontuario where codigoProntuario = ? ";
+		String query = " DELETE from prontuario where codigoProntuario = ? ";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
@@ -67,14 +67,14 @@ public class ProntuarioDAO {
 		return sucessoDelete;
 	}
 
-	public String consultarProntuarioPorId(String codigoProntuario) {
+	public ProntuarioVO consultarProntuarioPorId(int id) {
 
-		String query = "SELECT *from prontuario " + " where codigoProntuario = ?";
+		String query = " SELECT *from prontuario " + " where codigoProntuario = ? ";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
 		try {
-			prepStmt.setString(1, codigoProntuario);
+			prepStmt.setInt(1, id);
 			ResultSet result = prepStmt.executeQuery();
 
 			while (result.next()) {
@@ -91,14 +91,14 @@ public class ProntuarioDAO {
 			Banco.closeStatement(prepStmt);
 			Banco.closeConnection(conn);
 		}
-		return prontuario.toString();
+		return prontuario;
 	}
 
 	public boolean atualizar(ProntuarioVO prontuarioVOAlterado, String IDAnterior) {
 		boolean sucessoAtualizar = false;
 
-		String query = "UPDATE prontuario SET medicamento=?, exame=?, registro=?"
-				+ " where codigoProntuario = ?";
+		String query = " UPDATE prontuario SET medicamento=?, exame=?, registro=? "
+				+ " where codigoProntuario = ? ";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
@@ -126,7 +126,7 @@ public class ProntuarioDAO {
 
 	public ArrayList<ProntuarioVO> listarTodos() {
 
-		String query = "select * from prontuario";
+		String query = " select * from prontuario ";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
