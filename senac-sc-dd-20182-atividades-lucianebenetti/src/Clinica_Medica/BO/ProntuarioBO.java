@@ -24,4 +24,10 @@ public class ProntuarioBO {
 		return idGerado > 0;
 
 	}
+
+	public boolean excluirProntuario(ProntuarioVO prontuarioExcluido) {
+
+		boolean sucesso = dao.delete(prontuarioExcluido.getCodigoProntuario());
+		return sucesso;
+	}
 }

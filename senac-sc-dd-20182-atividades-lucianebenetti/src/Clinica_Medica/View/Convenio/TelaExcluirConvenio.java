@@ -108,6 +108,7 @@ public class TelaExcluirConvenio extends JPanel {
 		btnNewButton_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				
 				ConvenioController dao = new ConvenioController();
 				ConvenioVO convenioExcluido = construirConvenio();
 				dao.excluirConvenio(convenioExcluido);

@@ -44,4 +44,9 @@ public class ProntuarioController {
 		return validacao;
 	}
 
+	public void excluirProntuario(ProntuarioVO prontuarioExcluido) {
+		bo.excluirProntuario(prontuarioExcluido);
+		
+	}
+
 }

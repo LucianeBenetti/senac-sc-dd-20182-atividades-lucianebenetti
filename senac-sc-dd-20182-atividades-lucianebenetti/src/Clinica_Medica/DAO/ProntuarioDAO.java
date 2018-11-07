@@ -44,7 +44,7 @@ public class ProntuarioDAO {
 		return novoId;
 	}
 
-	public boolean delete(String codigoProntuario) {
+	public boolean delete(int codigoProntuario) {
 		boolean sucessoDelete = false;
 
 		String query = " DELETE from prontuario where codigoProntuario = ? ";
@@ -53,7 +53,7 @@ public class ProntuarioDAO {
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
 
 		try {
-			prepStmt.setString(1, codigoProntuario);
+			prepStmt.setInt(1, codigoProntuario);
 			int codigoRetorno = prepStmt.executeUpdate();
 			if (codigoRetorno == 1) {
 				sucessoDelete = true;

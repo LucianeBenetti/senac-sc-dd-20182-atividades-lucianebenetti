@@ -32,32 +32,38 @@ import Clinica_Medica.VO.ProntuarioVO;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import java.sql.Time;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class TelaCadastrarConsulta extends JPanel {
-	private JComboBox cbConvenio;
-	private JComboBox cbNomeMedico;
-	private JComboBox cbEspecialidade;
+	
+	private static final String MASCARA_CPF = "###.###.###-##";
 	private JComboBox cbHorarioConsulta;
 	private JTextField txtBuscarCPF;
 	private JTextField txtIdPaciente;
 	private JTextField txtIdConvenio;
 	private JTextField txtNomePaciente;
-	private JTextField txtIdMedico;
 	private JDateChooser dateChooserDataConsulta;
 	private ConsultaVO consulta = new ConsultaVO();
 	private ConvenioVO convenio = new ConvenioVO();
 	private MedicoVO medico = new MedicoVO();
+	private PacienteVO paciente = new PacienteVO();
 	private EspecialidadeVO especialidade = new EspecialidadeVO();
-	private ProntuarioVO prontuario = new ProntuarioVO();
-	private static final String MASCARA_CPF = "###.###.###-##";
-	PacienteVO pacienteBuscado = new PacienteVO();
-	private JTextField txtIdProntuario;
-	private JTextField txtIdEspecialidade;
+	private EspecializacaoVO especializacao = new EspecializacaoVO();
+	private PacienteVO pacienteBuscado = new PacienteVO();
 	private JTextField txtIdEspecializacao;
+	private JTable tbMedicoEspecialidade;
+	private JTextField txtNomeMedico;
+	private JTextField txtEspecialidade;
+	private JTextField txtConvenio;
+	private JTable tbConvenios;
 
 	/**
 	 * Create the panel.
@@ -68,7 +74,7 @@ public class TelaCadastrarConsulta extends JPanel {
 
 		JLabel lblBuscarCPFPaciente = new JLabel("CPF Paciente");
 		lblBuscarCPFPaciente.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblBuscarCPFPaciente.setBounds(26, 19, 142, 23);
+		lblBuscarCPFPaciente.setBounds(26, 45, 142, 23);
 		add(lblBuscarCPFPaciente);
 
 		try {
@@ -78,7 +84,7 @@ public class TelaCadastrarConsulta extends JPanel {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		txtBuscarCPF.setBounds(199, 15, 399, 27);
+		txtBuscarCPF.setBounds(173, 42, 399, 27);
 		add(txtBuscarCPF);
 		txtBuscarCPF.setColumns(10);
 
@@ -92,13 +98,14 @@ public class TelaCadastrarConsulta extends JPanel {
 
 				if (pacienteBuscado != null) {
 					pacienteBuscado = buscarPaciente();
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "Paciente não encontrado.");
 				}
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscar.setBounds(634, 15, 89, 31);
+		btnBuscar.setBounds(619, 41, 89, 31);
 		add(btnBuscar);
 
 		JSeparator separator = new JSeparator();
@@ -110,39 +117,24 @@ public class TelaCadastrarConsulta extends JPanel {
 		lblNome.setBounds(27, 166, 142, 23);
 		add(lblNome);
 
-		JLabel lblIdPaciente = new JLabel("ID Paciente");
-		lblIdPaciente.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblIdPaciente.setBounds(555, 166, 101, 23);
-		add(lblIdPaciente);
-
 		JLabel lblConvenio = new JLabel("Convenio");
 		lblConvenio.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblConvenio.setBounds(27, 228, 107, 23);
+		lblConvenio.setBounds(26, 243, 107, 23);
 		add(lblConvenio);
-
-		JLabel lblIdConvenio = new JLabel("ID Convenio");
-		lblIdConvenio.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblIdConvenio.setBounds(504, 228, 107, 23);
-		add(lblIdConvenio);
 
 		JLabel lblEspecialidade = new JLabel("Especialidade");
 		lblEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblEspecialidade.setBounds(27, 332, 128, 31);
+		lblEspecialidade.setBounds(26, 362, 128, 31);
 		add(lblEspecialidade);
 
 		JLabel lblNomeMdico = new JLabel("Nome M\u00E9dico");
 		lblNomeMdico.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNomeMdico.setBounds(26, 284, 130, 23);
+		lblNomeMdico.setBounds(26, 308, 130, 23);
 		add(lblNomeMdico);
-
-		JLabel lblIdMedico = new JLabel("ID Medico");
-		lblIdMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblIdMedico.setBounds(504, 284, 95, 23);
-		add(lblIdMedico);
 
 		JLabel lblData = new JLabel("Data da Consulta");
 		lblData.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblData.setBounds(26, 393, 152, 31);
+		lblData.setBounds(26, 431, 152, 31);
 		add(lblData);
 
 		JButton btnSair = new JButton("Sair");
@@ -159,18 +151,18 @@ public class TelaCadastrarConsulta extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(616, 486, 107, 35);
+		btnSair.setBounds(1207, 633, 107, 35);
 		add(btnSair);
 
 		JLabel lblDataRealizao = new JLabel("Hora da Consulta");
 		lblDataRealizao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblDataRealizao.setBounds(26, 449, 162, 23);
+		lblDataRealizao.setBounds(26, 496, 162, 23);
 		add(lblDataRealizao);
 
 		txtIdPaciente = new JTextField();
 		txtIdPaciente.setEditable(false);
 		txtIdPaciente.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtIdPaciente.setBounds(672, 166, 52, 31);
+		txtIdPaciente.setBounds(555, 162, 52, 27);
 		add(txtIdPaciente);
 		txtIdPaciente.setColumns(10);
 
@@ -178,7 +170,7 @@ public class TelaCadastrarConsulta extends JPanel {
 		txtIdConvenio.setEditable(false);
 		txtIdConvenio.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtIdConvenio.setColumns(10);
-		txtIdConvenio.setBounds(672, 229, 52, 27);
+		txtIdConvenio.setBounds(504, 240, 52, 27);
 		add(txtIdConvenio);
 
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -195,60 +187,24 @@ public class TelaCadastrarConsulta extends JPanel {
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(429, 486, 115, 35);
+		btnCadastrar.setBounds(602, 621, 115, 35);
 		add(btnCadastrar);
 
 		txtNomePaciente = new JTextField();
+		txtNomePaciente.setEditable(false);
 		txtNomePaciente.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtNomePaciente.setBounds(166, 163, 379, 26);
 		add(txtNomePaciente);
 		txtNomePaciente.setColumns(10);
 
-		txtIdMedico = new JTextField();
-		txtIdMedico.setEditable(false);
-		txtIdMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtIdMedico.setColumns(10);
-		txtIdMedico.setBounds(672, 285, 52, 27);
-		add(txtIdMedico);
-
 		String[] convenios = { "----------- Selecione -----------" };
-		cbConvenio = new JComboBox(convenios);
-		cbConvenio.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				preencherConvenio();
-			}
-		});
-		cbConvenio.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cbConvenio.setBounds(165, 224, 274, 30);
-		add(cbConvenio);
 
 		String[] esp = { "----------- Selecione -----------" };
-		cbEspecialidade = new JComboBox(esp);
-		cbEspecialidade.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				preencherEspecialidade();
-			}
-		});
-		cbEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cbEspecialidade.setBounds(165, 332, 274, 30);
-		add(cbEspecialidade);
 
 		String[] med = { "----------- Selecione -----------" };
-		cbNomeMedico = new JComboBox(med);
-		cbNomeMedico.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				preencherMedico();
-			}
-		});
-		cbNomeMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cbNomeMedico.setBounds(166, 276, 273, 31);
-		add(cbNomeMedico);
 
-		dateChooserDataConsulta = new JDateChooser();
-		dateChooserDataConsulta.setBounds(178, 393, 181, 31);
+		dateChooserDataConsulta = new JDateChooser(new Date(), "dd/MM/yyyy");
+		dateChooserDataConsulta.setBounds(178, 431, 181, 31);
 		add(dateChooserDataConsulta);
 
 		JButton btnLimparTela = new JButton("Limpar Tela");
@@ -259,12 +215,24 @@ public class TelaCadastrarConsulta extends JPanel {
 			}
 		});
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnLimparTela.setBounds(26, 486, 142, 35);
+		btnLimparTela.setBounds(26, 621, 142, 35);
 		add(btnLimparTela);
 
 		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				int codigoConsulta = 0;
+				ConsultaController dao = new ConsultaController();
+				ConsultaVO consulta = construirConsulta();
+				String mensagem = dao.atualizarConsulta(consulta, codigoConsulta);
+				JOptionPane.showMessageDialog(null, mensagem);
+				limparTela();	
+			}
+		});
 		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnAlterar.setBounds(219, 486, 130, 35);
+		btnAlterar.setBounds(316, 621, 130, 35);
 		add(btnAlterar);
 
 		String[] horarios = { "--- Selecione ---", "08:00:00", "08:30:00", "09:00:00", "09:30:00", "10:00:00",
@@ -273,44 +241,133 @@ public class TelaCadastrarConsulta extends JPanel {
 
 		cbHorarioConsulta = new JComboBox(horarios);
 		cbHorarioConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cbHorarioConsulta.setBounds(179, 446, 168, 29);
+		cbHorarioConsulta.setBounds(179, 493, 180, 29);
 		add(cbHorarioConsulta);
-
-		JLabel lblIdProntuario = new JLabel("ID Prontuario");
-		lblIdProntuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblIdProntuario.setBounds(26, 76, 135, 23);
-		add(lblIdProntuario);
-
-		txtIdProntuario = new JTextField();
-		txtIdProntuario.setEditable(false);
-		txtIdProntuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtIdProntuario.setBounds(197, 69, 95, 31);
-		add(txtIdProntuario);
-		txtIdProntuario.setColumns(10);
-
-		JLabel lblIdEspecialidade = new JLabel("ID Especialidade");
-		lblIdEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblIdEspecialidade.setBounds(504, 336, 152, 27);
-		add(lblIdEspecialidade);
-
-		txtIdEspecialidade = new JTextField();
-		txtIdEspecialidade.setEditable(false);
-		txtIdEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtIdEspecialidade.setBounds(671, 332, 52, 28);
-		add(txtIdEspecialidade);
-		txtIdEspecialidade.setColumns(10);
-
-		JLabel lblIdEspecializacao = new JLabel("ID Especializacao");
-		lblIdEspecializacao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblIdEspecializacao.setBounds(504, 374, 142, 30);
-		add(lblIdEspecializacao);
 
 		txtIdEspecializacao = new JTextField();
 		txtIdEspecializacao.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtIdEspecializacao.setEditable(false);
-		txtIdEspecializacao.setBounds(672, 374, 51, 30);
+		txtIdEspecializacao.setBounds(504, 304, 51, 30);
 		add(txtIdEspecializacao);
 		txtIdEspecializacao.setColumns(10);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(791, 337, 524, 195);
+		add(scrollPane);
+		
+		tbMedicoEspecialidade = new JTable();
+		tbMedicoEspecialidade.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				int selecionado = tbMedicoEspecialidade.getSelectedRow();
+				
+				txtIdEspecializacao.setText(tbMedicoEspecialidade.getValueAt(selecionado, 0) + "");
+				txtNomeMedico.setText((String) tbMedicoEspecialidade.getValueAt(selecionado, 1));
+				txtEspecialidade.setText((String) tbMedicoEspecialidade.getValueAt(selecionado, 2));
+								
+			}
+		});
+		tbMedicoEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tbMedicoEspecialidade.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"ID", "Nome Medico", "Especialidade"},
+			},
+			new String[] {
+				"ID", "Nome Medico", "Especialidade"
+			}
+		));
+		scrollPane.setViewportView(tbMedicoEspecialidade);
+		
+		JButton btnNewButton = new JButton("Buscar Medico e Especialidade");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				EspecializacaoController controlador = new EspecializacaoController();
+				ArrayList<EspecializacaoVO> especializacoes = (ArrayList<EspecializacaoVO>) controlador.listarTodasEspecializacoes();
+
+				DefaultTableModel tabela = (DefaultTableModel) tbMedicoEspecialidade.getModel();
+				for (EspecializacaoVO especializacao : especializacoes) {
+					tabela.addRow(new Object[] { especializacao.getCodigoEspecializacao(), especializacao.getMedicoVO().getNomeMedico(), especializacao.getEspecialidadeVO().getNomeEspecialidade(),
+							especializacao.getAnoEspecializacao(), especializacao.getEspecialidadeVO().getInstituicao()
+				
+					});
+				}
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnNewButton.setBounds(918, 305, 299, 31);
+		add(btnNewButton);
+		
+		txtNomeMedico = new JTextField();
+		txtNomeMedico.setEditable(false);
+		txtNomeMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtNomeMedico.setBounds(166, 304, 307, 31);
+		add(txtNomeMedico);
+		txtNomeMedico.setColumns(10);
+		
+		txtEspecialidade = new JTextField();
+		txtEspecialidade.setEditable(false);
+		txtEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtEspecialidade.setBounds(165, 362, 308, 31);
+		add(txtEspecialidade);
+		txtEspecialidade.setColumns(10);
+		
+		txtConvenio = new JTextField();
+		txtConvenio.setEditable(false);
+		txtConvenio.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtConvenio.setBounds(166, 240, 307, 28);
+		add(txtConvenio);
+		txtConvenio.setColumns(10);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(791, 69, 524, 183);
+		add(scrollPane_1);
+		
+		tbConvenios = new JTable();
+		tbConvenios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				int selecionado = tbConvenios.getSelectedRow();
+				
+				txtIdConvenio.setText(tbConvenios.getValueAt(selecionado, 0) + "");
+				txtConvenio.setText((String) tbConvenios.getValueAt(selecionado, 1));
+				
+			}
+		});
+		tbConvenios.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tbConvenios.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"ID", "Nome Convenio", "Valor"},
+			},
+			new String[] {
+				"ID", "Nome Convenio", "Valor"
+			}
+		));
+		scrollPane_1.setViewportView(tbConvenios);
+		
+		JButton btnBuscarConveio = new JButton("Buscar Convenios");
+		btnBuscarConveio.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				ConvenioController controlador = new ConvenioController();
+				ArrayList<ConvenioVO> convenios = (ArrayList<ConvenioVO>) controlador.listarTodosConvenios();
+
+				DefaultTableModel tabela = (DefaultTableModel) tbConvenios.getModel();
+				for (ConvenioVO convenio : convenios) {
+					tabela.addRow(new Object[] { convenio.getCodigoConvenio(), convenio.getNomeConvenio(),
+							convenio.getCnpjConvenio(), convenio.getValor()
+				
+					});
+				}
+			}
+		});
+		btnBuscarConveio.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnBuscarConveio.setBounds(952, 37, 201, 31);
+		add(btnBuscarConveio);
 
 	}
 
@@ -322,109 +379,60 @@ public class TelaCadastrarConsulta extends JPanel {
 		return pacienteBuscado;
 	}
 
-	protected void preencherMedico() {
-
-		MedicoController controlador = new MedicoController();
-		ArrayList<MedicoVO> listaMedicos = new ArrayList<MedicoVO>();
-
-		listaMedicos = controlador.consultarMedico();
-		DefaultComboBoxModel medicos = new DefaultComboBoxModel(listaMedicos.toArray());
-		cbNomeMedico.setModel(medicos);
-
-		for (int i = 0; i < listaMedicos.size(); i++) {
-
-			txtIdMedico.setText(listaMedicos.get(i).getCodigoMedico() + "");
-		}
-		consulta.getPacienteVO().setCodigoPaciente(Integer.parseInt(txtIdPaciente.getText()));
-	}
-
-	protected void preencherEspecialidade() {
-
-		EspecialidadeController controlador = new EspecialidadeController();
-		ArrayList<EspecialidadeVO> listaEspecialidades = new ArrayList<EspecialidadeVO>();
-
-		listaEspecialidades = controlador.consultarEspecialidade();
-		DefaultComboBoxModel especialidades = new DefaultComboBoxModel(listaEspecialidades.toArray());
-		cbEspecialidade.setModel(especialidades);
-
-		for (int i = 0; i < listaEspecialidades.size(); i++) {
-
-			txtIdEspecialidade.setText(listaEspecialidades.get(i).getCodigoEspecialidade() + "");
-		}
-
-	}
-
-	protected void preencherConvenio() {
-		ConvenioController controlador = new ConvenioController();
-		ArrayList<ConvenioVO> listaConvenios = new ArrayList<ConvenioVO>();
-
-		listaConvenios = controlador.ConsultarConvenio();
-		DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(listaConvenios.toArray());
-		cbConvenio.setModel(defaultComboBox);
-
-		for (int i = 0; i < listaConvenios.size(); i++) {
-
-			txtIdConvenio.setText(listaConvenios.get(i).getCodigoConvenio() + "");
-		}
-		consulta.getConvenioVO().setCodigoConvenio(Integer.parseInt(txtIdConvenio.getText()));
-
-	}
-
 	protected void limparTela() {
+		
+		limparTabelaConvenios();
+		limparTabelaMedicoEspecialidade();
+		
 		txtBuscarCPF.setText("");
 		txtIdConvenio.setText("");
-		txtIdMedico.setText("");
 		txtIdPaciente.setText("");
 		txtNomePaciente.setText("");
-		txtIdProntuario.setText("");
-		cbConvenio.setSelectedIndex(0);
-		cbEspecialidade.setSelectedIndex(0);
+		txtNomeMedico.setText("");
+		txtEspecialidade.setText("");
+		txtConvenio.setText("");
 		cbHorarioConsulta.setSelectedIndex(0);
-		cbNomeMedico.setSelectedIndex(0);
 		dateChooserDataConsulta.setDate(null);
 	}
-
-	protected void preencherEspecializacao() {
 		
-		EspecializacaoController especializacaoController = new EspecializacaoController();
-		ArrayList<EspecializacaoVO> especializacoes = new ArrayList<EspecializacaoVO>();
-		
-		if(txtIdMedico != null  && txtIdEspecializacao != null) {
-			especializacoes = especializacaoController.listarEspecializacoesPorMedicoEspecialidade(medico, especialidade);
-			
-			for (int i = 0; i < especializacoes.size(); i++) {
-				
-			txtIdEspecializacao.setText(especializacoes.get(i).getCodigoEspecializacao()+"");
-			}
-	}
-		
-}	
-	protected void preencherProntuario() {
-		
-		ProntuarioController prontuarioController = new ProntuarioController();
-		ArrayList<ProntuarioVO> prontuarios = new ArrayList<ProntuarioVO>();
-		
-		if (dateChooserDataConsulta != null && cbHorarioConsulta != null) {
-			prontuarioController.listarTodosProntuarios();
-		
-			for (int i = 0; i < prontuarios.size(); i++) {
-					
-			txtIdProntuario.setText(prontuarios.get(i).getCodigoProntuario()+"");
-			}
-		}else {
-			txtIdProntuario = null;
-		}
-	}
 	
-	protected ConsultaVO construirConsulta() {
-		preencherEspecializacao();
-		preencherProntuario();
 		
-		consulta.getProntuarioVO().setCodigoProntuario(Integer.parseInt(txtIdProntuario.getText()));
-		consulta.getEspecializacaoVO().setCodigoEspecializacao(Integer.parseInt(txtIdEspecializacao.getText()));	
+	protected ConsultaVO construirConsulta() {
+		
+		especializacao.setCodigoEspecializacao(Integer.parseInt(txtIdEspecializacao.getText()));
+		convenio.setCodigoConvenio(Integer.parseInt(txtIdConvenio.getText()));
+		paciente.setCodigoPaciente(Integer.parseInt(txtIdPaciente.getText()));
+		
+		consulta.setEspecializacaoVO(especializacao);
+		consulta.setConvenioVO(convenio);
+		consulta.setPacienteVO(paciente);
 		consulta.setDataConsulta(dateChooserDataConsulta.getDate());
 		consulta.setHorarioConsulta((String) cbHorarioConsulta.getSelectedItem());
 		
 		return consulta;
+	}
+	
+	private void limparTabelaConvenios() {
+		int linhas = 0;
+		int colunas = 0;
+		String zer = null;
+
+		for (linhas = 0; linhas <= tbConvenios.getRowCount() - 1; linhas++) {
+			for (colunas = 0; colunas <= tbConvenios.getColumnCount() - 1; colunas++) {
+				tbConvenios.setValueAt(zer, linhas, colunas);
+			}
+		}
+	}
+
+	private void limparTabelaMedicoEspecialidade() {
+		int linhas = 0;
+		int colunas = 0;
+		String zer = null;
+
+		for (linhas = 0; linhas <= tbMedicoEspecialidade.getRowCount() - 1; linhas++) {
+			for (colunas = 0; colunas <= tbConvenios.getColumnCount() - 1; colunas++) {
+				tbMedicoEspecialidade.setValueAt(zer, linhas, colunas);
+			}
+		}
 	}
 }

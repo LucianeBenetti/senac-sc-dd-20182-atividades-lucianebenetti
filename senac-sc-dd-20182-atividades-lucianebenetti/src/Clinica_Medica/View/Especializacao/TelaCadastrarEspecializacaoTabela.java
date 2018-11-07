@@ -91,6 +91,7 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 				String mensagem = controlador.salvar(especializacao);
 				JOptionPane.showMessageDialog(null, mensagem);
 				limparTela();
+				limparTabela();
 
 			}
 		});
@@ -231,10 +232,10 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 				if (controlador != null) {
 					JOptionPane.showMessageDialog(null, "Especializacao alterada com sucesso!");
 					limparTela();
+					limparTabela();
 				} else {
 					JOptionPane.showMessageDialog(null, "Não foi possível alterar Especializacao!");
 				}
-
 			}
 		});
 		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));

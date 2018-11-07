@@ -43,4 +43,22 @@ public class ConsultaController {
 		return bo.listarTodasConsultas();
 	}
 
+	public void excluirConsulta(ConsultaVO consultaExcluida) {
+		bo.excluirConsulta(consultaExcluida);
+		
+	}
+
+	public String atualizarConsulta(ConsultaVO consulta, int codigoConsulta) {
+		String validacao = validarConsulta(consulta);
+		if (validacao == "") {
+
+			if (bo.atualizarConsulta(consulta, codigoConsulta)) {
+				validacao = "Consulta salvo com sucesso!";
+			} else {
+				validacao = "Erro ao salvar consulta!";
+			}
+		}
+		return validacao;
+	}
+
 }

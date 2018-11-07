@@ -90,6 +90,7 @@ public class TelaExcluirEspecializacao extends JPanel {
 				controlador.excluirEspecializacao(especializacaoExcluida);
 				JOptionPane.showMessageDialog(null, "Especializacao Excluida!!");
 				limparTela();
+				limparTabela();
 
 			}
 		});

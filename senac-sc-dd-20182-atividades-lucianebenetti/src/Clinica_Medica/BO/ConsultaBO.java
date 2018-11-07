@@ -23,4 +23,15 @@ public class ConsultaBO {
 		return consultas;
 	}
 
+	public boolean excluirConsulta(ConsultaVO consultaExcluida) {
+		boolean sucesso = dao.delete(consultaExcluida.getCodigoConsulta());
+		return sucesso;
+		
+	}
+
+	public boolean atualizarConsulta(ConsultaVO consulta, int codigoConsulta) {
+		
+		return dao.atualizar(consulta, codigoConsulta);
+	}
+
 }
