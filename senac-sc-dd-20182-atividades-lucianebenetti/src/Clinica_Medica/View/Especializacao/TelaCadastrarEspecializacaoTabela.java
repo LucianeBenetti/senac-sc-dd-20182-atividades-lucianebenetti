@@ -90,10 +90,7 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 
 				String mensagem = controlador.salvar(especializacao);
 				JOptionPane.showMessageDialog(null, mensagem);
-				limparTela();
-				limparTabela();
-
-			}
+				}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnCadastrar.setBounds(425, 585, 114, 31);
@@ -201,6 +198,7 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 				} else {
 					
 				}
+			
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -231,8 +229,7 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 				controlador.atualizar(especializacao, codigoEspecializacao);
 				if (controlador != null) {
 					JOptionPane.showMessageDialog(null, "Especializacao alterada com sucesso!");
-					limparTela();
-					limparTabela();
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "Não foi possível alterar Especializacao!");
 				}
@@ -320,7 +317,7 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 		listaMedico = controlador.consultarMedico();
 		DefaultComboBoxModel medicos = new DefaultComboBoxModel(listaMedico.toArray());
 		cbMedico.setModel(medicos);
-
+		cbMedico.setSelectedItem(0);
 	}
 
 	protected void preencherEspecialidade() {
@@ -331,6 +328,7 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 		listaEspecialidade = controlador.consultarEspecialidade();
 		DefaultComboBoxModel especialidades = new DefaultComboBoxModel(listaEspecialidade.toArray());
 		cbEspecialidade.setModel(especialidades);
+		cbEspecialidade.setSelectedItem(null);
 
 	}
 	

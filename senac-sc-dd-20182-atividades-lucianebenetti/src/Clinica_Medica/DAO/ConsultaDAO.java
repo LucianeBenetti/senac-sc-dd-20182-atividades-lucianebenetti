@@ -191,4 +191,36 @@ public class ConsultaDAO {
 		return listaConsultas;
 	}
 
+	public ConsultaVO consultarPorId(int id) {
+		ConsultaVO consulta = new ConsultaVO();
+
+		String query = "SELECT * from consulta " + " where codigoConsulta like ?";
+
+		Connection conn = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
+		try {
+			prepStmt.setInt(1, id);
+			ResultSet result = prepStmt.executeQuery();
+
+			while (result.next()) {
+				
+				consulta.setCodigoConsulta(result.getInt(1));
+				EspecializacaoVO especializacaoVO = especializacaoDAO.consultarPorId(result.getInt(2));
+				consulta.setEspecializacaoVO(especializacaoVO);
+				PacienteVO pacienteVO = pacienteDAO.consultarPorId(result.getInt(3));
+				consulta.setPacienteVO(pacienteVO);
+				ConvenioVO convenioVO = convenioDAO.consultarPorId(result.getInt(4));
+				consulta.setConvenioVO(convenioVO);
+				consulta.setDataConsulta(result.getDate(5));
+				consulta.setHorarioConsulta(result.getString(6));
+			}
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			Banco.closeStatement(prepStmt);
+			Banco.closeConnection(conn);
+		}
+		return consulta;
+	}
+
 }

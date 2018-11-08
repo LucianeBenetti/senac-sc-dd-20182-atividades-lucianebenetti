@@ -30,4 +30,9 @@ public class ProntuarioBO {
 		boolean sucesso = dao.delete(prontuarioExcluido.getCodigoProntuario());
 		return sucesso;
 	}
+
+	public boolean atualizar(ProntuarioVO prontuario, int codigoProntuario) {
+		
+		return  dao.atualizar(prontuario, codigoProntuario);
+	}
 }

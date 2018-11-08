@@ -255,7 +255,9 @@ public class TelaExcluirEspecializacao extends JPanel {
 		txtAno.setText("");
 		txtNomeEspecialidade.setText("");
 		txtNomeMedico.setText("");
+		cbEspecialidade.setSelectedItem(null);
 		cbEspecialidade.setSelectedIndex(0);
+		cbMedico.setSelectedItem(null);
 		cbMedico.setSelectedIndex(0);
 		txtIdEspecializacao.setText("");
 
@@ -271,6 +273,8 @@ public class TelaExcluirEspecializacao extends JPanel {
 		listaMedico = controlador.consultarMedico();
 		DefaultComboBoxModel medicos = new DefaultComboBoxModel(listaMedico.toArray());
 		cbMedico.setModel(medicos);
+		cbMedico.setSelectedItem(null);
+		cbMedico.setSelectedIndex(0);
 
 	}
 
@@ -282,6 +286,8 @@ public class TelaExcluirEspecializacao extends JPanel {
 		listaEspecialidade = controlador.consultarEspecialidade();
 		DefaultComboBoxModel especialidades = new DefaultComboBoxModel(listaEspecialidade.toArray());
 		cbEspecialidade.setModel(especialidades);
+		cbEspecialidade.setSelectedItem(null);
+		cbEspecialidade.setSelectedIndex(0);
 
 	}
 

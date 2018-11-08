@@ -7,27 +7,30 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import Clinica_Medica.VO.ConsultaVO;
 import Clinica_Medica.VO.ProntuarioVO;
 
 public class ProntuarioDAO {
 	
 	private static ArrayList<ProntuarioVO> listaprontuarios = new ArrayList<ProntuarioVO>();
 	ProntuarioVO prontuario = new ProntuarioVO();
+	ConsultaDAO consultaDAO = new ConsultaDAO();
 
 	public int inserir(ProntuarioVO prontuario) {
 		int novoId = -1;
 
-		String query = " INSERT INTO prontuario (medicamento, exame, registro) "
-				+ " VALUES (?, ?, ?) ";
+		String query = " INSERT INTO prontuario (codigoConsulta, medicamento, exame, registro) "
+				+ " VALUES (?, ?, ?,?) ";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query, Statement.RETURN_GENERATED_KEYS);
 
 		try {
 			
-			prepStmt.setString(1, prontuario.getMedicamento());
-			prepStmt.setString(2, prontuario.getExame());
-			prepStmt.setString(3, prontuario.getRegistro());
+			prepStmt.setInt(1, prontuario.getConsulta().getCodigoConsulta());
+			prepStmt.setString(2, prontuario.getMedicamento());
+			prepStmt.setString(3, prontuario.getExame());
+			prepStmt.setString(4, prontuario.getRegistro());
 		
 			prepStmt.executeUpdate();
 
@@ -80,9 +83,11 @@ public class ProntuarioDAO {
 			while (result.next()) {
 				
 				prontuario.setCodigoProntuario(result.getInt(1));
-				prontuario.setMedicamento(result.getString(2));
-				prontuario.setExame(result.getString(3));
-				prontuario.setRegistro(result.getString(4));
+				ConsultaVO consulta = consultaDAO.consultarPorId(result.getInt(2));
+				prontuario.setConsulta(consulta);
+				prontuario.setMedicamento(result.getString(3));
+				prontuario.setExame(result.getString(4));
+				prontuario.setRegistro(result.getString(5));
 				
 			}
 		} catch (SQLException ex) {
@@ -94,10 +99,10 @@ public class ProntuarioDAO {
 		return prontuario;
 	}
 
-	public boolean atualizar(ProntuarioVO prontuarioVOAlterado, String IDAnterior) {
+	public boolean atualizar(ProntuarioVO prontuario, int codigoProntuario) {
 		boolean sucessoAtualizar = false;
 
-		String query = " UPDATE prontuario SET medicamento=?, exame=?, registro=? "
+		String query = " UPDATE prontuario SET codigoConsulta=?, medicamento=?, exame=?, registro=? "
 				+ " where codigoProntuario = ? ";
 
 		Connection conn = Banco.getConnection();
@@ -105,10 +110,11 @@ public class ProntuarioDAO {
 
 		try {
 			
-			prepStmt.setString(1, prontuario.getMedicamento());
-			prepStmt.setString(2, prontuario.getExame());
-			prepStmt.setString(3, prontuario.getRegistro());
-			prepStmt.setInt(4, prontuario.getCodigoProntuario());	
+			prepStmt.setInt(1, prontuario.getConsulta().getCodigoConsulta());
+			prepStmt.setString(2, prontuario.getMedicamento());
+			prepStmt.setString(3, prontuario.getExame());
+			prepStmt.setString(4, prontuario.getRegistro());
+			prepStmt.setInt(5, prontuario.getCodigoProntuario());
 			
 			int codigoRetorno = prepStmt.executeUpdate();
 
@@ -137,9 +143,11 @@ public class ProntuarioDAO {
 				ProntuarioVO prontuario = new ProntuarioVO();
 
 				prontuario.setCodigoProntuario(result.getInt(1));
-				prontuario.setMedicamento(result.getString(2));
-				prontuario.setExame(result.getString(3));
-				prontuario.setRegistro(result.getString(4));
+				ConsultaVO consulta = consultaDAO.consultarPorId(result.getInt(2));
+				prontuario.setConsulta(consulta);
+				prontuario.setMedicamento(result.getString(3));
+				prontuario.setExame(result.getString(4));
+				prontuario.setRegistro(result.getString(5));
 				
 				listaprontuarios.add(prontuario);
 			}

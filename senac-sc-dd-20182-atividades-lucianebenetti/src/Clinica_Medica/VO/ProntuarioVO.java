@@ -5,17 +5,14 @@ import java.util.ArrayList;
 public class ProntuarioVO {
 
 	private int codigoProntuario;
-	private int codigoConsulta;
 	private String medicamento;
 	private String exame;
 	private String registro;
-	private ArrayList<ConsultaVO> consulta;
+	private ConsultaVO consulta = new ConsultaVO();
 	
-	public ProntuarioVO(int codigoProntuario, int codigoConsulta, String medicamento, String exame, String registro,
-			ArrayList<ConsultaVO> consulta) {
+	public ProntuarioVO(int codigoProntuario, String medicamento, String exame, String registro, ConsultaVO consulta) {
 		super();
 		this.codigoProntuario = codigoProntuario;
-		this.codigoConsulta = codigoConsulta;
 		this.medicamento = medicamento;
 		this.exame = exame;
 		this.registro = registro;
@@ -33,14 +30,6 @@ public class ProntuarioVO {
 
 	public void setCodigoProntuario(int codigoProntuario) {
 		this.codigoProntuario = codigoProntuario;
-	}
-
-	public int getCodigoConsulta() {
-		return codigoConsulta;
-	}
-
-	public void setCodigoConsulta(int codigoConsulta) {
-		this.codigoConsulta = codigoConsulta;
 	}
 
 	public String getMedicamento() {
@@ -67,14 +56,13 @@ public class ProntuarioVO {
 		this.registro = registro;
 	}
 
-	public ArrayList<ConsultaVO> getConsulta() {
+	public ConsultaVO getConsulta() {
 		return consulta;
 	}
 
-	public void setConsulta(ArrayList<ConsultaVO> consulta) {
+	public void setConsulta(ConsultaVO consulta) {
 		this.consulta = consulta;
 	}
-	
-	
-	
+
+
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Clinica_Medica.BO.ProntuarioBO;
+import Clinica_Medica.VO.ConvenioVO;
 import Clinica_Medica.VO.ProntuarioVO;
 
 public class ProntuarioController {
@@ -47,6 +48,21 @@ public class ProntuarioController {
 	public void excluirProntuario(ProntuarioVO prontuarioExcluido) {
 		bo.excluirProntuario(prontuarioExcluido);
 		
+	}
+
+	public String atualizarProntuario(ProntuarioVO prontuario, int codigoProntuario) {
+
+		String validacao = validarProntuario(prontuario);
+		if (validacao == "") {
+
+			if (bo.atualizar(prontuario, codigoProntuario)) {
+				validacao = "Prontuario alterado com sucesso!";
+			} else {
+				validacao = "Erro ao alterar prontuario!";
+			}
+		}
+		return validacao;
+
 	}
 
 }

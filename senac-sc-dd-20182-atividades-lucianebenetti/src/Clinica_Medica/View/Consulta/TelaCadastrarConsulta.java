@@ -93,11 +93,15 @@ public class TelaCadastrarConsulta extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
+				ConsultaController controlerConsulta = new ConsultaController();
 				PacienteController dao = new PacienteController();
 				pacienteBuscado = dao.buscarPacientePorCpf(txtBuscarCPF.getText());
 
 				if (pacienteBuscado != null) {
 					pacienteBuscado = buscarPaciente();
+					controlerConsulta.listarTodasConsultas();
+					ConsultaVO consulta = buscarConsulta();
+					
 					
 				} else {
 					JOptionPane.showMessageDialog(null, "Paciente não encontrado.");
@@ -109,32 +113,32 @@ public class TelaCadastrarConsulta extends JPanel {
 		add(btnBuscar);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(26, 128, 697, 9);
+		separator.setBounds(26, 98, 697, 9);
 		add(separator);
 
 		JLabel lblNome = new JLabel("Nome Paciente");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNome.setBounds(27, 166, 142, 23);
+		lblNome.setBounds(26, 133, 142, 23);
 		add(lblNome);
 
 		JLabel lblConvenio = new JLabel("Convenio");
 		lblConvenio.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblConvenio.setBounds(26, 243, 107, 23);
+		lblConvenio.setBounds(26, 189, 107, 23);
 		add(lblConvenio);
 
 		JLabel lblEspecialidade = new JLabel("Especialidade");
 		lblEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblEspecialidade.setBounds(26, 362, 128, 31);
+		lblEspecialidade.setBounds(26, 308, 128, 31);
 		add(lblEspecialidade);
 
 		JLabel lblNomeMdico = new JLabel("Nome M\u00E9dico");
 		lblNomeMdico.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNomeMdico.setBounds(26, 308, 130, 23);
+		lblNomeMdico.setBounds(26, 254, 130, 23);
 		add(lblNomeMdico);
 
 		JLabel lblData = new JLabel("Data da Consulta");
 		lblData.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblData.setBounds(26, 431, 152, 31);
+		lblData.setBounds(26, 377, 152, 31);
 		add(lblData);
 
 		JButton btnSair = new JButton("Sair");
@@ -151,18 +155,18 @@ public class TelaCadastrarConsulta extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(1207, 633, 107, 35);
+		btnSair.setBounds(1208, 569, 107, 35);
 		add(btnSair);
 
 		JLabel lblDataRealizao = new JLabel("Hora da Consulta");
 		lblDataRealizao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblDataRealizao.setBounds(26, 496, 162, 23);
+		lblDataRealizao.setBounds(26, 464, 162, 23);
 		add(lblDataRealizao);
 
 		txtIdPaciente = new JTextField();
 		txtIdPaciente.setEditable(false);
 		txtIdPaciente.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtIdPaciente.setBounds(555, 162, 52, 27);
+		txtIdPaciente.setBounds(554, 129, 52, 27);
 		add(txtIdPaciente);
 		txtIdPaciente.setColumns(10);
 
@@ -170,7 +174,7 @@ public class TelaCadastrarConsulta extends JPanel {
 		txtIdConvenio.setEditable(false);
 		txtIdConvenio.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtIdConvenio.setColumns(10);
-		txtIdConvenio.setBounds(504, 240, 52, 27);
+		txtIdConvenio.setBounds(483, 186, 52, 27);
 		add(txtIdConvenio);
 
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -187,13 +191,13 @@ public class TelaCadastrarConsulta extends JPanel {
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(602, 621, 115, 35);
+		btnCadastrar.setBounds(608, 569, 115, 35);
 		add(btnCadastrar);
 
 		txtNomePaciente = new JTextField();
 		txtNomePaciente.setEditable(false);
 		txtNomePaciente.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNomePaciente.setBounds(166, 163, 379, 26);
+		txtNomePaciente.setBounds(165, 130, 379, 26);
 		add(txtNomePaciente);
 		txtNomePaciente.setColumns(10);
 
@@ -203,8 +207,9 @@ public class TelaCadastrarConsulta extends JPanel {
 
 		String[] med = { "----------- Selecione -----------" };
 
-		dateChooserDataConsulta = new JDateChooser(new Date(), "dd/MM/yyyy");
-		dateChooserDataConsulta.setBounds(178, 431, 181, 31);
+		dateChooserDataConsulta = new JDateChooser(new Date(), "dd/MM/YYYY");
+		dateChooserDataConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		dateChooserDataConsulta.setBounds(192, 377, 181, 31);
 		add(dateChooserDataConsulta);
 
 		JButton btnLimparTela = new JButton("Limpar Tela");
@@ -215,7 +220,7 @@ public class TelaCadastrarConsulta extends JPanel {
 			}
 		});
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnLimparTela.setBounds(26, 621, 142, 35);
+		btnLimparTela.setBounds(26, 569, 142, 35);
 		add(btnLimparTela);
 
 		JButton btnAlterar = new JButton("Alterar");
@@ -232,22 +237,22 @@ public class TelaCadastrarConsulta extends JPanel {
 			}
 		});
 		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnAlterar.setBounds(316, 621, 130, 35);
+		btnAlterar.setBounds(316, 569, 130, 35);
 		add(btnAlterar);
 
 		String[] horarios = { "--- Selecione ---", "08:00:00", "08:30:00", "09:00:00", "09:30:00", "10:00:00",
 				"10:30:00", "11:00:00", "11:30:00", "12:00:00", "12:30:00", "13:00:00", "13:30:00", "14:00:00",
-				"14:30:00", "15:00:00", "15:30:00", "16:00", "16:30:00", "17:00:00", "17:30:00", "18:00:00" };
+				"14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00", "17:30:00", "18:00:00" };
 
 		cbHorarioConsulta = new JComboBox(horarios);
 		cbHorarioConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cbHorarioConsulta.setBounds(179, 493, 180, 29);
+		cbHorarioConsulta.setBounds(193, 461, 180, 29);
 		add(cbHorarioConsulta);
 
 		txtIdEspecializacao = new JTextField();
 		txtIdEspecializacao.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtIdEspecializacao.setEditable(false);
-		txtIdEspecializacao.setBounds(504, 304, 51, 30);
+		txtIdEspecializacao.setBounds(484, 282, 51, 30);
 		add(txtIdEspecializacao);
 		txtIdEspecializacao.setColumns(10);
 		
@@ -303,21 +308,21 @@ public class TelaCadastrarConsulta extends JPanel {
 		txtNomeMedico = new JTextField();
 		txtNomeMedico.setEditable(false);
 		txtNomeMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNomeMedico.setBounds(166, 304, 307, 31);
+		txtNomeMedico.setBounds(166, 250, 307, 31);
 		add(txtNomeMedico);
 		txtNomeMedico.setColumns(10);
 		
 		txtEspecialidade = new JTextField();
 		txtEspecialidade.setEditable(false);
 		txtEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtEspecialidade.setBounds(165, 362, 308, 31);
+		txtEspecialidade.setBounds(165, 308, 308, 31);
 		add(txtEspecialidade);
 		txtEspecialidade.setColumns(10);
 		
 		txtConvenio = new JTextField();
 		txtConvenio.setEditable(false);
 		txtConvenio.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtConvenio.setBounds(166, 240, 307, 28);
+		txtConvenio.setBounds(166, 186, 307, 28);
 		add(txtConvenio);
 		txtConvenio.setColumns(10);
 		
@@ -371,6 +376,14 @@ public class TelaCadastrarConsulta extends JPanel {
 
 	}
 
+	protected ConsultaVO buscarConsulta() {
+		
+		
+		txtNomeMedico.setText(consulta.getEspecializacaoVO().getMedicoVO().getNomeMedico());
+		
+		return consulta;
+	}
+
 	protected PacienteVO buscarPaciente() {
 
 		txtNomePaciente.setText(pacienteBuscado.getNomePaciente());
@@ -395,14 +408,12 @@ public class TelaCadastrarConsulta extends JPanel {
 		dateChooserDataConsulta.setDate(null);
 	}
 		
-	
-		
 	protected ConsultaVO construirConsulta() {
 		
 		especializacao.setCodigoEspecializacao(Integer.parseInt(txtIdEspecializacao.getText()));
 		convenio.setCodigoConvenio(Integer.parseInt(txtIdConvenio.getText()));
 		paciente.setCodigoPaciente(Integer.parseInt(txtIdPaciente.getText()));
-		
+
 		consulta.setEspecializacaoVO(especializacao);
 		consulta.setConvenioVO(convenio);
 		consulta.setPacienteVO(paciente);

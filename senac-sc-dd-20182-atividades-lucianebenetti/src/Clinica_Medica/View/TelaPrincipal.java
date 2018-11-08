@@ -14,7 +14,6 @@ import Clinica_Medica.View.Convenio.TelaListarTodosConvenios;
 import Clinica_Medica.View.Especialidade.TelaCadastrarEspecialidade;
 import Clinica_Medica.View.Especialidade.TelaExcluirEspecialidade;
 import Clinica_Medica.View.Especialidade.TelaListarTodasEspecialidades;
-import Clinica_Medica.View.Especializacao.TelaCadastrarEspecializacao;
 import Clinica_Medica.View.Especializacao.TelaCadastrarEspecializacaoTabela;
 import Clinica_Medica.View.Especializacao.TelaExcluirEspecializacao;
 import Clinica_Medica.View.Especializacao.TelaListarTodasEspecializacoes;

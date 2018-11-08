@@ -37,8 +37,8 @@ public class TelaListarTodosProntuarios extends JPanel {
 
 				DefaultTableModel tabela = (DefaultTableModel) tbProntuarios.getModel();
 				for (ProntuarioVO prontuario : prontuarios) {
-					tabela.addRow(new Object[] { prontuario.getCodigoProntuario(), prontuario.getMedicamento(),
-							prontuario.getExame(), prontuario.getRegistro()
+					tabela.addRow(new Object[] { prontuario.getCodigoProntuario(), prontuario.getConsulta().getPacienteVO().getNomePaciente(), 
+							prontuario.getMedicamento(), prontuario.getExame(), prontuario.getRegistro()
 
 					});
 				}
@@ -80,8 +80,14 @@ public class TelaListarTodosProntuarios extends JPanel {
 				tbProntuarios = new JTable();
 				scrollPane.setViewportView(tbProntuarios);
 				tbProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				tbProntuarios.setModel(new DefaultTableModel(new Object[][] { { "ID", "Medicamento", "Exames", "Registro" }, },
-						new String[] { "ID", "Medicamento", "Exames", "Registro" }));
+				tbProntuarios.setModel(new DefaultTableModel(
+					new Object[][] {
+						{"ID", " Paciente", "Medicamento", "Exames", "Registro"},
+					},
+					new String[] {
+						"ID", "Paciente", "Medicamento", "Exames", "Registro"
+					}
+				));
 
 	}
 
