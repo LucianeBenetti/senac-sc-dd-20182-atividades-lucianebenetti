@@ -150,7 +150,7 @@ public class TelaCadastrarEspecialidade extends JPanel {
 		add(scrollPane);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(20, 84, 578, 136);
+		scrollPane_1.setBounds(17, 84, 578, 136);
 		add(scrollPane_1);
 
 		tbEspecialidade = new JTable();

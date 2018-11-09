@@ -43,10 +43,13 @@ import Clinica_Medica.VO.PacienteVO;
 import Clinica_Medica.VO.ProntuarioVO;
 
 import java.awt.Color;
+import com.toedter.calendar.JMonthChooser;
+import com.toedter.components.JSpinField;
 
 public class TelaExcluirConsulta extends JPanel {
 
 	private static final String MASCARA_CPF = "###.###.###-##";
+	private JDateChooser dateChooserDataConsulta;
 	private JTextField txtIdPaciente;
 	private JTextField txtIdConvenio;
 	private JTextField txtNomePaciente;
@@ -63,8 +66,8 @@ public class TelaExcluirConsulta extends JPanel {
 	private JTextField txtConvenio;
 	private JTable tbConsultas;
 	private JTextField txtHorario;
-	private JTextField txtData;
 	private JTextField txtIdConsulta;
+	ArrayList<ConsultaVO> consultas = new ArrayList<ConsultaVO>();
 
 	/**
 	 * Create the panel.
@@ -148,7 +151,7 @@ public class TelaExcluirConsulta extends JPanel {
 			}
 		});
 		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnExcluir.setBounds(358, 435, 115, 35);
+		btnExcluir.setBounds(512, 435, 115, 35);
 		add(btnExcluir);
 
 		txtNomePaciente = new JTextField();
@@ -223,30 +226,34 @@ public class TelaExcluirConsulta extends JPanel {
 				txtConvenio.setText((String) tbConsultas.getValueAt(selecionado, 2));
 				txtNomeMedico.setText((String) tbConsultas.getValueAt(selecionado, 3));
 				txtEspecialidade.setText((String) tbConsultas.getValueAt(selecionado, 4));
-				
-				Date dataConsulta = (Date) tbConsultas.getValueAt(selecionado, 5);
-				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
-				
-				String dataConsultaFormatada = sdf.format(dataConsulta);
-				
-				txtData.setText(dataConsultaFormatada);
+				dateChooserDataConsulta.setDate((Date) tbConsultas.getValueAt(selecionado, 5));
 				txtHorario.setText((String) tbConsultas.getValueAt(selecionado, 6));
-
-					}
+				txtIdPaciente.setText(tbConsultas.getValueAt(selecionado, 7) + "");
+				txtIdConvenio.setText(tbConsultas.getValueAt(selecionado,8) + "");
+				txtIdEspecializacao.setText(tbConsultas.getValueAt(selecionado,9) + "");
+			}
 		});
 		tbConsultas.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tbConsultas.setModel(new DefaultTableModel(
-				new Object[][] { { "ID", "Paciente", "Convenio", "Medico", "Especialidade", "Data", "Horario" }, },
-				new String[] { "ID", "Paciente", "Convenio", "Medico", "Especialidade", "Data", "Horario" }));
+				new Object[][] { { "ID Consulta", "Paciente", "Convenio", "Medico", "Especialidade", "Data", "Horario",
+						null, null, null }, },
+				new String[] { "ID Consulta", "Paciente", "Convenio", "Medico", "Especialidade", "Data", "Horario",
+						"New column", "New column", "New column" }));
 		scrollPane_1.setViewportView(tbConsultas);
-
+		tbConsultas.getColumnModel().getColumn(7).setMinWidth(0);
+		tbConsultas.getColumnModel().getColumn(7).setMaxWidth(0);
+		tbConsultas.getColumnModel().getColumn(8).setMinWidth(0);
+		tbConsultas.getColumnModel().getColumn(8).setMaxWidth(0);
+		tbConsultas.getColumnModel().getColumn(9).setMinWidth(0);
+		tbConsultas.getColumnModel().getColumn(9).setMaxWidth(0);
+	
 		JButton btnBuscarConsultas = new JButton("Buscar Consultas");
 		btnBuscarConsultas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
 				ConsultaController controlador = new ConsultaController();
-				ArrayList<ConsultaVO> consultas = (ArrayList<ConsultaVO>) controlador.listarTodasConsultas();
+				consultas = (ArrayList<ConsultaVO>) controlador.listarTodasConsultas();
 
 				DefaultTableModel tabela = (DefaultTableModel) tbConsultas.getModel();
 				for (ConsultaVO consulta : consultas) {
@@ -254,8 +261,15 @@ public class TelaExcluirConsulta extends JPanel {
 							consulta.getPacienteVO().getNomePaciente(), consulta.getConvenioVO().getNomeConvenio(),
 							consulta.getEspecializacaoVO().getMedicoVO().getNomeMedico(),
 							consulta.getEspecializacaoVO().getEspecialidadeVO().getNomeEspecialidade(),
-							consulta.getDataConsulta(), consulta.getHorarioConsulta() });
+							consulta.getDataConsulta(), consulta.getHorarioConsulta(),
+							consulta.getEspecializacaoVO().getCodigoEspecializacao(),
+							consulta.getPacienteVO().getCodigoPaciente(), consulta.getConvenioVO().getCodigoConvenio(),
+							consulta.getEspecializacaoVO().getCodigoEspecializacao()
+
+					});
+
 				}
+
 			}
 		});
 		btnBuscarConsultas.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -264,17 +278,9 @@ public class TelaExcluirConsulta extends JPanel {
 
 		txtHorario = new JTextField();
 		txtHorario.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtHorario.setEditable(false);
 		txtHorario.setBounds(190, 331, 179, 35);
 		add(txtHorario);
 		txtHorario.setColumns(10);
-
-		txtData = new JTextField();
-		txtData.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtData.setEditable(false);
-		txtData.setBounds(190, 286, 179, 34);
-		add(txtData);
-		txtData.setColumns(10);
 
 		JLabel lblIdConsulta = new JLabel("ID Consulta");
 		lblIdConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -287,6 +293,29 @@ public class TelaExcluirConsulta extends JPanel {
 		txtIdConsulta.setBounds(163, 29, 86, 31);
 		add(txtIdConsulta);
 		txtIdConsulta.setColumns(10);
+
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+
+				int codigoConsulta = 0;
+				ConsultaController dao = new ConsultaController();
+				ConsultaVO consulta = construirConsulta();
+				String mensagem = dao.atualizarConsulta(consulta, codigoConsulta);
+				JOptionPane.showMessageDialog(null, mensagem);
+				limparTela();
+
+			}
+		});
+		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnAlterar.setBounds(278, 435, 115, 35);
+		add(btnAlterar);
+		
+		dateChooserDataConsulta = new JDateChooser(new Date(), "dd/MM/YYYY");
+		dateChooserDataConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		dateChooserDataConsulta.setBounds(190, 286, 172, 31);
+		add(dateChooserDataConsulta);
 
 	}
 
@@ -306,8 +335,10 @@ public class TelaExcluirConsulta extends JPanel {
 		txtNomeMedico.setText("");
 		txtEspecialidade.setText("");
 		txtConvenio.setText("");
-		txtData.setText("");
+		dateChooserDataConsulta.setDate(null);
 		txtHorario.setText("");
+		txtIdEspecializacao.setText("");
+		txtIdConsulta.setText("");
 
 		limparTabelaConsultas();
 	}
@@ -326,18 +357,16 @@ public class TelaExcluirConsulta extends JPanel {
 
 	protected ConsultaVO construirConsulta() {
 
-		consulta.setCodigoConsulta(Integer.parseInt(txtIdConsulta.getText()));
+		especializacao.setCodigoEspecializacao(Integer.parseInt(txtIdEspecializacao.getText()));
+		convenio.setCodigoConvenio(Integer.parseInt(txtIdConvenio.getText()));
+		paciente.setCodigoPaciente(Integer.parseInt(txtIdPaciente.getText()));
 
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
-		
-		Date dataConsulta;
-		try {
-			dataConsulta = sdf.parse(txtData.getText());
-			consulta.setDataConsulta(dataConsulta);
-			consulta.setHorarioConsulta(txtHorario.getText());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		consulta.setEspecializacaoVO(especializacao);
+		consulta.setConvenioVO(convenio);
+		consulta.setPacienteVO(paciente);
+		consulta.setCodigoConsulta(Integer.parseInt(txtIdConsulta.getText()));
+		consulta.setDataConsulta(dateChooserDataConsulta.getDate());
+		consulta.setHorarioConsulta(txtHorario.getText());
 
 		return consulta;
 	}

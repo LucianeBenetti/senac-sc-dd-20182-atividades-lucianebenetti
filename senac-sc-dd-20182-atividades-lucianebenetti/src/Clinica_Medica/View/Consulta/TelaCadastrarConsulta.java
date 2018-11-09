@@ -43,7 +43,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class TelaCadastrarConsulta extends JPanel {
-	
+
 	private static final String MASCARA_CPF = "###.###.###-##";
 	private JComboBox cbHorarioConsulta;
 	private JTextField txtBuscarCPF;
@@ -99,10 +99,7 @@ public class TelaCadastrarConsulta extends JPanel {
 
 				if (pacienteBuscado != null) {
 					pacienteBuscado = buscarPaciente();
-					controlerConsulta.listarTodasConsultas();
-					ConsultaVO consulta = buscarConsulta();
-					
-					
+
 				} else {
 					JOptionPane.showMessageDialog(null, "Paciente não encontrado.");
 				}
@@ -223,23 +220,6 @@ public class TelaCadastrarConsulta extends JPanel {
 		btnLimparTela.setBounds(26, 569, 142, 35);
 		add(btnLimparTela);
 
-		JButton btnAlterar = new JButton("Alterar");
-		btnAlterar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				int codigoConsulta = 0;
-				ConsultaController dao = new ConsultaController();
-				ConsultaVO consulta = construirConsulta();
-				String mensagem = dao.atualizarConsulta(consulta, codigoConsulta);
-				JOptionPane.showMessageDialog(null, mensagem);
-				limparTela();	
-			}
-		});
-		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnAlterar.setBounds(316, 569, 130, 35);
-		add(btnAlterar);
-
 		String[] horarios = { "--- Selecione ---", "08:00:00", "08:30:00", "09:00:00", "09:30:00", "10:00:00",
 				"10:30:00", "11:00:00", "11:30:00", "12:00:00", "12:30:00", "13:00:00", "13:30:00", "14:00:00",
 				"14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00", "17:30:00", "18:00:00" };
@@ -255,48 +235,46 @@ public class TelaCadastrarConsulta extends JPanel {
 		txtIdEspecializacao.setBounds(484, 282, 51, 30);
 		add(txtIdEspecializacao);
 		txtIdEspecializacao.setColumns(10);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(791, 337, 524, 195);
 		add(scrollPane);
-		
+
 		tbMedicoEspecialidade = new JTable();
 		tbMedicoEspecialidade.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				int selecionado = tbMedicoEspecialidade.getSelectedRow();
-				
+
 				txtIdEspecializacao.setText(tbMedicoEspecialidade.getValueAt(selecionado, 0) + "");
 				txtNomeMedico.setText((String) tbMedicoEspecialidade.getValueAt(selecionado, 1));
 				txtEspecialidade.setText((String) tbMedicoEspecialidade.getValueAt(selecionado, 2));
-								
+
 			}
 		});
 		tbMedicoEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tbMedicoEspecialidade.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"ID", "Nome Medico", "Especialidade"},
-			},
-			new String[] {
-				"ID", "Nome Medico", "Especialidade"
-			}
-		));
+		tbMedicoEspecialidade
+				.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome Medico", "Especialidade" }, },
+						new String[] { "ID", "Nome Medico", "Especialidade" }));
 		scrollPane.setViewportView(tbMedicoEspecialidade);
-		
+
 		JButton btnNewButton = new JButton("Buscar Medico e Especialidade");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
+
 				EspecializacaoController controlador = new EspecializacaoController();
-				ArrayList<EspecializacaoVO> especializacoes = (ArrayList<EspecializacaoVO>) controlador.listarTodasEspecializacoes();
+				ArrayList<EspecializacaoVO> especializacoes = (ArrayList<EspecializacaoVO>) controlador
+						.listarTodasEspecializacoes();
 
 				DefaultTableModel tabela = (DefaultTableModel) tbMedicoEspecialidade.getModel();
 				for (EspecializacaoVO especializacao : especializacoes) {
-					tabela.addRow(new Object[] { especializacao.getCodigoEspecializacao(), especializacao.getMedicoVO().getNomeMedico(), especializacao.getEspecialidadeVO().getNomeEspecialidade(),
+					tabela.addRow(new Object[] { especializacao.getCodigoEspecializacao(),
+							especializacao.getMedicoVO().getNomeMedico(),
+							especializacao.getEspecialidadeVO().getNomeEspecialidade(),
 							especializacao.getAnoEspecializacao(), especializacao.getEspecialidadeVO().getInstituicao()
-				
+
 					});
 				}
 			}
@@ -304,60 +282,54 @@ public class TelaCadastrarConsulta extends JPanel {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnNewButton.setBounds(918, 305, 299, 31);
 		add(btnNewButton);
-		
+
 		txtNomeMedico = new JTextField();
 		txtNomeMedico.setEditable(false);
 		txtNomeMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtNomeMedico.setBounds(166, 250, 307, 31);
 		add(txtNomeMedico);
 		txtNomeMedico.setColumns(10);
-		
+
 		txtEspecialidade = new JTextField();
 		txtEspecialidade.setEditable(false);
 		txtEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtEspecialidade.setBounds(165, 308, 308, 31);
 		add(txtEspecialidade);
 		txtEspecialidade.setColumns(10);
-		
+
 		txtConvenio = new JTextField();
 		txtConvenio.setEditable(false);
 		txtConvenio.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtConvenio.setBounds(166, 186, 307, 28);
 		add(txtConvenio);
 		txtConvenio.setColumns(10);
-		
+
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(791, 69, 524, 183);
 		add(scrollPane_1);
-		
+
 		tbConvenios = new JTable();
 		tbConvenios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				int selecionado = tbConvenios.getSelectedRow();
-				
+
 				txtIdConvenio.setText(tbConvenios.getValueAt(selecionado, 0) + "");
 				txtConvenio.setText((String) tbConvenios.getValueAt(selecionado, 1));
-				
+
 			}
 		});
 		tbConvenios.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tbConvenios.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"ID", "Nome Convenio", "Valor"},
-			},
-			new String[] {
-				"ID", "Nome Convenio", "Valor"
-			}
-		));
+		tbConvenios.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome Convenio", "Valor" }, },
+				new String[] { "ID", "Nome Convenio", "Valor" }));
 		scrollPane_1.setViewportView(tbConvenios);
-		
+
 		JButton btnBuscarConveio = new JButton("Buscar Convenios");
 		btnBuscarConveio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				ConvenioController controlador = new ConvenioController();
 				ArrayList<ConvenioVO> convenios = (ArrayList<ConvenioVO>) controlador.listarTodosConvenios();
 
@@ -365,7 +337,7 @@ public class TelaCadastrarConsulta extends JPanel {
 				for (ConvenioVO convenio : convenios) {
 					tabela.addRow(new Object[] { convenio.getCodigoConvenio(), convenio.getNomeConvenio(),
 							convenio.getCnpjConvenio(), convenio.getValor()
-				
+
 					});
 				}
 			}
@@ -377,10 +349,9 @@ public class TelaCadastrarConsulta extends JPanel {
 	}
 
 	protected ConsultaVO buscarConsulta() {
-		
-		
+
 		txtNomeMedico.setText(consulta.getEspecializacaoVO().getMedicoVO().getNomeMedico());
-		
+
 		return consulta;
 	}
 
@@ -393,10 +364,7 @@ public class TelaCadastrarConsulta extends JPanel {
 	}
 
 	protected void limparTela() {
-		
-		limparTabelaConvenios();
-		limparTabelaMedicoEspecialidade();
-		
+
 		txtBuscarCPF.setText("");
 		txtIdConvenio.setText("");
 		txtIdPaciente.setText("");
@@ -406,10 +374,14 @@ public class TelaCadastrarConsulta extends JPanel {
 		txtConvenio.setText("");
 		cbHorarioConsulta.setSelectedIndex(0);
 		dateChooserDataConsulta.setDate(null);
+
+		limparTabelaConvenios();
+
+		limparTabelaMedicoEspecialidade();
 	}
-		
+
 	protected ConsultaVO construirConsulta() {
-		
+
 		especializacao.setCodigoEspecializacao(Integer.parseInt(txtIdEspecializacao.getText()));
 		convenio.setCodigoConvenio(Integer.parseInt(txtIdConvenio.getText()));
 		paciente.setCodigoPaciente(Integer.parseInt(txtIdPaciente.getText()));
@@ -419,10 +391,10 @@ public class TelaCadastrarConsulta extends JPanel {
 		consulta.setPacienteVO(paciente);
 		consulta.setDataConsulta(dateChooserDataConsulta.getDate());
 		consulta.setHorarioConsulta((String) cbHorarioConsulta.getSelectedItem());
-		
+
 		return consulta;
 	}
-	
+
 	private void limparTabelaConvenios() {
 		int linhas = 0;
 		int colunas = 0;

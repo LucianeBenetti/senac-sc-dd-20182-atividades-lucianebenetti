@@ -104,7 +104,7 @@ public class TelaPrincipal extends JFrame {
 		mnConsulta.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-stethoscope-50.png")));
 		menuBar.add(mnConsulta);
 		
-		JMenuItem mntmCadastrarconsulta = new JMenuItem("Cadastrar/Alterar Consulta");
+		JMenuItem mntmCadastrarconsulta = new JMenuItem("Cadastrar Consulta");
 		mntmCadastrarconsulta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				contentPane = new TelaCadastrarConsulta();
@@ -117,7 +117,7 @@ public class TelaPrincipal extends JFrame {
 		mntmCadastrarconsulta.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icones/icons8-salvar-64.png")));
 		mnConsulta.add(mntmCadastrarconsulta);
 		
-		JMenuItem mntmExcluirConsulta = new JMenuItem("Excluir Consulta");
+		JMenuItem mntmExcluirConsulta = new JMenuItem("Alterar/Excluir Consulta");
 		mntmExcluirConsulta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
