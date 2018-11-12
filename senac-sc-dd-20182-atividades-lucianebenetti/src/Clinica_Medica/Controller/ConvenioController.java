@@ -9,6 +9,8 @@ import Clinica_Medica.VO.ConvenioVO;
 public class ConvenioController {
 
 	ConvenioBO bo = new ConvenioBO();
+	public static final String TIPO_RELATORIO_XLS = "xls";
+	public static final String TIPO_RELATORIO_PDF = "pdf";
 
 	public String salvar(ConvenioVO convenio) {
 
@@ -72,6 +74,16 @@ public class ConvenioController {
 	public List<ConvenioVO> listarTodosConvenios() {
 
 		return bo.listarTodosConvenios();
+	}
+
+	public void gerarRelatorio(List<ConvenioVO> convenios, String caminhoEscolhido,
+			String tipoRelatorio) {
+		if(tipoRelatorio.equals(TIPO_RELATORIO_XLS)){
+			bo.gerarPlanilha(convenios, caminhoEscolhido);
+		}else{
+			bo.gerarPDF(convenios, caminhoEscolhido);
+		}
+		
 	}
 
 }

@@ -263,11 +263,10 @@ public class TelaCadastrarConsulta extends JPanel {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
+
 				ArrayList<EspecializacaoVO> especializacoes = null;
 				EspecializacaoController controlador = new EspecializacaoController();
-				especializacoes = (ArrayList<EspecializacaoVO>) controlador
-						.listarTodasEspecializacoes();
+				especializacoes = (ArrayList<EspecializacaoVO>) controlador.listarTodasEspecializacoes();
 
 				DefaultTableModel tabela = (DefaultTableModel) tbMedicoEspecialidade.getModel();
 				for (EspecializacaoVO especializacao : especializacoes) {
@@ -313,7 +312,7 @@ public class TelaCadastrarConsulta extends JPanel {
 		tbConvenios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-	
+
 				int selecionado = tbConvenios.getSelectedRow();
 
 				txtIdConvenio.setText(tbConvenios.getValueAt(selecionado, 0) + "");
@@ -330,19 +329,13 @@ public class TelaCadastrarConsulta extends JPanel {
 		btnBuscarConveio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-								
-				ArrayList<ConvenioVO> convenios = null;
 
 				ConvenioController controlador = new ConvenioController();
-				convenios = (ArrayList<ConvenioVO>) controlador.listarTodosConvenios();
 
-				DefaultTableModel tabela = (DefaultTableModel) tbConvenios.getModel();
-				for (ConvenioVO convenio : convenios) {
-					tabela.addRow(new Object[] { convenio.getCodigoConvenio(), convenio.getNomeConvenio(),
-							convenio.getCnpjConvenio(), convenio.getValor()
+				List<ConvenioVO> convenios = null;
+				convenios = controlador.listarTodosConvenios();
+				atualizarTabelaConvenios(convenios);
 
-					});
-				}
 			}
 		});
 		btnBuscarConveio.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -400,7 +393,7 @@ public class TelaCadastrarConsulta extends JPanel {
 	}
 
 	private void limparTabelaConvenios() {
-		
+
 		int linhas = 0;
 		int colunas = 0;
 		String zer = null;
@@ -408,9 +401,9 @@ public class TelaCadastrarConsulta extends JPanel {
 		for (linhas = 0; linhas <= tbConvenios.getRowCount() - 1; linhas++) {
 			for (colunas = 0; colunas <= tbConvenios.getColumnCount() - 1; colunas++) {
 				tbConvenios.setValueAt(zer, linhas, colunas);
-		      }
+			}
 		}
-		
+
 	}
 
 	private void limparTabelaMedicoEspecialidade() {
@@ -424,5 +417,43 @@ public class TelaCadastrarConsulta extends JPanel {
 			}
 		}
 	}
+
+	private void atualizarTabelaConvenios(List<ConvenioVO> convenios) {
+		tbConvenios.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome Convenio", "Valor" }, },
+				new String[] { "ID", "Nome Convenio", "Valor"}));
+
+		DefaultTableModel modelo = (DefaultTableModel) tbConvenios.getModel();
+
+		for (ConvenioVO convenio : convenios) {
+			// Crio uma nova linha na tabela
+			// Preencher a linha com os atributos do produto
+			// na ORDEM do cabeçalho da tabela
+			Object[] novaLinha = new Object[] { convenio.getCodigoConvenio(), convenio.getNomeConvenio(),
+					convenio.getValor(),
+
+			};
+			modelo.addRow(novaLinha);
+		}
+	}
 	
+	private void atualizarTabelaMedicosEspecialidades(List<EspecializacaoVO> especializacoes) {
+		tbMedicoEspecialidade.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome Medico", "Especialidade" }, },
+				new String[] { "ID", "Nome Medico", "Especialidade" }));
+
+		DefaultTableModel modelo = (DefaultTableModel) tbMedicoEspecialidade.getModel();
+
+		for (EspecializacaoVO especializacao : especializacoes) {
+			// Crio uma nova linha na tabela
+			// Preencher a linha com os atributos do produto
+			// na ORDEM do cabeçalho da tabela
+			Object[] novaLinha = new Object[] { especializacao.getCodigoEspecializacao(),
+					especializacao.getMedicoVO().getNomeMedico(),
+					especializacao.getEspecialidadeVO().getNomeEspecialidade(),
+					especializacao.getAnoEspecializacao(), especializacao.getEspecialidadeVO().getInstituicao(),
+
+
+			};
+			modelo.addRow(novaLinha);
+		}
+	}
 }

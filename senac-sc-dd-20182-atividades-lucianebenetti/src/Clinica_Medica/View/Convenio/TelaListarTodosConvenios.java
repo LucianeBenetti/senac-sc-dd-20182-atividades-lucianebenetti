@@ -2,6 +2,7 @@ package Clinica_Medica.View.Convenio;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
@@ -14,6 +15,7 @@ import Clinica_Medica.VO.ConvenioVO;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -22,6 +24,7 @@ import javax.swing.JScrollPane;
 
 public class TelaListarTodosConvenios extends JPanel {
 	private JTable tbConvenio;
+	private List<ConvenioVO> conveniosConsultados;
 
 	/**
 	 * Create the panel.
@@ -34,16 +37,12 @@ public class TelaListarTodosConvenios extends JPanel {
 		btnListarTodosConvenios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+			
 				ConvenioController controlador = new ConvenioController();
-				ArrayList<ConvenioVO> convenios = (ArrayList<ConvenioVO>) controlador.listarTodosConvenios();
+				List<ConvenioVO> convenios = null;
+					convenios= controlador.listarTodosConvenios();
 
-				DefaultTableModel tabela = (DefaultTableModel) tbConvenio.getModel();
-				for (ConvenioVO convenio : convenios) {
-					tabela.addRow(new Object[] { convenio.getCodigoConvenio(), convenio.getNomeConvenio(),
-							convenio.getCnpjConvenio(), convenio.getValor()
-				
-					});
-				}
+				atualizarTabelaConvenios(convenios);
 			}
 		});
 		btnListarTodosConvenios.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -89,6 +88,56 @@ public class TelaListarTodosConvenios extends JPanel {
 				"ID", "Nome", "CNPJ", "Valor"
 			}
 		));
+		
+		JButton btnGerarPlaniha = new JButton("Gerar Planiha");
+		btnGerarPlaniha.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				JFileChooser jfc = new JFileChooser();
+				jfc.setDialogTitle("Salvar relatório como...");
+				
+				int resultado = jfc.showSaveDialog(null);
+				if(resultado == JFileChooser.APPROVE_OPTION){
+					String caminhoEscolhido = jfc.getSelectedFile().getAbsolutePath();
+					
+					ConvenioController produtoController = new ConvenioController();
+					produtoController.gerarRelatorio(conveniosConsultados, caminhoEscolhido, ConvenioController.TIPO_RELATORIO_XLS);
+				}
+			}
+		});
+		
+		btnGerarPlaniha.setBounds(77, 355, 115, 29);
+		add(btnGerarPlaniha);
+
+	}
+	
+	protected void atualizarTabelaConvenios(List<ConvenioVO> convenios) {
+		//atualiza o atributo produtosConsultados
+		conveniosConsultados = convenios;
+		
+		//Limpa a tabela
+		tbConvenio.setModel(new DefaultTableModel(
+				new String[][] {
+					{"ID", "Nome", "CNPJ", "Valor"},
+				},
+				new String[] {
+						"ID", "Nome", "CNPJ", "Valor"
+				}));
+		
+		DefaultTableModel modelo = (DefaultTableModel) tbConvenio.getModel();
+		
+		for(ConvenioVO convenio: convenios) {
+			//Crio uma nova linha na tabela
+			//Preencher a linha com os atributos do produto
+			//na ORDEM do cabeçalho da tabela
+			Object[] novaLinha = new Object[] {
+					convenio.getCodigoConvenio(),
+					convenio.getNomeConvenio(),
+					convenio.getCnpjConvenio(),
+					convenio.getValor()
+			};
+			modelo.addRow(novaLinha);
+		}
 
 	}
 }

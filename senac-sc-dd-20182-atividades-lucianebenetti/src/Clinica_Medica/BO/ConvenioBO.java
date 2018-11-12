@@ -47,4 +47,15 @@ public class ConvenioBO {
 		ArrayList<ConvenioVO> convenios = dao.listarTodos();
 		return convenios;
 	}
+
+	public void gerarPlanilha(List<ConvenioVO> convenios, String caminhoEscolhido) {
+		GeradorPlanilha gerador = new GeradorPlanilha();
+		gerador.gerarPlanilhaConvenios(convenios, caminhoEscolhido);
+		
+	}
+
+	public void gerarPDF(List<ConvenioVO> convenios, String caminhoEscolhido) {
+		// TODO Auto-generated method stub
+		
+	}
 }
