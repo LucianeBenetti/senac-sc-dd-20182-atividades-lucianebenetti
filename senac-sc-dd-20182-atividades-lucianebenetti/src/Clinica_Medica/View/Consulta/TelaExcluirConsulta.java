@@ -67,7 +67,7 @@ public class TelaExcluirConsulta extends JPanel {
 	private JTable tbConsultas;
 	private JTextField txtHorario;
 	private JTextField txtIdConsulta;
-	ArrayList<ConsultaVO> consultas = new ArrayList<ConsultaVO>();
+	
 
 	/**
 	 * Create the panel.
@@ -252,6 +252,7 @@ public class TelaExcluirConsulta extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
+				ArrayList<ConsultaVO> consultas = null;
 				ConsultaController controlador = new ConsultaController();
 				consultas = (ArrayList<ConsultaVO>) controlador.listarTodasConsultas();
 

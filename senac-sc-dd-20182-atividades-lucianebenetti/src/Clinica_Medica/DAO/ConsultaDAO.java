@@ -17,7 +17,6 @@ import Clinica_Medica.VO.PacienteVO;
 
 public class ConsultaDAO {
 
-	private static ArrayList<ConsultaVO> listaConsultas = new ArrayList<ConsultaVO>();
 	private EspecializacaoDAO especializacaoDAO = new EspecializacaoDAO();
 	private ConvenioDAO convenioDAO = new ConvenioDAO();
 	private PacienteDAO pacienteDAO = new PacienteDAO();
@@ -160,7 +159,7 @@ public class ConsultaDAO {
 
 	public ArrayList<ConsultaVO> listarTodos() {
 
-		
+		ArrayList<ConsultaVO> listaConsultas = new ArrayList<ConsultaVO>();
 		String query = "select * from consulta";
 
 		Connection conn = Banco.getConnection();

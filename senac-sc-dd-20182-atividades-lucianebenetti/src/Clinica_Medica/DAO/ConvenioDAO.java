@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import Clinica_Medica.VO.ConvenioVO;
 
 public class ConvenioDAO {
-	private static ArrayList<ConvenioVO> listaConvenios = new ArrayList<ConvenioVO>();
+	
 
 	public int inserirConvenio(ConvenioVO convenio) {
 
@@ -131,6 +131,8 @@ public class ConvenioDAO {
 
 	public ArrayList<ConvenioVO> listarTodos() {
 
+		ArrayList<ConvenioVO> listaConvenios = new ArrayList<ConvenioVO>();
+		
 		String query = "select * from convenio";
 
 		Connection conn = Banco.getConnection();

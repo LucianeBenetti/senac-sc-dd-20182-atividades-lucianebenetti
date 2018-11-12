@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
@@ -18,6 +19,7 @@ import com.toedter.calendar.JDateChooser;
 import Clinica_Medica.Controller.ConvenioController;
 import Clinica_Medica.Controller.ProntuarioController;
 import Clinica_Medica.VO.ConvenioVO;
+import Clinica_Medica.VO.EspecialidadeVO;
 import Clinica_Medica.VO.ProntuarioVO;
 
 import java.awt.event.ActionListener;
@@ -63,6 +65,7 @@ public class TelaExcluirProntuario extends JPanel {
 				ProntuarioVO prontuarioExcluido = construirProntuario();
 				dao.excluirProntuario(prontuarioExcluido);
 				JOptionPane.showMessageDialog(null, "Prontuário excluído!");
+			
 				limparTela();
 			}
 		});
@@ -160,6 +163,8 @@ public class TelaExcluirProntuario extends JPanel {
 
 	}
 
+
+
 	protected void limparTela() {
 
 		txtIdProntuario.setText("");
@@ -185,6 +190,24 @@ public class TelaExcluirProntuario extends JPanel {
 			for (colunas = 0; colunas <= tbProntuarios.getColumnCount() - 1; colunas++) {
 				tbProntuarios.setValueAt(zer, linhas, colunas);
 			}
+		}
+	
+	}
+	protected void atualizarTabelaProntuario(List<ProntuarioVO> prontuarios) {
+		tbProntuarios.setModel(new DefaultTableModel(new Object[][] { { "ID", "Paciente", "Medicamentos", "Exames", "Registro"}, },
+				new String[] { "ID", "Paciente", "Medicamentos", "Exames", "Registro" }));
+
+		DefaultTableModel modelo = (DefaultTableModel) tbProntuarios.getModel();
+
+		for (ProntuarioVO prontuario : prontuarios) {
+			// Crio uma nova linha na tabela
+			// Preencher a linha com os atributos do produto
+			// na ORDEM do cabeçalho da tabela
+			Object[] novaLinha = new Object[] { prontuario.getCodigoProntuario(), prontuario.getMedicamento(),
+					prontuario.getExame(), prontuario.getRegistro(),
+
+			};
+			modelo.addRow(novaLinha);
 		}
 	}
 

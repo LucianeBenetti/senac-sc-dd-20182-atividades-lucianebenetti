@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import com.mysql.fabric.xmlrpc.base.Data;
 
 import Clinica_Medica.DAO.PacienteDAO;
 import Clinica_Medica.VO.MedicoVO;

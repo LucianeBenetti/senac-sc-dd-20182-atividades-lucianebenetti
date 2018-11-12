@@ -12,7 +12,6 @@ import Clinica_Medica.VO.ProntuarioVO;
 
 public class ProntuarioDAO {
 	
-	private static ArrayList<ProntuarioVO> listaprontuarios = new ArrayList<ProntuarioVO>();
 	ProntuarioVO prontuario = new ProntuarioVO();
 	ConsultaDAO consultaDAO = new ConsultaDAO();
 
@@ -132,6 +131,7 @@ public class ProntuarioDAO {
 
 	public ArrayList<ProntuarioVO> listarTodos() {
 
+		ArrayList<ProntuarioVO> listaprontuarios = new ArrayList<ProntuarioVO>();
 		String query = " select * from prontuario ";
 
 		Connection conn = Banco.getConnection();

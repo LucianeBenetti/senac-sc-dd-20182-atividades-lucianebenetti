@@ -13,7 +13,6 @@ import Clinica_Medica.VO.MedicoVO;
 
 public class EspecializacaoDAO {
 
-	private static ArrayList<EspecializacaoVO> listaEspecializacao = new ArrayList<EspecializacaoVO>();
 	private EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO();
 	private MedicoDAO medicoDAO = new MedicoDAO();
 	
@@ -107,7 +106,8 @@ public class EspecializacaoDAO {
 	}
 
 	public ArrayList<EspecializacaoVO> listarEspecializacoesDoMedicoPorEspecialidade(int codigoEspecialidade, int codigoMedico ) {
-
+		ArrayList<EspecializacaoVO> listaEspecializacao = new ArrayList<EspecializacaoVO>();
+		
 		String query = " SELECT codigoEspecializacao, e.codigoEspecialidade, med.codigoMedico, anoEspecializacao from especializacao esp" 
 				+ " inner join especialidade e on (esp.codigoEspecialidade = e.codigoEspecialidade) "
 				+ " inner join medico med on (esp.codigoMedico = med.codigoMedico) "
@@ -144,6 +144,7 @@ public class EspecializacaoDAO {
 
 	public ArrayList<EspecializacaoVO> listarTodasEspecializacoes() {
 		String query = "SELECT * from especializacao";
+		ArrayList<EspecializacaoVO> listaEspecializacao = new ArrayList<EspecializacaoVO>();
 
 
 		Connection conn = Banco.getConnection();
@@ -171,6 +172,9 @@ public class EspecializacaoDAO {
 	}
 
 	public boolean existeEspecializacao(EspecializacaoVO especializacao) {
+		
+		ArrayList<EspecializacaoVO> listaEspecializacao = new ArrayList<EspecializacaoVO>();
+
 		String query = " SELECT count(esp.codigoEspecializacao) from especializacao esp " 
 						+ " inner join especialidade e on (esp.codigoEspecialidade = e.codigoEspecialidade) "
 						+ " inner join medico med on (esp.codigoMedico = med.codigoMedico) "
@@ -199,6 +203,9 @@ public class EspecializacaoDAO {
 	
 
 	public ArrayList<EspecializacaoVO> existeEspecializacaoPorNome(String nomeMedico, String nomeEspecialidade){
+		
+		ArrayList<EspecializacaoVO> listaEspecializacao = new ArrayList<EspecializacaoVO>();
+
 		String query = "SELECT esp.codigoEspecializacao, e.codigoEspecialidade, med.codigoMedico, esp.anoEspecializacao from especializacao esp" 
 				+ " inner join especialidade e on (esp.codigoEspecialidade = e.codigoEspecialidade)"
 				+ " inner join medico med on (esp.codigoMedico = med.codigoMedico)"
@@ -238,6 +245,7 @@ public class EspecializacaoDAO {
 
 
 	public EspecializacaoVO consultarPorId(int id) {
+		
 		String query = "SELECT * FROM especializacao WHERE codigoEspecializacao = ? ";
 
 		Connection conn = Banco.getConnection();

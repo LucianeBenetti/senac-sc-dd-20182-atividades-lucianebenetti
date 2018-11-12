@@ -263,9 +263,10 @@ public class TelaCadastrarConsulta extends JPanel {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-
+				
+				ArrayList<EspecializacaoVO> especializacoes = null;
 				EspecializacaoController controlador = new EspecializacaoController();
-				ArrayList<EspecializacaoVO> especializacoes = (ArrayList<EspecializacaoVO>) controlador
+				especializacoes = (ArrayList<EspecializacaoVO>) controlador
 						.listarTodasEspecializacoes();
 
 				DefaultTableModel tabela = (DefaultTableModel) tbMedicoEspecialidade.getModel();
@@ -312,7 +313,7 @@ public class TelaCadastrarConsulta extends JPanel {
 		tbConvenios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
+	
 				int selecionado = tbConvenios.getSelectedRow();
 
 				txtIdConvenio.setText(tbConvenios.getValueAt(selecionado, 0) + "");
@@ -329,9 +330,11 @@ public class TelaCadastrarConsulta extends JPanel {
 		btnBuscarConveio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+								
+				ArrayList<ConvenioVO> convenios = null;
 
 				ConvenioController controlador = new ConvenioController();
-				ArrayList<ConvenioVO> convenios = (ArrayList<ConvenioVO>) controlador.listarTodosConvenios();
+				convenios = (ArrayList<ConvenioVO>) controlador.listarTodosConvenios();
 
 				DefaultTableModel tabela = (DefaultTableModel) tbConvenios.getModel();
 				for (ConvenioVO convenio : convenios) {
@@ -371,6 +374,7 @@ public class TelaCadastrarConsulta extends JPanel {
 		txtNomePaciente.setText("");
 		txtNomeMedico.setText("");
 		txtEspecialidade.setText("");
+		txtIdEspecializacao.setText("");
 		txtConvenio.setText("");
 		cbHorarioConsulta.setSelectedIndex(0);
 		dateChooserDataConsulta.setDate(null);
@@ -396,6 +400,7 @@ public class TelaCadastrarConsulta extends JPanel {
 	}
 
 	private void limparTabelaConvenios() {
+		
 		int linhas = 0;
 		int colunas = 0;
 		String zer = null;
@@ -403,8 +408,9 @@ public class TelaCadastrarConsulta extends JPanel {
 		for (linhas = 0; linhas <= tbConvenios.getRowCount() - 1; linhas++) {
 			for (colunas = 0; colunas <= tbConvenios.getColumnCount() - 1; colunas++) {
 				tbConvenios.setValueAt(zer, linhas, colunas);
-			}
+		      }
 		}
+		
 	}
 
 	private void limparTabelaMedicoEspecialidade() {
@@ -413,9 +419,10 @@ public class TelaCadastrarConsulta extends JPanel {
 		String zer = null;
 
 		for (linhas = 0; linhas <= tbMedicoEspecialidade.getRowCount() - 1; linhas++) {
-			for (colunas = 0; colunas <= tbConvenios.getColumnCount() - 1; colunas++) {
+			for (colunas = 0; colunas <= tbMedicoEspecialidade.getColumnCount() - 1; colunas++) {
 				tbMedicoEspecialidade.setValueAt(zer, linhas, colunas);
 			}
 		}
 	}
+	
 }
