@@ -43,17 +43,17 @@ public class TelaCadastrarConvenio extends JPanel {
 		
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNome.setBounds(10, 117, 46, 23);
+		lblNome.setBounds(258, 121, 46, 23);
 		add(lblNome);
 		
 		JLabel lblCnpj = new JLabel("CNPJ");
 		lblCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCnpj.setBounds(10, 171, 46, 23);
+		lblCnpj.setBounds(258, 203, 46, 23);
 		add(lblCnpj);
 		
 		JLabel lblBuscarCnpj = new JLabel("CNPJ");
 		lblBuscarCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblBuscarCnpj.setBounds(10, 37, 46, 23);
+		lblBuscarCnpj.setBounds(258, 44, 46, 23);
 		add(lblBuscarCnpj);
 		
 		try {
@@ -63,13 +63,13 @@ public class TelaCadastrarConvenio extends JPanel {
 			e1.printStackTrace();
 		}
 		txtBuscarCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtBuscarCnpj.setBounds(66, 29, 351, 33);
+		txtBuscarCnpj.setBounds(344, 39, 351, 33);
 		add(txtBuscarCnpj);
 		txtBuscarCnpj.setColumns(10);
 		
 		txtNome = new JTextField();
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNome.setBounds(66, 117, 461, 26);
+		txtNome.setBounds(344, 112, 517, 41);
 		add(txtNome);
 		txtNome.setColumns(10);
 		
@@ -80,7 +80,7 @@ public class TelaCadastrarConvenio extends JPanel {
 			e1.printStackTrace();
 		}
 		txtCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtCnpj.setBounds(66, 171, 461, 26);
+		txtCnpj.setBounds(344, 194, 517, 41);
 		add(txtCnpj);
 		txtCnpj.setColumns(10);
 		
@@ -101,7 +101,7 @@ public class TelaCadastrarConvenio extends JPanel {
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscar.setBounds(438, 30, 89, 36);
+		btnBuscar.setBounds(799, 37, 89, 36);
 		add(btnBuscar);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -119,7 +119,7 @@ public class TelaCadastrarConvenio extends JPanel {
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(289, 296, 124, 36);
+		btnCadastrar.setBounds(610, 481, 124, 36);
 		add(btnCadastrar);
 		
 		JButton btnSair = new JButton("Sair");
@@ -138,18 +138,18 @@ public class TelaCadastrarConvenio extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(419, 296, 108, 36);
+		btnSair.setBounds(780, 481, 108, 36);
 		add(btnSair);
 		
 		JLabel lblValor = new JLabel("Valor");
 		lblValor.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblValor.setBounds(10, 222, 46, 23);
+		lblValor.setBounds(258, 275, 46, 23);
 		add(lblValor);
 		
 		txtValor = new JTextField();
 		txtValor.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtValor.setColumns(10);
-		txtValor.setBounds(66, 222, 461, 26);
+		txtValor.setBounds(344, 266, 517, 41);
 		add(txtValor);
 		
 		JButton btnLimparTela = new JButton("Limpar Tela");
@@ -160,7 +160,7 @@ public class TelaCadastrarConvenio extends JPanel {
 			}
 		});
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnLimparTela.setBounds(10, 296, 140, 36);
+		btnLimparTela.setBounds(251, 481, 140, 36);
 		add(btnLimparTela);
 		
 		JButton btnAtualizar = new JButton("Atualizar");
@@ -177,11 +177,11 @@ public class TelaCadastrarConvenio extends JPanel {
 			}
 		});
 		btnAtualizar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnAtualizar.setBounds(160, 296, 119, 36);
+		btnAtualizar.setBounds(437, 481, 119, 36);
 		add(btnAtualizar);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(10, 77, 517, 2);
+		separator_1.setBounds(257, 94, 631, 2);
 		add(separator_1);
 
 	}

@@ -9,6 +9,7 @@ import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import Clinica_Medica.BO.ConvenioBO;
 import Clinica_Medica.Controller.ConvenioController;
 import Clinica_Medica.VO.ConvenioVO;
 
@@ -21,6 +22,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.JScrollBar;
 
 public class TelaListarTodosConvenios extends JPanel {
 	private JTable tbConvenio;
@@ -46,7 +48,7 @@ public class TelaListarTodosConvenios extends JPanel {
 			}
 		});
 		btnListarTodosConvenios.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnListarTodosConvenios.setBounds(258, 24, 226, 31);
+		btnListarTodosConvenios.setBounds(507, 47, 226, 31);
 		add(btnListarTodosConvenios);
 		
 		JButton btnSair = new JButton("Sair");
@@ -65,20 +67,20 @@ public class TelaListarTodosConvenios extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(621, 329, 94, 31);
+		btnSair.setBounds(876, 417, 94, 31);
 		add(btnSair);
 		
 		JLabel lblConvenios = new JLabel("Convenios");
 		lblConvenios.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblConvenios.setBounds(22, 66, 102, 22);
+		lblConvenios.setBounds(289, 87, 102, 22);
 		add(lblConvenios);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(32, 99, 681, 157);
+		scrollPane.setBounds(289, 120, 681, 248);
 		add(scrollPane);
 		
 		tbConvenio = new JTable();
-		scrollPane.setViewportView(tbConvenio);
+		scrollPane.setColumnHeaderView(tbConvenio);
 		tbConvenio.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tbConvenio.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -90,6 +92,7 @@ public class TelaListarTodosConvenios extends JPanel {
 		));
 		
 		JButton btnGerarPlaniha = new JButton("Gerar Planiha");
+		btnGerarPlaniha.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnGerarPlaniha.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -106,7 +109,7 @@ public class TelaListarTodosConvenios extends JPanel {
 			}
 		});
 		
-		btnGerarPlaniha.setBounds(77, 355, 115, 29);
+		btnGerarPlaniha.setBounds(685, 418, 144, 29);
 		add(btnGerarPlaniha);
 
 	}

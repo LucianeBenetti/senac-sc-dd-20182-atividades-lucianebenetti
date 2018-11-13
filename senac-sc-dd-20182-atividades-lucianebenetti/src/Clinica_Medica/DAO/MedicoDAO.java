@@ -142,7 +142,8 @@ public class MedicoDAO {
 	}
 
 	public ArrayList<MedicoVO> listarTodos() {
-
+		
+		ArrayList<MedicoVO> listamedicos = new ArrayList<MedicoVO>();
 		String query = "select * from medico";
 
 		Connection conn = Banco.getConnection();

@@ -8,11 +8,13 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import Clinica_Medica.Controller.PacienteController;
+import Clinica_Medica.VO.MedicoVO;
 import Clinica_Medica.VO.PacienteVO;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
@@ -33,19 +35,12 @@ public class TelaListarTodosPacientes extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				
 				PacienteController controlador = new PacienteController();
-				ArrayList<PacienteVO> pacientes = (ArrayList<PacienteVO>) controlador.listarTodosPacientes();
-
-				DefaultTableModel tabela = (DefaultTableModel) tbPacientes.getModel();
-				for (PacienteVO paciente : pacientes) {
-					tabela.addRow(new Object[] { paciente.getNomePaciente(), paciente.getCpfPaciente(),
-							paciente.getCnpjPaciente(), paciente.getCelMensagemPaciente(), paciente.getFoneResidencial(), paciente.getFoneComercial(), paciente.getEmailPaciente()
-
-					});
-				}
+				List<PacienteVO> pacientes = controlador.listarTodosPacientes();
+				atualizarTabelaPacientes(pacientes);
 			}
 		});
 		btnListarTodosPacientes.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnListarTodosPacientes.setBounds(269, 42, 324, 36);
+		btnListarTodosPacientes.setBounds(449, 61, 324, 36);
 		add(btnListarTodosPacientes);
 		
 		JButton btnSair = new JButton("Sair");
@@ -64,15 +59,15 @@ public class TelaListarTodosPacientes extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(777, 410, 90, 36);
+		btnSair.setBounds(1026, 432, 90, 36);
 		add(btnSair);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 132, 857, 241);
+		scrollPane.setBounds(175, 133, 962, 241);
 		add(scrollPane);
 		
 		tbPacientes = new JTable();
-		scrollPane.setViewportView(tbPacientes);
+		scrollPane.setColumnHeaderView(tbPacientes);
 		tbPacientes.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tbPacientes.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -85,9 +80,28 @@ public class TelaListarTodosPacientes extends JPanel {
 		
 		JLabel lblPacientes = new JLabel("Pacientes");
 		lblPacientes.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblPacientes.setBounds(10, 111, 124, 22);
+		lblPacientes.setBounds(170, 100, 124, 22);
 		add(lblPacientes);
 
 	}
 
+	private void atualizarTabelaPacientes(List<PacienteVO> pacientes) {
+		tbPacientes.setModel(new DefaultTableModel(new Object[][] { {"Nome", "CPF", "CNPJ", "Celular", "Fone Residencial", "Fone Comercial", "e-mail"}, },
+				new String[] { "Nome", "CPF", "CNPJ", "Celular", "Fone Residencial", "Fone Comercial", "e-mail" }));
+
+		DefaultTableModel modelo = (DefaultTableModel) tbPacientes.getModel();
+
+		for (PacienteVO paciente: pacientes) {
+			// Crio uma nova linha na tabela
+			// Preencher a linha com os atributos do produto
+			// na ORDEM do cabeçalho da tabela
+			Object[] novaLinha = new Object[] { paciente.getNomePaciente(), paciente.getCpfPaciente(),
+					paciente.getCnpjPaciente(), paciente.getCelMensagemPaciente(), paciente.getFoneResidencial(), 
+					paciente.getFoneComercial(), paciente.getEmailPaciente(),
+
+
+			};
+			modelo.addRow(novaLinha);
+		}
+	}
 }

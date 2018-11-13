@@ -96,6 +96,8 @@ public class EspecialidadeDAO {
 	}
 
 	public  ArrayList<EspecialidadeVO> listarTodasEspecialidades() {
+	
+		ArrayList<EspecialidadeVO> listaEspecialiades = new ArrayList<EspecialidadeVO>();
 
 		String query = "select * from especialidade";
 

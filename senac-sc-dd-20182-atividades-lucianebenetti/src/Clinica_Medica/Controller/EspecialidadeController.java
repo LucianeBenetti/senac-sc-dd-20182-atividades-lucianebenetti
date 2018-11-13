@@ -60,7 +60,7 @@ public class EspecialidadeController {
 
 	}
 
-	public List<EspecialidadeVO> listarTodosConvenios() {
+	public List<EspecialidadeVO> listarTodasEspecialidades() {
 
 		return bo.listarTodasEspecialidades();
 	}

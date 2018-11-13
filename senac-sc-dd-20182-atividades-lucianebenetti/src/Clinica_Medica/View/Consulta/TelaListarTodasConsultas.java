@@ -9,12 +9,15 @@ import javax.swing.JSeparator;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import Clinica_Medica.Controller.ConsultaController;
 import Clinica_Medica.VO.ConsultaVO;
+import Clinica_Medica.VO.ConvenioVO;
 
 import javax.swing.JLabel;
 
@@ -33,22 +36,17 @@ public class TelaListarTodasConsultas extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				ConsultaController controlador = new ConsultaController();
-				ArrayList<ConsultaVO> consultas = (ArrayList<ConsultaVO>) controlador.listarTodasConsultas();
-
-				DefaultTableModel tabela = (DefaultTableModel) tbConsultas.getModel();
-				for (ConsultaVO consulta : consultas) {
-					tabela.addRow(new Object[] { consulta.getCodigoConsulta(), consulta.getPacienteVO().getNomePaciente(), 
-							consulta.getConvenioVO().getNomeConvenio(), consulta.getDataConsulta(), consulta.getHorarioConsulta()
-						});
-				}
+				List<ConsultaVO> consultas = controlador.listarTodasConsultas();
+				atualizarTabelaConsultas(consultas);
+				
 			}
 		});
 		btnListarTodasConsultas.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnListarTodasConsultas.setBounds(252, 31, 238, 31);
+		btnListarTodasConsultas.setBounds(554, 38, 238, 31);
 		add(btnListarTodasConsultas);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 92, 718, 8);
+		separator.setBounds(275, 96, 753, 8);
 		add(separator);
 		
 		JButton btnSair = new JButton("Sair");
@@ -67,15 +65,15 @@ public class TelaListarTodasConsultas extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(702, 437, 92, 31);
+		btnSair.setBounds(951, 519, 92, 31);
 		add(btnSair);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(26, 153, 768, 161);
+		scrollPane.setBounds(275, 151, 768, 319);
 		add(scrollPane);
 		
 		tbConsultas = new JTable();
-		scrollPane.setViewportView(tbConsultas);
+		scrollPane.setColumnHeaderView(tbConsultas);
 		tbConsultas.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"ID", "Nome Paciente", "Convenio", "Data Consulta", "Horario"},
@@ -88,8 +86,26 @@ public class TelaListarTodasConsultas extends JPanel {
 		
 		JLabel lblConsultas = new JLabel("Consultas");
 		lblConsultas.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblConsultas.setBounds(26, 133, 113, 22);
+		lblConsultas.setBounds(275, 133, 113, 22);
 		add(lblConsultas);
 
+	}
+	
+	private void atualizarTabelaConsultas(List<ConsultaVO> consultas) {
+		tbConsultas.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome Convenio", "Valor" }, },
+				new String[] { "ID", "Nome Convenio", "Valor"}));
+
+		DefaultTableModel modelo = (DefaultTableModel) tbConsultas.getModel();
+
+		for (ConsultaVO consulta : consultas) {
+			// Crio uma nova linha na tabela
+			// Preencher a linha com os atributos do produto
+			// na ORDEM do cabeçalho da tabela
+			Object[] novaLinha = new Object[] { consulta.getCodigoConsulta(), consulta.getPacienteVO().getNomePaciente(), 
+					consulta.getConvenioVO().getNomeConvenio(), consulta.getDataConsulta(), consulta.getHorarioConsulta(),
+
+			};
+			modelo.addRow(novaLinha);
+		}
 	}
 }

@@ -35,17 +35,17 @@ public class TelaExcluirConvenio extends JPanel {
 		
 		JLabel lblCNPJ = new JLabel("CNPJ");
 		lblCNPJ.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCNPJ.setBounds(10, 28, 46, 22);
+		lblCNPJ.setBounds(315, 54, 46, 22);
 		add(lblCNPJ);
 		
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNome.setBounds(10, 112, 58, 27);
+		lblNome.setBounds(315, 157, 58, 27);
 		add(lblNome);
 		
 		JLabel lblValor = new JLabel("Valor");
 		lblValor.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblValor.setBounds(10, 176, 58, 27);
+		lblValor.setBounds(315, 225, 58, 27);
 		add(lblValor);
 		
 		try {
@@ -55,19 +55,19 @@ public class TelaExcluirConvenio extends JPanel {
 			e1.printStackTrace();
 		}
 		txtCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtCnpj.setBounds(90, 25, 251, 30);
+		txtCnpj.setBounds(404, 50, 314, 30);
 		add(txtCnpj);
 		txtCnpj.setColumns(10);
 		
 		txtNome = new JTextField();
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNome.setBounds(107, 112, 379, 30);
+		txtNome.setBounds(415, 155, 427, 30);
 		add(txtNome);
 		txtNome.setColumns(10);
 		
 		txtValor = new JTextField();
 		txtValor.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtValor.setBounds(107, 176, 125, 30);
+		txtValor.setBounds(415, 223, 149, 30);
 		add(txtValor);
 		txtValor.setColumns(10);
 		
@@ -90,7 +90,7 @@ public class TelaExcluirConvenio extends JPanel {
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscar.setBounds(387, 24, 99, 31);
+		btnBuscar.setBounds(743, 50, 99, 31);
 		add(btnBuscar);
 		
 		JButton btnLimparTela = new JButton("Limpar Tela");
@@ -101,7 +101,7 @@ public class TelaExcluirConvenio extends JPanel {
 			}
 		});
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnLimparTela.setBounds(10, 258, 137, 31);
+		btnLimparTela.setBounds(315, 428, 137, 31);
 		add(btnLimparTela);
 		
 		JButton btnNewButton_2 = new JButton("Excluir");
@@ -117,7 +117,7 @@ public class TelaExcluirConvenio extends JPanel {
 			}
 		});
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_2.setBounds(230, 258, 99, 31);
+		btnNewButton_2.setBounds(534, 428, 99, 31);
 		add(btnNewButton_2);
 		
 		JButton btnSair = new JButton("Sair");
@@ -136,11 +136,11 @@ public class TelaExcluirConvenio extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(397, 258, 89, 31);
+		btnSair.setBounds(741, 428, 89, 31);
 		add(btnSair);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 72, 476, 14);
+		separator.setBounds(318, 101, 524, 14);
 		add(separator);
 		
 

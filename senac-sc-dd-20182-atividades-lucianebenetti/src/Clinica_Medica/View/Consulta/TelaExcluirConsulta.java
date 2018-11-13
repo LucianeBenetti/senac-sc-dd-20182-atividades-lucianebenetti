@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.awt.Font;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
@@ -239,7 +240,7 @@ public class TelaExcluirConsulta extends JPanel {
 						null, null, null }, },
 				new String[] { "ID Consulta", "Paciente", "Convenio", "Medico", "Especialidade", "Data", "Horario",
 						"New column", "New column", "New column" }));
-		scrollPane_1.setViewportView(tbConsultas);
+		scrollPane_1.setColumnHeaderView(tbConsultas);
 		tbConsultas.getColumnModel().getColumn(7).setMinWidth(0);
 		tbConsultas.getColumnModel().getColumn(7).setMaxWidth(0);
 		tbConsultas.getColumnModel().getColumn(8).setMinWidth(0);
@@ -252,24 +253,16 @@ public class TelaExcluirConsulta extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				ArrayList<ConsultaVO> consultas = null;
+				List<ConsultaVO> consultas = null;
 				ConsultaController controlador = new ConsultaController();
-				consultas = (ArrayList<ConsultaVO>) controlador.listarTodasConsultas();
-
-				DefaultTableModel tabela = (DefaultTableModel) tbConsultas.getModel();
-				for (ConsultaVO consulta : consultas) {
-					tabela.addRow(new Object[] { consulta.getCodigoConsulta(),
-							consulta.getPacienteVO().getNomePaciente(), consulta.getConvenioVO().getNomeConvenio(),
-							consulta.getEspecializacaoVO().getMedicoVO().getNomeMedico(),
-							consulta.getEspecializacaoVO().getEspecialidadeVO().getNomeEspecialidade(),
-							consulta.getDataConsulta(), consulta.getHorarioConsulta(),
-							consulta.getEspecializacaoVO().getCodigoEspecializacao(),
-							consulta.getPacienteVO().getCodigoPaciente(), consulta.getConvenioVO().getCodigoConvenio(),
-							consulta.getEspecializacaoVO().getCodigoEspecializacao()
-
-					});
-
-				}
+				consultas = controlador.listarTodasConsultas();
+				atualizarTabelaConsultas(consultas);
+				tbConsultas.getColumnModel().getColumn(7).setMinWidth(0);
+				tbConsultas.getColumnModel().getColumn(7).setMaxWidth(0);
+				tbConsultas.getColumnModel().getColumn(8).setMinWidth(0);
+				tbConsultas.getColumnModel().getColumn(8).setMaxWidth(0);
+				tbConsultas.getColumnModel().getColumn(9).setMinWidth(0);
+				tbConsultas.getColumnModel().getColumn(9).setMaxWidth(0);
 
 			}
 		});
@@ -370,5 +363,32 @@ public class TelaExcluirConsulta extends JPanel {
 		consulta.setHorarioConsulta(txtHorario.getText());
 
 		return consulta;
+	}
+	
+	private void atualizarTabelaConsultas(List<ConsultaVO> consultas) {
+		tbConsultas.setModel(new DefaultTableModel(new Object[][] { { "ID Consulta", "Paciente", "Convenio", "Medico", "Especialidade", "Data", "Horario",
+			null, null, null }, },
+				new String[] { "ID Consulta", "Paciente", "Convenio", "Medico", "Especialidade", "Data", "Horario",
+						"New column", "New column", "New column"}));
+
+		DefaultTableModel modelo = (DefaultTableModel) tbConsultas.getModel();
+
+		for (ConsultaVO consulta : consultas) {
+			// Crio uma nova linha na tabela
+			// Preencher a linha com os atributos do produto
+			// na ORDEM do cabeçalho da tabela
+			Object[] novaLinha = new Object[] { consulta.getCodigoConsulta(),
+					consulta.getPacienteVO().getNomePaciente(), consulta.getConvenioVO().getNomeConvenio(),
+					consulta.getEspecializacaoVO().getMedicoVO().getNomeMedico(),
+					consulta.getEspecializacaoVO().getEspecialidadeVO().getNomeEspecialidade(),
+					consulta.getDataConsulta(), consulta.getHorarioConsulta(),
+					consulta.getEspecializacaoVO().getCodigoEspecializacao(),
+					consulta.getPacienteVO().getCodigoPaciente(), consulta.getConvenioVO().getCodigoConvenio(),
+					consulta.getEspecializacaoVO().getCodigoEspecializacao(),
+
+
+			};
+			modelo.addRow(novaLinha);
+		}
 	}
 }

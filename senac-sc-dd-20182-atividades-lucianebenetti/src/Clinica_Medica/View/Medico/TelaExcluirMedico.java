@@ -41,7 +41,7 @@ public class TelaExcluirMedico extends JPanel {
 		
 		JLabel lblBuscarCpf = new JLabel("CPF");
 		lblBuscarCpf.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblBuscarCpf.setBounds(10, 29, 54, 28);
+		lblBuscarCpf.setBounds(391, 29, 54, 28);
 		add(lblBuscarCpf);
 		
 		try {
@@ -51,7 +51,7 @@ public class TelaExcluirMedico extends JPanel {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		txtBuscarCpf.setBounds(95, 29, 299, 28);
+		txtBuscarCpf.setBounds(476, 29, 299, 28);
 		add(txtBuscarCpf);
 		txtBuscarCpf.setColumns(10);
 		
@@ -72,43 +72,43 @@ public class TelaExcluirMedico extends JPanel {
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscar.setBounds(430, 29, 89, 28);
+		btnBuscar.setBounds(811, 29, 89, 28);
 		add(btnBuscar);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 104, 537, 8);
+		separator.setBounds(391, 104, 537, 8);
 		add(separator);
 		
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNome.setBounds(10, 123, 62, 23);
+		lblNome.setBounds(391, 126, 62, 23);
 		add(lblNome);
 		
 		txtNome = new JTextField();
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNome.setBounds(95, 123, 549, 26);
+		txtNome.setBounds(476, 126, 549, 26);
 		add(txtNome);
 		txtNome.setColumns(10);
 		
 		JLabel lblCnpj = new JLabel("CNPJ");
 		lblCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCnpj.setBounds(10, 258, 54, 28);
+		lblCnpj.setBounds(391, 261, 54, 28);
 		add(lblCnpj);
 		
 		txtCrm = new JTextField();
 		txtCrm.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtCrm.setBounds(95, 171, 195, 26);
+		txtCrm.setBounds(476, 174, 195, 26);
 		add(txtCrm);
 		txtCrm.setColumns(10);
 		
 		JLabel lblCrm = new JLabel("CRM");
 		lblCrm.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCrm.setBounds(10, 173, 54, 23);
+		lblCrm.setBounds(391, 176, 54, 23);
 		add(lblCrm);
 		
 		JLabel lblCelular = new JLabel(" Celular Principal");
 		lblCelular.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCelular.setBounds(10, 309, 136, 24);
+		lblCelular.setBounds(385, 311, 136, 24);
 		add(lblCelular);
 		
 		try {
@@ -118,7 +118,7 @@ public class TelaExcluirMedico extends JPanel {
 			e2.printStackTrace();
 		}
 		txtCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtCnpj.setBounds(95, 258, 317, 28);
+		txtCnpj.setBounds(476, 261, 317, 28);
 		add(txtCnpj);
 		txtCnpj.setColumns(10);
 		
@@ -129,7 +129,7 @@ public class TelaExcluirMedico extends JPanel {
 			e1.printStackTrace();
 		}
 		txtCelular.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtCelular.setBounds(180, 307, 232, 28);
+		txtCelular.setBounds(561, 310, 232, 28);
 		add(txtCelular);
 		txtCelular.setColumns(10);
 		
@@ -141,7 +141,7 @@ public class TelaExcluirMedico extends JPanel {
 			}
 		});
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnLimparTela.setBounds(21, 458, 125, 31);
+		btnLimparTela.setBounds(381, 473, 168, 31);
 		add(btnLimparTela);
 		
 		JButton btnExcluir = new JButton("Excluir");
@@ -157,7 +157,7 @@ public class TelaExcluirMedico extends JPanel {
 			}
 		});
 		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnExcluir.setBounds(283, 458, 100, 31);
+		btnExcluir.setBounds(675, 473, 100, 31);
 		add(btnExcluir);
 		
 		JButton btnSair = new JButton("Sair");
@@ -176,12 +176,12 @@ public class TelaExcluirMedico extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(542, 458, 102, 31);
+		btnSair.setBounds(902, 473, 102, 31);
 		add(btnSair);
 		
 		JLabel lblCpf = new JLabel("CPF");
 		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCpf.setBounds(10, 219, 54, 23);
+		lblCpf.setBounds(391, 222, 54, 23);
 		add(lblCpf);
 		
 		try {
@@ -191,13 +191,13 @@ public class TelaExcluirMedico extends JPanel {
 			e1.printStackTrace();
 		}
 		txtCpf.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtCpf.setBounds(94, 215, 318, 28);
+		txtCpf.setBounds(475, 218, 318, 28);
 		add(txtCpf);
 		txtCpf.setColumns(10);
 		
 		JLabel lblCelularMensagem = new JLabel("Celular Mensagem");
 		lblCelularMensagem.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCelularMensagem.setBounds(18, 358, 158, 28);
+		lblCelularMensagem.setBounds(391, 361, 158, 28);
 		add(lblCelularMensagem);
 		
 		try {
@@ -207,18 +207,18 @@ public class TelaExcluirMedico extends JPanel {
 			e1.printStackTrace();
 		}
 		txtCelMen.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtCelMen.setBounds(180, 358, 232, 27);
+		txtCelMen.setBounds(561, 361, 232, 27);
 		add(txtCelMen);
 		txtCelMen.setColumns(10);
 		
 		JLabel lblEmail = new JLabel("e-mail");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblEmail.setBounds(18, 397, 62, 26);
+		lblEmail.setBounds(391, 400, 62, 26);
 		add(lblEmail);
 		
 		txtEmail = new JTextField();
 		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtEmail.setBounds(118, 397, 526, 26);
+		txtEmail.setBounds(499, 400, 526, 26);
 		add(txtEmail);
 		txtEmail.setColumns(10);
 

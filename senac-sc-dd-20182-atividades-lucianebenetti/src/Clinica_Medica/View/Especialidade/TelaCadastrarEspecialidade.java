@@ -43,21 +43,21 @@ public class TelaCadastrarEspecialidade extends JPanel {
 
 		JLabel lblBuscarNome = new JLabel("Nome");
 		lblBuscarNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblBuscarNome.setBounds(10, 23, 66, 22);
+		lblBuscarNome.setBounds(375, 23, 66, 22);
 		add(lblBuscarNome);
 
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNome.setBounds(10, 280, 66, 22);
+		lblNome.setBounds(386, 402, 66, 22);
 		add(lblNome);
 
 		JLabel lblInstituicao = new JLabel("Instituicao");
 		lblInstituicao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblInstituicao.setBounds(10, 323, 92, 22);
+		lblInstituicao.setBounds(386, 445, 92, 22);
 		add(lblInstituicao);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 61, 588, 12);
+		separator.setBounds(375, 61, 599, 12);
 		add(separator);
 
 		JButton btnSair = new JButton("Sair");
@@ -74,7 +74,7 @@ public class TelaCadastrarEspecialidade extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(475, 390, 120, 31);
+		btnSair.setBounds(854, 523, 120, 31);
 		add(btnSair);
 
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -91,7 +91,7 @@ public class TelaCadastrarEspecialidade extends JPanel {
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(325, 390, 129, 31);
+		btnCadastrar.setBounds(704, 523, 129, 31);
 		add(btnCadastrar);
 
 		JButton btnBuscar = new JButton("Buscar");
@@ -112,25 +112,25 @@ public class TelaCadastrarEspecialidade extends JPanel {
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscar.setBounds(509, 19, 89, 31);
+		btnBuscar.setBounds(880, 19, 89, 31);
 		add(btnBuscar);
 
 		txtBuscarNome = new JTextField();
 		txtBuscarNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtBuscarNome.setBounds(66, 11, 391, 36);
+		txtBuscarNome.setBounds(431, 11, 391, 36);
 		add(txtBuscarNome);
 		txtBuscarNome.setColumns(10);
 
 		txtNome = new JTextField();
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtNome.setColumns(10);
-		txtNome.setBounds(112, 275, 486, 33);
+		txtNome.setBounds(488, 397, 486, 33);
 		add(txtNome);
 
 		txtInstituicao = new JTextField();
 		txtInstituicao.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtInstituicao.setColumns(10);
-		txtInstituicao.setBounds(112, 319, 486, 31);
+		txtInstituicao.setBounds(488, 441, 486, 31);
 		add(txtInstituicao);
 
 		JButton btnLimparTela = new JButton("Limpar Tela");
@@ -142,7 +142,7 @@ public class TelaCadastrarEspecialidade extends JPanel {
 			}
 		});
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnLimparTela.setBounds(10, 389, 144, 32);
+		btnLimparTela.setBounds(389, 522, 144, 32);
 		add(btnLimparTela);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -150,11 +150,11 @@ public class TelaCadastrarEspecialidade extends JPanel {
 		add(scrollPane);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(17, 84, 578, 136);
+		scrollPane_1.setBounds(375, 80, 599, 251);
 		add(scrollPane_1);
 
 		tbEspecialidade = new JTable();
-		scrollPane_1.setViewportView(tbEspecialidade);
+		scrollPane_1.setColumnHeaderView(tbEspecialidade);
 		tbEspecialidade.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -195,19 +195,19 @@ public class TelaCadastrarEspecialidade extends JPanel {
 
 			}
 		});
-		btnAlterar.setBounds(189, 390, 110, 31);
+		btnAlterar.setBounds(568, 523, 110, 31);
 		add(btnAlterar);
 
 		txtId = new JTextField();
 		txtId.setEditable(false);
 		txtId.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtId.setBounds(112, 231, 86, 33);
+		txtId.setBounds(488, 353, 86, 33);
 		add(txtId);
 		txtId.setColumns(10);
 
 		JLabel lblid = new JLabel("ID");
 		lblid.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblid.setBounds(10, 238, 59, 31);
+		lblid.setBounds(386, 360, 59, 31);
 		add(lblid);
 
 	}

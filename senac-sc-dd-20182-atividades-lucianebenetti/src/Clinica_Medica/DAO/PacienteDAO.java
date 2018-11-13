@@ -164,6 +164,7 @@ public class PacienteDAO {
 	
 	public ArrayList<PacienteVO> listarTodos() {
 
+		ArrayList<PacienteVO> listapacientes = new ArrayList<PacienteVO>();
 		String query = "select * from paciente";
 
 		Connection conn = Banco.getConnection();

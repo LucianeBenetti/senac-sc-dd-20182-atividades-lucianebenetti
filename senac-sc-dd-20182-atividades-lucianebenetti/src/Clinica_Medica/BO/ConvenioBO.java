@@ -55,7 +55,8 @@ public class ConvenioBO {
 	}
 
 	public void gerarPDF(List<ConvenioVO> convenios, String caminhoEscolhido) {
-		// TODO Auto-generated method stub
+	
+		
 		
 	}
 }

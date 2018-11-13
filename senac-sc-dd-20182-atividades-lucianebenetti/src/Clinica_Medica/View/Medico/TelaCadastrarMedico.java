@@ -58,53 +58,53 @@ public class TelaCadastrarMedico extends JPanel {
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(417, 458, 119, 37);
+		btnCadastrar.setBounds(783, 495, 119, 37);
 		add(btnCadastrar);
 
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNome.setBounds(10, 109, 46, 23);
+		lblNome.setBounds(383, 115, 46, 23);
 		add(lblNome);
 
 		JLabel lblCrm = new JLabel("CRM");
 		lblCrm.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCrm.setBounds(10, 157, 46, 23);
+		lblCrm.setBounds(383, 163, 46, 23);
 		add(lblCrm);
 
 		JLabel lblNewLabel = new JLabel("Celular Mensagem");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(10, 362, 150, 27);
+		lblNewLabel.setBounds(383, 368, 150, 27);
 		add(lblNewLabel);
 
 		JLabel lblCelular = new JLabel("Celular Principal");
 		lblCelular.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCelular.setBounds(10, 311, 138, 26);
+		lblCelular.setBounds(383, 317, 138, 26);
 		add(lblCelular);
 
 		JLabel lblEmail = new JLabel("e-Mail");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblEmail.setBounds(10, 415, 68, 23);
+		lblEmail.setBounds(383, 421, 68, 23);
 		add(lblEmail);
 
 		JLabel lblCpf = new JLabel("CPF");
 		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCpf.setBounds(10, 206, 46, 23);
+		lblCpf.setBounds(383, 212, 46, 23);
 		add(lblCpf);
 
 		JLabel lblCnpj = new JLabel("CNPJ");
 		lblCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCnpj.setBounds(10, 261, 46, 23);
+		lblCnpj.setBounds(383, 267, 46, 23);
 		add(lblCnpj);
 
 		txtNome = new JTextField();
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNome.setBounds(66, 103, 636, 29);
+		txtNome.setBounds(439, 109, 636, 29);
 		add(txtNome);
 		txtNome.setColumns(10);
 
 		txtCrm = new JTextField();
 		txtCrm.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtCrm.setBounds(66, 154, 169, 27);
+		txtCrm.setBounds(439, 160, 169, 27);
 		add(txtCrm);
 		txtCrm.setColumns(10);
 
@@ -115,7 +115,7 @@ public class TelaCadastrarMedico extends JPanel {
 			e1.printStackTrace();
 		}
 		txtCPF.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtCPF.setBounds(66, 203, 277, 27);
+		txtCPF.setBounds(439, 209, 277, 27);
 		add(txtCPF);
 		txtCPF.setColumns(10);
 
@@ -126,7 +126,7 @@ public class TelaCadastrarMedico extends JPanel {
 			e1.printStackTrace();
 		}
 		txtCnpj.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtCnpj.setBounds(66, 258, 277, 27);
+		txtCnpj.setBounds(439, 264, 277, 27);
 		add(txtCnpj);
 		txtCnpj.setColumns(10);
 
@@ -137,7 +137,7 @@ public class TelaCadastrarMedico extends JPanel {
 			e.printStackTrace();
 		}
 		txtCel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtCel.setBounds(158, 310, 323, 28);
+		txtCel.setBounds(531, 316, 323, 28);
 		add(txtCel);
 		txtCel.setColumns(10);
 
@@ -148,19 +148,19 @@ public class TelaCadastrarMedico extends JPanel {
 			e.printStackTrace();
 		}
 		txtCelMen.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtCelMen.setBounds(158, 361, 323, 28);
+		txtCelMen.setBounds(531, 367, 323, 28);
 		add(txtCelMen);
 		txtCelMen.setColumns(10);
 
 		txtEmail = new JTextField();
 		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtEmail.setBounds(88, 412, 614, 29);
+		txtEmail.setBounds(461, 418, 614, 29);
 		add(txtEmail);
 		txtEmail.setColumns(10);
 
 		JLabel lblBuscarCpf = new JLabel("CPF");
 		lblBuscarCpf.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblBuscarCpf.setBounds(10, 33, 46, 14);
+		lblBuscarCpf.setBounds(383, 53, 46, 14);
 		add(lblBuscarCpf);
 
 		try {
@@ -170,7 +170,7 @@ public class TelaCadastrarMedico extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		txtBuscarCpf.setBounds(66, 30, 277, 27);
+		txtBuscarCpf.setBounds(439, 46, 337, 27);
 		add(txtBuscarCpf);
 		txtBuscarCpf.setColumns(10);
 
@@ -192,11 +192,11 @@ public class TelaCadastrarMedico extends JPanel {
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscar.setBounds(373, 27, 105, 30);
+		btnBuscar.setBounds(817, 43, 105, 30);
 		add(btnBuscar);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 84, 471, 2);
+		separator.setBounds(383, 96, 530, 2);
 		add(separator);
 
 		JButton btnSair = new JButton("Sair");
@@ -213,7 +213,7 @@ public class TelaCadastrarMedico extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(604, 458, 98, 37);
+		btnSair.setBounds(977, 495, 98, 37);
 		add(btnSair);
 
 		JButton btnLimparTela = new JButton("Limpar Tela");
@@ -224,7 +224,7 @@ public class TelaCadastrarMedico extends JPanel {
 			}
 		});
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnLimparTela.setBounds(10, 458, 138, 37);
+		btnLimparTela.setBounds(376, 495, 138, 37);
 		add(btnLimparTela);
 
 		JButton btnAlterar = new JButton("Alterar");
@@ -241,7 +241,7 @@ public class TelaCadastrarMedico extends JPanel {
 			}
 		});
 		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnAlterar.setBounds(200, 458, 143, 37);
+		btnAlterar.setBounds(566, 495, 143, 37);
 		add(btnAlterar);
 
 	}

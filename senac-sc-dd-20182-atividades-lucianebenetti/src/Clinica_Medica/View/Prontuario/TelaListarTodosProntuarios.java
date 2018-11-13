@@ -20,7 +20,6 @@ import javax.swing.JScrollPane;
 public class TelaListarTodosProntuarios extends JPanel {
 	private JTable tbProntuarios;
 
-
 	/**
 	 * Create the panel.
 	 */
@@ -33,27 +32,20 @@ public class TelaListarTodosProntuarios extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				ProntuarioController controlador = new ProntuarioController();
-				ArrayList<ProntuarioVO> prontuarios = (ArrayList<ProntuarioVO>) controlador.listarTodosProntuarios();
-
-				DefaultTableModel tabela = (DefaultTableModel) tbProntuarios.getModel();
-				for (ProntuarioVO prontuario : prontuarios) {
-					tabela.addRow(new Object[] { prontuario.getCodigoProntuario(), prontuario.getConsulta().getPacienteVO().getNomePaciente(), 
-							prontuario.getMedicamento(), prontuario.getExame(), prontuario.getRegistro()
-
-					});
-				}
+				ProntuarioController controladorProntuarios = new ProntuarioController();
+				List<ProntuarioVO> prontuarios = controladorProntuarios.listarTodosProntuarios();
+				atualizarTabelaProntuarios(prontuarios);
 
 			}
 		});
 		btnListarTodosProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnListarTodosProntuarios.setBounds(147, 26, 273, 44);
+		btnListarTodosProntuarios.setBounds(510, 58, 273, 44);
 		add(btnListarTodosProntuarios);
 
 		JLabel lblProntuarios = new JLabel("Prontuarios");
 		lblProntuarios.setBackground(new Color(173, 216, 230));
 		lblProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblProntuarios.setBounds(21, 124, 150, 31);
+		lblProntuarios.setBounds(281, 127, 150, 31);
 		add(lblProntuarios);
 
 		JButton btnSair = new JButton("Sair");
@@ -71,24 +63,37 @@ public class TelaListarTodosProntuarios extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(471, 419, 115, 31);
+		btnSair.setBounds(923, 477, 115, 31);
 		add(btnSair);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(21, 154, 565, 193);
-		add(scrollPane);
-		
-				tbProntuarios = new JTable();
-				scrollPane.setViewportView(tbProntuarios);
-				tbProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				tbProntuarios.setModel(new DefaultTableModel(
-					new Object[][] {
-						{"ID", " Paciente", "Medicamento", "Exames", "Registro"},
-					},
-					new String[] {
-						"ID", "Paciente", "Medicamento", "Exames", "Registro"
-					}
-				));
 
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(282, 159, 756, 244);
+		add(scrollPane);
+
+		tbProntuarios = new JTable();
+		scrollPane.setViewportView(tbProntuarios);
+		tbProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		tbProntuarios.setModel(
+				new DefaultTableModel(new Object[][] { { "ID", " Paciente", "Medicamento", "Exames", "Registro" }, },
+						new String[] { "ID", "Paciente", "Medicamento", "Exames", "Registro" }));
+
+	}
+
+	private void atualizarTabelaProntuarios(List<ProntuarioVO> prontuarios) {
+		tbProntuarios.setModel(new DefaultTableModel(
+				new Object[][] { { "ID Prontuario", "Paciente", "Medicamentos", "Exames", "Registro" }, },
+				new String[] { "ID Prontuario", "Paciente", "Medicamentos", "Exames", "Registro" }));
+
+		DefaultTableModel modelo = (DefaultTableModel) tbProntuarios.getModel();
+
+		for (ProntuarioVO prontuario : prontuarios) {
+			// Crio uma nova linha na tabela
+			// Preencher a linha com os atributos do produto
+			// na ORDEM do cabeçalho da tabela
+			Object[] novaLinha = new Object[] { prontuario.getCodigoProntuario(),
+					prontuario.getConsulta().getPacienteVO().getNomePaciente(), prontuario.getMedicamento(),
+					prontuario.getExame(), prontuario.getRegistro() };
+			modelo.addRow(novaLinha);
+		}
 	}
 }

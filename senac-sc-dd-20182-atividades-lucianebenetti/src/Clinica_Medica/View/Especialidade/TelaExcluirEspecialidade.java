@@ -52,12 +52,18 @@ public class TelaExcluirEspecialidade extends JPanel {
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscar.setBounds(538, 11, 89, 31);
+		btnBuscar.setBounds(889, 18, 89, 31);
 		add(btnBuscar);
 
 		JButton btnNewButton_1 = new JButton("Limpar Tela");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				limparTela();
+			}
+		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_1.setBounds(20, 408, 144, 31);
+		btnNewButton_1.setBounds(375, 563, 144, 31);
 		add(btnNewButton_1);
 
 		JButton btnExcluir = new JButton("Excluir");
@@ -73,7 +79,7 @@ public class TelaExcluirEspecialidade extends JPanel {
 			}
 		});
 		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnExcluir.setBounds(283, 408, 100, 31);
+		btnExcluir.setBounds(644, 563, 100, 31);
 		add(btnExcluir);
 
 		JButton btnSair = new JButton("Sair");
@@ -91,26 +97,26 @@ public class TelaExcluirEspecialidade extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(538, 408, 89, 31);
+		btnSair.setBounds(875, 563, 89, 31);
 		add(btnSair);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 73, 616, 11);
+		separator.setBounds(362, 73, 616, 11);
 		add(separator);
 
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNome.setBounds(10, 19, 77, 28);
+		lblNome.setBounds(362, 19, 77, 28);
 		add(lblNome);
 
 		txtBuscarNome = new JTextField();
 		txtBuscarNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtBuscarNome.setBounds(76, 11, 316, 31);
+		txtBuscarNome.setBounds(428, 18, 452, 31);
 		add(txtBuscarNome);
 		txtBuscarNome.setColumns(10);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 95, 616, 154);
+		scrollPane.setBounds(362, 95, 616, 215);
 		add(scrollPane);
 
 		tbEspecialidade = new JTable();
@@ -128,39 +134,39 @@ public class TelaExcluirEspecialidade extends JPanel {
 		tbEspecialidade.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome", "Instituicao" }, },
 				new String[] { "ID", "Nome", "Instituicao" }));
 		tbEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		scrollPane.setViewportView(tbEspecialidade);
+		scrollPane.setColumnHeaderView(tbEspecialidade);
 
 		JLabel lblNewLabel = new JLabel("ID");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(20, 270, 55, 31);
+		lblNewLabel.setBounds(375, 335, 55, 31);
 		add(lblNewLabel);
 
 		JLabel lblNome_1 = new JLabel("Nome");
 		lblNome_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNome_1.setBounds(17, 312, 58, 32);
+		lblNome_1.setBounds(375, 400, 58, 32);
 		add(lblNome_1);
 
 		JLabel lblInstituicao = new JLabel("Instituicao");
 		lblInstituicao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblInstituicao.setBounds(20, 363, 89, 23);
+		lblInstituicao.setBounds(375, 480, 89, 23);
 		add(lblInstituicao);
 
 		txtId = new JTextField();
 		txtId.setEditable(false);
 		txtId.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtId.setBounds(129, 270, 89, 28);
+		txtId.setBounds(486, 336, 89, 28);
 		add(txtId);
 		txtId.setColumns(10);
 
 		txtNome = new JTextField();
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNome.setBounds(129, 312, 480, 29);
+		txtNome.setBounds(481, 402, 498, 29);
 		add(txtNome);
 		txtNome.setColumns(10);
 
 		txtInstituicao = new JTextField();
 		txtInstituicao.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtInstituicao.setBounds(129, 356, 480, 31);
+		txtInstituicao.setBounds(481, 476, 498, 31);
 		add(txtInstituicao);
 		txtInstituicao.setColumns(10);
 

@@ -9,10 +9,12 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import Clinica_Medica.Controller.MedicoController;
+import Clinica_Medica.VO.EspecialidadeVO;
 import Clinica_Medica.VO.MedicoVO;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -35,19 +37,12 @@ public class TelaListarTodosMedicos extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				MedicoController controlador = new MedicoController();
-				ArrayList<MedicoVO> medicos = (ArrayList<MedicoVO>) controlador.listarTodosMedicos();
-
-				DefaultTableModel tabela = (DefaultTableModel) tbMedicos.getModel();
-				for (MedicoVO medico : medicos) {
-					tabela.addRow(new Object[] { medico.getNomeMedico(), medico.getCrm(),
-							medico.getCpfMedico(), medico.getCnpjMedico(), medico.getCelularMedico(), medico.getCelMensagemMedico(), medico.getEmailMedico()
-
-					});
-				}
+				List<MedicoVO> medicos = controlador.listarTodosMedicos();
+				atualizarTabelaMedicos(medicos);
 			}
 		});
 		btnListarTodosOs.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnListarTodosOs.setBounds(226, 31, 280, 40);
+		btnListarTodosOs.setBounds(540, 73, 280, 40);
 		add(btnListarTodosOs);
 		
 		JButton btnSair = new JButton("Sair");
@@ -66,15 +61,15 @@ public class TelaListarTodosMedicos extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(714, 447, 96, 31);
+		btnSair.setBounds(1068, 449, 96, 31);
 		add(btnSair);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 139, 811, 274);
+		scrollPane.setBounds(177, 147, 987, 274);
 		add(scrollPane);
 		
 		tbMedicos = new JTable();
-		scrollPane.setViewportView(tbMedicos);
+		scrollPane.setColumnHeaderView(tbMedicos);
 		tbMedicos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tbMedicos.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -87,9 +82,29 @@ public class TelaListarTodosMedicos extends JPanel {
 		
 		JLabel lblMedicos = new JLabel("Medicos");
 		lblMedicos.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblMedicos.setBounds(10, 114, 120, 22);
+		lblMedicos.setBounds(187, 126, 120, 22);
 		add(lblMedicos);
 
+	}
+	
+	private void atualizarTabelaMedicos(List<MedicoVO> medicos) {
+		tbMedicos.setModel(new DefaultTableModel(new Object[][] { { "Nome", "CRM", "CPF", "CNPJ", "Celular", "Whats App", "e-mail" }, },
+				new String[] { "Nome", "CRM", "CPF", "CNPJ", "Celular", "Whats App", "e-mail" }));
+
+		DefaultTableModel modelo = (DefaultTableModel) tbMedicos.getModel();
+
+		for (MedicoVO medico: medicos) {
+			// Crio uma nova linha na tabela
+			// Preencher a linha com os atributos do produto
+			// na ORDEM do cabeçalho da tabela
+			Object[] novaLinha = new Object[] {  medico.getNomeMedico(), medico.getCrm(),
+					medico.getCpfMedico(), medico.getCnpjMedico(), medico.getCelularMedico(), 
+					medico.getCelMensagemMedico(), medico.getEmailMedico(),
+
+
+			};
+			modelo.addRow(novaLinha);
+		}
 	}
 
 }

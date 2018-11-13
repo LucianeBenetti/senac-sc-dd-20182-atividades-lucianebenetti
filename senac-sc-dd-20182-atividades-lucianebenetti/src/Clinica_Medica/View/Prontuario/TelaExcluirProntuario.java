@@ -54,7 +54,7 @@ public class TelaExcluirProntuario extends JPanel {
 		});
 
 		btnLimparTela.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnLimparTela.setBounds(21, 416, 132, 31);
+		btnLimparTela.setBounds(410, 495, 132, 31);
 		add(btnLimparTela);
 
 		JButton btnExcluir = new JButton("Excluir");
@@ -70,7 +70,7 @@ public class TelaExcluirProntuario extends JPanel {
 			}
 		});
 		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnExcluir.setBounds(282, 416, 97, 31);
+		btnExcluir.setBounds(704, 495, 97, 31);
 		add(btnExcluir);
 
 		JButton btnSair = new JButton("Sair");
@@ -88,34 +88,34 @@ public class TelaExcluirProntuario extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(505, 416, 97, 30);
+		btnSair.setBounds(927, 495, 97, 30);
 		add(btnSair);
 
 		JLabel lblNomePaciente = new JLabel("Nome Paciente");
 		lblNomePaciente.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNomePaciente.setBounds(21, 321, 120, 25);
+		lblNomePaciente.setBounds(410, 435, 120, 25);
 		add(lblNomePaciente);
 
 		txtNome = new JTextField();
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtNome.setBounds(164, 320, 395, 25);
+		txtNome.setBounds(550, 434, 395, 25);
 		add(txtNome);
 		txtNome.setColumns(10);
 
 		JLabel lblIdProntuario = new JLabel("ID Prontuario");
 		lblIdProntuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblIdProntuario.setBounds(21, 265, 125, 25);
+		lblIdProntuario.setBounds(410, 383, 125, 25);
 		add(lblIdProntuario);
 
 		txtIdProntuario = new JTextField();
 		txtIdProntuario.setEditable(false);
 		txtIdProntuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtIdProntuario.setBounds(164, 264, 86, 25);
+		txtIdProntuario.setBounds(550, 382, 86, 25);
 		add(txtIdProntuario);
 		txtIdProntuario.setColumns(10);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(21, 235, 606, 2);
+		separator.setBounds(418, 342, 606, 2);
 		add(separator);
 
 		JButton btnBuscarProntuarios = new JButton("Buscar Prontuarios");
@@ -123,24 +123,19 @@ public class TelaExcluirProntuario extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				ProntuarioController controlador = new ProntuarioController();
-				ArrayList<ProntuarioVO> prontuarios = (ArrayList<ProntuarioVO>) controlador.listarTodosProntuarios();
+				ProntuarioController controladorProntuarios = new ProntuarioController();
+				List<ProntuarioVO> prontuarios =  controladorProntuarios.listarTodosProntuarios();
+				atualizarTabelaProntuarios(prontuarios);
 
-				DefaultTableModel tabela = (DefaultTableModel) tbProntuarios.getModel();
-				for (ProntuarioVO prontuario : prontuarios) {
-					tabela.addRow(new Object[] { prontuario.getCodigoProntuario(), prontuario.getMedicamento(),
-							prontuario.getExame(), prontuario.getRegistro()
-
-					});
-				}
+				
 			}
 		});
 		btnBuscarProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscarProntuarios.setBounds(197, 11, 211, 31);
+		btnBuscarProntuarios.setBounds(590, 69, 211, 43);
 		add(btnBuscarProntuarios);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(50, 71, 543, 128);
+		scrollPane.setBounds(410, 123, 614, 195);
 		add(scrollPane);
 
 		tbProntuarios = new JTable();
@@ -159,7 +154,7 @@ public class TelaExcluirProntuario extends JPanel {
 				new DefaultTableModel(new Object[][] { { "ID", "Paciente", "Medicamentos", "Exames", "Registro" }, },
 						new String[] { "ID", "Paciente", "Medicamentos", "Exames", "Registro" }));
 		tbProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		scrollPane.setViewportView(tbProntuarios);
+		scrollPane.setColumnHeaderView(tbProntuarios);
 
 	}
 
@@ -193,9 +188,10 @@ public class TelaExcluirProntuario extends JPanel {
 		}
 	
 	}
-	protected void atualizarTabelaProntuario(List<ProntuarioVO> prontuarios) {
-		tbProntuarios.setModel(new DefaultTableModel(new Object[][] { { "ID", "Paciente", "Medicamentos", "Exames", "Registro"}, },
-				new String[] { "ID", "Paciente", "Medicamentos", "Exames", "Registro" }));
+	
+	private void atualizarTabelaProntuarios(List<ProntuarioVO> prontuarios) {
+		tbProntuarios.setModel(new DefaultTableModel(new Object[][] { { "ID Prontuario", "Paciente", "Medicamentos", "Exames", "Registro" }, },
+				new String[] { "ID Prontuario", "Paciente", "Medicamentos", "Exames", "Registro"}));
 
 		DefaultTableModel modelo = (DefaultTableModel) tbProntuarios.getModel();
 
@@ -203,9 +199,9 @@ public class TelaExcluirProntuario extends JPanel {
 			// Crio uma nova linha na tabela
 			// Preencher a linha com os atributos do produto
 			// na ORDEM do cabeçalho da tabela
-			Object[] novaLinha = new Object[] { prontuario.getCodigoProntuario(), prontuario.getMedicamento(),
-					prontuario.getExame(), prontuario.getRegistro(),
-
+			Object[] novaLinha = new Object[] { prontuario.getCodigoProntuario(), 
+					prontuario.getConsulta().getPacienteVO().getNomePaciente(),
+					prontuario.getMedicamento(), prontuario.getExame(), prontuario.getRegistro()
 			};
 			modelo.addRow(novaLinha);
 		}

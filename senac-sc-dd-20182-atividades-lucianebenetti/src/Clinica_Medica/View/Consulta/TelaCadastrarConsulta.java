@@ -41,6 +41,9 @@ import java.util.List;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Component;
+import javax.swing.Box;
+import javax.swing.JToggleButton;
 
 public class TelaCadastrarConsulta extends JPanel {
 
@@ -152,7 +155,7 @@ public class TelaCadastrarConsulta extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(1208, 569, 107, 35);
+		btnSair.setBounds(1228, 569, 107, 35);
 		add(btnSair);
 
 		JLabel lblDataRealizao = new JLabel("Hora da Consulta");
@@ -188,7 +191,7 @@ public class TelaCadastrarConsulta extends JPanel {
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCadastrar.setBounds(608, 569, 115, 35);
+		btnCadastrar.setBounds(483, 569, 115, 35);
 		add(btnCadastrar);
 
 		txtNomePaciente = new JTextField();
@@ -237,7 +240,7 @@ public class TelaCadastrarConsulta extends JPanel {
 		txtIdEspecializacao.setColumns(10);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(791, 337, 524, 195);
+		scrollPane.setBounds(811, 345, 524, 195);
 		add(scrollPane);
 
 		tbMedicoEspecialidade = new JTable();
@@ -257,30 +260,22 @@ public class TelaCadastrarConsulta extends JPanel {
 		tbMedicoEspecialidade
 				.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome Medico", "Especialidade" }, },
 						new String[] { "ID", "Nome Medico", "Especialidade" }));
-		scrollPane.setViewportView(tbMedicoEspecialidade);
+		scrollPane.setColumnHeaderView(tbMedicoEspecialidade);
 
 		JButton btnNewButton = new JButton("Buscar Medico e Especialidade");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-
-				ArrayList<EspecializacaoVO> especializacoes = null;
+				
 				EspecializacaoController controlador = new EspecializacaoController();
-				especializacoes = (ArrayList<EspecializacaoVO>) controlador.listarTodasEspecializacoes();
-
-				DefaultTableModel tabela = (DefaultTableModel) tbMedicoEspecialidade.getModel();
-				for (EspecializacaoVO especializacao : especializacoes) {
-					tabela.addRow(new Object[] { especializacao.getCodigoEspecializacao(),
-							especializacao.getMedicoVO().getNomeMedico(),
-							especializacao.getEspecialidadeVO().getNomeEspecialidade(),
-							especializacao.getAnoEspecializacao(), especializacao.getEspecialidadeVO().getInstituicao()
-
-					});
-				}
+				List<EspecializacaoVO> especializacoes = null;
+				especializacoes = controlador.listarTodasEspecializacoes();
+				atualizarTabelaMedicosEspecialidades(especializacoes);
+			
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton.setBounds(918, 305, 299, 31);
+		btnNewButton.setBounds(936, 308, 299, 31);
 		add(btnNewButton);
 
 		txtNomeMedico = new JTextField();
@@ -305,7 +300,7 @@ public class TelaCadastrarConsulta extends JPanel {
 		txtConvenio.setColumns(10);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(791, 69, 524, 183);
+		scrollPane_1.setBounds(811, 63, 524, 183);
 		add(scrollPane_1);
 
 		tbConvenios = new JTable();
@@ -323,7 +318,7 @@ public class TelaCadastrarConsulta extends JPanel {
 		tbConvenios.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tbConvenios.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome Convenio", "Valor" }, },
 				new String[] { "ID", "Nome Convenio", "Valor" }));
-		scrollPane_1.setViewportView(tbConvenios);
+		scrollPane_1.setColumnHeaderView(tbConvenios);
 
 		JButton btnBuscarConveio = new JButton("Buscar Convenios");
 		btnBuscarConveio.addMouseListener(new MouseAdapter() {
@@ -339,8 +334,16 @@ public class TelaCadastrarConsulta extends JPanel {
 			}
 		});
 		btnBuscarConveio.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscarConveio.setBounds(952, 37, 201, 31);
+		btnBuscarConveio.setBounds(957, 26, 201, 31);
 		add(btnBuscarConveio);
+		
+		JSeparator separator_2 = new JSeparator();
+		separator_2.setBounds(751, 11, 0, 428);
+		add(separator_2);
+		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		verticalStrut.setBounds(750, 11, 1, 20);
+		add(verticalStrut);
 
 	}
 
@@ -449,9 +452,6 @@ public class TelaCadastrarConsulta extends JPanel {
 			Object[] novaLinha = new Object[] { especializacao.getCodigoEspecializacao(),
 					especializacao.getMedicoVO().getNomeMedico(),
 					especializacao.getEspecialidadeVO().getNomeEspecialidade(),
-					especializacao.getAnoEspecializacao(), especializacao.getEspecialidadeVO().getInstituicao(),
-
-
 			};
 			modelo.addRow(novaLinha);
 		}

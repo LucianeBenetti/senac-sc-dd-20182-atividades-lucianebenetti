@@ -15,10 +15,12 @@ import Clinica_Medica.VO.EspecialidadeVO;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JLabel;
 
 public class TelaListarTodasEspecialidades extends JPanel {
-	private JTable tbEspecializacoes;
+	private JTable tbEspecialidades;
 
 	/**
 	 * Create the panel.
@@ -33,19 +35,13 @@ public class TelaListarTodasEspecialidades extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				
 				EspecialidadeController controlador = new EspecialidadeController();
-				ArrayList<EspecialidadeVO> especialidades = (ArrayList<EspecialidadeVO>) controlador.listarTodosConvenios();
+				List<EspecialidadeVO> especialidades = controlador.listarTodasEspecialidades();
+				atualizarTabelaEspecialidades(especialidades);
 
-				DefaultTableModel tabela = (DefaultTableModel) tbEspecializacoes.getModel();
-				for (EspecialidadeVO especialidade : especialidades) {
-					tabela.addRow(new Object[] { especialidade.getCodigoEspecialidade(), especialidade.getNomeEspecialidade(),
-							especialidade.getInstituicao()
-				
-					});
-				}
 			}
 		});
 		btnListarTodasEspecialidades.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnListarTodasEspecialidades.setBounds(185, 35, 276, 31);
+		btnListarTodasEspecialidades.setBounds(537, 90, 276, 31);
 		add(btnListarTodasEspecialidades);
 		
 		JButton btnSair = new JButton("Sair");
@@ -64,21 +60,21 @@ public class TelaListarTodasEspecialidades extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(549, 288, 89, 31);
+		btnSair.setBounds(873, 496, 89, 31);
 		add(btnSair);
 		
 		JLabel lblEspecialidades = new JLabel("Especialidades");
 		lblEspecialidades.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblEspecialidades.setBounds(36, 84, 142, 23);
+		lblEspecialidades.setBounds(362, 145, 142, 23);
 		add(lblEspecialidades);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(36, 106, 599, 154);
+		scrollPane.setBounds(365, 168, 599, 251);
 		add(scrollPane);
 		
-		tbEspecializacoes = new JTable();
-		scrollPane.setViewportView(tbEspecializacoes);
-		tbEspecializacoes.setModel(new DefaultTableModel(
+		tbEspecialidades = new JTable();
+		scrollPane.setColumnHeaderView(tbEspecialidades);
+		tbEspecialidades.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"ID", "Nome", "Instituicao"},
 			},
@@ -86,8 +82,26 @@ public class TelaListarTodasEspecialidades extends JPanel {
 				"ID", "Nome", "Instituicao"
 			}
 		));
-		tbEspecializacoes.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tbEspecialidades.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
+	}
+	
+	private void atualizarTabelaEspecialidades(List<EspecialidadeVO> especialidades) {
+		tbEspecialidades.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome", "Instituição" }, },
+				new String[] { "ID", "Nome", "Instituição" }));
+
+		DefaultTableModel modelo = (DefaultTableModel) tbEspecialidades.getModel();
+
+		for (EspecialidadeVO especialidade : especialidades) {
+			// Crio uma nova linha na tabela
+			// Preencher a linha com os atributos do produto
+			// na ORDEM do cabeçalho da tabela
+			Object[] novaLinha = new Object[] { especialidade.getCodigoEspecialidade(),
+					especialidade.getNomeEspecialidade(), especialidade.getInstituicao(),
+
+			};
+			modelo.addRow(novaLinha);
+		}
 	}
 
 }
