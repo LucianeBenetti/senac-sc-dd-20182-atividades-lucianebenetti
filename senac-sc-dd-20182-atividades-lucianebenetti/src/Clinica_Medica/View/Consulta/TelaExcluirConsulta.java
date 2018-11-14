@@ -46,6 +46,8 @@ import Clinica_Medica.VO.ProntuarioVO;
 import java.awt.Color;
 import com.toedter.calendar.JMonthChooser;
 import com.toedter.components.JSpinField;
+import java.awt.Panel;
+import java.awt.SystemColor;
 
 public class TelaExcluirConsulta extends JPanel {
 
@@ -310,6 +312,11 @@ public class TelaExcluirConsulta extends JPanel {
 		dateChooserDataConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		dateChooserDataConsulta.setBounds(190, 286, 172, 31);
 		add(dateChooserDataConsulta);
+		
+		Panel panel = new Panel();
+		panel.setBackground(SystemColor.menu);
+		panel.setBounds(668, 10, 5, 461);
+		add(panel);
 
 	}
 

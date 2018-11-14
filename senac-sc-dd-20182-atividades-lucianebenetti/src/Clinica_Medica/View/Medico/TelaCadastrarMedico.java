@@ -18,6 +18,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Panel;
+import javax.swing.UIManager;
 
 public class TelaCadastrarMedico extends JPanel {
 	private JTextField txtNome;
@@ -243,6 +245,11 @@ public class TelaCadastrarMedico extends JPanel {
 		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnAlterar.setBounds(566, 495, 143, 37);
 		add(btnAlterar);
+		
+		Panel panel = new Panel();
+		panel.setBackground(UIManager.getColor("Button.background"));
+		panel.setBounds(350, 38, 4, 494);
+		add(panel);
 
 	}
 

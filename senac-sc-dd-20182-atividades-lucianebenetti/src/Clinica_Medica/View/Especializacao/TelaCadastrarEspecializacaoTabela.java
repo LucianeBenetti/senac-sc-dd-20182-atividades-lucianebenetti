@@ -29,6 +29,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JComboBox;
+import java.awt.Panel;
+import java.awt.SystemColor;
 
 public class TelaCadastrarEspecializacaoTabela extends JPanel {
 	private JTextField txtNomeMedico;
@@ -165,7 +167,7 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 		btnBuscar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				MedicoVO medicoBuscado;
 				EspecialidadeVO especialidadeBuscada;
 
@@ -189,11 +191,14 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 
 					if (especializacoes != null) {
 						atualizarTabelaEspecializacoes(especializacoes);
-
-					} else {
-						JOptionPane.showMessageDialog(null, "Especialização já cadastrada! Tente novamente.");
 					}
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Especialização não cadastrada! Tente novamente!");
+
 				}
+				cbEspecialidade.setSelectedItem(0);
+				cbMedico.setSelectedItem(0);
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -226,7 +231,7 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 				} else {
 					JOptionPane.showMessageDialog(null, "Não foi possível alterar Especializacao!");
 				}
-			
+
 			}
 		});
 		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -270,6 +275,11 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 				new Object[][] { { "ID", "Nome Medico", "Especialidade", "Ano", "Instituicao" }, },
 				new String[] { "ID", "Nome Medico", "Especialidade", "Ano", "Instituicao" }));
 		scrollPane.setColumnHeaderView(tbEspecializacao);
+		
+		Panel panel = new Panel();
+		panel.setBackground(SystemColor.menu);
+		panel.setBounds(256, 23, 4, 592);
+		add(panel);
 
 	}
 
@@ -291,8 +301,8 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 		txtNomeMedico.setText("");
 		cbEspecialidade.setSelectedIndex(0);
 		cbMedico.setSelectedIndex(0);
-		cbEspecialidade.setSelectedItem(null);
-		cbMedico.setSelectedItem(null);
+		cbEspecialidade.setSelectedItem(0);
+		cbMedico.setSelectedItem(0);
 		txtIdEspecializacao.setText("");
 
 		limparTabela();

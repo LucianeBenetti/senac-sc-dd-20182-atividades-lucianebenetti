@@ -28,6 +28,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Color;
+import java.awt.Panel;
+import java.awt.SystemColor;
 
 public class TelaExcluirEspecializacao extends JPanel {
 	private JTextField txtNomeMedico;
@@ -236,6 +238,11 @@ public class TelaExcluirEspecializacao extends JPanel {
 				new Object[][] { { "ID", "Nome Medico", "Especialidade", "Ano", "Instituicao" }, },
 				new String[] { "ID", "Nome Medico", "Especialidade", "Ano", "Instituicao" }));
 		scrollPane.setColumnHeaderView(tbEspecializacao);
+		
+		Panel panel = new Panel();
+		panel.setBackground(SystemColor.menu);
+		panel.setBounds(315, 20, 3, 580);
+		add(panel);
 
 	}
 

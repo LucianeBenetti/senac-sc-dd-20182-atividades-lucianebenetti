@@ -76,7 +76,7 @@ public class TelaListarTodasEspecializacoes extends JPanel {
 		tbEspecializacoes.setModel(
 				new DefaultTableModel(new Object[][] { { "ID", "Medico", "Especialidade", "Ano", "Instituicao" }, },
 						new String[] { "ID", "Medico", "Especialidade", "Ano", "Instituicao" }));
-		tbEspecializacoes.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tbEspecializacoes.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		scrollPane.setColumnHeaderView(tbEspecializacoes);
 
 		JLabel lblEspecializacoes = new JLabel("Especializacoes");

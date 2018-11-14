@@ -15,6 +15,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.awt.Color;
+import java.awt.Panel;
+import java.awt.SystemColor;
 
 public class TelaExcluirMedico extends JPanel {
 	private JTextField txtBuscarCpf;
@@ -221,6 +223,11 @@ public class TelaExcluirMedico extends JPanel {
 		txtEmail.setBounds(499, 400, 526, 26);
 		add(txtEmail);
 		txtEmail.setColumns(10);
+		
+		Panel panel = new Panel();
+		panel.setBackground(SystemColor.menu);
+		panel.setBounds(354, 29, 3, 474);
+		add(panel);
 
 	}
 

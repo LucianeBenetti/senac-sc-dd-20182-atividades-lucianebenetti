@@ -71,7 +71,7 @@ public class TelaListarTodosProntuarios extends JPanel {
 		add(scrollPane);
 
 		tbProntuarios = new JTable();
-		scrollPane.setViewportView(tbProntuarios);
+		scrollPane.setColumnHeaderView(tbProntuarios);
 		tbProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tbProntuarios.setModel(
 				new DefaultTableModel(new Object[][] { { "ID", " Paciente", "Medicamento", "Exames", "Registro" }, },

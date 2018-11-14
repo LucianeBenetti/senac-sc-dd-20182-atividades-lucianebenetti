@@ -17,6 +17,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.awt.Color;
+import java.awt.Panel;
+import java.awt.SystemColor;
 
 public class TelaExcluirConvenio extends JPanel {
 
@@ -142,6 +144,11 @@ public class TelaExcluirConvenio extends JPanel {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(318, 101, 524, 14);
 		add(separator);
+		
+		Panel panel = new Panel();
+		panel.setBackground(SystemColor.menu);
+		panel.setBounds(273, 49, 4, 425);
+		add(panel);
 		
 
 	}

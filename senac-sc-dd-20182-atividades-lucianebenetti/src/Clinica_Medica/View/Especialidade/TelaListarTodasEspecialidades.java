@@ -82,7 +82,7 @@ public class TelaListarTodasEspecialidades extends JPanel {
 				"ID", "Nome", "Instituicao"
 			}
 		));
-		tbEspecialidades.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tbEspecialidades.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
 	}
 	

@@ -44,6 +44,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JToggleButton;
+import java.awt.Panel;
+import javax.swing.UIManager;
 
 public class TelaCadastrarConsulta extends JPanel {
 
@@ -344,6 +346,11 @@ public class TelaCadastrarConsulta extends JPanel {
 		Component verticalStrut = Box.createVerticalStrut(20);
 		verticalStrut.setBounds(750, 11, 1, 20);
 		add(verticalStrut);
+		
+		Panel panel = new Panel();
+		panel.setBackground(UIManager.getColor("Button.background"));
+		panel.setBounds(741, 33, 4, 571);
+		add(panel);
 
 	}
 

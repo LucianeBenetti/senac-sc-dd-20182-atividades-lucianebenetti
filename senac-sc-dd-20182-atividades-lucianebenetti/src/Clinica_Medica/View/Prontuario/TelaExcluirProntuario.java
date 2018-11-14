@@ -30,6 +30,8 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Panel;
+import java.awt.SystemColor;
 
 public class TelaExcluirProntuario extends JPanel {
 	private JTextField txtNome;
@@ -155,6 +157,11 @@ public class TelaExcluirProntuario extends JPanel {
 						new String[] { "ID", "Paciente", "Medicamentos", "Exames", "Registro" }));
 		tbProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		scrollPane.setColumnHeaderView(tbProntuarios);
+		
+		Panel panel = new Panel();
+		panel.setBackground(SystemColor.menu);
+		panel.setBounds(361, 39, 4, 485);
+		add(panel);
 
 	}
 

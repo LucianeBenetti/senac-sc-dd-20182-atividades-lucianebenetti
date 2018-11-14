@@ -38,6 +38,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Panel;
+import java.awt.SystemColor;
 
 public class TelaCadastrarProntuario extends JPanel {
 
@@ -331,6 +333,11 @@ public class TelaCadastrarProntuario extends JPanel {
 		lblPeriodicos.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblPeriodicos.setBounds(793, 294, 94, 14);
 		add(lblPeriodicos);
+		
+		Panel panel = new Panel();
+		panel.setBackground(SystemColor.menu);
+		panel.setBounds(755, 19, 4, 498);
+		add(panel);
 
 		String[] horarios = { "--- Selecione ---", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00",
 				"11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30",

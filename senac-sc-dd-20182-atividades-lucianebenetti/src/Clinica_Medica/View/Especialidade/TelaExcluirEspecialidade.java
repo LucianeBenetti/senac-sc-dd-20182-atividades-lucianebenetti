@@ -16,6 +16,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import Clinica_Medica.Controller.EspecialidadeController;
 import Clinica_Medica.VO.EspecialidadeVO;
+import java.awt.Panel;
+import java.awt.SystemColor;
 
 public class TelaExcluirEspecialidade extends JPanel {
 	private JTextField txtBuscarNome;
@@ -169,6 +171,11 @@ public class TelaExcluirEspecialidade extends JPanel {
 		txtInstituicao.setBounds(481, 476, 498, 31);
 		add(txtInstituicao);
 		txtInstituicao.setColumns(10);
+		
+		Panel panel = new Panel();
+		panel.setBackground(SystemColor.menu);
+		panel.setBounds(299, 18, 4, 576);
+		add(panel);
 
 	}
 

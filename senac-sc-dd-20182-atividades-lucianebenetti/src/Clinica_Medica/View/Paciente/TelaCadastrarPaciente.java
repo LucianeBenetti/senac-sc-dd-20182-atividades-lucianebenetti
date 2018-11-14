@@ -23,6 +23,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Panel;
+import java.awt.SystemColor;
 
 public class TelaCadastrarPaciente extends JPanel {
 	
@@ -344,6 +346,11 @@ public class TelaCadastrarPaciente extends JPanel {
 		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnAlterar.setBounds(566, 520, 124, 37);
 		add(btnAlterar);
+		
+		Panel panel = new Panel();
+		panel.setBackground(SystemColor.menu);
+		panel.setBounds(342, 30, 4, 527);
+		add(panel);
 
 	}
 

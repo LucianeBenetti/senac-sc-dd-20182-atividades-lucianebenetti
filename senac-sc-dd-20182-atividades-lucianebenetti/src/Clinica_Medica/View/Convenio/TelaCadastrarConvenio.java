@@ -23,6 +23,8 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
+import java.awt.Panel;
+import java.awt.SystemColor;
 
 public class TelaCadastrarConvenio extends JPanel {
 	
@@ -183,6 +185,11 @@ public class TelaCadastrarConvenio extends JPanel {
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(257, 94, 631, 2);
 		add(separator_1);
+		
+		Panel panel = new Panel();
+		panel.setBackground(SystemColor.menu);
+		panel.setBounds(214, 44, 4, 475);
+		add(panel);
 
 	}
 

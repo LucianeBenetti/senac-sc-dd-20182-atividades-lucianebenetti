@@ -27,6 +27,7 @@ import javax.swing.JScrollBar;
 public class TelaListarTodosConvenios extends JPanel {
 	private JTable tbConvenio;
 	private List<ConvenioVO> conveniosConsultados;
+	private JButton btnGerarPlaniha;
 
 	/**
 	 * Create the panel.
@@ -42,9 +43,11 @@ public class TelaListarTodosConvenios extends JPanel {
 			
 				ConvenioController controlador = new ConvenioController();
 				List<ConvenioVO> convenios = null;
-					convenios= controlador.listarTodosConvenios();
-
+				convenios= controlador.listarTodosConvenios();
 				atualizarTabelaConvenios(convenios);
+				
+				btnGerarPlaniha.setEnabled(true);
+
 			}
 		});
 		btnListarTodosConvenios.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -91,7 +94,8 @@ public class TelaListarTodosConvenios extends JPanel {
 			}
 		));
 		
-		JButton btnGerarPlaniha = new JButton("Gerar Planiha");
+		btnGerarPlaniha = new JButton("Gerar Planiha");
+		btnGerarPlaniha.setEnabled(false);
 		btnGerarPlaniha.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnGerarPlaniha.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

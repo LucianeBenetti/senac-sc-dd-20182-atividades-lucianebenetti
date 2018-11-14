@@ -80,7 +80,7 @@ public class TelaListarTodosPacientes extends JPanel {
 		
 		JLabel lblPacientes = new JLabel("Pacientes");
 		lblPacientes.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblPacientes.setBounds(170, 100, 124, 22);
+		lblPacientes.setBounds(179, 110, 124, 22);
 		add(lblPacientes);
 
 	}

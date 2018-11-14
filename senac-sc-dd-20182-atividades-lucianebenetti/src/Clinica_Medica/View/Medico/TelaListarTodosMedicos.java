@@ -70,7 +70,7 @@ public class TelaListarTodosMedicos extends JPanel {
 		
 		tbMedicos = new JTable();
 		scrollPane.setColumnHeaderView(tbMedicos);
-		tbMedicos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tbMedicos.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tbMedicos.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"Nome", "CRM", "CPF", "CNPJ", "Celular", "Whats App", "e-mail"},
@@ -82,7 +82,7 @@ public class TelaListarTodosMedicos extends JPanel {
 		
 		JLabel lblMedicos = new JLabel("Medicos");
 		lblMedicos.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblMedicos.setBounds(187, 126, 120, 22);
+		lblMedicos.setBounds(177, 125, 120, 22);
 		add(lblMedicos);
 
 	}

@@ -22,6 +22,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JScrollPane;
+import java.awt.Panel;
+import java.awt.SystemColor;
 
 public class TelaCadastrarEspecialidade extends JPanel {
 
@@ -209,6 +211,11 @@ public class TelaCadastrarEspecialidade extends JPanel {
 		lblid.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblid.setBounds(386, 360, 59, 31);
 		add(lblid);
+		
+		Panel panel = new Panel();
+		panel.setBackground(SystemColor.menu);
+		panel.setBounds(315, 11, 4, 543);
+		add(panel);
 
 	}
 
