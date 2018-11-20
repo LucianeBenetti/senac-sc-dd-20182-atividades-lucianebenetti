@@ -73,6 +73,7 @@ public class TelaListarTodasConsultas extends JPanel {
 		add(scrollPane);
 		
 		tbConsultas = new JTable();
+		tbConsultas.setEnabled(false);
 		scrollPane.setColumnHeaderView(tbConsultas);
 		tbConsultas.setModel(new DefaultTableModel(
 			new Object[][] {

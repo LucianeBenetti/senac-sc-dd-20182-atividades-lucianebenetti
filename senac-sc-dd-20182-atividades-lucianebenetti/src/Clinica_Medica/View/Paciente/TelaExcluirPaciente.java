@@ -186,6 +186,7 @@ setBackground(new Color(173, 216, 230));
 		txtCpfBusca.setColumns(10);
 		
 		txtNome = new JTextField();
+		txtNome.setEditable(false);
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtNome.setColumns(10);
 		txtNome.setBounds(392, 96, 633, 25);
@@ -193,6 +194,7 @@ setBackground(new Color(173, 216, 230));
 		
 		try {
 			txtCpf = new JFormattedTextField(new MaskFormatter(MASCARA_CPF));
+			txtCpf.setEditable(false);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -204,6 +206,7 @@ setBackground(new Color(173, 216, 230));
 		
 		try {
 			txtCnpj = new JFormattedTextField(new MaskFormatter(MASCARA_CNPJ));
+			txtCnpj.setEditable(false);
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -215,6 +218,7 @@ setBackground(new Color(173, 216, 230));
 		
 		try {
 			txtCelular = new JFormattedTextField(new MaskFormatter(MASCARA_CELULAR));
+			txtCelular.setEditable(false);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -226,6 +230,7 @@ setBackground(new Color(173, 216, 230));
 		
 		try {
 			txtFoneRes = new JFormattedTextField(new MaskFormatter(MASCARA_TELEFONE_FIXO));
+			txtFoneRes.setEditable(false);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -237,6 +242,7 @@ setBackground(new Color(173, 216, 230));
 		
 		try {
 			txtFoneCom = new JFormattedTextField(new MaskFormatter(MASCARA_TELEFONE_FIXO));
+			txtFoneCom.setEditable(false);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -247,36 +253,42 @@ setBackground(new Color(173, 216, 230));
 		add(txtFoneCom);
 		
 		txtEmail = new JTextField();
+		txtEmail.setEditable(false);
 		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtEmail.setColumns(10);
 		txtEmail.setBounds(416, 271, 609, 25);
 		add(txtEmail);
 		
 		txtLogradouro = new JTextField();
+		txtLogradouro.setEditable(false);
 		txtLogradouro.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtLogradouro.setColumns(10);
 		txtLogradouro.setBounds(418, 335, 609, 25);
 		add(txtLogradouro);
 		
 		txtNumLog = new JTextField();
+		txtNumLog.setEditable(false);
 		txtNumLog.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtNumLog.setColumns(10);
 		txtNumLog.setBounds(416, 380, 139, 25);
 		add(txtNumLog);
 		
 		txtComplemento = new JTextField();
+		txtComplemento.setEditable(false);
 		txtComplemento.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtComplemento.setColumns(10);
 		txtComplemento.setBounds(693, 380, 334, 25);
 		add(txtComplemento);
 		
 		txtBairro = new JTextField();
+		txtBairro.setEditable(false);
 		txtBairro.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtBairro.setColumns(10);
 		txtBairro.setBounds(418, 423, 223, 25);
 		add(txtBairro);
 		
 		txtCidade = new JTextField();
+		txtCidade.setEditable(false);
 		txtCidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtCidade.setColumns(10);
 		txtCidade.setBounds(751, 423, 276, 25);
@@ -284,6 +296,7 @@ setBackground(new Color(173, 216, 230));
 		
 		try {
 			txtCep = new JFormattedTextField(new MaskFormatter(MASCARA_CEP));
+			txtCep.setEditable(false);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

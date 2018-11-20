@@ -69,6 +69,7 @@ public class TelaListarTodosMedicos extends JPanel {
 		add(scrollPane);
 		
 		tbMedicos = new JTable();
+		tbMedicos.setEnabled(false);
 		scrollPane.setColumnHeaderView(tbMedicos);
 		tbMedicos.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tbMedicos.setModel(new DefaultTableModel(

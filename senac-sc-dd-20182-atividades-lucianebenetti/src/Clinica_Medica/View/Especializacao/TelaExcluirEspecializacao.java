@@ -101,6 +101,7 @@ public class TelaExcluirEspecializacao extends JPanel {
 		add(btnExcluir);
 
 		txtNomeMedico = new JTextField();
+		txtNomeMedico.setEditable(false);
 		txtNomeMedico.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtNomeMedico.setBounds(531, 402, 440, 31);
 		add(txtNomeMedico);
@@ -132,12 +133,14 @@ public class TelaExcluirEspecializacao extends JPanel {
 		add(cbEspecialidade);
 
 		txtNomeEspecialidade = new JTextField();
+		txtNomeEspecialidade.setEditable(false);
 		txtNomeEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtNomeEspecialidade.setBounds(531, 453, 440, 31);
 		add(txtNomeEspecialidade);
 		txtNomeEspecialidade.setColumns(10);
 
 		txtAno = new JTextField();
+		txtAno.setEditable(false);
 		txtAno.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtAno.setBounds(407, 513, 101, 34);
 		add(txtAno);

@@ -64,6 +64,7 @@ public class TelaListarTodasEspecialidades extends JPanel {
 		add(btnSair);
 		
 		JLabel lblEspecialidades = new JLabel("Especialidades");
+		lblEspecialidades.setEnabled(false);
 		lblEspecialidades.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblEspecialidades.setBounds(362, 145, 142, 23);
 		add(lblEspecialidades);
@@ -73,6 +74,7 @@ public class TelaListarTodasEspecialidades extends JPanel {
 		add(scrollPane);
 		
 		tbEspecialidades = new JTable();
+		tbEspecialidades.setEnabled(false);
 		scrollPane.setColumnHeaderView(tbEspecialidades);
 		tbEspecialidades.setModel(new DefaultTableModel(
 			new Object[][] {

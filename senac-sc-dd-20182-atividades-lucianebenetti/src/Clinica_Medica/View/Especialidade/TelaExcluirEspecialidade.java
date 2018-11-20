@@ -161,12 +161,14 @@ public class TelaExcluirEspecialidade extends JPanel {
 		txtId.setColumns(10);
 
 		txtNome = new JTextField();
+		txtNome.setEditable(false);
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtNome.setBounds(481, 402, 498, 29);
 		add(txtNome);
 		txtNome.setColumns(10);
 
 		txtInstituicao = new JTextField();
+		txtInstituicao.setEditable(false);
 		txtInstituicao.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtInstituicao.setBounds(481, 476, 498, 31);
 		add(txtInstituicao);

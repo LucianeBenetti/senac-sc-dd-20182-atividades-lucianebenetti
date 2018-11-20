@@ -73,6 +73,7 @@ public class TelaListarTodasEspecializacoes extends JPanel {
 		add(scrollPane);
 
 		tbEspecializacoes = new JTable();
+		tbEspecializacoes.setEnabled(false);
 		tbEspecializacoes.setModel(
 				new DefaultTableModel(new Object[][] { { "ID", "Medico", "Especialidade", "Ano", "Instituicao" }, },
 						new String[] { "ID", "Medico", "Especialidade", "Ano", "Instituicao" }));

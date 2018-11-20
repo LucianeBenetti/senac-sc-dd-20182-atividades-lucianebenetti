@@ -83,6 +83,7 @@ public class TelaListarTodosConvenios extends JPanel {
 		add(scrollPane);
 		
 		tbConvenio = new JTable();
+		tbConvenio.setEnabled(false);
 		scrollPane.setColumnHeaderView(tbConvenio);
 		tbConvenio.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tbConvenio.setModel(new DefaultTableModel(

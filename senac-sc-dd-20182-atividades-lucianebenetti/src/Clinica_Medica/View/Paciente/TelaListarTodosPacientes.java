@@ -67,6 +67,7 @@ public class TelaListarTodosPacientes extends JPanel {
 		add(scrollPane);
 		
 		tbPacientes = new JTable();
+		tbPacientes.setEnabled(false);
 		scrollPane.setColumnHeaderView(tbPacientes);
 		tbPacientes.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tbPacientes.setModel(new DefaultTableModel(

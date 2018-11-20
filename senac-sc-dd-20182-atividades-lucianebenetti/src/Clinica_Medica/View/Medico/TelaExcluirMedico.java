@@ -87,6 +87,7 @@ public class TelaExcluirMedico extends JPanel {
 		add(lblNome);
 		
 		txtNome = new JTextField();
+		txtNome.setEditable(false);
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtNome.setBounds(476, 126, 549, 26);
 		add(txtNome);
@@ -98,6 +99,7 @@ public class TelaExcluirMedico extends JPanel {
 		add(lblCnpj);
 		
 		txtCrm = new JTextField();
+		txtCrm.setEditable(false);
 		txtCrm.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtCrm.setBounds(476, 174, 195, 26);
 		add(txtCrm);
@@ -115,6 +117,7 @@ public class TelaExcluirMedico extends JPanel {
 		
 		try {
 			txtCnpj = new JFormattedTextField(new MaskFormatter(MASCARA_CNPJ));
+			txtCnpj.setEditable(false);
 		} catch (ParseException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -126,6 +129,7 @@ public class TelaExcluirMedico extends JPanel {
 		
 		try {
 			txtCelular = new JFormattedTextField(new MaskFormatter(MASCARA_CELULAR));
+			txtCelular.setEditable(false);
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -188,6 +192,7 @@ public class TelaExcluirMedico extends JPanel {
 		
 		try {
 			txtCpf = new JFormattedTextField(new MaskFormatter(MASCARA_CPF));
+			txtCpf.setEditable(false);
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -204,6 +209,7 @@ public class TelaExcluirMedico extends JPanel {
 		
 		try {
 			txtCelMen = new JFormattedTextField(new MaskFormatter(MASCARA_CELULAR));
+			txtCelMen.setEditable(false);
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -219,6 +225,7 @@ public class TelaExcluirMedico extends JPanel {
 		add(lblEmail);
 		
 		txtEmail = new JTextField();
+		txtEmail.setEditable(false);
 		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtEmail.setBounds(499, 400, 526, 26);
 		add(txtEmail);

@@ -62,12 +62,14 @@ public class TelaExcluirConvenio extends JPanel {
 		txtCnpj.setColumns(10);
 		
 		txtNome = new JTextField();
+		txtNome.setEditable(false);
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtNome.setBounds(415, 155, 427, 30);
 		add(txtNome);
 		txtNome.setColumns(10);
 		
 		txtValor = new JTextField();
+		txtValor.setEditable(false);
 		txtValor.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtValor.setBounds(415, 223, 149, 30);
 		add(txtValor);

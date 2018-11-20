@@ -68,8 +68,8 @@ public class TelaExcluirConsulta extends JPanel {
 	private JTextField txtEspecialidade;
 	private JTextField txtConvenio;
 	private JTable tbConsultas;
-	private JTextField txtHorario;
 	private JTextField txtIdConsulta;
+	private JComboBox cbHorarioConsulta;
 	
 
 	/**
@@ -230,7 +230,7 @@ public class TelaExcluirConsulta extends JPanel {
 				txtNomeMedico.setText((String) tbConsultas.getValueAt(selecionado, 3));
 				txtEspecialidade.setText((String) tbConsultas.getValueAt(selecionado, 4));
 				dateChooserDataConsulta.setDate((Date) tbConsultas.getValueAt(selecionado, 5));
-				txtHorario.setText((String) tbConsultas.getValueAt(selecionado, 6));
+				cbHorarioConsulta.setSelectedItem((String) tbConsultas.getValueAt(selecionado, 6));
 				txtIdPaciente.setText(tbConsultas.getValueAt(selecionado, 7) + "");
 				txtIdConvenio.setText(tbConsultas.getValueAt(selecionado,8) + "");
 				txtIdEspecializacao.setText(tbConsultas.getValueAt(selecionado,9) + "");
@@ -272,12 +272,6 @@ public class TelaExcluirConsulta extends JPanel {
 		btnBuscarConsultas.setBounds(926, 67, 201, 31);
 		add(btnBuscarConsultas);
 
-		txtHorario = new JTextField();
-		txtHorario.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtHorario.setBounds(190, 331, 179, 35);
-		add(txtHorario);
-		txtHorario.setColumns(10);
-
 		JLabel lblIdConsulta = new JLabel("ID Consulta");
 		lblIdConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblIdConsulta.setBounds(27, 34, 128, 20);
@@ -317,6 +311,15 @@ public class TelaExcluirConsulta extends JPanel {
 		panel.setBackground(SystemColor.menu);
 		panel.setBounds(668, 10, 5, 461);
 		add(panel);
+		
+		String[] horariosConsultas = { "--- Selecione ---", "08:00:00", "08:30:00", "09:00:00", "09:30:00", "10:00:00",
+				"10:30:00", "11:00:00", "11:30:00", "12:00:00", "12:30:00", "13:00:00", "13:30:00", "14:00:00",
+				"14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00", "17:30:00", "18:00:00" };
+
+		cbHorarioConsulta = new JComboBox(horariosConsultas);
+		cbHorarioConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		cbHorarioConsulta.setBounds(190, 341, 172, 31);
+		add(cbHorarioConsulta);
 
 	}
 
@@ -337,7 +340,7 @@ public class TelaExcluirConsulta extends JPanel {
 		txtEspecialidade.setText("");
 		txtConvenio.setText("");
 		dateChooserDataConsulta.setDate(null);
-		txtHorario.setText("");
+		cbHorarioConsulta.setSelectedIndex(0);
 		txtIdEspecializacao.setText("");
 		txtIdConsulta.setText("");
 
@@ -367,7 +370,7 @@ public class TelaExcluirConsulta extends JPanel {
 		consulta.setPacienteVO(paciente);
 		consulta.setCodigoConsulta(Integer.parseInt(txtIdConsulta.getText()));
 		consulta.setDataConsulta(dateChooserDataConsulta.getDate());
-		consulta.setHorarioConsulta(txtHorario.getText());
+		consulta.setHorarioConsulta((String) cbHorarioConsulta.getSelectedItem());
 
 		return consulta;
 	}

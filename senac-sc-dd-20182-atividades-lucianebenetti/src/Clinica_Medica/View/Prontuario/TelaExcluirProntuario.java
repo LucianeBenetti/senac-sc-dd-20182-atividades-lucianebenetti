@@ -99,6 +99,7 @@ public class TelaExcluirProntuario extends JPanel {
 		add(lblNomePaciente);
 
 		txtNome = new JTextField();
+		txtNome.setEditable(false);
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtNome.setBounds(550, 434, 395, 25);
 		add(txtNome);
