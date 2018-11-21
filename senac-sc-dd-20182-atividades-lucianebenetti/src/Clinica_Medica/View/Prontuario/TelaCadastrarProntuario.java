@@ -77,18 +77,8 @@ public class TelaCadastrarProntuario extends JPanel {
 
 				ConsultaController controladorConsultas = new ConsultaController();
 				List<ConsultaVO> consultas = controladorConsultas.listarTodasConsultas();
-				ProntuarioController controladorProntuarios = new ProntuarioController();
-				List<ProntuarioVO> prontuarios = controladorProntuarios.listarTodosProntuarios();
+
 				atualizarTabelaConsultas(consultas);
-
-//				for (ProntuarioVO prontuario : prontuarios) {
-//					if (tbConsultas.getRowCount() != 0) {
-//						if (txtNomePaciente.getText() == prontuario.getConsulta().getPacienteVO().getNomePaciente()) {
-
-							atualizarTabelaProntuarios(prontuarios);
-//						}
-//					}
-//				}
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -244,7 +234,7 @@ public class TelaCadastrarProntuario extends JPanel {
 		txtHorarioConsulta.setColumns(10);
 
 		JScrollPane scrollPane_4 = new JScrollPane();
-		scrollPane_4.setBounds(793, 94, 552, 182);
+		scrollPane_4.setBounds(793, 94, 552, 151);
 		add(scrollPane_4);
 
 		tbConsultas = new JTable();
@@ -284,7 +274,7 @@ public class TelaCadastrarProntuario extends JPanel {
 		add(lblIdConsulta);
 
 		JScrollPane scrollPane_5 = new JScrollPane();
-		scrollPane_5.setBounds(793, 315, 552, 144);
+		scrollPane_5.setBounds(793, 327, 552, 133);
 		add(scrollPane_5);
 
 		tbProntuarios = new JTable();
@@ -324,15 +314,38 @@ public class TelaCadastrarProntuario extends JPanel {
 		lblConsultas.setBounds(793, 79, 107, 14);
 		add(lblConsultas);
 
-		JLabel lblPeriodicos = new JLabel("Periodicos");
+		JLabel lblPeriodicos = new JLabel("Prontuarios");
 		lblPeriodicos.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblPeriodicos.setBounds(793, 294, 94, 14);
+		lblPeriodicos.setBounds(793, 312, 94, 14);
 		add(lblPeriodicos);
 
 		Panel panel = new Panel();
 		panel.setBackground(SystemColor.menu);
 		panel.setBounds(755, 19, 4, 498);
 		add(panel);
+
+		JButton btnBuscarPronturios = new JButton("Buscar Prontuarios");
+		btnBuscarPronturios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+
+				ProntuarioController controladorProntuarios = new ProntuarioController();
+				List<ProntuarioVO> prontuarios = controladorProntuarios.listarTodosProntuarios();
+
+			//for (ProntuarioVO prontuario : prontuarios) {
+
+			//		if (txtNomePaciente.getText() == prontuario.getConsulta().getPacienteVO().getNomePaciente()) {
+
+						atualizarTabelaProntuarios(prontuarios);
+					//}
+				//}
+			}
+
+		});
+		btnBuscarPronturios.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnBuscarPronturios.setBounds(977, 278, 219, 39);
+
+		add(btnBuscarPronturios);
 
 		String[] horarios = { "--- Selecione ---", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00",
 				"11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30",
@@ -440,5 +453,4 @@ public class TelaCadastrarProntuario extends JPanel {
 			modelo.addRow(novaLinha);
 		}
 	}
-
 }

@@ -166,6 +166,7 @@ public class TelaCadastrarPaciente extends JPanel {
 					pacienteBuscado = buscarPaciente();
 				} else {
 					JOptionPane.showMessageDialog(null, "Paciente não encontrado.");
+					txtCpf.setText(txtCpfBusca.getText());
 				}
 				
 			}

@@ -74,7 +74,6 @@ public class TelaListarTodasEspecialidades extends JPanel {
 		add(scrollPane);
 		
 		tbEspecialidades = new JTable();
-		tbEspecialidades.setEnabled(false);
 		scrollPane.setColumnHeaderView(tbEspecialidades);
 		tbEspecialidades.setModel(new DefaultTableModel(
 			new Object[][] {

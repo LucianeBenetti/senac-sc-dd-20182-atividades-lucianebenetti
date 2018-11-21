@@ -99,6 +99,7 @@ public class TelaCadastrarConvenio extends JPanel {
 													
 					}else {
 						JOptionPane.showMessageDialog(null, "Convênio não encontrado.");
+						txtCnpj.setText(txtBuscarCnpj.getText());
 					}
 			}
 		});

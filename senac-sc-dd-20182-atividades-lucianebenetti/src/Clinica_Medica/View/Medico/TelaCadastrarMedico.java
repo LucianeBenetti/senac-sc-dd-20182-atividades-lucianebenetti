@@ -185,11 +185,11 @@ public class TelaCadastrarMedico extends JPanel {
 				medicoBuscado = dao.buscarMedicoPorCPF(txtBuscarCpf.getText());
 
 				if (medicoBuscado != null) {
-					
 					medicoBuscado = buscarMedico();
-					
+
 				} else {
 					JOptionPane.showMessageDialog(null, "Médico não encontrado.");
+					txtCPF.setText(txtBuscarCpf.getText());
 				}
 			}
 		});
@@ -245,7 +245,7 @@ public class TelaCadastrarMedico extends JPanel {
 		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnAlterar.setBounds(566, 495, 143, 37);
 		add(btnAlterar);
-		
+
 		Panel panel = new Panel();
 		panel.setBackground(UIManager.getColor("Button.background"));
 		panel.setBounds(350, 38, 4, 494);
