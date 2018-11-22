@@ -243,6 +243,8 @@ public class TelaExcluirConsulta extends JPanel {
 				new String[] { "ID Consulta", "Paciente", "Convenio", "Medico", "Especialidade", "Data", "Horario",
 						"New column", "New column", "New column" }));
 		scrollPane_1.setColumnHeaderView(tbConsultas);
+		tbConsultas.getColumnModel().getColumn(0).setMinWidth(0);
+		tbConsultas.getColumnModel().getColumn(0).setMaxWidth(0);
 		tbConsultas.getColumnModel().getColumn(7).setMinWidth(0);
 		tbConsultas.getColumnModel().getColumn(7).setMaxWidth(0);
 		tbConsultas.getColumnModel().getColumn(8).setMinWidth(0);
@@ -259,6 +261,8 @@ public class TelaExcluirConsulta extends JPanel {
 				ConsultaController controlador = new ConsultaController();
 				consultas = controlador.listarTodasConsultas();
 				atualizarTabelaConsultas(consultas);
+				tbConsultas.getColumnModel().getColumn(0).setMinWidth(0);
+				tbConsultas.getColumnModel().getColumn(0).setMaxWidth(0);
 				tbConsultas.getColumnModel().getColumn(7).setMinWidth(0);
 				tbConsultas.getColumnModel().getColumn(7).setMaxWidth(0);
 				tbConsultas.getColumnModel().getColumn(8).setMinWidth(0);

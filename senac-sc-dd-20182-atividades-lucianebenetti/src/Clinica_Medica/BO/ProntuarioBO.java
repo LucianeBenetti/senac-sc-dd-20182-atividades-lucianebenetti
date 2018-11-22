@@ -35,4 +35,8 @@ public class ProntuarioBO {
 		
 		return  dao.atualizar(prontuario, codigoProntuario);
 	}
+
+	public List<ProntuarioVO> listarProntuariosDoPaciente(int codigoPaciente) {
+		return dao.listarProntuariosDoPaciente(codigoPaciente);
+	}
 }

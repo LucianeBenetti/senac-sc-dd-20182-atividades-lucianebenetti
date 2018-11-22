@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Clinica_Medica.BO.ProntuarioBO;
+import Clinica_Medica.VO.ConsultaVO;
 import Clinica_Medica.VO.ConvenioVO;
 import Clinica_Medica.VO.ProntuarioVO;
 
@@ -63,6 +64,16 @@ public class ProntuarioController {
 		}
 		return validacao;
 
+	}
+
+	public List<ProntuarioVO> listarProntuariosDoPaciente(ConsultaVO consultaSelecionada) {
+		
+		List<ProntuarioVO> prontuarios = new ArrayList<>();
+		if(consultaSelecionada != null && consultaSelecionada.getPacienteVO() != null) {
+			prontuarios = bo.listarProntuariosDoPaciente(consultaSelecionada.getPacienteVO().getCodigoPaciente());
+		}
+		
+		return prontuarios;
 	}
 
 }

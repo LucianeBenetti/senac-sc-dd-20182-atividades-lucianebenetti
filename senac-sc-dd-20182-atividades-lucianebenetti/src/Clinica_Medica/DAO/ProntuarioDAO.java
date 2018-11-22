@@ -158,5 +158,38 @@ public class ProntuarioDAO {
 		return listaprontuarios;
 	}
 
+	public ArrayList<ProntuarioVO> listarProntuariosDoPaciente(int idPaciente) {
+
+		ArrayList<ProntuarioVO> listaProntuarios = new ArrayList<ProntuarioVO>();
+		
+		String query = " SELECT prt.* from prontuario prt, consulta con, paciente pac "
+				+ " WHERE prt.codigoProntuario = con.codigoConsulta " + 
+				"     AND pac.codigoPaciente = con.codigoPaciente " + 
+				"     AND pac.codigoPaciente = ? ";
+
+		Connection conn = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, query);
+		try {
+			prepStmt.setInt(1, idPaciente);
+			ResultSet result = prepStmt.executeQuery();
+
+			while (result.next()) {
+				ProntuarioVO prontuario = new ProntuarioVO();
+
+				prontuario.setCodigoProntuario(result.getInt(1));
+				ConsultaVO consulta = consultaDAO.consultarPorId(result.getInt(2));
+				prontuario.setConsulta(consulta);
+				prontuario.setMedicamento(result.getString(3));
+				prontuario.setExame(result.getString(4));
+				prontuario.setRegistro(result.getString(5));
+				
+				listaProntuarios.add(prontuario);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaProntuarios;
+	}
 
 }

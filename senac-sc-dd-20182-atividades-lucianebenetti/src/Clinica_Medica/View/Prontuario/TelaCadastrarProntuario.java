@@ -9,6 +9,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
+import Clinica_Medica.BO.ProntuarioBO;
 import Clinica_Medica.Controller.ConsultaController;
 import Clinica_Medica.Controller.PacienteController;
 import Clinica_Medica.Controller.ProntuarioController;
@@ -57,6 +58,9 @@ public class TelaCadastrarProntuario extends JPanel {
 	private JTextField txtIdConsulta;
 	private JTable tbProntuarios;
 	private JTextField txtIdProntuario;
+	protected List<ConsultaVO> consultas;
+	protected ConsultaVO consultaSelecionada;
+	private JButton btnBuscarProntuarios;
 
 	/**
 	 * Create the panel.
@@ -76,9 +80,11 @@ public class TelaCadastrarProntuario extends JPanel {
 			public void mouseClicked(MouseEvent arg0) {
 
 				ConsultaController controladorConsultas = new ConsultaController();
-				List<ConsultaVO> consultas = controladorConsultas.listarTodasConsultas();
+				consultas = controladorConsultas.listarTodasConsultas();
 
 				atualizarTabelaConsultas(consultas);
+				btnBuscarProntuarios.setEnabled(true);
+
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -130,7 +136,7 @@ public class TelaCadastrarProntuario extends JPanel {
 		txtNomePaciente = new JTextField();
 		txtNomePaciente.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtNomePaciente.setColumns(10);
-		txtNomePaciente.setBounds(157, 19, 560, 32);
+		txtNomePaciente.setBounds(157, 19, 552, 32);
 		add(txtNomePaciente);
 
 		JButton btnLimparTela = new JButton("Limpar Tela");
@@ -242,16 +248,17 @@ public class TelaCadastrarProntuario extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				int selecionado = tbConsultas.getSelectedRow();
+				int linhaSelecionada = tbConsultas.getSelectedRow();
+				consultaSelecionada = consultas.get(linhaSelecionada - 1);
 
-				txtIdConsulta.setText(tbConsultas.getValueAt(selecionado, 0) + "");
-				txtNomePaciente.setText((String) tbConsultas.getValueAt(selecionado, 1));
+				txtIdConsulta.setText(tbConsultas.getValueAt(linhaSelecionada, 0) + "");
+				txtNomePaciente.setText((String) tbConsultas.getValueAt(linhaSelecionada, 1));
 
-				Date dataConsulta = (Date) tbConsultas.getValueAt(selecionado, 2);
+				Date dataConsulta = (Date) tbConsultas.getValueAt(linhaSelecionada, 2);
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
 				String dataConsultaFormatada = sdf.format(dataConsulta);
 				txtDataConsulta.setText(dataConsultaFormatada);
-				txtHorarioConsulta.setText((String) tbConsultas.getValueAt(selecionado, 3));
+				txtHorarioConsulta.setText((String) tbConsultas.getValueAt(linhaSelecionada, 3));
 
 			}
 		});
@@ -260,7 +267,6 @@ public class TelaCadastrarProntuario extends JPanel {
 				new Object[][] { { "ID Consulta", "Paciente", "Data Consulta", "Horario Consulta" }, },
 				new String[] { "ID Consulta", "Paciente", "Data Consulta", "Horario Consulta" }));
 		scrollPane_4.setColumnHeaderView(tbConsultas);
-
 		txtIdConsulta = new JTextField();
 		txtIdConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtIdConsulta.setEditable(false);
@@ -299,13 +305,13 @@ public class TelaCadastrarProntuario extends JPanel {
 
 		JLabel lblIdProntuario = new JLabel("ID Prontuario");
 		lblIdProntuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblIdProntuario.setBounds(374, 125, 114, 24);
+		lblIdProntuario.setBounds(273, 124, 114, 24);
 		add(lblIdProntuario);
 
 		txtIdProntuario = new JTextField();
 		txtIdProntuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtIdProntuario.setEditable(false);
-		txtIdProntuario.setBounds(498, 121, 86, 32);
+		txtIdProntuario.setBounds(392, 116, 86, 32);
 		add(txtIdProntuario);
 		txtIdProntuario.setColumns(10);
 
@@ -324,28 +330,32 @@ public class TelaCadastrarProntuario extends JPanel {
 		panel.setBounds(755, 19, 4, 498);
 		add(panel);
 
-		JButton btnBuscarPronturios = new JButton("Buscar Prontuarios");
-		btnBuscarPronturios.addMouseListener(new MouseAdapter() {
+		btnBuscarProntuarios = new JButton("Buscar Prontuarios");
+		btnBuscarProntuarios.setEnabled(false);
+		btnBuscarProntuarios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
+				// ProntuarioVO prontuarioBuscado = new ProntuarioVO();
 				ProntuarioController controladorProntuarios = new ProntuarioController();
-				List<ProntuarioVO> prontuarios = controladorProntuarios.listarTodosProntuarios();
+				List<ProntuarioVO> prontuarios = controladorProntuarios
+						.listarProntuariosDoPaciente(consultaSelecionada);
 
-			//for (ProntuarioVO prontuario : prontuarios) {
-
-			//		if (txtNomePaciente.getText() == prontuario.getConsulta().getPacienteVO().getNomePaciente()) {
+				for (ProntuarioVO prontuarioBuscado : prontuarios) {
+					if (consultaSelecionada.getPacienteVO().getCodigoPaciente() == prontuarioBuscado.getConsulta()
+							.getPacienteVO().getCodigoPaciente()) {
 
 						atualizarTabelaProntuarios(prontuarios);
-					//}
-				//}
+					} else {
+						JOptionPane.showMessageDialog(null, "Paciente sem prontuário cadastrado!");
+					}
+				}
 			}
-
 		});
-		btnBuscarPronturios.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscarPronturios.setBounds(977, 278, 219, 39);
+		btnBuscarProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnBuscarProntuarios.setBounds(977, 278, 219, 39);
 
-		add(btnBuscarPronturios);
+		add(btnBuscarProntuarios);
 
 		String[] horarios = { "--- Selecione ---", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00",
 				"11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30",
@@ -429,7 +439,7 @@ public class TelaCadastrarProntuario extends JPanel {
 			// na ORDEM do cabeçalho da tabela
 			Object[] novaLinha = new Object[] { consulta.getCodigoConsulta(),
 					consulta.getPacienteVO().getNomePaciente(), consulta.getDataConsulta(),
-					consulta.getHorarioConsulta(),
+					consulta.getHorarioConsulta(), consulta.getPacienteVO().getCodigoPaciente(),
 
 			};
 			modelo.addRow(novaLinha);
@@ -438,8 +448,8 @@ public class TelaCadastrarProntuario extends JPanel {
 
 	private void atualizarTabelaProntuarios(List<ProntuarioVO> prontuarios) {
 		tbProntuarios.setModel(new DefaultTableModel(
-				new Object[][] { { "ID Prontuario", "Paciente", "Medicamentos", "Exames", "Registro" }, },
-				new String[] { "ID Prontuario", "Paciente", "Medicamentos", "Exames", "Registro" }));
+				new Object[][] { { "ID Prontuario", "Medico", "Paciente", "Medicamentos", "Exames", "Registro" }, },
+				new String[] { "ID Prontuario", "Medico", "Paciente", "Medicamentos", "Exames", "Registro" }));
 
 		DefaultTableModel modelo = (DefaultTableModel) tbProntuarios.getModel();
 
@@ -448,6 +458,7 @@ public class TelaCadastrarProntuario extends JPanel {
 			// Preencher a linha com os atributos do produto
 			// na ORDEM do cabeçalho da tabela
 			Object[] novaLinha = new Object[] { prontuario.getCodigoProntuario(),
+					prontuario.getConsulta().getEspecializacaoVO().getMedicoVO().getNomeMedico(),
 					prontuario.getConsulta().getPacienteVO().getNomePaciente(), prontuario.getMedicamento(),
 					prontuario.getExame(), prontuario.getRegistro() };
 			modelo.addRow(novaLinha);
