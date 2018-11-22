@@ -130,7 +130,7 @@ public class TelaPrincipal extends JFrame {
 		mntmExcluirConsulta.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnConsulta.add(mntmExcluirConsulta);
 		
-		JMenuItem mntmListarTodos = new JMenuItem("Listar Todos");
+		JMenuItem mntmListarTodos = new JMenuItem("Listar Consultas");
 		mntmListarTodos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				contentPane = new TelaListarTodasConsultas();
@@ -173,7 +173,7 @@ public class TelaPrincipal extends JFrame {
 		mntmExcluirPaciente.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnPaciente.add(mntmExcluirPaciente);
 		
-		JMenuItem mntmListarTodos_1 = new JMenuItem("Listar Todos");
+		JMenuItem mntmListarTodos_1 = new JMenuItem("Listar Pacientes");
 		mntmListarTodos_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -218,7 +218,7 @@ public class TelaPrincipal extends JFrame {
 		mntmExcluirProntuario.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnProntuario.add(mntmExcluirProntuario);
 		
-		JMenuItem mntmListarProntuario = new JMenuItem("Listar Prontuario");
+		JMenuItem mntmListarProntuario = new JMenuItem("Listar Prontuarios");
 		mntmListarProntuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -263,7 +263,7 @@ public class TelaPrincipal extends JFrame {
 		mntmExcluirConvenio.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnConvenio.add(mntmExcluirConvenio);
 		
-		JMenuItem mntmListarTodos_2 = new JMenuItem("Listar Todos");
+		JMenuItem mntmListarTodos_2 = new JMenuItem("Listar Conv\u00EAnios/Relat\u00F3rios");
 		mntmListarTodos_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -308,7 +308,7 @@ public class TelaPrincipal extends JFrame {
 		mntmExcluirMedico.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnMdico.add(mntmExcluirMedico);
 		
-		JMenuItem mntmListarTodos_3 = new JMenuItem("Listar Todos");
+		JMenuItem mntmListarTodos_3 = new JMenuItem("Listar M\u00E9dicos");
 		mntmListarTodos_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -353,7 +353,7 @@ public class TelaPrincipal extends JFrame {
 		mntmExcluirEspecialidade.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnEspecialidade.add(mntmExcluirEspecialidade);
 		
-		JMenuItem mntmListarEspecialidade = new JMenuItem("Listar Especialidade");
+		JMenuItem mntmListarEspecialidade = new JMenuItem("Listar Especialidades");
 		mntmListarEspecialidade.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -400,7 +400,7 @@ public class TelaPrincipal extends JFrame {
 		mntmExcluirEspecializacao.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		mnEspecializacao.add(mntmExcluirEspecializacao);
 		
-		JMenuItem mntmListasTodas = new JMenuItem("Listas Todas");
+		JMenuItem mntmListasTodas = new JMenuItem("Listas Especializa\u00E7\u00F5es");
 		mntmListasTodas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
