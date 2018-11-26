@@ -22,7 +22,6 @@ public class ConsultaBO {
 		//java.sql.Date			
 		Date dataSQL = new Date(c.getTimeInMillis());
 		
-		
 		if (dao.consultarDataHorario(dataSQL, consulta.getHorarioConsulta()) == null) {
 			JOptionPane.showMessageDialog(null, "Consulta já cadastrada! Tente novamente.");
 		} else {

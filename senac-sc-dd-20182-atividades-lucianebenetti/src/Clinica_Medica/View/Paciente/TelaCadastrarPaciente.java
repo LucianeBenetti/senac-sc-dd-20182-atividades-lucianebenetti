@@ -146,15 +146,10 @@ public class TelaCadastrarPaciente extends JPanel {
 				PacienteController controlador = new PacienteController();
 				PacienteVO paciente = construirPaciente();
 				
-				if (controlador.consultarPacientePorCpf(paciente.getCpfPaciente()) != null) {
-					JOptionPane.showMessageDialog(null, "Paciente já cadastrado! Tente novamente.");
-					
-				} else {
-
 				String mensagem = controlador.salvar(paciente);
 				JOptionPane.showMessageDialog(null, mensagem);
 				limparTela();
-			}
+			
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));

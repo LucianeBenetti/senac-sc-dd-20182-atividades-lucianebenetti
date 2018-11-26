@@ -54,14 +54,10 @@ public class TelaCadastrarMedico extends JPanel {
 				MedicoController controlador = new MedicoController();
 				MedicoVO medico = construirMedico();
 
-				if (controlador.consultarMedicoVOPorCpf(medico.getCpfMedico()) != null) {
-					JOptionPane.showMessageDialog(null, "Médico já cadastrado! Tente novamente.");
-				} else {
-					
 				String mensagem = controlador.salvar(medico);
 				JOptionPane.showMessageDialog(null, mensagem);
 				limparTela();
-				}
+				
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));

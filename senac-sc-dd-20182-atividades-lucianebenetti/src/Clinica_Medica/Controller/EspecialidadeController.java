@@ -3,6 +3,8 @@ package Clinica_Medica.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import Clinica_Medica.BO.EspecialidadeBO;
 import Clinica_Medica.VO.EspecialidadeVO;
 import Clinica_Medica.VO.EspecializacaoVO;
@@ -35,6 +37,11 @@ public class EspecialidadeController {
 			if (especialidade.getNomeEspecialidade().trim().equals("")
 					|| especialidade.getInstituicao().trim().equals("")) {
 				validacao += "- Nome e Instituição são obrigatórios. \n";
+			} else {
+				if (bo.consultarEspecialidadeVONome(especialidade.getNomeEspecialidade(),
+						especialidade.getInstituicao()) != null) {
+					validacao = "Especialidade já cadastrada! Tente novamente.";
+				}
 			}
 
 		}
@@ -65,9 +72,8 @@ public class EspecialidadeController {
 		return bo.listarTodasEspecialidades();
 	}
 
-	
 	public ArrayList<EspecialidadeVO> consultarEspecialidade() {
-		
+
 		return bo.buscarEspecilidades();
 	}
 
@@ -79,9 +85,7 @@ public class EspecialidadeController {
 	public EspecialidadeVO consultarEspecialidadeVONome(String nomeEspecialidade, String instituicao) {
 		// TODO Auto-generated method stub
 		return bo.consultarEspecialidadeVONome(nomeEspecialidade, instituicao);
-		
-	}
 
-		
+	}
 
 }

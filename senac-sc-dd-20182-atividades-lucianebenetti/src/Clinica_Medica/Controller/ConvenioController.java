@@ -3,6 +3,8 @@ package Clinica_Medica.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import Clinica_Medica.BO.ConvenioBO;
 import Clinica_Medica.VO.ConvenioVO;
 
@@ -12,6 +14,13 @@ public class ConvenioController {
 	public static final String TIPO_RELATORIO_XLS = "xls";
 	public static final String TIPO_RELATORIO_PDF = "pdf";
 
+	/**
+	 * Tenta salvar um novo convenio.
+	 * 
+	 * @param convenio o novo convenio criado.
+	 * @return String msg, informando o que ocorreu (sucesso ao salvar, CPNJ já
+	 *         utilizado, erro, etc.)
+	 */
 	public String salvar(ConvenioVO convenio) {
 
 		String validacao = validarConvenio(convenio);
@@ -21,7 +30,7 @@ public class ConvenioController {
 			if (bo.inserir(convenio)) {
 				validacao = "Convênio salvo com sucesso!";
 			} else {
-				validacao = "Erro ao salvar convenio!";
+				validacao = "Erro ao salvar convênio!";
 			}
 		}
 		return validacao;
@@ -34,9 +43,12 @@ public class ConvenioController {
 			validacao = "CNPJ está nulo!";
 		} else {
 			if (convenio.getNomeConvenio().trim().equals("") || convenio.getCnpjConvenio().trim().equals("")) {
-				validacao += " - Nome e CNPJ são obrigatórios. \n";
+				validacao += "Nome e CNPJ são obrigatórios. \n";
+			} else {
+				if (bo.buscarConvenioPorCNPJ(convenio.getCnpjConvenio()) != null) {
+					validacao = "Convênio já cadastrado! Tente novamente.";
+				}
 			}
-
 		}
 		return validacao;
 	}
@@ -53,13 +65,11 @@ public class ConvenioController {
 	public String atualizarConvenio(ConvenioVO convenio, String conCnpj) {
 
 		String validacao = validarConvenio(convenio);
-		if (validacao == "") {
+		if (bo.atualizarConvenio(convenio, conCnpj)) {
+			validacao = "Convênio salvo com sucesso!";
+		} else {
+			validacao = "Erro ao salvar convenio!";
 
-			if (bo.atualizarConvenio(convenio, conCnpj)) {
-				validacao = "Convênio salvo com sucesso!";
-			} else {
-				validacao = "Erro ao salvar convenio!";
-			}
 		}
 		return validacao;
 
@@ -68,7 +78,7 @@ public class ConvenioController {
 	public void excluirConvenio(ConvenioVO convenio) {
 
 		bo.excluirConvenio(convenio);
-	
+
 	}
 
 	public List<ConvenioVO> listarTodosConvenios() {
@@ -76,12 +86,11 @@ public class ConvenioController {
 		return bo.listarTodosConvenios();
 	}
 
-	public void gerarRelatorio(List<ConvenioVO> convenios, String caminhoEscolhido,
-			String tipoRelatorio) {
-		if(tipoRelatorio.equals(TIPO_RELATORIO_XLS)){
+	public void gerarRelatorio(List<ConvenioVO> convenios, String caminhoEscolhido, String tipoRelatorio) {
+		if (tipoRelatorio.equals(TIPO_RELATORIO_XLS)) {
 			bo.gerarPlanilha(convenios, caminhoEscolhido);
 		}
-		
+
 	}
 
 }

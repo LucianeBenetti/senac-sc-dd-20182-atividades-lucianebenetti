@@ -90,14 +90,10 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 				EspecializacaoController controlador = new EspecializacaoController();
 				EspecializacaoVO especializacao = construirEspecializacao();
 				
-				if (controlador.existeEspecializacao(especializacao)) {
-					JOptionPane.showMessageDialog(null, "Especialização já cadastrada! Tente novamente.");
-				} else {
-
 				String mensagem = controlador.salvar(especializacao);
 				JOptionPane.showMessageDialog(null, mensagem);
 				limparTela();
-				}
+				
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));

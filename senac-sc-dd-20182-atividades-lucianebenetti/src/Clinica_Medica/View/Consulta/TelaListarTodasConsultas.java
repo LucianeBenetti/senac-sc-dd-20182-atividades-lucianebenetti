@@ -93,8 +93,8 @@ public class TelaListarTodasConsultas extends JPanel {
 	}
 	
 	private void atualizarTabelaConsultas(List<ConsultaVO> consultas) {
-		tbConsultas.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome Convenio", "Valor" }, },
-				new String[] { "ID", "Nome Convenio", "Valor"}));
+		tbConsultas.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome Paciente", "Convenio", "Data Consulta", "Horario"}, },
+				new String[] {"ID", "Nome Paciente", "Convenio", "Data Consulta", "Horario"}));
 
 		DefaultTableModel modelo = (DefaultTableModel) tbConsultas.getModel();
 

@@ -291,9 +291,9 @@ public class TelaCadastrarProntuario extends JPanel {
 				int selecionado = tbProntuarios.getSelectedRow();
 
 				txtIdProntuario.setText(tbProntuarios.getValueAt(selecionado, 0) + "");
-				txtAreaMedicamentos.setText((String) tbProntuarios.getValueAt(selecionado, 2));
-				txtAreaExames.setText((String) tbProntuarios.getValueAt(selecionado, 3));
-				txtAreaRegistro.setText((String) tbProntuarios.getValueAt(selecionado, 4));
+				txtAreaMedicamentos.setText((String) tbProntuarios.getValueAt(selecionado, 3));
+				txtAreaExames.setText((String) tbProntuarios.getValueAt(selecionado, 4));
+				txtAreaRegistro.setText((String) tbProntuarios.getValueAt(selecionado, 5));
 
 			}
 		});
@@ -335,20 +335,13 @@ public class TelaCadastrarProntuario extends JPanel {
 		btnBuscarProntuarios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-
-				// ProntuarioVO prontuarioBuscado = new ProntuarioVO();
 				ProntuarioController controladorProntuarios = new ProntuarioController();
-				List<ProntuarioVO> prontuarios = controladorProntuarios
-						.listarProntuariosDoPaciente(consultaSelecionada);
+				List<ProntuarioVO> prontuarios = controladorProntuarios.listarProntuariosDoPaciente(consultaSelecionada);
 
-				for (ProntuarioVO prontuarioBuscado : prontuarios) {
-					if (consultaSelecionada.getPacienteVO().getCodigoPaciente() == prontuarioBuscado.getConsulta()
-							.getPacienteVO().getCodigoPaciente()) {
-
-						atualizarTabelaProntuarios(prontuarios);
-					} else {
-						JOptionPane.showMessageDialog(null, "Paciente sem prontuário cadastrado!");
-					}
+				if (prontuarios.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Paciente sem prontuário cadastrado!");
+				} else {
+					atualizarTabelaProntuarios(prontuarios);
 				}
 			}
 		});

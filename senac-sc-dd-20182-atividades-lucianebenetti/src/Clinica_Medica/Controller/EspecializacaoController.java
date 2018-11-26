@@ -3,6 +3,8 @@ package Clinica_Medica.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import Clinica_Medica.BO.EspecializacaoBO;
 import Clinica_Medica.VO.EspecialidadeVO;
 import Clinica_Medica.VO.EspecializacaoVO;
@@ -38,6 +40,10 @@ public class EspecializacaoController {
 		} else {
 			if (especializacao.getAnoEspecializacao().trim().equals("")) {
 				validacao += "- O preenchimento de todos os campos é obrigatório. Por gentileza, informar os dados corretos! \n";
+			} else {
+				if (bo.existeEspecializacao(especializacao)) {
+					validacao = "Especialização já cadastrada! Tente novamente.";
+				}
 			}
 
 		}
@@ -50,7 +56,7 @@ public class EspecializacaoController {
 	}
 
 	public void excluirEspecializacao(EspecializacaoVO especializacaoExcluida) {
-	
+
 		bo.excluirEspecializacao(especializacaoExcluida);
 
 	}
@@ -62,26 +68,24 @@ public class EspecializacaoController {
 
 	}
 
-	public ArrayList<EspecializacaoVO> listarEspecializacoesPorMedicoEspecialidade(MedicoVO medico, EspecialidadeVO especialidade) {
+	public ArrayList<EspecializacaoVO> listarEspecializacoesPorMedicoEspecialidade(MedicoVO medico,
+			EspecialidadeVO especialidade) {
 		return bo.listarTodasEspecializacoesPorMedicoEspecialidade(medico, especialidade);
 	}
 
-	
 	public ArrayList<EspecializacaoVO> listarTodasEspecializacoes() {
 
 		return bo.listarTodasEspecializacoes();
 	}
 
 	public List<EspecializacaoVO> existeCadastro(String nomeMedico, String nomeEspecialidade) {
-		 return bo.existeEspecializacaoPorNome(nomeMedico, nomeEspecialidade);
-		
+		return bo.existeEspecializacaoPorNome(nomeMedico, nomeEspecialidade);
+
 	}
 
 	public boolean existeEspecializacao(EspecializacaoVO especializacao) {
-		
+
 		return bo.existeEspecializacao(especializacao);
 	}
-
-	
 
 }

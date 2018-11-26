@@ -163,7 +163,7 @@ public class ProntuarioDAO {
 		ArrayList<ProntuarioVO> listaProntuarios = new ArrayList<ProntuarioVO>();
 		
 		String query = " SELECT prt.* from prontuario prt, consulta con, paciente pac "
-				+ " WHERE prt.codigoProntuario = con.codigoConsulta " + 
+				+ " WHERE prt.codigoConsulta = con.codigoConsulta " + 
 				"     AND pac.codigoPaciente = con.codigoPaciente " + 
 				"     AND pac.codigoPaciente = ? ";
 
