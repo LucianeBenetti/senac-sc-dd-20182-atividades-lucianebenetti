@@ -78,6 +78,8 @@ public class EspecializacaoDAO {
 
 	public EspecializacaoVO atualizarEspecializacao (EspecializacaoVO especializacao, int codigoEspecializacao) {
 
+		boolean sucessoAtualizar = false;
+		
 		String query = "UPDATE especializacao SET codigoEspecialidade=?, codigoMedico=?, anoEspecializacao=? "
 				+ " where codigoEspecializacao = ?";
 
@@ -94,7 +96,7 @@ public class EspecializacaoDAO {
 			int codigoRetorno = prepStmt.executeUpdate();
 
 			if (codigoRetorno == 1) {
-
+				sucessoAtualizar = true;
 			}
 		} catch (SQLException ex) {
 			System.out.println("Erro ao executar Query de Atualização do Especializacão!Causa: \n: " + ex.getMessage());

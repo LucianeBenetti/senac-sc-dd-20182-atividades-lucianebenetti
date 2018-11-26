@@ -4,8 +4,8 @@ public class EspecialidadeVO {
 
 	private int codigoEspecialidade;
 	private String nomeEspecialidade;
-	private String Instituicao;
-
+	private String instituicao;
+	
 	public EspecialidadeVO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -15,7 +15,7 @@ public class EspecialidadeVO {
 		super();
 		this.codigoEspecialidade = codigoEspecialidade;
 		this.nomeEspecialidade = nomeEspecialidade;
-		Instituicao = instituicao;
+		this.instituicao = instituicao;
 	}
 
 	public int getCodigoEspecialidade() {
@@ -35,16 +35,18 @@ public class EspecialidadeVO {
 	}
 
 	public String getInstituicao() {
-		return Instituicao;
+		return instituicao;
 	}
 
 	public void setInstituicao(String instituicao) {
-		Instituicao = instituicao;
+		this.instituicao = instituicao;
 	}
 
 	@Override
 	public String toString() {
-		return nomeEspecialidade;
+		return  nomeEspecialidade;
 	}
+	
 
 }
+

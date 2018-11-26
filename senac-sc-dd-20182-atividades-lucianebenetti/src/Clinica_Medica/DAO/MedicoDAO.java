@@ -11,7 +11,7 @@ import Clinica_Medica.VO.MedicoVO;
 
 public class MedicoDAO {
 
-	private static ArrayList<MedicoVO> listamedicos = new ArrayList<MedicoVO>();
+	private static ArrayList<MedicoVO> listaMedicos = new ArrayList<MedicoVO>();
 	MedicoVO med = new MedicoVO();
 
 	public int inserir(MedicoVO medicoVO) {
@@ -26,7 +26,7 @@ public class MedicoDAO {
 		try {
 			prepStmt.setString(1, medicoVO.getNomeMedico());
 			prepStmt.setString(2, medicoVO.getCrm());
-			prepStmt.setString(3, medicoVO.getCelMensagemMedico());
+			prepStmt.setString(3, medicoVO.getWhatsAppMedico());
 			prepStmt.setString(4, medicoVO.getCelularMedico());
 			prepStmt.setString(5, medicoVO.getEmailMedico());
 			prepStmt.setString(6, medicoVO.getCpfMedico());
@@ -90,7 +90,7 @@ public class MedicoDAO {
 				medico.setCodigoMedico(result.getInt(1));
 				medico.setNomeMedico(result.getString(2));
 				medico.setCrm(result.getString(3));
-				medico.setCelMensagemMedico(result.getString(4));
+				medico.setWhatsAppMedico(result.getString(4));
 				medico.setCelularMedico(result.getString(5));
 				medico.setEmailMedico(result.getString(6));
 				medico.setCpfMedico(result.getString(7));
@@ -120,7 +120,7 @@ public class MedicoDAO {
 		try {
 			prepStmt.setString(1, medicoVOAlterado.getNomeMedico());
 			prepStmt.setString(2, medicoVOAlterado.getCrm());
-			prepStmt.setString(3, medicoVOAlterado.getCelMensagemMedico());
+			prepStmt.setString(3, medicoVOAlterado.getWhatsAppMedico());
 			prepStmt.setString(4, medicoVOAlterado.getCelularMedico());
 			prepStmt.setString(5, medicoVOAlterado.getEmailMedico());
 			prepStmt.setString(6, medicoVOAlterado.getCpfMedico());
@@ -143,7 +143,7 @@ public class MedicoDAO {
 
 	public ArrayList<MedicoVO> listarTodos() {
 		
-		ArrayList<MedicoVO> listamedicos = new ArrayList<MedicoVO>();
+		ArrayList<MedicoVO> listaMedicos = new ArrayList<MedicoVO>();
 		String query = "select * from medico";
 
 		Connection conn = Banco.getConnection();
@@ -157,19 +157,19 @@ public class MedicoDAO {
 				medico.setCodigoMedico(result.getInt(1));
 				medico.setNomeMedico(result.getString(2));
 				medico.setCrm(result.getString(3));
-				medico.setCelMensagemMedico(result.getString(4));
+				medico.setWhatsAppMedico(result.getString(4));
 				medico.setCelularMedico(result.getString(5));
 				medico.setEmailMedico(result.getString(6));
 				medico.setCpfMedico(result.getString(7));
 				medico.setCnpjMedico(result.getString(8));
 				
-				listamedicos.add(medico);
+				listaMedicos.add(medico);
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return listamedicos;
+		return listaMedicos;
 	}
 
 	public ArrayList<MedicoVO> exibirMedicoPorNome(String nomeMedico) {
@@ -191,7 +191,7 @@ public class MedicoDAO {
 				medico.setCodigoMedico(result.getInt(1));
 				medico.setNomeMedico(result.getString(2));
 				medico.setCrm(result.getString(3));
-				medico.setCelMensagemMedico(result.getString(4));
+				medico.setWhatsAppMedico(result.getString(4));
 				medico.setCelularMedico(result.getString(5));
 				medico.setEmailMedico(result.getString(6));
 				medico.setCpfMedico(result.getString(7));
@@ -227,7 +227,7 @@ public class MedicoDAO {
 				medico.setCodigoMedico(result.getInt(1));
 				medico.setNomeMedico(result.getString(2));
 				medico.setCrm(result.getString(3));
-				medico.setCelMensagemMedico(result.getString(4));
+				medico.setWhatsAppMedico(result.getString(4));
 				medico.setCelularMedico(result.getString(5));
 				medico.setEmailMedico(result.getString(6));
 				medico.setCpfMedico(result.getString(7));

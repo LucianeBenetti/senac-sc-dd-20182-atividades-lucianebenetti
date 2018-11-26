@@ -14,15 +14,9 @@ public class EspecializacaoBO {
 
 	public boolean inserir(EspecializacaoVO especializacao) {
 
-		if (dao.existeEspecializacao(especializacao)) {
-			JOptionPane.showMessageDialog(null, "Especialização já cadastrada! Tente novamente.");
-		} else {
-
 			int idGerado = dao.inserirEspecializacao(especializacao);
 			return idGerado > 0;
 		}
-		return false;
-	}
 
 	public boolean excluirEspecializacao(EspecializacaoVO especializacao) {
 		boolean sucesso = dao.delete(especializacao.getCodigoEspecializacao());
@@ -56,6 +50,11 @@ public class EspecializacaoBO {
 
 		ArrayList<EspecializacaoVO> especializacoes = dao.existeEspecializacaoPorNome(nomeMedico, nomeEspecialidade);
 		return especializacoes;
+	}
+
+	public boolean existeEspecializacao(EspecializacaoVO especializacao) {
+		
+		return dao.existeEspecializacao(especializacao);
 	}
 
 }

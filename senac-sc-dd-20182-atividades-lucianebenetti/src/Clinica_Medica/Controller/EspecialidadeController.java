@@ -76,6 +76,12 @@ public class EspecialidadeController {
 		return bo.exibirEspecialidadePorNome(especialidade);
 	}
 
+	public EspecialidadeVO consultarEspecialidadeVONome(String nomeEspecialidade, String instituicao) {
+		// TODO Auto-generated method stub
+		return bo.consultarEspecialidadeVONome(nomeEspecialidade, instituicao);
+		
+	}
+
 		
 
 }

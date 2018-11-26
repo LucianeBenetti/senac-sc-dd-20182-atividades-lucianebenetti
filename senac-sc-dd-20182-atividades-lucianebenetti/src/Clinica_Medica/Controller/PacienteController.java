@@ -70,5 +70,10 @@ public class PacienteController {
 		return bo.listarTodosPacientes();
 	}
 
+	public PacienteVO consultarPacientePorCpf(String cpfPaciente) {
+		// TODO Auto-generated method stub
+		return bo.consultarPacientePorCpf(cpfPaciente);
+	}
+
 
 }

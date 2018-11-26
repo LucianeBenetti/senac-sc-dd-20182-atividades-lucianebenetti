@@ -15,16 +15,9 @@ public class EspecialidadeBO {
 
 	public boolean inserir(EspecialidadeVO especialidade) {
 
-		if (dao.consultarEspecialidadeVONome(especialidade.getNomeEspecialidade(),
-				especialidade.getInstituicao()) != null) {
-			JOptionPane.showMessageDialog(null, "Especialidade já cadastrada! Tente novamente.");
-
-		} else {
-
 			int idGerado = dao.inserirEspecialidadeVO(especialidade);
 			return idGerado > 0;
-		}
-		return false;
+		
 	}
 
 	public List<EspecialidadeVO> exibirEspecialidadePorNome(String espNome) {
@@ -59,6 +52,11 @@ public class EspecialidadeBO {
 		ArrayList<EspecialidadeVO> especialidades = dao.consultarEspecialidadeNome(especialidade.getNomeEspecialidade());
 		
 		return especialidades;
+	}
+
+	public EspecialidadeVO consultarEspecialidadeVONome(String nomeEspecialidade, String instituicao) {
+		
+		return dao.consultarEspecialidadeVONome(nomeEspecialidade, instituicao);
 	}
 
 	

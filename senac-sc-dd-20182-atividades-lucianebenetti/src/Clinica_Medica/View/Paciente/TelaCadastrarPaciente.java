@@ -145,10 +145,16 @@ public class TelaCadastrarPaciente extends JPanel {
 				
 				PacienteController controlador = new PacienteController();
 				PacienteVO paciente = construirPaciente();
+				
+				if (controlador.consultarPacientePorCpf(paciente.getCpfPaciente()) != null) {
+					JOptionPane.showMessageDialog(null, "Paciente já cadastrado! Tente novamente.");
+					
+				} else {
 
 				String mensagem = controlador.salvar(paciente);
 				JOptionPane.showMessageDialog(null, mensagem);
 				limparTela();
+			}
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -357,7 +363,7 @@ public class TelaCadastrarPaciente extends JPanel {
 
 	protected PacienteVO buscarPaciente() {
 		txtBairro.setText(pacienteBuscado.getBairro());
-		txtCelular.setText(pacienteBuscado.getCelMensagemPaciente());
+		txtCelular.setText(pacienteBuscado.getWhatsAppPaciente());
 		txtCep.setText(pacienteBuscado.getCep());
 		txtCidade.setText(pacienteBuscado.getCidade());
 		txtCnpj.setText(pacienteBuscado.getCnpjPaciente());
@@ -368,7 +374,7 @@ public class TelaCadastrarPaciente extends JPanel {
 		txtFoneRes.setText(pacienteBuscado.getFoneResidencial());
 		txtLogradouro.setText(pacienteBuscado.getLogradouro());
 		txtNome.setText(pacienteBuscado.getNomePaciente());
-		txtNumLog.setText(pacienteBuscado.getNumLog());
+		txtNumLog.setText(pacienteBuscado.getNumeroLogradouro());
 		cbEstado.setSelectedItem(pacienteBuscado.getUf());
 		
 		return pacienteBuscado;
@@ -377,7 +383,7 @@ public class TelaCadastrarPaciente extends JPanel {
 	protected PacienteVO construirPaciente() {
 		
 		paciente.setBairro(txtBairro.getText());
-		paciente.setCelMensagemPaciente(txtCelular.getText());
+		paciente.setWhatsAppPaciente(txtCelular.getText());
 		paciente.setCep(txtCep.getText());
 		paciente.setCidade(txtCidade.getText());
 		paciente.setCnpjPaciente(txtCnpj.getText());
@@ -388,7 +394,7 @@ public class TelaCadastrarPaciente extends JPanel {
 		paciente.setFoneResidencial(txtFoneRes.getText());
 		paciente.setLogradouro(txtLogradouro.getText());
 		paciente.setNomePaciente(txtNome.getText());
-		paciente.setNumLog(txtNumLog.getText());
+		paciente.setNumeroLogradouro(txtNumLog.getText());
 		paciente.setUf((String) cbEstado.getSelectedItem());
 			
 		return paciente;

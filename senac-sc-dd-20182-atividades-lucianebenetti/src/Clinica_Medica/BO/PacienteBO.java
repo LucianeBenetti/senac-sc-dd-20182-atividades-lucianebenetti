@@ -17,16 +17,10 @@ public class PacienteBO {
 	
 
 	public boolean inserir(PacienteVO paciente) {
-		if (dao.consultarPacientePorCpf(paciente.getCpfPaciente()) != null) {
-			JOptionPane.showMessageDialog(null, "Paciente já cadastrado! Tente novamente.");
-			
-		} else {
-
+		
 			int idGerado = dao.inserirPaciente(paciente);
 			return idGerado > 0;
 		}
-		return false;
-	}
 
 	public PacienteVO buscarPacientePorCpf(String cpf) {
 		PacienteVO pacienteBuscado = dao.consultarPacientePorCpf(cpf);
@@ -48,5 +42,10 @@ public class PacienteBO {
 
 		ArrayList<PacienteVO> pacientes = dao.listarTodos();
 		return pacientes;
+	}
+
+	public PacienteVO consultarPacientePorCpf(String cpfPaciente) {
+		
+		return dao.consultarPacientePorCpf(cpfPaciente);
 	}
 }

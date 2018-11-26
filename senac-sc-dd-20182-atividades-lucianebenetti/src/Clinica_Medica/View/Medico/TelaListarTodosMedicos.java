@@ -100,7 +100,7 @@ public class TelaListarTodosMedicos extends JPanel {
 			// na ORDEM do cabeçalho da tabela
 			Object[] novaLinha = new Object[] {  medico.getNomeMedico(), medico.getCrm(),
 					medico.getCpfMedico(), medico.getCnpjMedico(), medico.getCelularMedico(), 
-					medico.getCelMensagemMedico(), medico.getEmailMedico(),
+					medico.getWhatsAppMedico(), medico.getEmailMedico(),
 
 
 			};

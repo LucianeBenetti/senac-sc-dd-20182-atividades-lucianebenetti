@@ -77,6 +77,11 @@ public class EspecializacaoController {
 		
 	}
 
+	public boolean existeEspecializacao(EspecializacaoVO especializacao) {
+		
+		return bo.existeEspecializacao(especializacao);
+	}
+
 	
 
 }

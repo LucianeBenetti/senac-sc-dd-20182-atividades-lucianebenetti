@@ -353,7 +353,7 @@ setBackground(new Color(173, 216, 230));
 	protected PacienteVO construirPaciente() {
 		
 		paciente.setBairro(txtBairro.getText());
-		paciente.setCelMensagemPaciente(txtCelular.getText());
+		paciente.setWhatsAppPaciente(txtCelular.getText());
 		paciente.setCep(txtCep.getText());
 		paciente.setCidade(txtCidade.getText());
 		paciente.setCnpjPaciente(txtCnpj.getText());
@@ -364,7 +364,7 @@ setBackground(new Color(173, 216, 230));
 		paciente.setFoneResidencial(txtFoneRes.getText());
 		paciente.setLogradouro(txtLogradouro.getText());
 		paciente.setNomePaciente(txtNome.getText());
-		paciente.setNumLog(txtNumLog.getText());
+		paciente.setNumeroLogradouro(txtNumLog.getText());
 		paciente.setUf((String) cbEstado.getSelectedItem());
 			
 		return paciente;
@@ -392,7 +392,7 @@ setBackground(new Color(173, 216, 230));
 
 	protected PacienteVO buscarPaciente() {
 		txtBairro.setText(pacienteBuscado.getBairro());
-		txtCelular.setText(pacienteBuscado.getCelMensagemPaciente());
+		txtCelular.setText(pacienteBuscado.getWhatsAppPaciente());
 		txtCep.setText(pacienteBuscado.getCep());
 		txtCidade.setText(pacienteBuscado.getCidade());
 		txtCnpj.setText(pacienteBuscado.getCnpjPaciente());
@@ -403,7 +403,7 @@ setBackground(new Color(173, 216, 230));
 		txtFoneRes.setText(pacienteBuscado.getFoneResidencial());
 		txtLogradouro.setText(pacienteBuscado.getLogradouro());
 		txtNome.setText(pacienteBuscado.getNomePaciente());
-		txtNumLog.setText(pacienteBuscado.getNumLog());
+		txtNumLog.setText(pacienteBuscado.getNumeroLogradouro());
 		cbEstado.setSelectedItem(pacienteBuscado.getUf());
 		
 		return pacienteBuscado;

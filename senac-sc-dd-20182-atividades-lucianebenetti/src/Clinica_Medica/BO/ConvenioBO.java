@@ -13,14 +13,9 @@ public class ConvenioBO {
 
 	public boolean inserir(ConvenioVO convenio) {
 
-		if (dao.consultarConvenioPorCnpj(convenio.getCnpjConvenio()) != null) {
-			JOptionPane.showMessageDialog(null, "Convênio já cadastrado! Tente novamente.");
-		} else {
-
 			int idGerado = dao.inserirConvenio(convenio);
 			return idGerado > 0;
-		}
-		return false;
+
 	}
 
 	public ConvenioVO buscarConvenioPorCNPJ(String convCnpj) {
@@ -54,9 +49,4 @@ public class ConvenioBO {
 		
 	}
 
-	public void gerarPDF(List<ConvenioVO> convenios, String caminhoEscolhido) {
-	
-		
-		
-	}
 }

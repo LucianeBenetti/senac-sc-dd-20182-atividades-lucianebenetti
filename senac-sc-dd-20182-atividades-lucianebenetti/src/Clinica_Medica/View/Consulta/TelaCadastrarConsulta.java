@@ -186,6 +186,7 @@ public class TelaCadastrarConsulta extends JPanel {
 
 				ConsultaController controlador = new ConsultaController();
 				ConsultaVO consulta = construirConsulta();
+				
 
 				String mensagem = controlador.salvar(consulta);
 				JOptionPane.showMessageDialog(null, mensagem);

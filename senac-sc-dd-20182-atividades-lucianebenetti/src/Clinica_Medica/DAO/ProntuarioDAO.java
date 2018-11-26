@@ -131,7 +131,7 @@ public class ProntuarioDAO {
 
 	public ArrayList<ProntuarioVO> listarTodos() {
 
-		ArrayList<ProntuarioVO> listaprontuarios = new ArrayList<ProntuarioVO>();
+		ArrayList<ProntuarioVO> listaProntuarios = new ArrayList<ProntuarioVO>();
 		String query = " select * from prontuario ";
 
 		Connection conn = Banco.getConnection();
@@ -149,13 +149,13 @@ public class ProntuarioDAO {
 				prontuario.setExame(result.getString(4));
 				prontuario.setRegistro(result.getString(5));
 				
-				listaprontuarios.add(prontuario);
+				listaProntuarios.add(prontuario);
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return listaprontuarios;
+		return listaProntuarios;
 	}
 
 	public ArrayList<ProntuarioVO> listarProntuariosDoPaciente(int idPaciente) {

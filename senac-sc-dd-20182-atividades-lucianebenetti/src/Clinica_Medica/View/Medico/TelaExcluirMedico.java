@@ -256,7 +256,7 @@ protected MedicoVO construirMedico() {
 	medico.setCpfMedico(txtCpf.getText());
 	medico.setCnpjMedico(txtCnpj.getText());
 	medico.setCelularMedico(txtCelular.getText());
-	medico.setCelMensagemMedico(txtCelMen.getText());
+	medico.setWhatsAppMedico(txtCelMen.getText());
 	medico.setEmailMedico(txtEmail.getText());
 		
 		return medico;
@@ -268,7 +268,7 @@ protected MedicoVO buscarMedico() {
 	txtCpf.setText(medicoBuscado.getCpfMedico());
 	txtCnpj.setText(medicoBuscado.getCnpjMedico());
 	txtCelular.setText(medicoBuscado.getCelularMedico());
-	txtCelMen.setText(medicoBuscado.getCelMensagemMedico());
+	txtCelMen.setText(medicoBuscado.getWhatsAppMedico());
 	txtEmail.setText(medicoBuscado.getEmailMedico());
 
 	return medicoBuscado;

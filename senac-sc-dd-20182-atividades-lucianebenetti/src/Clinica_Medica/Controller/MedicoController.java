@@ -85,4 +85,9 @@ public class MedicoController {
 		return bo.exibirMedicoPorNome(medico);
 	}
 
+	public MedicoVO consultarMedicoVOPorCpf(String cpfMedico) {
+
+		return bo.consultarMedicoVOPorCpf(cpfMedico);
+	}
+
 }

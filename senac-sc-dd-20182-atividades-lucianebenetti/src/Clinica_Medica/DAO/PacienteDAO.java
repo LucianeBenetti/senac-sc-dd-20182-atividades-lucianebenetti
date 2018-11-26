@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import Clinica_Medica.VO.PacienteVO;
 
 public class PacienteDAO {
-	private static ArrayList<PacienteVO> listapacientes = new ArrayList<PacienteVO>();
+	private static ArrayList<PacienteVO> listaPacientes = new ArrayList<PacienteVO>();
 
 	public int inserirPaciente(PacienteVO paciente) {
 
@@ -23,14 +23,14 @@ public class PacienteDAO {
 
 		try {
 			prepStmt.setString(1, paciente.getNomePaciente());
-			prepStmt.setString(2, paciente.getCelMensagemPaciente());
+			prepStmt.setString(2, paciente.getWhatsAppPaciente());
 			prepStmt.setString(3, paciente.getFoneResidencial());
 			prepStmt.setString(4, paciente.getFoneComercial());
 			prepStmt.setString(5, paciente.getEmailPaciente());
 			prepStmt.setString(6, paciente.getCpfPaciente());
 			prepStmt.setString(7, paciente.getCnpjPaciente());
 			prepStmt.setString(8, paciente.getLogradouro());
-			prepStmt.setString(9, paciente.getNumLog());
+			prepStmt.setString(9, paciente.getNumeroLogradouro());
 			prepStmt.setString(10, paciente.getComplemento());
 			prepStmt.setString(11, paciente.getBairro());
 			prepStmt.setString(12, paciente.getCidade());
@@ -73,14 +73,14 @@ public class PacienteDAO {
 				paciente = new PacienteVO();
 				paciente.setCodigoPaciente(result.getInt(1));
 				paciente.setNomePaciente(result.getString(2));
-				paciente.setCelMensagemPaciente(result.getString(3));
+				paciente.setWhatsAppPaciente(result.getString(3));
 				paciente.setFoneResidencial(result.getString(4));
 				paciente.setFoneComercial(result.getString(5));
 				paciente.setEmailPaciente(result.getString(6));
 				paciente.setCpfPaciente(result.getString(7));
 				paciente.setCnpjPaciente(result.getString(8));
 				paciente.setLogradouro(result.getString(9));
-				paciente.setNumLog(result.getString(10));
+				paciente.setNumeroLogradouro(result.getString(10));
 				paciente.setComplemento(result.getString(11));
 				paciente.setBairro(result.getString(12));
 				paciente.setCidade(result.getString(13));
@@ -133,14 +133,14 @@ public class PacienteDAO {
 
 		try {
 			prepStmt.setString(1, pacienteAlterado.getNomePaciente());
-			prepStmt.setString(2, pacienteAlterado.getCelMensagemPaciente());
+			prepStmt.setString(2, pacienteAlterado.getWhatsAppPaciente());
 			prepStmt.setString(3, pacienteAlterado.getFoneResidencial());
 			prepStmt.setString(4, pacienteAlterado.getFoneComercial());
 			prepStmt.setString(5, pacienteAlterado.getEmailPaciente());
 			prepStmt.setString(6, pacienteAlterado.getCpfPaciente());
 			prepStmt.setString(7, pacienteAlterado.getCnpjPaciente());
 			prepStmt.setString(8, pacienteAlterado.getLogradouro());
-			prepStmt.setString(9, pacienteAlterado.getNumLog());
+			prepStmt.setString(9, pacienteAlterado.getNumeroLogradouro());
 			prepStmt.setString(10, pacienteAlterado.getComplemento());
 			prepStmt.setString(11, pacienteAlterado.getBairro());
 			prepStmt.setString(12, pacienteAlterado.getCidade());
@@ -164,7 +164,7 @@ public class PacienteDAO {
 	
 	public ArrayList<PacienteVO> listarTodos() {
 
-		ArrayList<PacienteVO> listapacientes = new ArrayList<PacienteVO>();
+		ArrayList<PacienteVO> listaPacientes = new ArrayList<PacienteVO>();
 		String query = "select * from paciente";
 
 		Connection conn = Banco.getConnection();
@@ -177,20 +177,20 @@ public class PacienteDAO {
 
 				paciente.setCodigoPaciente(result.getInt(1));
 				paciente.setNomePaciente(result.getString(2));
-				paciente.setCelMensagemPaciente(result.getString(3));
+				paciente.setWhatsAppPaciente(result.getString(3));
 				paciente.setFoneResidencial(result.getString(4));
 				paciente.setFoneComercial(result.getString(5));
 				paciente.setEmailPaciente(result.getString(6));
 				paciente.setCpfPaciente(result.getString(7));
 				paciente.setCnpjPaciente(result.getString(8));
 				
-					listapacientes.add(paciente);
+					listaPacientes.add(paciente);
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return listapacientes;
+		return listaPacientes;
 	}
 
 	public PacienteVO consultarPorId(int id) {
@@ -208,14 +208,14 @@ public class PacienteDAO {
 				paciente = new PacienteVO();
 				paciente.setCodigoPaciente(result.getInt(1));
 				paciente.setNomePaciente(result.getString(2));
-				paciente.setCelMensagemPaciente(result.getString(3));
+				paciente.setWhatsAppPaciente(result.getString(3));
 				paciente.setFoneResidencial(result.getString(4));
 				paciente.setFoneComercial(result.getString(5));
 				paciente.setEmailPaciente(result.getString(6));
 				paciente.setCpfPaciente(result.getString(7));
 				paciente.setCnpjPaciente(result.getString(8));
 				paciente.setLogradouro(result.getString(9));
-				paciente.setNumLog(result.getString(10));
+				paciente.setNumeroLogradouro(result.getString(10));
 				paciente.setComplemento(result.getString(11));
 				paciente.setBairro(result.getString(12));
 				paciente.setCidade(result.getString(13));

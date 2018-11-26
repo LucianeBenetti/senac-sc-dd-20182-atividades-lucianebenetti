@@ -115,10 +115,14 @@ public class TelaCadastrarConvenio extends JPanel {
 				ConvenioController controlador = new ConvenioController();
 				ConvenioVO convenio = construirConvenio();
 				
+				if (controlador.buscarConvenioPorCNPJ(convenio.getCnpjConvenio()) != null) {
+					JOptionPane.showMessageDialog(null, "Convênio já cadastrado! Tente novamente.");
+				} else {
+				
 				String mensagem = controlador.salvar(convenio);
 				JOptionPane.showMessageDialog(null, mensagem);
 				limparTela();
-				
+				}
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));

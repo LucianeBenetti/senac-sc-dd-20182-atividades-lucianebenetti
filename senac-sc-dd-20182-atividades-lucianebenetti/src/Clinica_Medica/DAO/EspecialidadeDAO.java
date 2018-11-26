@@ -155,6 +155,7 @@ public class EspecialidadeDAO {
 
 	public EspecialidadeVO atualizarEspecialidade(EspecialidadeVO especialidade, int codigoEspecialidade) {
 
+		boolean sucessoAtualizar = false;
 		String query = "UPDATE especialidade SET nomeEspecialidade=?, instituicao=? "
 				+ " where codigoEspecialidade = ? ";
 
@@ -169,7 +170,7 @@ public class EspecialidadeDAO {
 			int codigoRetorno = prepStmt.executeUpdate();
 
 			if (codigoRetorno == 1) {
-
+				sucessoAtualizar = true;
 			}
 		} catch (SQLException ex) {
 			System.out.println("Erro ao executar Query de Atualização do Especialidade! Causa: \n: " + ex.getMessage());

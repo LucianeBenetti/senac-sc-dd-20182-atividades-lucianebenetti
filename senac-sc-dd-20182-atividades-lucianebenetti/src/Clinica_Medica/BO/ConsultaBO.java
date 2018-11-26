@@ -16,17 +16,19 @@ public class ConsultaBO {
 	ConsultaDAO dao = new ConsultaDAO();
 
 	public boolean inserir(ConsultaVO consulta) {
+		
 		Calendar c = Calendar.getInstance();
 		c.setTime(consulta.getDataConsulta());
 		//java.sql.Date			
 		Date dataSQL = new Date(c.getTimeInMillis());
 		
-		if (dao.consultarDataHorario(dataSQL, consulta.getHorarioConsulta()) != null) {
+		
+		if (dao.consultarDataHorario(dataSQL, consulta.getHorarioConsulta()) == null) {
+			JOptionPane.showMessageDialog(null, "Consulta já cadastrada! Tente novamente.");
+		} else {
 			int idGerado = dao.inserirConsulta(consulta);
 			return idGerado > 0;
-		} else {
-			JOptionPane.showMessageDialog(null, "Consulta já cadastrada! Tente novamente.");
-		
+				
 		}
 		return false;
 	}

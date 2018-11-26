@@ -97,7 +97,7 @@ public class TelaListarTodosPacientes extends JPanel {
 			// Preencher a linha com os atributos do produto
 			// na ORDEM do cabeçalho da tabela
 			Object[] novaLinha = new Object[] { paciente.getNomePaciente(), paciente.getCpfPaciente(),
-					paciente.getCnpjPaciente(), paciente.getCelMensagemPaciente(), paciente.getFoneResidencial(), 
+					paciente.getCnpjPaciente(), paciente.getWhatsAppPaciente(), paciente.getFoneResidencial(), 
 					paciente.getFoneComercial(), paciente.getEmailPaciente(),
 
 

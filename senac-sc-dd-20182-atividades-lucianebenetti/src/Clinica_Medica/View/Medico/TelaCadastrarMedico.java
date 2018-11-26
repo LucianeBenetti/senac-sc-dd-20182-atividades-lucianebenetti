@@ -54,9 +54,14 @@ public class TelaCadastrarMedico extends JPanel {
 				MedicoController controlador = new MedicoController();
 				MedicoVO medico = construirMedico();
 
+				if (controlador.consultarMedicoVOPorCpf(medico.getCpfMedico()) != null) {
+					JOptionPane.showMessageDialog(null, "Médico já cadastrado! Tente novamente.");
+				} else {
+					
 				String mensagem = controlador.salvar(medico);
 				JOptionPane.showMessageDialog(null, mensagem);
 				limparTela();
+				}
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -259,7 +264,7 @@ public class TelaCadastrarMedico extends JPanel {
 		txtCPF.setText(medicoBuscado.getCpfMedico());
 		txtCnpj.setText(medicoBuscado.getCnpjMedico());
 		txtCel.setText(medicoBuscado.getCelularMedico());
-		txtCelMen.setText(medicoBuscado.getCelMensagemMedico());
+		txtCelMen.setText(medicoBuscado.getWhatsAppMedico());
 		txtEmail.setText(medicoBuscado.getEmailMedico());
 
 		return medicoBuscado;
@@ -284,7 +289,7 @@ public class TelaCadastrarMedico extends JPanel {
 		medico.setCpfMedico(txtCPF.getText());
 		medico.setCnpjMedico(txtCnpj.getText());
 		medico.setCelularMedico(txtCel.getText());
-		medico.setCelMensagemMedico(txtCelMen.getText());
+		medico.setWhatsAppMedico(txtCelMen.getText());
 		medico.setEmailMedico(txtEmail.getText());
 
 		return medico;

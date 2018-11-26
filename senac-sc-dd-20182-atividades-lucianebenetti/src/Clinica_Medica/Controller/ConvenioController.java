@@ -80,8 +80,6 @@ public class ConvenioController {
 			String tipoRelatorio) {
 		if(tipoRelatorio.equals(TIPO_RELATORIO_XLS)){
 			bo.gerarPlanilha(convenios, caminhoEscolhido);
-		}else{
-			bo.gerarPDF(convenios, caminhoEscolhido);
 		}
 		
 	}
