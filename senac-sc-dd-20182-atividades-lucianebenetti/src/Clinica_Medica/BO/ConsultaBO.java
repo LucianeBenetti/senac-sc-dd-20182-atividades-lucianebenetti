@@ -10,24 +10,23 @@ import javax.swing.JOptionPane;
 import Clinica_Medica.DAO.ConsultaDAO;
 import Clinica_Medica.VO.ConsultaVO;
 
-
 public class ConsultaBO {
-	
+
 	ConsultaDAO dao = new ConsultaDAO();
 
 	public boolean inserir(ConsultaVO consulta) {
-		
+
+		String validacao = "";
 		Calendar c = Calendar.getInstance();
 		c.setTime(consulta.getDataConsulta());
-		//java.sql.Date			
 		Date dataSQL = new Date(c.getTimeInMillis());
-		
 		if (dao.consultarDataHorario(dataSQL, consulta.getHorarioConsulta()) == null) {
+
 			JOptionPane.showMessageDialog(null, "Consulta já cadastrada! Tente novamente.");
+			
 		} else {
 			int idGerado = dao.inserirConsulta(consulta);
 			return idGerado > 0;
-				
 		}
 		return false;
 	}
@@ -40,12 +39,17 @@ public class ConsultaBO {
 	public boolean excluirConsulta(ConsultaVO consultaExcluida) {
 		boolean sucesso = dao.delete(consultaExcluida.getCodigoConsulta());
 		return sucesso;
-		
+
 	}
 
 	public boolean atualizarConsulta(ConsultaVO consulta, int codigoConsulta) {
-		
+
 		return dao.atualizar(consulta, codigoConsulta);
+	}
+
+	public ConsultaVO consultarDataHorario(Date dataSQL, String horarioConsulta) {
+		// TODO Auto-generated method stub
+		return dao.consultarDataHorario(dataSQL, horarioConsulta);
 	}
 
 }

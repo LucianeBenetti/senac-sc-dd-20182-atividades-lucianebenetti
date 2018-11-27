@@ -243,8 +243,7 @@ public class TelaExcluirConsulta extends JPanel {
 				new String[] { "ID Consulta", "Paciente", "Convenio", "Medico", "Especialidade", "Data", "Horario",
 						"New column", "New column", "New column" }));
 		scrollPane_1.setColumnHeaderView(tbConsultas);
-		tbConsultas.getColumnModel().getColumn(0).setMinWidth(0);
-		tbConsultas.getColumnModel().getColumn(0).setMaxWidth(0);
+		
 		tbConsultas.getColumnModel().getColumn(7).setMinWidth(0);
 		tbConsultas.getColumnModel().getColumn(7).setMaxWidth(0);
 		tbConsultas.getColumnModel().getColumn(8).setMinWidth(0);
@@ -257,12 +256,11 @@ public class TelaExcluirConsulta extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				List<ConsultaVO> consultas = null;
+				
 				ConsultaController controlador = new ConsultaController();
-				consultas = controlador.listarTodasConsultas();
+				List<ConsultaVO> consultas = controlador.listarTodasConsultas();
 				atualizarTabelaConsultas(consultas);
-				tbConsultas.getColumnModel().getColumn(0).setMinWidth(0);
-				tbConsultas.getColumnModel().getColumn(0).setMaxWidth(0);
+						
 				tbConsultas.getColumnModel().getColumn(7).setMinWidth(0);
 				tbConsultas.getColumnModel().getColumn(7).setMaxWidth(0);
 				tbConsultas.getColumnModel().getColumn(8).setMinWidth(0);
@@ -306,7 +304,7 @@ public class TelaExcluirConsulta extends JPanel {
 		btnAlterar.setBounds(278, 435, 115, 35);
 		add(btnAlterar);
 		
-		dateChooserDataConsulta = new JDateChooser(new Date(), "dd/MM/YYYY");
+		dateChooserDataConsulta = new JDateChooser();
 		dateChooserDataConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		dateChooserDataConsulta.setBounds(190, 286, 172, 31);
 		add(dateChooserDataConsulta);
@@ -392,12 +390,14 @@ public class TelaExcluirConsulta extends JPanel {
 			// Preencher a linha com os atributos do produto
 			// na ORDEM do cabeçalho da tabela
 			Object[] novaLinha = new Object[] { consulta.getCodigoConsulta(),
-					consulta.getPacienteVO().getNomePaciente(), consulta.getConvenioVO().getNomeConvenio(),
+					consulta.getPacienteVO().getNomePaciente(), 
+					consulta.getConvenioVO().getNomeConvenio(), 
 					consulta.getEspecializacaoVO().getMedicoVO().getNomeMedico(),
 					consulta.getEspecializacaoVO().getEspecialidadeVO().getNomeEspecialidade(),
-					consulta.getDataConsulta(), consulta.getHorarioConsulta(),
-					consulta.getEspecializacaoVO().getCodigoEspecializacao(),
-					consulta.getPacienteVO().getCodigoPaciente(), consulta.getConvenioVO().getCodigoConvenio(),
+					consulta.getDataConsulta(),
+					consulta.getHorarioConsulta(),
+					consulta.getPacienteVO().getCodigoPaciente(), 
+					consulta.getConvenioVO().getCodigoConvenio(),
 					consulta.getEspecializacaoVO().getCodigoEspecializacao(),
 
 

@@ -89,11 +89,11 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				EspecializacaoController controlador = new EspecializacaoController();
 				EspecializacaoVO especializacao = construirEspecializacao();
-				
+
 				String mensagem = controlador.salvar(especializacao);
 				JOptionPane.showMessageDialog(null, mensagem);
 				limparTela();
-				
+
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -192,14 +192,16 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 
 					if (especializacoes != null) {
 						atualizarTabelaEspecializacoes(especializacoes);
+					} else {
+
 					}
-
-				} else {
-					JOptionPane.showMessageDialog(null, "Especialização não cadastrada! Tente novamente!");
-
 				}
-				cbEspecialidade.setSelectedItem(0);
-				cbMedico.setSelectedItem(0);
+				medico = (MedicoVO) cbMedico.getSelectedItem();
+				especialidade = (EspecialidadeVO) cbEspecialidade.getSelectedItem();
+
+				txtNomeMedico.setText(medico.getNomeMedico());
+				txtNomeEspecialidade.setText(especialidade.getNomeEspecialidade());
+
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -276,7 +278,7 @@ public class TelaCadastrarEspecializacaoTabela extends JPanel {
 				new Object[][] { { "ID", "Nome Medico", "Especialidade", "Ano", "Instituicao" }, },
 				new String[] { "ID", "Nome Medico", "Especialidade", "Ano", "Instituicao" }));
 		scrollPane.setColumnHeaderView(tbEspecializacao);
-		
+
 		Panel panel = new Panel();
 		panel.setBackground(SystemColor.menu);
 		panel.setBounds(256, 23, 4, 592);

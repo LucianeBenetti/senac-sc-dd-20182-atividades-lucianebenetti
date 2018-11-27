@@ -172,6 +172,7 @@ public class TelaExcluirProntuario extends JPanel {
 
 		txtIdProntuario.setText("");
 		txtNome.setText("");
+		
 	
 		limparTabela() ;
 

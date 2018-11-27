@@ -386,6 +386,11 @@ public class TelaCadastrarProntuario extends JPanel {
 		txtNomePaciente.setText("");
 		txtAreaExames.setText("");
 		txtAreaRegistro.setText("");
+		txtDataConsulta.setText("");
+		txtHorarioConsulta.setText("");
+		txtIdConsulta.setText("");
+		txtIdProntuario.setText("");
+		txtNomePaciente.setText("");
 	}
 
 	protected PacienteVO buscarPaciente() {

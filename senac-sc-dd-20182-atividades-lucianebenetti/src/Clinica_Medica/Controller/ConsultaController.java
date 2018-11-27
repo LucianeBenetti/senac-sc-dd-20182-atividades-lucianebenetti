@@ -1,13 +1,17 @@
 package Clinica_Medica.Controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 
 import Clinica_Medica.BO.ConsultaBO;
 import Clinica_Medica.VO.ConsultaVO;
 
 public class ConsultaController {
-	
+
 	ConsultaBO bo = new ConsultaBO();
 
 	public String salvar(ConsultaVO consulta) {
@@ -25,15 +29,22 @@ public class ConsultaController {
 	}
 
 	private String validarConsulta(ConsultaVO consulta) {
-
 		String validacao = "";
 		if (consulta.getDataConsulta() == null) {
 			validacao = "Data está nula!";
 		} else {
 			if (consulta.getDataConsulta().equals("") || consulta.getHorarioConsulta().equals("")) {
 				validacao += " - Data  e Horario são obrigatórios. \n";
+			} else {
+				// java.sql.Date
+				Calendar c = Calendar.getInstance();
+				c.setTime(consulta.getDataConsulta());
+				Date dataSQL = new Date(c.getTimeInMillis());
+				java.util.Date hoje = Calendar.getInstance().getTime();
+				if (dataSQL.before(hoje)) {
+					validacao = "Data não pode ser inferior que a data atual.";
+				}
 			}
-
 		}
 		return validacao;
 	}
@@ -45,7 +56,7 @@ public class ConsultaController {
 
 	public void excluirConsulta(ConsultaVO consultaExcluida) {
 		bo.excluirConsulta(consultaExcluida);
-		
+
 	}
 
 	public String atualizarConsulta(ConsultaVO consulta, int codigoConsulta) {

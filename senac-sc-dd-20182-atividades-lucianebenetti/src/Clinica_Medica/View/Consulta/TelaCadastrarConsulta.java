@@ -186,8 +186,7 @@ public class TelaCadastrarConsulta extends JPanel {
 
 				ConsultaController controlador = new ConsultaController();
 				ConsultaVO consulta = construirConsulta();
-				
-
+								
 				String mensagem = controlador.salvar(consulta);
 				JOptionPane.showMessageDialog(null, mensagem);
 				limparTela();
@@ -210,7 +209,7 @@ public class TelaCadastrarConsulta extends JPanel {
 
 		String[] med = { "----------- Selecione -----------" };
 
-		dateChooserDataConsulta = new JDateChooser(new Date(), "dd/MM/YYYY");
+		dateChooserDataConsulta = new JDateChooser();
 		dateChooserDataConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		dateChooserDataConsulta.setBounds(192, 377, 181, 31);
 		add(dateChooserDataConsulta);
