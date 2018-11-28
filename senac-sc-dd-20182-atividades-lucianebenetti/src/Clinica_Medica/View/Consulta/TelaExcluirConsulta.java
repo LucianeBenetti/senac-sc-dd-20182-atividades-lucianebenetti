@@ -214,7 +214,7 @@ public class TelaExcluirConsulta extends JPanel {
 		txtConvenio.setColumns(10);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(740, 117, 597, 214);
+		scrollPane_1.setBounds(740, 117, 685, 214);
 		add(scrollPane_1);
 
 		tbConsultas = new JTable();
@@ -244,6 +244,9 @@ public class TelaExcluirConsulta extends JPanel {
 						"New column", "New column", "New column" }));
 		scrollPane_1.setColumnHeaderView(tbConsultas);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane_1.setRowHeaderView(scrollPane);
+		
 		tbConsultas.getColumnModel().getColumn(7).setMinWidth(0);
 		tbConsultas.getColumnModel().getColumn(7).setMaxWidth(0);
 		tbConsultas.getColumnModel().getColumn(8).setMinWidth(0);
@@ -271,7 +274,7 @@ public class TelaExcluirConsulta extends JPanel {
 			}
 		});
 		btnBuscarConsultas.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscarConsultas.setBounds(926, 67, 201, 31);
+		btnBuscarConsultas.setBounds(978, 67, 201, 31);
 		add(btnBuscarConsultas);
 
 		JLabel lblIdConsulta = new JLabel("ID Consulta");

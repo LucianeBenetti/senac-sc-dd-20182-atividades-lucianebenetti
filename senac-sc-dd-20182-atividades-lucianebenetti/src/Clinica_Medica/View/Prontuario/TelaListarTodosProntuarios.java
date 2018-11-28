@@ -39,7 +39,7 @@ public class TelaListarTodosProntuarios extends JPanel {
 			}
 		});
 		btnListarTodosProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnListarTodosProntuarios.setBounds(510, 58, 273, 44);
+		btnListarTodosProntuarios.setBounds(757, 67, 273, 44);
 		add(btnListarTodosProntuarios);
 
 		JLabel lblProntuarios = new JLabel("Prontuarios");
@@ -63,11 +63,11 @@ public class TelaListarTodosProntuarios extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(923, 477, 115, 31);
+		btnSair.setBounds(1392, 470, 115, 31);
 		add(btnSair);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(282, 159, 756, 244);
+		scrollPane.setBounds(282, 159, 1225, 244);
 		add(scrollPane);
 
 		tbProntuarios = new JTable();

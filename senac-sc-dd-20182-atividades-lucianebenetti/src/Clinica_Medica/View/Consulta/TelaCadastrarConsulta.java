@@ -242,7 +242,7 @@ public class TelaCadastrarConsulta extends JPanel {
 		txtIdEspecializacao.setColumns(10);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(811, 345, 524, 195);
+		scrollPane.setBounds(811, 345, 637, 195);
 		add(scrollPane);
 
 		tbMedicoEspecialidade = new JTable();
@@ -277,7 +277,7 @@ public class TelaCadastrarConsulta extends JPanel {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton.setBounds(936, 308, 299, 31);
+		btnNewButton.setBounds(981, 308, 299, 31);
 		add(btnNewButton);
 
 		txtNomeMedico = new JTextField();
@@ -302,7 +302,7 @@ public class TelaCadastrarConsulta extends JPanel {
 		txtConvenio.setColumns(10);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(811, 63, 524, 183);
+		scrollPane_1.setBounds(811, 63, 637, 183);
 		add(scrollPane_1);
 
 		tbConvenios = new JTable();
@@ -336,7 +336,7 @@ public class TelaCadastrarConsulta extends JPanel {
 			}
 		});
 		btnBuscarConveio.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscarConveio.setBounds(957, 26, 201, 31);
+		btnBuscarConveio.setBounds(1016, 16, 201, 31);
 		add(btnBuscarConveio);
 		
 		JSeparator separator_2 = new JSeparator();

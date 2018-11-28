@@ -38,7 +38,7 @@ public class TelaSobre extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaSobre.class.getResource("/icones/icons8-card\u00E1pio.png")));
 		setTitle("Sobre");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 656, 304);
+		setBounds(100, 100, 664, 421);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(173, 216, 230));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -56,7 +56,7 @@ public class TelaSobre extends JFrame {
 		lblTecnlogoEmAnlise.setBounds(51, 123, 514, 20);
 		contentPane.add(lblTecnlogoEmAnlise);
 		
-		JLabel lblOutubro = new JLabel("Outubro/2018");
+		JLabel lblOutubro = new JLabel("Novembro/2018");
 		lblOutubro.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblOutubro.setBounds(423, 221, 158, 34);
 		contentPane.add(lblOutubro);

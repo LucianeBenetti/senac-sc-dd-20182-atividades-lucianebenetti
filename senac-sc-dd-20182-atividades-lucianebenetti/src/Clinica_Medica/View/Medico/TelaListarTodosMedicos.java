@@ -42,7 +42,7 @@ public class TelaListarTodosMedicos extends JPanel {
 			}
 		});
 		btnListarTodosOs.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnListarTodosOs.setBounds(540, 73, 280, 40);
+		btnListarTodosOs.setBounds(596, 78, 280, 40);
 		add(btnListarTodosOs);
 		
 		JButton btnSair = new JButton("Sair");
@@ -61,11 +61,11 @@ public class TelaListarTodosMedicos extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(1068, 449, 96, 31);
+		btnSair.setBounds(1299, 482, 96, 31);
 		add(btnSair);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(177, 147, 987, 274);
+		scrollPane.setBounds(177, 147, 1218, 274);
 		add(scrollPane);
 		
 		tbMedicos = new JTable();
