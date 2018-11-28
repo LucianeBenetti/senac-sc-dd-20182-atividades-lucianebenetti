@@ -16,7 +16,6 @@ public class ConsultaBO {
 
 	public boolean inserir(ConsultaVO consulta) {
 
-		String validacao = "";
 		Calendar c = Calendar.getInstance();
 		c.setTime(consulta.getDataConsulta());
 		Date dataSQL = new Date(c.getTimeInMillis());

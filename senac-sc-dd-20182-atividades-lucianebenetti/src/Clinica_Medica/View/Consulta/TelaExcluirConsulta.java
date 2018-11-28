@@ -70,7 +70,6 @@ public class TelaExcluirConsulta extends JPanel {
 	private JTable tbConsultas;
 	private JTextField txtIdConsulta;
 	private JComboBox cbHorarioConsulta;
-	
 
 	/**
 	 * Create the panel.
@@ -118,7 +117,7 @@ public class TelaExcluirConsulta extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(1230, 435, 107, 35);
+		btnSair.setBounds(1389, 435, 107, 35);
 		add(btnSair);
 
 		JLabel lblDataRealizao = new JLabel("Hora da Consulta");
@@ -145,9 +144,9 @@ public class TelaExcluirConsulta extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
-				ConsultaController controlador = new ConsultaController();
+				ConsultaController consultaController = new ConsultaController();
 				ConsultaVO consultaExcluida = construirConsulta();
-				controlador.excluirConsulta(consultaExcluida);
+				consultaController.excluirConsulta(consultaExcluida);
 				JOptionPane.showMessageDialog(null, "Consulta excluída!");
 
 				limparTela();
@@ -214,7 +213,7 @@ public class TelaExcluirConsulta extends JPanel {
 		txtConvenio.setColumns(10);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(740, 117, 685, 214);
+		scrollPane_1.setBounds(740, 117, 766, 214);
 		add(scrollPane_1);
 
 		tbConsultas = new JTable();
@@ -232,8 +231,8 @@ public class TelaExcluirConsulta extends JPanel {
 				dateChooserDataConsulta.setDate((Date) tbConsultas.getValueAt(selecionado, 5));
 				cbHorarioConsulta.setSelectedItem((String) tbConsultas.getValueAt(selecionado, 6));
 				txtIdPaciente.setText(tbConsultas.getValueAt(selecionado, 7) + "");
-				txtIdConvenio.setText(tbConsultas.getValueAt(selecionado,8) + "");
-				txtIdEspecializacao.setText(tbConsultas.getValueAt(selecionado,9) + "");
+				txtIdConvenio.setText(tbConsultas.getValueAt(selecionado, 8) + "");
+				txtIdEspecializacao.setText(tbConsultas.getValueAt(selecionado, 9) + "");
 			}
 		});
 		tbConsultas.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -243,27 +242,23 @@ public class TelaExcluirConsulta extends JPanel {
 				new String[] { "ID Consulta", "Paciente", "Convenio", "Medico", "Especialidade", "Data", "Horario",
 						"New column", "New column", "New column" }));
 		scrollPane_1.setColumnHeaderView(tbConsultas);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane_1.setRowHeaderView(scrollPane);
-		
+
 		tbConsultas.getColumnModel().getColumn(7).setMinWidth(0);
 		tbConsultas.getColumnModel().getColumn(7).setMaxWidth(0);
 		tbConsultas.getColumnModel().getColumn(8).setMinWidth(0);
 		tbConsultas.getColumnModel().getColumn(8).setMaxWidth(0);
 		tbConsultas.getColumnModel().getColumn(9).setMinWidth(0);
 		tbConsultas.getColumnModel().getColumn(9).setMaxWidth(0);
-	
+
 		JButton btnBuscarConsultas = new JButton("Buscar Consultas");
 		btnBuscarConsultas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				
-				ConsultaController controlador = new ConsultaController();
-				List<ConsultaVO> consultas = controlador.listarTodasConsultas();
+				ConsultaController consultaController = new ConsultaController();
+				List<ConsultaVO> consultas = consultaController.listarTodasConsultas();
 				atualizarTabelaConsultas(consultas);
-						
+
 				tbConsultas.getColumnModel().getColumn(7).setMinWidth(0);
 				tbConsultas.getColumnModel().getColumn(7).setMaxWidth(0);
 				tbConsultas.getColumnModel().getColumn(8).setMinWidth(0);
@@ -274,7 +269,7 @@ public class TelaExcluirConsulta extends JPanel {
 			}
 		});
 		btnBuscarConsultas.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscarConsultas.setBounds(978, 67, 201, 31);
+		btnBuscarConsultas.setBounds(1015, 67, 201, 31);
 		add(btnBuscarConsultas);
 
 		JLabel lblIdConsulta = new JLabel("ID Consulta");
@@ -295,9 +290,9 @@ public class TelaExcluirConsulta extends JPanel {
 			public void mouseClicked(MouseEvent arg0) {
 
 				int codigoConsulta = 0;
-				ConsultaController dao = new ConsultaController();
+				ConsultaController consultaController = new ConsultaController();
 				ConsultaVO consulta = construirConsulta();
-				String mensagem = dao.atualizarConsulta(consulta, codigoConsulta);
+				String mensagem = consultaController.atualizarConsulta(consulta, codigoConsulta);
 				JOptionPane.showMessageDialog(null, mensagem);
 				limparTela();
 
@@ -306,17 +301,17 @@ public class TelaExcluirConsulta extends JPanel {
 		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnAlterar.setBounds(278, 435, 115, 35);
 		add(btnAlterar);
-		
+
 		dateChooserDataConsulta = new JDateChooser();
 		dateChooserDataConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		dateChooserDataConsulta.setBounds(190, 286, 172, 31);
 		add(dateChooserDataConsulta);
-		
+
 		Panel panel = new Panel();
 		panel.setBackground(SystemColor.menu);
 		panel.setBounds(668, 10, 5, 461);
 		add(panel);
-		
+
 		String[] horariosConsultas = { "--- Selecione ---", "08:00:00", "08:30:00", "09:00:00", "09:30:00", "10:00:00",
 				"10:30:00", "11:00:00", "11:30:00", "12:00:00", "12:30:00", "13:00:00", "13:30:00", "14:00:00",
 				"14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00", "17:30:00", "18:00:00" };
@@ -379,12 +374,13 @@ public class TelaExcluirConsulta extends JPanel {
 
 		return consulta;
 	}
-	
+
 	private void atualizarTabelaConsultas(List<ConsultaVO> consultas) {
-		tbConsultas.setModel(new DefaultTableModel(new Object[][] { { "ID Consulta", "Paciente", "Convenio", "Medico", "Especialidade", "Data", "Horario",
-			null, null, null }, },
+		tbConsultas.setModel(new DefaultTableModel(
+				new Object[][] { { "ID Consulta", "Paciente", "Convenio", "Medico", "Especialidade", "Data", "Horario",
+						null, null, null }, },
 				new String[] { "ID Consulta", "Paciente", "Convenio", "Medico", "Especialidade", "Data", "Horario",
-						"New column", "New column", "New column"}));
+						"New column", "New column", "New column" }));
 
 		DefaultTableModel modelo = (DefaultTableModel) tbConsultas.getModel();
 
@@ -393,16 +389,12 @@ public class TelaExcluirConsulta extends JPanel {
 			// Preencher a linha com os atributos do produto
 			// na ORDEM do cabeçalho da tabela
 			Object[] novaLinha = new Object[] { consulta.getCodigoConsulta(),
-					consulta.getPacienteVO().getNomePaciente(), 
-					consulta.getConvenioVO().getNomeConvenio(), 
+					consulta.getPacienteVO().getNomePaciente(), consulta.getConvenioVO().getNomeConvenio(),
 					consulta.getEspecializacaoVO().getMedicoVO().getNomeMedico(),
 					consulta.getEspecializacaoVO().getEspecialidadeVO().getNomeEspecialidade(),
-					consulta.getDataConsulta(),
-					consulta.getHorarioConsulta(),
-					consulta.getPacienteVO().getCodigoPaciente(), 
-					consulta.getConvenioVO().getCodigoConvenio(),
+					consulta.getDataConsulta(), consulta.getHorarioConsulta(),
+					consulta.getPacienteVO().getCodigoPaciente(), consulta.getConvenioVO().getCodigoConvenio(),
 					consulta.getEspecializacaoVO().getCodigoEspecializacao(),
-
 
 			};
 			modelo.addRow(novaLinha);

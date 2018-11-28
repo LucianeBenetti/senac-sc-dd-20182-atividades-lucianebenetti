@@ -113,9 +113,9 @@ public class TelaExcluirConvenio extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				
-				ConvenioController dao = new ConvenioController();
+				ConvenioController controlador = new ConvenioController();
 				ConvenioVO convenioExcluido = construirConvenio();
-				dao.excluirConvenio(convenioExcluido);
+				controlador.excluirConvenio(convenioExcluido);
 				JOptionPane.showMessageDialog(null, "Convênio excluído!");
 				limparTela();
 			}

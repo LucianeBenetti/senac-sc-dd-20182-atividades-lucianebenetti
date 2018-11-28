@@ -160,8 +160,8 @@ public class TelaCadastrarPaciente extends JPanel {
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				PacienteController dao = new PacienteController();
-				pacienteBuscado = dao.buscarPacientePorCpf(txtCpfBusca.getText());
+				PacienteController controlador = new PacienteController();
+				pacienteBuscado = controlador.buscarPacientePorCpf(txtCpfBusca.getText());
 				
 				if (pacienteBuscado != null) {
 					pacienteBuscado = buscarPaciente();

@@ -86,11 +86,11 @@ public class TelaCadastrarEspecialidade extends JPanel {
 
 				EspecialidadeController controlador = new EspecialidadeController();
 				EspecialidadeVO especialidade = construirEspecialidade();
-				
+
 				String mensagem = controlador.salvar(especialidade);
 				JOptionPane.showMessageDialog(null, mensagem);
 				limparTela();
-				}
+			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnCadastrar.setBounds(704, 523, 129, 31);
@@ -107,8 +107,10 @@ public class TelaCadastrarEspecialidade extends JPanel {
 				if (txtBuscarNome.getText() != null) {
 					especialidades = controlador.exibirEspecialidadePorNome(txtBuscarNome.getText());
 					atualizarTabelaEspecialidades(especialidades);
-				} else {
+				}
+				if (especialidades.size() == 0) {
 					JOptionPane.showMessageDialog(null, "Especialidade não encontrada!!");
+
 				}
 
 			}
@@ -161,7 +163,7 @@ public class TelaCadastrarEspecialidade extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int selecionado = tbEspecialidade.getSelectedRow();
-				
+
 				txtId.setText(tbEspecialidade.getValueAt(selecionado, 0) + "");
 				txtNome.setText((String) tbEspecialidade.getValueAt(selecionado, 1));
 				txtInstituicao.setText((String) tbEspecialidade.getValueAt(selecionado, 2));
@@ -177,21 +179,21 @@ public class TelaCadastrarEspecialidade extends JPanel {
 		btnAlterar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				int codigo = Integer.parseInt(txtId.getText());
 				EspecialidadeController controlador = new EspecialidadeController();
 				EspecialidadeVO especialidade = construirEspecialidade();
-				
+
 				String codigoEsp = txtId.getText();
-				if(codigoEsp.trim() !="") {
+				if (codigoEsp.trim() != "") {
 					especialidade.setCodigoEspecialidade(Integer.parseInt(codigoEsp));
-					}
-				
+				}
+
 				controlador.atualizar(especialidade, codigo);
-				if(controlador != null) {
-				JOptionPane.showMessageDialog(null, "Especialidade alterada com sucesso!");
-				limparTela();
-				}else {
+				if (controlador != null) {
+					JOptionPane.showMessageDialog(null, "Especialidade alterada com sucesso!");
+					limparTela();
+				} else {
 					JOptionPane.showMessageDialog(null, "Não foi possível alterar Especialidade!");
 				}
 
@@ -211,7 +213,7 @@ public class TelaCadastrarEspecialidade extends JPanel {
 		lblid.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblid.setBounds(386, 360, 59, 31);
 		add(lblid);
-		
+
 		Panel panel = new Panel();
 		panel.setBackground(SystemColor.menu);
 		panel.setBounds(315, 11, 4, 543);
@@ -223,7 +225,7 @@ public class TelaCadastrarEspecialidade extends JPanel {
 
 		especialidade.setNomeEspecialidade(txtNome.getText());
 		especialidade.setInstituicao(txtInstituicao.getText());
-		
+
 		return especialidade;
 	}
 

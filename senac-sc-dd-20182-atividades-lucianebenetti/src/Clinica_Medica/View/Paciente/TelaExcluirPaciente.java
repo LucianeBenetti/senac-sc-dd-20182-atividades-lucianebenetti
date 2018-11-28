@@ -157,9 +157,9 @@ setBackground(new Color(173, 216, 230));
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				PacienteController dao = new PacienteController();
+				PacienteController controlador = new PacienteController();
 				
-				pacienteBuscado = dao.buscarPacientePorCpf(txtCpfBusca.getText());
+				pacienteBuscado = controlador.buscarPacientePorCpf(txtCpfBusca.getText());
 				
 				if(pacienteBuscado != null) {
 					pacienteBuscado = buscarPaciente();

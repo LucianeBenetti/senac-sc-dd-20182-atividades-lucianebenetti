@@ -169,9 +169,9 @@ public class TelaCadastrarConvenio extends JPanel {
 			public void mouseClicked(MouseEvent arg0) {
 
 				String conCnpj = null;
-				ConvenioController dao = new ConvenioController();
+				ConvenioController controlador = new ConvenioController();
 				ConvenioVO convenio = construirConvenio();
-				String mensagem = dao.atualizarConvenio(convenio, conCnpj);
+				String mensagem = controlador.atualizarConvenio(convenio, conCnpj);
 				JOptionPane.showMessageDialog(null, mensagem);
 				limparTela();
 			}

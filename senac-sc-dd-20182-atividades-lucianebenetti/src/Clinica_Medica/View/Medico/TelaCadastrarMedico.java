@@ -182,8 +182,8 @@ public class TelaCadastrarMedico extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
-				MedicoController dao = new MedicoController();
-				medicoBuscado = dao.buscarMedicoPorCPF(txtBuscarCpf.getText());
+				MedicoController controlador = new MedicoController();
+				medicoBuscado = controlador.buscarMedicoPorCPF(txtBuscarCpf.getText());
 
 				if (medicoBuscado != null) {
 					medicoBuscado = buscarMedico();
@@ -236,9 +236,9 @@ public class TelaCadastrarMedico extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 
 				String cpf = null;
-				MedicoController dao = new MedicoController();
+				MedicoController controlador = new MedicoController();
 				MedicoVO medico = construirMedico();
-				String mensagem = dao.atualizarMedico(medico, cpf);
+				String mensagem = controlador.atualizarMedico(medico, cpf);
 				JOptionPane.showMessageDialog(null, mensagem);
 				limparTela();
 			}

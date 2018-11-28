@@ -62,8 +62,8 @@ public class TelaExcluirMedico extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				MedicoController dao = new MedicoController();
-				medicoBuscado = dao.buscarMedicoPorCPF(txtBuscarCpf.getText());
+				MedicoController controlador = new MedicoController();
+				medicoBuscado = controlador.buscarMedicoPorCPF(txtBuscarCpf.getText());
 				
 				if(medicoBuscado != null) {
 					medicoBuscado = buscarMedico();
@@ -155,9 +155,9 @@ public class TelaExcluirMedico extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				MedicoController dao = new MedicoController();
+				MedicoController controlador = new MedicoController();
 				MedicoVO medicoExcluido = construirMedico();
-				dao.excluirMedico(medicoExcluido);
+				controlador.excluirMedico(medicoExcluido);
 				JOptionPane.showMessageDialog(null, "Medico excluído!");
 				limparTela();
 			}

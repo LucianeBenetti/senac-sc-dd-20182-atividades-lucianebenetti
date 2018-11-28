@@ -38,7 +38,7 @@ public class TelaSobre extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaSobre.class.getResource("/icones/icons8-card\u00E1pio.png")));
 		setTitle("Sobre");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 664, 421);
+		setBounds(100, 100, 666, 359);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(173, 216, 230));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

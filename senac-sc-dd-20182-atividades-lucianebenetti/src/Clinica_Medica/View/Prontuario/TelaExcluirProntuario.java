@@ -63,16 +63,16 @@ public class TelaExcluirProntuario extends JPanel {
 		btnExcluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ProntuarioController dao = new ProntuarioController();
+				ProntuarioController controlador = new ProntuarioController();
 				ProntuarioVO prontuarioExcluido = construirProntuario();
-				dao.excluirProntuario(prontuarioExcluido);
+				controlador.excluirProntuario(prontuarioExcluido);
 				JOptionPane.showMessageDialog(null, "Prontuário excluído!");
 			
 				limparTela();
 			}
 		});
 		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnExcluir.setBounds(848, 495, 97, 31);
+		btnExcluir.setBounds(880, 495, 97, 31);
 		add(btnExcluir);
 
 		JButton btnSair = new JButton("Sair");
@@ -90,7 +90,7 @@ public class TelaExcluirProntuario extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(1275, 495, 97, 30);
+		btnSair.setBounds(1290, 495, 97, 30);
 		add(btnSair);
 
 		JLabel lblNomePaciente = new JLabel("Nome Paciente");
@@ -118,7 +118,7 @@ public class TelaExcluirProntuario extends JPanel {
 		txtIdProntuario.setColumns(10);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(418, 342, 606, 2);
+		separator.setBounds(418, 335, 969, 9);
 		add(separator);
 
 		JButton btnBuscarProntuarios = new JButton("Buscar Prontuarios");
@@ -134,11 +134,11 @@ public class TelaExcluirProntuario extends JPanel {
 			}
 		});
 		btnBuscarProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscarProntuarios.setBounds(778, 73, 211, 43);
+		btnBuscarProntuarios.setBounds(802, 72, 211, 43);
 		add(btnBuscarProntuarios);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(410, 123, 962, 195);
+		scrollPane.setBounds(410, 123, 977, 195);
 		add(scrollPane);
 
 		tbProntuarios = new JTable();

@@ -51,7 +51,7 @@ public class TelaListarTodosConvenios extends JPanel {
 			}
 		});
 		btnListarTodosConvenios.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnListarTodosConvenios.setBounds(507, 47, 226, 31);
+		btnListarTodosConvenios.setBounds(617, 60, 226, 31);
 		add(btnListarTodosConvenios);
 		
 		JButton btnSair = new JButton("Sair");
@@ -70,7 +70,7 @@ public class TelaListarTodosConvenios extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(876, 417, 94, 31);
+		btnSair.setBounds(1035, 417, 94, 31);
 		add(btnSair);
 		
 		JLabel lblConvenios = new JLabel("Convenios");
@@ -79,7 +79,7 @@ public class TelaListarTodosConvenios extends JPanel {
 		add(lblConvenios);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(289, 120, 681, 248);
+		scrollPane.setBounds(289, 120, 840, 248);
 		add(scrollPane);
 		
 		tbConvenio = new JTable();
@@ -114,7 +114,7 @@ public class TelaListarTodosConvenios extends JPanel {
 			}
 		});
 		
-		btnGerarPlaniha.setBounds(685, 418, 144, 29);
+		btnGerarPlaniha.setBounds(772, 418, 144, 29);
 		add(btnGerarPlaniha);
 
 	}

@@ -35,18 +35,18 @@ public class TelaListarTodasConsultas extends JPanel {
 		btnListarTodasConsultas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				ConsultaController controlador = new ConsultaController();
-				List<ConsultaVO> consultas = controlador.listarTodasConsultas();
+				ConsultaController consultaController = new ConsultaController();
+				List<ConsultaVO> consultas = consultaController.listarTodasConsultas();
 				atualizarTabelaConsultas(consultas);
 				
 			}
 		});
 		btnListarTodasConsultas.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnListarTodasConsultas.setBounds(554, 38, 238, 31);
+		btnListarTodasConsultas.setBounds(658, 41, 238, 31);
 		add(btnListarTodasConsultas);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(275, 96, 753, 8);
+		separator.setBounds(275, 94, 1012, 10);
 		add(separator);
 		
 		JButton btnSair = new JButton("Sair");
@@ -65,11 +65,11 @@ public class TelaListarTodasConsultas extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(951, 519, 92, 31);
+		btnSair.setBounds(1210, 528, 92, 31);
 		add(btnSair);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(275, 151, 768, 319);
+		scrollPane.setBounds(275, 151, 1027, 319);
 		add(scrollPane);
 		
 		tbConsultas = new JTable();

@@ -42,7 +42,7 @@ public class ConsultaController {
 				Date dataSQL = new Date(c.getTimeInMillis());
 				java.util.Date hoje = Calendar.getInstance().getTime();
 				if (dataSQL.before(hoje)) {
-					validacao = "Data não pode ser inferior que a data atual.";
+					validacao = "Data não pode ser inferior ou igual a data atual.";
 				}
 			}
 		}

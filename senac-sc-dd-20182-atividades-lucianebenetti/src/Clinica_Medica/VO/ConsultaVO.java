@@ -13,7 +13,6 @@ public class ConsultaVO {
 
 	public ConsultaVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public ConsultaVO(int codigoConsulta, EspecializacaoVO especializacaoVO, PacienteVO pacienteVO,

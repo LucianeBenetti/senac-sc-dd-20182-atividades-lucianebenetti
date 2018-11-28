@@ -88,7 +88,7 @@ public class TelaCadastrarProntuario extends JPanel {
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscar.setBounds(1065, 46, 219, 39);
+		btnBuscar.setBounds(1120, 39, 219, 39);
 		add(btnBuscar);
 
 		JSeparator separator = new JSeparator();
@@ -110,7 +110,7 @@ public class TelaCadastrarProntuario extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(1463, 499, 114, 39);
+		btnSair.setBounds(1535, 482, 114, 39);
 		add(btnSair);
 
 		JLabel lblMedicamentos = new JLabel("Medicamentos");
@@ -159,9 +159,9 @@ public class TelaCadastrarProntuario extends JPanel {
 				int codigoProntuario = 0;
 				prontuario.setCodigoProntuario(Integer.parseInt(txtIdProntuario.getText()));
 
-				ProntuarioController dao = new ProntuarioController();
+				ProntuarioController controlador = new ProntuarioController();
 				ProntuarioVO prontuario = construirProntuario();
-				String mensagem = dao.atualizarProntuario(prontuario, prontuario.getCodigoProntuario());
+				String mensagem = controlador.atualizarProntuario(prontuario, prontuario.getCodigoProntuario());
 				JOptionPane.showMessageDialog(null, mensagem);
 				limparTela();
 				limparTabelaConsultas();
@@ -240,7 +240,7 @@ public class TelaCadastrarProntuario extends JPanel {
 		txtHorarioConsulta.setColumns(10);
 
 		JScrollPane scrollPane_4 = new JScrollPane();
-		scrollPane_4.setBounds(793, 94, 784, 151);
+		scrollPane_4.setBounds(793, 94, 856, 151);
 		add(scrollPane_4);
 
 		tbConsultas = new JTable();
@@ -280,7 +280,7 @@ public class TelaCadastrarProntuario extends JPanel {
 		add(lblIdConsulta);
 
 		JScrollPane scrollPane_5 = new JScrollPane();
-		scrollPane_5.setBounds(793, 327, 784, 133);
+		scrollPane_5.setBounds(793, 327, 856, 133);
 		add(scrollPane_5);
 
 		tbProntuarios = new JTable();
@@ -346,7 +346,7 @@ public class TelaCadastrarProntuario extends JPanel {
 			}
 		});
 		btnBuscarProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscarProntuarios.setBounds(1078, 278, 219, 39);
+		btnBuscarProntuarios.setBounds(1120, 278, 219, 39);
 
 		add(btnBuscarProntuarios);
 

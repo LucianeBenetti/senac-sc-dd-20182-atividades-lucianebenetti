@@ -54,7 +54,7 @@ public class TelaExcluirEspecialidade extends JPanel {
 			}
 		});
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscar.setBounds(889, 18, 89, 31);
+		btnBuscar.setBounds(1010, 18, 89, 31);
 		add(btnBuscar);
 
 		JButton btnNewButton_1 = new JButton("Limpar Tela");
@@ -73,15 +73,15 @@ public class TelaExcluirEspecialidade extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				EspecialidadeController dao = new EspecialidadeController();
+				EspecialidadeController controlador = new EspecialidadeController();
 				EspecialidadeVO especialidadeExcluida = construirEspecialidade();
-				dao.excluirEspecialidadeVO(especialidadeExcluida);
+				controlador.excluirEspecialidadeVO(especialidadeExcluida);
 				JOptionPane.showMessageDialog(null, "Especialidade excluída!");
 				limparTela();
 			}
 		});
 		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnExcluir.setBounds(644, 563, 100, 31);
+		btnExcluir.setBounds(715, 563, 100, 31);
 		add(btnExcluir);
 
 		JButton btnSair = new JButton("Sair");
@@ -99,11 +99,11 @@ public class TelaExcluirEspecialidade extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(875, 563, 89, 31);
+		btnSair.setBounds(1023, 563, 89, 31);
 		add(btnSair);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(362, 73, 616, 11);
+		separator.setBounds(362, 73, 750, 11);
 		add(separator);
 
 		JLabel lblNome = new JLabel("Nome");
@@ -118,7 +118,7 @@ public class TelaExcluirEspecialidade extends JPanel {
 		txtBuscarNome.setColumns(10);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(362, 95, 616, 215);
+		scrollPane.setBounds(362, 95, 750, 215);
 		add(scrollPane);
 
 		tbEspecialidade = new JTable();

@@ -40,7 +40,7 @@ public class TelaListarTodosPacientes extends JPanel {
 			}
 		});
 		btnListarTodosPacientes.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnListarTodosPacientes.setBounds(449, 61, 324, 36);
+		btnListarTodosPacientes.setBounds(521, 67, 324, 36);
 		add(btnListarTodosPacientes);
 		
 		JButton btnSair = new JButton("Sair");
@@ -59,11 +59,11 @@ public class TelaListarTodosPacientes extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(1026, 432, 90, 36);
+		btnSair.setBounds(1150, 439, 90, 36);
 		add(btnSair);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(175, 133, 962, 241);
+		scrollPane.setBounds(175, 133, 1065, 241);
 		add(scrollPane);
 		
 		tbPacientes = new JTable();

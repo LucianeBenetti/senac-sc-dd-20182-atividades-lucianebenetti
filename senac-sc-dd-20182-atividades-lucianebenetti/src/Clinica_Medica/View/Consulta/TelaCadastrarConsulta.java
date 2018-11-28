@@ -98,12 +98,11 @@ public class TelaCadastrarConsulta extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				ConsultaController controlerConsulta = new ConsultaController();
-				PacienteController dao = new PacienteController();
-				pacienteBuscado = dao.buscarPacientePorCpf(txtBuscarCPF.getText());
+				PacienteController pacienteController = new PacienteController();
+				pacienteBuscado = pacienteController.buscarPacientePorCpf(txtBuscarCPF.getText());
 
 				if (pacienteBuscado != null) {
-					pacienteBuscado = buscarPaciente();
+					pacienteBuscado = preencherPaciente();
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Paciente não encontrado.");
@@ -157,7 +156,7 @@ public class TelaCadastrarConsulta extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(1228, 569, 107, 35);
+		btnSair.setBounds(1341, 587, 107, 35);
 		add(btnSair);
 
 		JLabel lblDataRealizao = new JLabel("Hora da Consulta");
@@ -184,10 +183,10 @@ public class TelaCadastrarConsulta extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
-				ConsultaController controlador = new ConsultaController();
+				ConsultaController consultaController = new ConsultaController();
 				ConsultaVO consulta = construirConsulta();
 								
-				String mensagem = controlador.salvar(consulta);
+				String mensagem = consultaController.salvar(consulta);
 				JOptionPane.showMessageDialog(null, mensagem);
 				limparTela();
 			}
@@ -269,15 +268,15 @@ public class TelaCadastrarConsulta extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				
-				EspecializacaoController controlador = new EspecializacaoController();
+				EspecializacaoController especializacaoController = new EspecializacaoController();
 				List<EspecializacaoVO> especializacoes = null;
-				especializacoes = controlador.listarTodasEspecializacoes();
+				especializacoes = especializacaoController.listarTodasEspecializacoes();
 				atualizarTabelaMedicosEspecialidades(especializacoes);
 			
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton.setBounds(981, 308, 299, 31);
+		btnNewButton.setBounds(994, 308, 299, 31);
 		add(btnNewButton);
 
 		txtNomeMedico = new JTextField();
@@ -327,16 +326,15 @@ public class TelaCadastrarConsulta extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				ConvenioController controlador = new ConvenioController();
-
+				ConvenioController convenioController = new ConvenioController();
 				List<ConvenioVO> convenios = null;
-				convenios = controlador.listarTodosConvenios();
+				convenios = convenioController.listarTodosConvenios();
 				atualizarTabelaConvenios(convenios);
 
 			}
 		});
 		btnBuscarConveio.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnBuscarConveio.setBounds(1016, 16, 201, 31);
+		btnBuscarConveio.setBounds(1028, 16, 201, 31);
 		add(btnBuscarConveio);
 		
 		JSeparator separator_2 = new JSeparator();
@@ -361,7 +359,7 @@ public class TelaCadastrarConsulta extends JPanel {
 		return consulta;
 	}
 
-	protected PacienteVO buscarPaciente() {
+	protected PacienteVO preencherPaciente() {
 
 		txtNomePaciente.setText(pacienteBuscado.getNomePaciente());
 		txtIdPaciente.setText(pacienteBuscado.getCodigoPaciente() + "");

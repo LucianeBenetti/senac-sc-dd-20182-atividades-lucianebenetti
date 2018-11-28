@@ -42,8 +42,12 @@ public class TelaListarTodasEspecializacoes extends JPanel {
 			}
 		});
 		btnListarTodasEspecializacoes.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnListarTodasEspecializacoes.setBounds(620, 74, 281, 31);
+		btnListarTodasEspecializacoes.setBounds(664, 45, 281, 31);
 		add(btnListarTodasEspecializacoes);
+
+		JSeparator separator = new JSeparator();
+		separator.setBounds(324, 92, 980, 9);
+		add(separator);
 
 		JButton btnSair = new JButton("Sair");
 		btnSair.addMouseListener(new MouseAdapter() {
@@ -61,11 +65,11 @@ public class TelaListarTodasEspecializacoes extends JPanel {
 			}
 		});
 		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSair.setBounds(836, 546, 95, 31);
+		btnSair.setBounds(1197, 545, 95, 31);
 		add(btnSair);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(313, 154, 939, 268);
+		scrollPane.setBounds(313, 154, 991, 297);
 		add(scrollPane);
 
 		tbEspecializacoes = new JTable();
