@@ -117,27 +117,6 @@ public class TelaExcluirEspecialidade extends JPanel {
 		add(txtBuscarNome);
 		txtBuscarNome.setColumns(10);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(362, 95, 750, 215);
-		add(scrollPane);
-
-		tbEspecialidade = new JTable();
-		tbEspecialidade.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				int selecionado = tbEspecialidade.getSelectedRow();
-
-				txtId.setText(tbEspecialidade.getValueAt(selecionado, 0) + "");
-				txtNome.setText((String) tbEspecialidade.getValueAt(selecionado, 1));
-				txtInstituicao.setText((String) tbEspecialidade.getValueAt(selecionado, 2));
-			}
-		});
-		tbEspecialidade.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome", "Instituicao" }, },
-				new String[] { "ID", "Nome", "Instituicao" }));
-		tbEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		scrollPane.setColumnHeaderView(tbEspecialidade);
-
 		JLabel lblNewLabel = new JLabel("ID");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel.setBounds(375, 335, 55, 31);
@@ -178,6 +157,27 @@ public class TelaExcluirEspecialidade extends JPanel {
 		panel.setBackground(SystemColor.menu);
 		panel.setBounds(299, 18, 4, 576);
 		add(panel);
+				
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setBounds(362, 84, 748, 212);
+				add(scrollPane);
+		
+				tbEspecialidade = new JTable();
+				scrollPane.setViewportView(tbEspecialidade);
+				tbEspecialidade.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+
+						int selecionado = tbEspecialidade.getSelectedRow();
+
+						txtId.setText(tbEspecialidade.getValueAt(selecionado, 0) + "");
+						txtNome.setText((String) tbEspecialidade.getValueAt(selecionado, 1));
+						txtInstituicao.setText((String) tbEspecialidade.getValueAt(selecionado, 2));
+					}
+				});
+				tbEspecialidade.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome", "Instituicao" }, },
+						new String[] { "ID", "Nome", "Instituicao" }));
+				tbEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
 	}
 

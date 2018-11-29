@@ -219,33 +219,33 @@ public class TelaExcluirEspecializacao extends JPanel {
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(350, 321, 857, 16);
 		add(separator_1);
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(350, 141, 857, 155);
-		add(scrollPane);
-
-		tbEspecializacao = new JTable();
-		tbEspecializacao.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		tbEspecializacao.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				int selecionado = tbEspecializacao.getSelectedRow();
-
-				txtIdEspecializacao.setText(tbEspecializacao.getValueAt(selecionado, 0) + "");
-				txtNomeMedico.setText((String) tbEspecializacao.getValueAt(selecionado, 1));
-				txtNomeEspecialidade.setText((String) tbEspecializacao.getValueAt(selecionado, 2));
-				txtAno.setText((String) tbEspecializacao.getValueAt(selecionado, 3));
-			}
-		});
-		tbEspecializacao.setModel(new DefaultTableModel(
-				new Object[][] { { "ID", "Nome Medico", "Especialidade", "Ano", "Instituicao" }, },
-				new String[] { "ID", "Nome Medico", "Especialidade", "Ano", "Instituicao" }));
-		scrollPane.setColumnHeaderView(tbEspecializacao);
 		
 		Panel panel = new Panel();
 		panel.setBackground(SystemColor.menu);
 		panel.setBounds(315, 20, 3, 580);
 		add(panel);
+				
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setBounds(351, 129, 855, 181);
+				add(scrollPane);
+		
+				tbEspecializacao = new JTable();
+				scrollPane.setViewportView(tbEspecializacao);
+				tbEspecializacao.setFont(new Font("Tahoma", Font.PLAIN, 16));
+				tbEspecializacao.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						int selecionado = tbEspecializacao.getSelectedRow();
+
+						txtIdEspecializacao.setText(tbEspecializacao.getValueAt(selecionado, 0) + "");
+						txtNomeMedico.setText((String) tbEspecializacao.getValueAt(selecionado, 1));
+						txtNomeEspecialidade.setText((String) tbEspecializacao.getValueAt(selecionado, 2));
+						txtAno.setText((String) tbEspecializacao.getValueAt(selecionado, 3));
+					}
+				});
+				tbEspecializacao.setModel(new DefaultTableModel(
+						new Object[][] { { "ID", "Nome Medico", "Especialidade", "Ano", "Instituicao" }, },
+						new String[] { "ID", "Nome Medico", "Especialidade", "Ano", "Instituicao" }));
 
 	}
 

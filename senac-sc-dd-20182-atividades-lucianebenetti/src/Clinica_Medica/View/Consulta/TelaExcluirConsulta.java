@@ -212,44 +212,6 @@ public class TelaExcluirConsulta extends JPanel {
 		add(txtConvenio);
 		txtConvenio.setColumns(10);
 
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(740, 117, 766, 214);
-		add(scrollPane_1);
-
-		tbConsultas = new JTable();
-		tbConsultas.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				int selecionado = tbConsultas.getSelectedRow();
-
-				txtIdConsulta.setText(tbConsultas.getValueAt(selecionado, 0) + "");
-				txtNomePaciente.setText((String) tbConsultas.getValueAt(selecionado, 1));
-				txtConvenio.setText((String) tbConsultas.getValueAt(selecionado, 2));
-				txtNomeMedico.setText((String) tbConsultas.getValueAt(selecionado, 3));
-				txtEspecialidade.setText((String) tbConsultas.getValueAt(selecionado, 4));
-				dateChooserDataConsulta.setDate((Date) tbConsultas.getValueAt(selecionado, 5));
-				cbHorarioConsulta.setSelectedItem((String) tbConsultas.getValueAt(selecionado, 6));
-				txtIdPaciente.setText(tbConsultas.getValueAt(selecionado, 7) + "");
-				txtIdConvenio.setText(tbConsultas.getValueAt(selecionado, 8) + "");
-				txtIdEspecializacao.setText(tbConsultas.getValueAt(selecionado, 9) + "");
-			}
-		});
-		tbConsultas.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tbConsultas.setModel(new DefaultTableModel(
-				new Object[][] { { "ID Consulta", "Paciente", "Convenio", "Medico", "Especialidade", "Data", "Horario",
-						null, null, null }, },
-				new String[] { "ID Consulta", "Paciente", "Convenio", "Medico", "Especialidade", "Data", "Horario",
-						"New column", "New column", "New column" }));
-		scrollPane_1.setColumnHeaderView(tbConsultas);
-
-		tbConsultas.getColumnModel().getColumn(7).setMinWidth(0);
-		tbConsultas.getColumnModel().getColumn(7).setMaxWidth(0);
-		tbConsultas.getColumnModel().getColumn(8).setMinWidth(0);
-		tbConsultas.getColumnModel().getColumn(8).setMaxWidth(0);
-		tbConsultas.getColumnModel().getColumn(9).setMinWidth(0);
-		tbConsultas.getColumnModel().getColumn(9).setMaxWidth(0);
-
 		JButton btnBuscarConsultas = new JButton("Buscar Consultas");
 		btnBuscarConsultas.addMouseListener(new MouseAdapter() {
 			@Override
@@ -320,6 +282,44 @@ public class TelaExcluirConsulta extends JPanel {
 		cbHorarioConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		cbHorarioConsulta.setBounds(190, 341, 172, 31);
 		add(cbHorarioConsulta);
+				
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setBounds(740, 109, 764, 302);
+				add(scrollPane);
+		
+				tbConsultas = new JTable();
+				scrollPane.setViewportView(tbConsultas);
+				tbConsultas.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+
+						int selecionado = tbConsultas.getSelectedRow();
+
+						txtIdConsulta.setText(tbConsultas.getValueAt(selecionado, 0) + "");
+						txtNomePaciente.setText((String) tbConsultas.getValueAt(selecionado, 1));
+						txtConvenio.setText((String) tbConsultas.getValueAt(selecionado, 2));
+						txtNomeMedico.setText((String) tbConsultas.getValueAt(selecionado, 3));
+						txtEspecialidade.setText((String) tbConsultas.getValueAt(selecionado, 4));
+						dateChooserDataConsulta.setDate((Date) tbConsultas.getValueAt(selecionado, 5));
+						cbHorarioConsulta.setSelectedItem((String) tbConsultas.getValueAt(selecionado, 6));
+						txtIdPaciente.setText(tbConsultas.getValueAt(selecionado, 7) + "");
+						txtIdConvenio.setText(tbConsultas.getValueAt(selecionado, 8) + "");
+						txtIdEspecializacao.setText(tbConsultas.getValueAt(selecionado, 9) + "");
+					}
+				});
+				tbConsultas.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				tbConsultas.setModel(new DefaultTableModel(
+						new Object[][] { { "ID Consulta", "Paciente", "Convenio", "Medico", "Especialidade", "Data", "Horario",
+								null, null, null }, },
+						new String[] { "ID Consulta", "Paciente", "Convenio", "Medico", "Especialidade", "Data", "Horario",
+								"New column", "New column", "New column" }));
+				
+						tbConsultas.getColumnModel().getColumn(7).setMinWidth(0);
+						tbConsultas.getColumnModel().getColumn(7).setMaxWidth(0);
+						tbConsultas.getColumnModel().getColumn(8).setMinWidth(0);
+						tbConsultas.getColumnModel().getColumn(8).setMaxWidth(0);
+						tbConsultas.getColumnModel().getColumn(9).setMinWidth(0);
+						tbConsultas.getColumnModel().getColumn(9).setMaxWidth(0);
 
 	}
 

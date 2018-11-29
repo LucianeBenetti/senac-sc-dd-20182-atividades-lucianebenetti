@@ -68,22 +68,22 @@ public class TelaListarTodasEspecializacoes extends JPanel {
 		btnSair.setBounds(1197, 545, 95, 31);
 		add(btnSair);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(313, 154, 991, 297);
-		add(scrollPane);
-
-		tbEspecializacoes = new JTable();
-		tbEspecializacoes.setEnabled(false);
-		tbEspecializacoes.setModel(
-				new DefaultTableModel(new Object[][] { { "ID", "Medico", "Especialidade", "Ano", "Instituicao" }, },
-						new String[] { "ID", "Medico", "Especialidade", "Ano", "Instituicao" }));
-		tbEspecializacoes.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		scrollPane.setColumnHeaderView(tbEspecializacoes);
-
 		JLabel lblEspecializacoes = new JLabel("Especializacoes");
 		lblEspecializacoes.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblEspecializacoes.setBounds(313, 129, 132, 22);
 		add(lblEspecializacoes);
+				
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setBounds(313, 162, 1000, 255);
+				add(scrollPane);
+		
+				tbEspecializacoes = new JTable();
+				scrollPane.setViewportView(tbEspecializacoes);
+				tbEspecializacoes.setEnabled(false);
+				tbEspecializacoes.setModel(
+						new DefaultTableModel(new Object[][] { { "ID", "Medico", "Especialidade", "Ano", "Instituicao" }, },
+								new String[] { "ID", "Medico", "Especialidade", "Ano", "Instituicao" }));
+				tbEspecializacoes.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
 	}
 

@@ -68,13 +68,18 @@ public class TelaListarTodasConsultas extends JPanel {
 		btnSair.setBounds(1210, 528, 92, 31);
 		add(btnSair);
 		
+		JLabel lblConsultas = new JLabel("Consultas");
+		lblConsultas.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblConsultas.setBounds(275, 133, 113, 22);
+		add(lblConsultas);
+		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(275, 151, 1027, 319);
+		scrollPane.setBounds(275, 181, 1025, 243);
 		add(scrollPane);
 		
 		tbConsultas = new JTable();
+		scrollPane.setViewportView(tbConsultas);
 		tbConsultas.setEnabled(false);
-		scrollPane.setColumnHeaderView(tbConsultas);
 		tbConsultas.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"ID", "Nome Paciente", "Convenio", "Data Consulta", "Horario"},
@@ -84,11 +89,6 @@ public class TelaListarTodasConsultas extends JPanel {
 			}
 		));
 		tbConsultas.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		
-		JLabel lblConsultas = new JLabel("Consultas");
-		lblConsultas.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblConsultas.setBounds(275, 133, 113, 22);
-		add(lblConsultas);
 
 	}
 	

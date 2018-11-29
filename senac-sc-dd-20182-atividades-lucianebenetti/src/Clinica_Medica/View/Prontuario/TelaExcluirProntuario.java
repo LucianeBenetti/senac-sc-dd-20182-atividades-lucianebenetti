@@ -136,33 +136,33 @@ public class TelaExcluirProntuario extends JPanel {
 		btnBuscarProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnBuscarProntuarios.setBounds(802, 72, 211, 43);
 		add(btnBuscarProntuarios);
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(410, 123, 977, 195);
-		add(scrollPane);
-
-		tbProntuarios = new JTable();
-		tbProntuarios.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				int selecionado = tbProntuarios.getSelectedRow();
-
-				txtIdProntuario.setText(tbProntuarios.getValueAt(selecionado, 0) + "");
-				txtNome.setText((String) tbProntuarios.getValueAt(selecionado, 1));
-
-			}
-		});
-		tbProntuarios.setModel(
-				new DefaultTableModel(new Object[][] { { "ID", "Paciente", "Medicamentos", "Exames", "Registro" }, },
-						new String[] { "ID", "Paciente", "Medicamentos", "Exames", "Registro" }));
-		tbProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		scrollPane.setColumnHeaderView(tbProntuarios);
 		
 		Panel panel = new Panel();
 		panel.setBackground(SystemColor.menu);
 		panel.setBounds(361, 39, 4, 485);
 		add(panel);
+				
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setBounds(410, 116, 975, 187);
+				add(scrollPane);
+		
+				tbProntuarios = new JTable();
+				scrollPane.setViewportView(tbProntuarios);
+				tbProntuarios.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+
+						int selecionado = tbProntuarios.getSelectedRow();
+
+						txtIdProntuario.setText(tbProntuarios.getValueAt(selecionado, 0) + "");
+						txtNome.setText((String) tbProntuarios.getValueAt(selecionado, 1));
+
+					}
+				});
+				tbProntuarios.setModel(
+						new DefaultTableModel(new Object[][] { { "ID", "Paciente", "Medicamentos", "Exames", "Registro" }, },
+								new String[] { "ID", "Paciente", "Medicamentos", "Exames", "Registro" }));
+				tbProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
 	}
 

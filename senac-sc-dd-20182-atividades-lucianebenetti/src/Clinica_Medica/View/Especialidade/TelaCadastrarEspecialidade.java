@@ -153,27 +153,6 @@ public class TelaCadastrarEspecialidade extends JPanel {
 		scrollPane.setBounds(10, 174, 569, -92);
 		add(scrollPane);
 
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(375, 80, 599, 251);
-		add(scrollPane_1);
-
-		tbEspecialidade = new JTable();
-		scrollPane_1.setColumnHeaderView(tbEspecialidade);
-		tbEspecialidade.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int selecionado = tbEspecialidade.getSelectedRow();
-
-				txtId.setText(tbEspecialidade.getValueAt(selecionado, 0) + "");
-				txtNome.setText((String) tbEspecialidade.getValueAt(selecionado, 1));
-				txtInstituicao.setText((String) tbEspecialidade.getValueAt(selecionado, 2));
-
-			}
-		});
-		tbEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tbEspecialidade.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome", "Instituição" }, },
-				new String[] { "ID", "Nome", "Instituição" }));
-
 		JButton btnAlterar = new JButton("Alterar");
 		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnAlterar.addMouseListener(new MouseAdapter() {
@@ -218,6 +197,27 @@ public class TelaCadastrarEspecialidade extends JPanel {
 		panel.setBackground(SystemColor.menu);
 		panel.setBounds(315, 11, 4, 543);
 		add(panel);
+				
+				JScrollPane scrollPane_1 = new JScrollPane();
+				scrollPane_1.setBounds(375, 66, 597, 250);
+				add(scrollPane_1);
+		
+				tbEspecialidade = new JTable();
+				scrollPane_1.setViewportView(tbEspecialidade);
+				tbEspecialidade.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						int selecionado = tbEspecialidade.getSelectedRow();
+
+						txtId.setText(tbEspecialidade.getValueAt(selecionado, 0) + "");
+						txtNome.setText((String) tbEspecialidade.getValueAt(selecionado, 1));
+						txtInstituicao.setText((String) tbEspecialidade.getValueAt(selecionado, 2));
+
+					}
+				});
+				tbEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 18));
+				tbEspecialidade.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome", "Instituição" }, },
+						new String[] { "ID", "Nome", "Instituição" }));
 
 	}
 

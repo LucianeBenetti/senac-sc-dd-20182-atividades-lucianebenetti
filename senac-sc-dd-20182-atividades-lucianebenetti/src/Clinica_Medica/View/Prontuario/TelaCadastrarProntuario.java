@@ -173,33 +173,9 @@ public class TelaCadastrarProntuario extends JPanel {
 		btnAlterar.setBounds(286, 482, 140, 39);
 		add(btnAlterar);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(157, 321, 560, 126);
-		add(scrollPane);
-
-		txtAreaRegistro = new JTextArea();
-		scrollPane.setViewportView(txtAreaRegistro);
-		txtAreaRegistro.setFont(new Font("Dialog", Font.PLAIN, 16));
-
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(157, 256, 2, 2);
 		add(scrollPane_1);
-
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(157, 256, 560, 54);
-		add(scrollPane_2);
-
-		txtAreaExames = new JTextArea();
-		txtAreaExames.setFont(new Font("Dialog", Font.PLAIN, 16));
-		scrollPane_2.setViewportView(txtAreaExames);
-
-		JScrollPane scrollPane_3 = new JScrollPane();
-		scrollPane_3.setBounds(157, 194, 560, 46);
-		add(scrollPane_3);
-
-		txtAreaMedicamentos = new JTextArea();
-		scrollPane_3.setViewportView(txtAreaMedicamentos);
-		txtAreaMedicamentos.setFont(new Font("Dialog", Font.PLAIN, 16));
 
 		JLabel lblHoraConsulta = new JLabel("Horario Consulta");
 		lblHoraConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -238,35 +214,6 @@ public class TelaCadastrarProntuario extends JPanel {
 		txtHorarioConsulta.setBounds(576, 62, 135, 32);
 		add(txtHorarioConsulta);
 		txtHorarioConsulta.setColumns(10);
-
-		JScrollPane scrollPane_4 = new JScrollPane();
-		scrollPane_4.setBounds(793, 94, 856, 151);
-		add(scrollPane_4);
-
-		tbConsultas = new JTable();
-		tbConsultas.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				int linhaSelecionada = tbConsultas.getSelectedRow();
-				consultaSelecionada = consultas.get(linhaSelecionada - 1);
-
-				txtIdConsulta.setText(tbConsultas.getValueAt(linhaSelecionada, 0) + "");
-				txtNomePaciente.setText((String) tbConsultas.getValueAt(linhaSelecionada, 1));
-
-				Date dataConsulta = (Date) tbConsultas.getValueAt(linhaSelecionada, 2);
-				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
-				String dataConsultaFormatada = sdf.format(dataConsulta);
-				txtDataConsulta.setText(dataConsultaFormatada);
-				txtHorarioConsulta.setText((String) tbConsultas.getValueAt(linhaSelecionada, 3));
-
-			}
-		});
-		tbConsultas.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		tbConsultas.setModel(new DefaultTableModel(
-				new Object[][] { { "ID Consulta", "Paciente", "Data Consulta", "Horario Consulta" }, },
-				new String[] { "ID Consulta", "Paciente", "Data Consulta", "Horario Consulta" }));
-		scrollPane_4.setColumnHeaderView(tbConsultas);
 		txtIdConsulta = new JTextField();
 		txtIdConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtIdConsulta.setEditable(false);
@@ -278,30 +225,6 @@ public class TelaCadastrarProntuario extends JPanel {
 		lblIdConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblIdConsulta.setBounds(21, 122, 126, 22);
 		add(lblIdConsulta);
-
-		JScrollPane scrollPane_5 = new JScrollPane();
-		scrollPane_5.setBounds(793, 327, 856, 133);
-		add(scrollPane_5);
-
-		tbProntuarios = new JTable();
-		tbProntuarios.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-
-				int selecionado = tbProntuarios.getSelectedRow();
-
-				txtIdProntuario.setText(tbProntuarios.getValueAt(selecionado, 0) + "");
-				txtAreaMedicamentos.setText((String) tbProntuarios.getValueAt(selecionado, 3));
-				txtAreaExames.setText((String) tbProntuarios.getValueAt(selecionado, 4));
-				txtAreaRegistro.setText((String) tbProntuarios.getValueAt(selecionado, 5));
-
-			}
-		});
-		tbProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		tbProntuarios.setModel(new DefaultTableModel(
-				new Object[][] { { "ID Prontuario", "Paciente", "Medicamentos", "Exames", "Registro" }, },
-				new String[] { "ID Prontuario", "Paciente", "Medicamentos", "Exames", "Registro" }));
-		scrollPane_5.setColumnHeaderView(tbProntuarios);
 
 		JLabel lblIdProntuario = new JLabel("ID Prontuario");
 		lblIdProntuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -349,6 +272,83 @@ public class TelaCadastrarProntuario extends JPanel {
 		btnBuscarProntuarios.setBounds(1120, 278, 219, 39);
 
 		add(btnBuscarProntuarios);
+				
+				JScrollPane scrollPane_3 = new JScrollPane();
+				scrollPane_3.setBounds(157, 185, 558, 44);
+				add(scrollPane_3);
+		
+				txtAreaMedicamentos = new JTextArea();
+				scrollPane_3.setViewportView(txtAreaMedicamentos);
+				txtAreaMedicamentos.setFont(new Font("Dialog", Font.PLAIN, 16));
+						
+						JScrollPane scrollPane_2 = new JScrollPane();
+						scrollPane_2.setBounds(157, 256, 558, 52);
+						add(scrollPane_2);
+				
+						txtAreaExames = new JTextArea();
+						scrollPane_2.setViewportView(txtAreaExames);
+						txtAreaExames.setFont(new Font("Dialog", Font.PLAIN, 16));
+								
+								JScrollPane scrollPane = new JScrollPane();
+								scrollPane.setBounds(157, 322, 558, 124);
+								add(scrollPane);
+						
+								txtAreaRegistro = new JTextArea();
+								scrollPane.setViewportView(txtAreaRegistro);
+								txtAreaRegistro.setFont(new Font("Dialog", Font.PLAIN, 16));
+										
+										JScrollPane scrollPane_4 = new JScrollPane();
+										scrollPane_4.setBounds(793, 106, 854, 138);
+										add(scrollPane_4);
+								
+										tbConsultas = new JTable();
+										scrollPane_4.setViewportView(tbConsultas);
+										tbConsultas.addMouseListener(new MouseAdapter() {
+											@Override
+											public void mouseClicked(MouseEvent e) {
+
+												int linhaSelecionada = tbConsultas.getSelectedRow();
+												consultaSelecionada = consultas.get(linhaSelecionada - 1);
+
+												txtIdConsulta.setText(tbConsultas.getValueAt(linhaSelecionada, 0) + "");
+												txtNomePaciente.setText((String) tbConsultas.getValueAt(linhaSelecionada, 1));
+
+												Date dataConsulta = (Date) tbConsultas.getValueAt(linhaSelecionada, 2);
+												SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
+												String dataConsultaFormatada = sdf.format(dataConsulta);
+												txtDataConsulta.setText(dataConsultaFormatada);
+												txtHorarioConsulta.setText((String) tbConsultas.getValueAt(linhaSelecionada, 3));
+
+											}
+										});
+										tbConsultas.setFont(new Font("Tahoma", Font.PLAIN, 16));
+										tbConsultas.setModel(new DefaultTableModel(
+												new Object[][] { { "ID Consulta", "Paciente", "Data Consulta", "Horario Consulta" }, },
+												new String[] { "ID Consulta", "Paciente", "Data Consulta", "Horario Consulta" }));
+												
+												JScrollPane scrollPane_5 = new JScrollPane();
+												scrollPane_5.setBounds(795, 327, 854, 144);
+												add(scrollPane_5);
+										
+												tbProntuarios = new JTable();
+												scrollPane_5.setViewportView(tbProntuarios);
+												tbProntuarios.addMouseListener(new MouseAdapter() {
+													@Override
+													public void mouseClicked(MouseEvent arg0) {
+
+														int selecionado = tbProntuarios.getSelectedRow();
+
+														txtIdProntuario.setText(tbProntuarios.getValueAt(selecionado, 0) + "");
+														txtAreaMedicamentos.setText((String) tbProntuarios.getValueAt(selecionado, 3));
+														txtAreaExames.setText((String) tbProntuarios.getValueAt(selecionado, 4));
+														txtAreaRegistro.setText((String) tbProntuarios.getValueAt(selecionado, 5));
+
+													}
+												});
+												tbProntuarios.setFont(new Font("Tahoma", Font.PLAIN, 16));
+												tbProntuarios.setModel(new DefaultTableModel(
+														new Object[][] { { "ID Prontuario", "Paciente", "Medicamentos", "Exames", "Registro" }, },
+														new String[] { "ID Prontuario", "Paciente", "Medicamentos", "Exames", "Registro" }));
 
 		String[] horarios = { "--- Selecione ---", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00",
 				"11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30",

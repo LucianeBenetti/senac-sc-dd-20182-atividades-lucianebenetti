@@ -62,13 +62,18 @@ public class TelaListarTodosPacientes extends JPanel {
 		btnSair.setBounds(1150, 439, 90, 36);
 		add(btnSair);
 		
+		JLabel lblPacientes = new JLabel("Pacientes");
+		lblPacientes.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblPacientes.setBounds(179, 110, 124, 22);
+		add(lblPacientes);
+		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(175, 133, 1065, 241);
+		scrollPane.setBounds(179, 130, 1063, 285);
 		add(scrollPane);
 		
 		tbPacientes = new JTable();
+		scrollPane.setViewportView(tbPacientes);
 		tbPacientes.setEnabled(false);
-		scrollPane.setColumnHeaderView(tbPacientes);
 		tbPacientes.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tbPacientes.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -78,11 +83,6 @@ public class TelaListarTodosPacientes extends JPanel {
 				"Nome", "CPF", "CNPJ", "Celular", "Fone Residencial", "Fone Comercial", "e-mail"
 			}
 		));
-		
-		JLabel lblPacientes = new JLabel("Pacientes");
-		lblPacientes.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblPacientes.setBounds(179, 110, 124, 22);
-		add(lblPacientes);
 
 	}
 

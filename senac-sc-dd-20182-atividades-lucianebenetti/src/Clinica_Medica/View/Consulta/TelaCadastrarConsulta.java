@@ -240,29 +240,6 @@ public class TelaCadastrarConsulta extends JPanel {
 		add(txtIdEspecializacao);
 		txtIdEspecializacao.setColumns(10);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(811, 345, 637, 195);
-		add(scrollPane);
-
-		tbMedicoEspecialidade = new JTable();
-		tbMedicoEspecialidade.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				int selecionado = tbMedicoEspecialidade.getSelectedRow();
-
-				txtIdEspecializacao.setText(tbMedicoEspecialidade.getValueAt(selecionado, 0) + "");
-				txtNomeMedico.setText((String) tbMedicoEspecialidade.getValueAt(selecionado, 1));
-				txtEspecialidade.setText((String) tbMedicoEspecialidade.getValueAt(selecionado, 2));
-
-			}
-		});
-		tbMedicoEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tbMedicoEspecialidade
-				.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome Medico", "Especialidade" }, },
-						new String[] { "ID", "Nome Medico", "Especialidade" }));
-		scrollPane.setColumnHeaderView(tbMedicoEspecialidade);
-
 		JButton btnNewButton = new JButton("Buscar Medico e Especialidade");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -300,27 +277,6 @@ public class TelaCadastrarConsulta extends JPanel {
 		add(txtConvenio);
 		txtConvenio.setColumns(10);
 
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(811, 63, 637, 183);
-		add(scrollPane_1);
-
-		tbConvenios = new JTable();
-		tbConvenios.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				int selecionado = tbConvenios.getSelectedRow();
-
-				txtIdConvenio.setText(tbConvenios.getValueAt(selecionado, 0) + "");
-				txtConvenio.setText((String) tbConvenios.getValueAt(selecionado, 1));
-
-			}
-		});
-		tbConvenios.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tbConvenios.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome Convenio", "Valor" }, },
-				new String[] { "ID", "Nome Convenio", "Valor" }));
-		scrollPane_1.setColumnHeaderView(tbConvenios);
-
 		JButton btnBuscarConveio = new JButton("Buscar Convenios");
 		btnBuscarConveio.addMouseListener(new MouseAdapter() {
 			@Override
@@ -349,6 +305,50 @@ public class TelaCadastrarConsulta extends JPanel {
 		panel.setBackground(UIManager.getColor("Button.background"));
 		panel.setBounds(741, 33, 4, 571);
 		add(panel);
+				
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setBounds(811, 50, 635, 162);
+				add(scrollPane);
+		
+				tbConvenios = new JTable();
+				scrollPane.setViewportView(tbConvenios);
+				tbConvenios.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+
+						int selecionado = tbConvenios.getSelectedRow();
+
+						txtIdConvenio.setText(tbConvenios.getValueAt(selecionado, 0) + "");
+						txtConvenio.setText((String) tbConvenios.getValueAt(selecionado, 1));
+
+					}
+				});
+				tbConvenios.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				tbConvenios.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome Convenio", "Valor" }, },
+						new String[] { "ID", "Nome Convenio", "Valor" }));
+						
+						JScrollPane scrollPane_1 = new JScrollPane();
+						scrollPane_1.setBounds(813, 355, 635, 203);
+						add(scrollPane_1);
+				
+						tbMedicoEspecialidade = new JTable();
+						scrollPane_1.setViewportView(tbMedicoEspecialidade);
+						tbMedicoEspecialidade.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+
+								int selecionado = tbMedicoEspecialidade.getSelectedRow();
+
+								txtIdEspecializacao.setText(tbMedicoEspecialidade.getValueAt(selecionado, 0) + "");
+								txtNomeMedico.setText((String) tbMedicoEspecialidade.getValueAt(selecionado, 1));
+								txtEspecialidade.setText((String) tbMedicoEspecialidade.getValueAt(selecionado, 2));
+
+							}
+						});
+						tbMedicoEspecialidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
+						tbMedicoEspecialidade
+								.setModel(new DefaultTableModel(new Object[][] { { "ID", "Nome Medico", "Especialidade" }, },
+										new String[] { "ID", "Nome Medico", "Especialidade" }));
 
 	}
 

@@ -69,11 +69,11 @@ public class TelaListarTodasEspecialidades extends JPanel {
 		add(lblEspecialidades);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(365, 168, 801, 251);
+		scrollPane.setBounds(372, 169, 799, 296);
 		add(scrollPane);
 		
 		tbEspecialidades = new JTable();
-		scrollPane.setColumnHeaderView(tbEspecialidades);
+		scrollPane.setViewportView(tbEspecialidades);
 		tbEspecialidades.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"ID", "Nome", "Instituicao"},

@@ -64,13 +64,18 @@ public class TelaListarTodosMedicos extends JPanel {
 		btnSair.setBounds(1338, 455, 96, 31);
 		add(btnSair);
 		
+		JLabel lblMedicos = new JLabel("Medicos");
+		lblMedicos.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblMedicos.setBounds(177, 125, 120, 22);
+		add(lblMedicos);
+		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(177, 147, 1257, 274);
+		scrollPane.setBounds(177, 160, 1255, 266);
 		add(scrollPane);
 		
 		tbMedicos = new JTable();
+		scrollPane.setViewportView(tbMedicos);
 		tbMedicos.setEnabled(false);
-		scrollPane.setColumnHeaderView(tbMedicos);
 		tbMedicos.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tbMedicos.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -80,11 +85,6 @@ public class TelaListarTodosMedicos extends JPanel {
 				"Nome", "CRM", "CPF", "CNPJ", "Celular", "Whats App", "e-mail"
 			}
 		));
-		
-		JLabel lblMedicos = new JLabel("Medicos");
-		lblMedicos.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblMedicos.setBounds(177, 125, 120, 22);
-		add(lblMedicos);
 
 	}
 	

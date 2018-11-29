@@ -78,23 +78,6 @@ public class TelaListarTodosConvenios extends JPanel {
 		lblConvenios.setBounds(289, 87, 102, 22);
 		add(lblConvenios);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(289, 120, 840, 248);
-		add(scrollPane);
-		
-		tbConvenio = new JTable();
-		tbConvenio.setEnabled(false);
-		scrollPane.setColumnHeaderView(tbConvenio);
-		tbConvenio.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		tbConvenio.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"ID", "Nome", "CNPJ", "Valor"},
-			},
-			new String[] {
-				"ID", "Nome", "CNPJ", "Valor"
-			}
-		));
-		
 		btnGerarPlaniha = new JButton("Gerar Planiha");
 		btnGerarPlaniha.setEnabled(false);
 		btnGerarPlaniha.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -116,6 +99,23 @@ public class TelaListarTodosConvenios extends JPanel {
 		
 		btnGerarPlaniha.setBounds(772, 418, 144, 29);
 		add(btnGerarPlaniha);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(289, 118, 838, 263);
+		add(scrollPane);
+		
+		tbConvenio = new JTable();
+		scrollPane.setViewportView(tbConvenio);
+		tbConvenio.setEnabled(false);
+		tbConvenio.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		tbConvenio.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"ID", "Nome", "CNPJ", "Valor"},
+			},
+			new String[] {
+				"ID", "Nome", "CNPJ", "Valor"
+			}
+		));
 
 	}
 	
